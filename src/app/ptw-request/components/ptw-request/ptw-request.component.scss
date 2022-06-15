@@ -1,0 +1,123 @@
+.content-body {
+    padding-top: 8px;
+    margin: 16px;
+}
+
+.applicant-toolbar {
+    background-color: rgb(207, 218, 228);
+}
+
+#toolbar-title {
+    font-size: medium;
+}
+
+.toolbar-spacer {
+    flex: 1 1 auto;
+}
+
+.common-section-form, .section-one-form {
+    margin: 16px;
+}
+
+.section-title {
+    font-size: medium;
+    font-weight: lighter;
+}
+
+.subsection-title {
+    font-size: medium;
+    font-weight: 450;
+}
+
+.required-label {
+    color: crimson;
+}
+
+.permit-type-options, 
+.location-of-work-options, 
+.other-loc-input, 
+.task-desc-input, 
+.wah-s1-ard-name-input,
+.wah-s1-ard-nric-or-fin-no-input,
+.wah-s1-ard-org-type-input,
+.wah-s1-ard-org-name-input,
+.wah-s1-ard-dep-name-input,
+.wah-s1-ard-contact-no-input,
+.cs-s1-ard-name-input,
+.cs-s1-ard-nric-or-fin-no-input,
+.cs-s1-ard-org-type-input,
+.cs-s1-ard-org-name-input,
+.cs-s1-ard-dep-name-input,
+.cs-s1-ard-contact-no-input,
+.cs-s1-ph-input,
+.apl-name-input, 
+.apl-nric-or-fin-no-input, 
+.apl-org-type-options, 
+.apl-org-name-options, 
+.apl-dep-name-input, 
+.apl-contact-no-input, 
+.apl-email-input,
+#apl-dcl-checkbox {
+    width: 525px;
+}
+
+.apl-dcl-container {
+    width: 600px;
+    padding: 24px;
+    background-color: aliceblue;
+}
+
+.start-date-picker, 
+.start-time-picker, 
+.end-date-picker, 
+.end-time-picker, 
+.no-of-workers-input, 
+.no-of-spvs-input {
+    width: 245px;
+}
+
+.start-time-picker, 
+.end-time-picker, 
+.no-of-spvs-input {
+    padding-left: 35px;
+}
+
+#cmi-left-col, 
+#cmi-mid-col, 
+#cmi-right-col,
+#cmi-per-left-col, 
+#cmi-per-mid-col, 
+#cmi-per-right-col {
+    width: 100%;
+}
+
+#cmi-mid-col {
+    text-align: center;
+}
+
+#cmi-col {
+    width: 100%;
+    overflow: hidden;
+}
+
+#cmi-per-col {
+    width: 50%;
+    float: left;
+}
+
+#cmi-ppe-col {
+    margin-left: 600px;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+    margin-bottom: 8px;
+}
+
+.wah-s1-cmi-remarks-input {
+    width: 85%;
+}
+
+.cs-s1-cmi-ppe-specify-input {
+    width: 600px;
+}

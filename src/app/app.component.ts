@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'permit-to-work-v2s1';
+  title: string = 'permit-to-work-v2s1';
+
+  constructor(private router: Router) { }
+
+  public navigateTo(url: string): void {
+    this.router.navigate(["/" + url], { replaceUrl: true });
+  }
 }

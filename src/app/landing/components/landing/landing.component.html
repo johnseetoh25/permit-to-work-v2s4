@@ -1,0 +1,37 @@
+<header>
+    <p>
+        <mat-toolbar class = "applicant-toolbar">
+            <mat-toolbar-row>
+                <span id = "toolbar-title">Home</span>
+                <span class = "spacer"></span>
+                    <button mat-icon-button class = "toolbar-menu-button" [matMenuTriggerFor] = "applicantMenu" aria-label = "Applicant toolbar menu">
+                        <mat-icon>menu</mat-icon>
+                    </button>
+                    <mat-menu #applicantMenu = "matMenu">
+                        <button mat-menu-item (click) = "this.navigateTo('')">
+                            <mat-icon>book</mat-icon>
+                            <span>Tracking Log</span>
+                        </button>
+                    </mat-menu>
+            </mat-toolbar-row>
+        </mat-toolbar>
+    </p>
+</header>
+<div class = "content-body">
+    <div class = "landing-title">
+        <h2>Permit-to-Work</h2>
+        <h3>E-Management System</h3>
+    </div>
+    <div> 
+        <mat-grid-list cols = "1" rowHeight= "75px">
+            <mat-grid-tile>To proceed, please select the following:</mat-grid-tile>
+            <mat-grid-tile>
+                <a class = "sign-in-button" mat-raised-button (click) = "this.navigateTo('ptw-request')" routerLinkActive = "active" color = "primary"><mat-icon>person</mat-icon>&emsp;Apply for PTW</a>
+            </mat-grid-tile>
+            <mat-grid-tile><b>OR</b></mat-grid-tile>
+            <mat-grid-tile>
+                <a class = "sign-in-button" mat-raised-button (click) = "this.navigateTo('')" routerLinkActive = "active" color = "accent"><mat-icon>supervisor_account</mat-icon>&emsp;Approve PTWs (require sign-in)</a>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</div>

@@ -1,0 +1,853 @@
+<header>
+    <p>
+        <mat-toolbar class = "applicant-toolbar">
+            <mat-toolbar-row>
+                <span id = "toolbar-title">NEW PTW REQUEST</span>
+                <span class = "toolbar-spacer"></span>
+                    <button mat-icon-button class = "toolbar-menu-button" [matMenuTriggerFor] = "applicantMenu" aria-label = "Applicant toolbar menu">
+                        <mat-icon>menu</mat-icon>
+                    </button>
+                    <mat-menu #applicantMenu = "matMenu">
+                        <button mat-menu-item>
+                            <mat-icon>book</mat-icon>
+                            <span>Tracking Log</span>
+                        </button>
+                        <button mat-menu-item>
+                            <mat-icon>exit_to_app</mat-icon>
+                            <span>Sign Out</span>
+                        </button>
+                    </mat-menu>
+            </mat-toolbar-row>
+        </mat-toolbar>
+    </p>
+</header>
+<div class = "content-body">
+    <mat-stepper #stepper linear = "true">
+        <mat-step [stepControl] = "this.sectionOneAFormGroup" [errorMessage] = "this.errorMessage">
+            <form class = "common-section-form" [formGroup] = "this.sectionOneAFormGroup">
+                <ng-template matStepLabel>Section I (A): Basic Information</ng-template>
+                <mat-label class = "section-title">NOTE: This section is to be completed by a supervisor</mat-label>
+                <br><br>
+                <h2>Application Form</h2>
+                <mat-label class = "required-label">* Required field</mat-label>
+                <br><br>
+                <mat-form-field class = "permit-type-options" appearance = "fill">
+                    <mat-label>Select permit type</mat-label>
+                    <mat-select required formControlName = "permitType" [(value)] = "this.selectedPermitType" (selectionChange) = "this.togglePTWFormValidators($event.value)">
+                        <mat-option>None</mat-option>
+                        <mat-option value = "Work at height (WAH)">Work at height (WAH)</mat-option>
+                        <mat-option value = "Confined space (CS)">Confined space (CS)</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field class = "location-of-work-options" appearance = "fill">
+                    <mat-label>Select location of work</mat-label>
+                    <mat-select required formControlName = "locationOfWork" [(value)] = "this.selectedLocationOfWork">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngIf = "this.selectedPermitType == 'Work at height (WAH)'" value = "Work at Height Training Platform">Work at Height Training Platform</mat-option>
+                        <mat-option *ngIf = "this.selectedPermitType == 'Confined space (CS)'" value = "Confined Space Training Room">Confined Space Training Room</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <section class = "multiloc-toggle-container" appearance = "fill">
+                    <mat-slide-toggle class = "multiloc-toggle" (change) = "this.taskCoversMultiLocs = $event.source.checked; this.checkMultiLocInputValidator(this.taskCoversMultiLocs);" [checked] = "this.taskCoversMultiLocs" disabled = "false">
+                        Task covers multiple locations
+                    </mat-slide-toggle>
+                </section>
+                <br>
+                <div *ngIf = "this.taskCoversMultiLocs">
+                    <mat-form-field class = "other-loc-input" appearance = "fill">
+                        <mat-label>Other location(s)</mat-label>
+                        <input matInput required [(ngModel)] = "this.otherLocationsInput" formControlName = "otherLocs">
+                        <mat-hint>Separate each location by a comma (,) without any space</mat-hint>
+                    </mat-form-field>
+                    <br><br>
+                </div>
+                <mat-divider></mat-divider>
+                <br>
+                <mat-form-field class = "start-date-picker" appearance = "fill">
+                    <mat-label>Select start date</mat-label>
+                    <input 
+                        matInput 
+                        required
+                        formControlName = "startDate" 
+                        placeholder = "Start date"
+                        [matDatepicker] = "startDatePicker"
+                        (dateChange) = "this.startDateInput = this.sectionOneAFormGroup.get('startDate')?.value;">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for] = "startDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #startDatePicker></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class = "start-time-picker" appearance = "fill">
+                    <mat-label>Select start time</mat-label>
+                    <input 
+                        matInput 
+                        required
+                        formControlName = "startTime" 
+                        placeholder = "Start time"
+                        [ngxTimepicker] = "startTimePicker" 
+                        (ngModelChange) = "this.startTimeInput = this.sectionOneAFormGroup.get('startTime')?.value;">
+                    <ngx-material-timepicker-toggle matSuffix [for] = "startTimePicker"></ngx-material-timepicker-toggle>
+                    <ngx-material-timepicker #startTimePicker></ngx-material-timepicker>
+                </mat-form-field>
+                <br><br>
+                <mat-form-field class = "end-date-picker" appearance = "fill">
+                    <mat-label>Select end date</mat-label>
+                    <input 
+                        matInput 
+                        required
+                        formControlName = "endDate" 
+                        placeholder = "End date" 
+                        [matDatepicker] = "endDatePicker"
+                        (dateChange) = "this.endDateInput = this.sectionOneAFormGroup.get('endDate')?.value;">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for] = "endDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #endDatePicker></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class = "end-time-picker" appearance = "fill">
+                    <mat-label>Select end time</mat-label>
+                    <input 
+                        matInput 
+                        required 
+                        formControlName = "endTime" 
+                        placeholder = "End time" 
+                        [ngxTimepicker] = "endTimePicker" 
+                        (ngModelChange) = "this.endTimeInput = this.sectionOneAFormGroup.get('endTime')?.value;">
+                    <ngx-material-timepicker-toggle matSuffix [for] = "endTimePicker"></ngx-material-timepicker-toggle>
+                    <ngx-material-timepicker #endTimePicker></ngx-material-timepicker>
+                </mat-form-field>
+                <br><br> 
+                <mat-form-field class = "task-desc-input" appearance = "fill">
+                    <mat-label>Task description</mat-label>
+                    <textarea matInput required [(ngModel)] = "this.taskDescriptionInput" formControlName = "taskDesc"></textarea>
+                </mat-form-field>
+                <br>
+                <mat-form-field class = "no-of-workers-input" appearance = "fill">
+                    <mat-label>No. of workers</mat-label>
+                    <input matInput type = "number" min = "1" value = "1" required [(ngModel)] = "this.noOfWorkersInput" formControlName = "noOfWorkers">
+                </mat-form-field>
+                <mat-form-field class = "no-of-spvs-input" appearance = "fill">
+                    <mat-label>No. of supervisors</mat-label>
+                    <input matInput type = "number" min = "1" value = "1" required [(ngModel)] = "this.noOfSupervisorsInput" formControlName = "noOfSpvs">
+                </mat-form-field>
+                <div>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl] = "this.sectionOneBFormGroup" [errorMessage] = "this.errorMessage">
+            <form class = "section-one-form" [formGroup] = "this.sectionOneBFormGroup">
+                <ng-template matStepLabel>Section I (B): Safety Measures</ng-template>
+                <div *ngIf = "this.selectedPermitType == 'Work at height (WAH)'">
+                    <mat-label class = "section-title">NOTE: This section is to be completed by a supervisor</mat-label>
+                    <br><br>
+                    <h2>WAH Control Measures Implemented</h2>
+                    <mat-label class = "required-label">* Please fill out all the check boxes below</mat-label>
+                    <br><br>
+                    <mat-list>
+                        <mat-list-item>
+                            <div id = "cmi-left-col">
+                                <p>Due consideration given to eliminate work at heights tasks.</p>
+                            </div>
+                            <div id = "cmi-mid-col">
+                                <mat-radio-group 
+                                        required 
+                                        aria-label = "Select an option" 
+                                        [(ngModel)] = "this.wah_s1_cmi_q01_choiceInput" formControlName = "wah_s1_cmi_q01_choice">
+                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                        {{ rads }}
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                            <div id = "cmi-right-col">
+                                <mat-form-field class = "wah-s1-cmi-remarks-input" appearance = "fill">
+                                    <mat-label>Remarks</mat-label>
+                                    <input style = "height: 15px" matInput [(ngModel)] = "this.wah_s1_cmi_q01_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                                </mat-form-field>
+                            </div>
+                        </mat-list-item>
+                        <br>
+                        <mat-list-item>
+                            <div id = "cmi-left-col">
+                                <p>Safe means of access or egress provided.</p>
+                            </div>
+                            <div id = "cmi-mid-col">
+                                <mat-radio-group 
+                                        required 
+                                        aria-label = "Select an option" 
+                                        [(ngModel)] = "this.wah_s1_cmi_q02_choiceInput" formControlName = "wah_s1_cmi_q02_choice">
+                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                        {{ rads }}
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                            <div id = "cmi-right-col">
+                                <mat-form-field class = "wah-s1-cmi-remarks-input" appearance = "fill">
+                                    <mat-label>Remarks</mat-label>
+                                    <input style = "height: 15px" matInput [(ngModel)] = "this.wah_s1_cmi_q02_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                                </mat-form-field>
+                            </div>
+                        </mat-list-item>
+                        <br>
+                        <mat-list-item>
+                            <div id = "cmi-left-col">
+                                <p>Edge protection provided wherever there is falling risks.</p>
+                            </div>
+                            <div id = "cmi-mid-col">
+                                <mat-radio-group 
+                                        required 
+                                        aria-label = "Select an option" 
+                                        [(ngModel)] = "this.wah_s1_cmi_q03_choiceInput" formControlName = "wah_s1_cmi_q03_choice">
+                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                        {{ rads }}
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                            <div id = "cmi-right-col">
+                                <mat-form-field class = "wah-s1-cmi-remarks-input" appearance = "fill">
+                                    <mat-label>Remarks</mat-label>
+                                    <input style = "height: 15px" matInput [(ngModel)] = "this.wah_s1_cmi_q03_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                                </mat-form-field>
+                            </div>
+                        </mat-list-item>
+                        <br>
+                        <mat-list-item>
+                            <div id = "cmi-left-col">
+                                <p>Fall prevention equipment used to provide access or work platform.</p>
+                            </div>
+                            <div id = "cmi-mid-col">
+                                <mat-radio-group 
+                                        required 
+                                        aria-label = "Select an option" 
+                                        [(ngModel)] = "this.wah_s1_cmi_q04_choiceInput" formControlName = "wah_s1_cmi_q04_choice">
+                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                        {{ rads }}
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                            <div id = "cmi-right-col">
+                                <mat-form-field class = "wah-s1-cmi-remarks-input" appearance = "fill">
+                                    <mat-label>Remarks</mat-label>
+                                    <input style = "height: 15px" matInput [(ngModel)] = "this.wah_s1_cmi_q04_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                                </mat-form-field>
+                            </div>
+                        </mat-list-item>
+                        <br>
+                        <mat-list-item>
+                            <div id = "cmi-left-col">
+                                <p>Fall prevention equipment are adequate and in good condition.</p>
+                            </div>
+                            <div id = "cmi-mid-col">
+                                <mat-radio-group 
+                                        required 
+                                        aria-label = "Select an option" 
+                                        [(ngModel)] = "this.wah_s1_cmi_q05_choiceInput" formControlName = "wah_s1_cmi_q05_choice">
+                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                        {{ rads }}
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                            <div id = "cmi-right-col">
+                                <mat-form-field class = "wah-s1-cmi-remarks-input" appearance = "fill">
+                                    <mat-label>Remarks</mat-label>
+                                    <input style = "height: 15px" matInput [(ngModel)] = "this.wah_s1_cmi_q05_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                                </mat-form-field>
+                            </div>
+                        </mat-list-item>
+                        <br>
+                        <mat-list-item>
+                            <div id = "cmi-left-col">
+                                <p>Anchorage/ lifeline installed and inspected by competent person.</p>
+                            </div>
+                            <div id = "cmi-mid-col">
+                                <mat-radio-group 
+                                        required 
+                                        aria-label = "Select an option" 
+                                        [(ngModel)] = "this.wah_s1_cmi_q06_choiceInput" formControlName = "wah_s1_cmi_q06_choice">
+                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                        {{ rads }}
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                            <div id = "cmi-right-col">
+                                <mat-form-field class = "wah-s1-cmi-remarks-input" appearance = "fill">
+                                    <mat-label>Remarks</mat-label>
+                                    <input style = "height: 15px" matInput [(ngModel)] = "this.wah_s1_cmi_q06_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                                </mat-form-field>
+                            </div>
+                        </mat-list-item>
+                        <br>
+                        <mat-list-item>
+                            <div id = "cmi-left-col">
+                                <p>Travel restraint system used to exclude persons from falling risks.</p>
+                            </div>
+                            <div id = "cmi-mid-col">
+                                <mat-radio-group 
+                                        required 
+                                        aria-label = "Select an option" 
+                                        [(ngModel)] = "this.wah_s1_cmi_q07_choiceInput" formControlName = "wah_s1_cmi_q07_choice">
+                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                        {{ rads }}
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                            <div id = "cmi-right-col">
+                                <mat-form-field class = "wah-s1-cmi-remarks-input" appearance = "fill">
+                                    <mat-label>Remarks</mat-label>
+                                    <input style = "height: 15px" matInput [(ngModel)] = "this.wah_s1_cmi_q07_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                                </mat-form-field>
+                            </div>
+                        </mat-list-item>
+                        <br>
+                        <mat-list-item>
+                            <div id = "cmi-left-col">
+                                <p>All persons subjected to falling risks are equipped with Personal Fall Arrest System (PFAS).</p>
+                            </div>
+                            <div id = "cmi-mid-col">
+                                <mat-radio-group 
+                                        required 
+                                        aria-label = "Select an option" 
+                                        [(ngModel)] = "this.wah_s1_cmi_q08_choiceInput" formControlName = "wah_s1_cmi_q08_choice">
+                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                        {{ rads }}
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                            <div id = "cmi-right-col">
+                                <mat-form-field class = "wah-s1-cmi-remarks-input" appearance = "fill">
+                                    <mat-label>Remarks</mat-label>
+                                    <input style = "height: 15px" matInput [(ngModel)] = "this.wah_s1_cmi_q08_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                                </mat-form-field>
+                            </div>
+                        </mat-list-item>
+                        <br>
+                        <mat-list-item>
+                            <div id = "cmi-left-col">
+                                <p>All personnel are adequately trained to perform work at heights.</p>
+                            </div>
+                            <div id = "cmi-mid-col">
+                                <mat-radio-group 
+                                        required 
+                                        aria-label = "Select an option" 
+                                        [(ngModel)] = "this.wah_s1_cmi_q09_choiceInput" formControlName = "wah_s1_cmi_q09_choice">
+                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                        {{ rads }}
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                            <div id = "cmi-right-col">
+                                <mat-form-field class = "wah-s1-cmi-remarks-input" appearance = "fill">
+                                    <mat-label>Remarks</mat-label>
+                                    <input style = "height: 15px" matInput [(ngModel)] = "this.wah_s1_cmi_q09_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                                </mat-form-field>
+                            </div>
+                        </mat-list-item>
+                        <br>
+                        <mat-list-item>
+                            <div id = "cmi-left-col">
+                                <p>Hazards and risk assessment are conducted and communicated.</p>
+                            </div>
+                            <div id = "cmi-mid-col">
+                                <mat-radio-group 
+                                        required 
+                                        aria-label = "Select an option" 
+                                        [(ngModel)] = "this.wah_s1_cmi_q10_choiceInput" formControlName = "wah_s1_cmi_q10_choice">
+                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                        {{ rads }}
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                            <div id = "cmi-right-col">
+                                <mat-form-field class = "wah-s1-cmi-remarks-input" appearance = "fill">
+                                    <mat-label>Remarks</mat-label>
+                                    <input style = "height: 15px" matInput [(ngModel)] = "this.wah_s1_cmi_q10_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                                </mat-form-field>
+                            </div>
+                        </mat-list-item>
+                        <br>
+                        <mat-list-item>
+                            <div id = "cmi-left-col">
+                                <p>Others (please specify, if any).</p>
+                            </div>
+                            <div id = "cmi-mid-col"></div>
+                            <div id = "cmi-right-col">
+                                <mat-form-field class = "wah-s1-cmi-remarks-input" appearance = "fill">
+                                    <mat-label>Specify</mat-label>
+                                    <input style = "height: 15px" matInput [(ngModel)] = "this.wah_s1_cmi_q11_specifyInput" [ngModelOptions] = "{ standalone: true }">
+                                </mat-form-field>
+                            </div>
+                        </mat-list-item>
+                    </mat-list>
+                    <br>
+                    <mat-divider></mat-divider>
+                    <br>
+                    <h2>Particulars of WAH Attendant</h2>
+                    <mat-label class = "required-label">* Required field</mat-label>
+                    <br><br>
+                    <mat-form-field class = "wah-s1-ard-name-input" appearance = "fill">
+                        <mat-label>Attendant name</mat-label>
+                        <input matInput required [(ngModel)] = "this.wah_s1_ard_nameInput" formControlName = "wah_s1_ard_name">
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class = "wah-s1-ard-nric-or-fin-no-input" appearance = "fill">
+                        <mat-label>NRIC / FIN no.</mat-label>
+                        <input 
+                            matInput
+                            required 
+                            placeholder = "@_______#"
+                            [inputMask] = "this.nricOrFinNoInputMask"
+                            [(ngModel)] = "this.wah_s1_ard_nricOrFinNoInput" 
+                            formControlName = "wah_s1_ard_nricOrFinNo">
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class = "wah-s1-ard-org-type-input" appearance = "fill">
+                        <mat-label>Organisation type</mat-label>
+                        <mat-select required formControlName = "wah_s1_ard_orgType" [(value)] = "this.wah_s1_ard_organisationTypeInput" (selectionChange) = "this.toggleArdOrgNameValidator(this.selectedPermitType, $event.value)">
+                            <mat-option>None</mat-option>
+                            <mat-option value = "Internal">Internal</mat-option>
+                            <mat-option value = "External">External</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <br>
+                    <div *ngIf = "this.wah_s1_ard_organisationTypeInput == 'External'">
+                        <mat-form-field class = "wah-s1-ard-org-name-input" appearance = "fill">
+                            <mat-label>Organisation name</mat-label>
+                            <input matInput required [(ngModel)] = "this.wah_s1_ard_organisationNameInput" formControlName = "wah_s1_ard_orgName">
+                        </mat-form-field>
+                        <br>
+                    </div>
+                    <mat-form-field class = "wah-s1-ard-dep-name-input" appearance = "fill">
+                        <mat-label>Department name</mat-label>
+                        <input matInput required [(ngModel)] = "this.wah_s1_ard_departmentNameInput" formControlName = "wah_s1_ard_depName">
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class = "wah-s1-ard-contact-no-input" appearance = "fill">
+                        <mat-label>Contact no.</mat-label>
+                        <input 
+                            matInput 
+                            required
+                            placeholder = "+65 ____-____"
+                            [inputMask] = "this.contactNoInputMask"
+                            [(ngModel)] = "this.wah_s1_ard_contactNoInput" 
+                            formControlName = "wah_s1_ard_contactNo">
+                    </mat-form-field>
+                </div>
+                <div *ngIf = "this.selectedPermitType == 'Confined space (CS)'">
+                    <mat-label class = "section-title">NOTE: This section is to be completed by a supervisor</mat-label>
+                    <br><br>
+                    <h2>Potential CS Hazards</h2>
+                    <mat-label class = "required-label">* Required field</mat-label>
+                    <br><br>
+                    <mat-form-field class = "cs-s1-ph-input" appearance = "fill">
+                        <mat-label>Potential atmospheric hazards</mat-label>
+                        <input required matInput [(ngModel)] = "this.cs_s1_ph_atmoInput" formControlName = "cs_s1_ph_atmo">
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class = "cs-s1-ph-input" appearance = "fill">
+                        <mat-label>Potential non-atmospheric hazards</mat-label>
+                        <input required matInput [(ngModel)] = "this.cs_s1_ph_nonAtmoInput" formControlName = "cs_s1_ph_nonAtmo">
+                    </mat-form-field>
+                    <br><br>
+                    <mat-divider></mat-divider>
+                    <br>
+                    <h2>CS Control Measures Implemented</h2>
+                    <mat-label class = "required-label">* Please fill out all the check boxes below</mat-label>
+                    <br><br>
+                    <div id = "cmi-col">
+                        <div id = "cmi-per-col">
+                            <p class = "subsection-title">Pre-Entry Requirements</p>
+                            <mat-list>
+                                <mat-list-item>
+                                    <div id = "cmi-per-left-col">
+                                        <p>Ventilation</p>
+                                    </div>
+                                    <div id = "cmi-per-mid-col">
+                                        <mat-radio-group 
+                                                required 
+                                                aria-label = "Select an option" 
+                                                [(ngModel)] = "this.cs_s1_cmi_per_q01_checkedInput" formControlName = "cs_s1_cmi_per_q01_checked">
+                                            <mat-radio-button *ngFor = "let rads of this.radioButtonGroupAlt" [value] = "rads">
+                                                {{ rads }}
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <div id = "cmi-per-left-col">
+                                        <p>Lighting</p>
+                                    </div>
+                                    <div id = "cmi-per-right-col">
+                                        <mat-radio-group 
+                                                required 
+                                                aria-label = "Select an option" 
+                                                [(ngModel)] = "this.cs_s1_cmi_per_q02_checkedInput" formControlName = "cs_s1_cmi_per_q02_checked">
+                                            <mat-radio-button *ngFor = "let rads of this.radioButtonGroupAlt" [value] = "rads">
+                                                {{ rads }}
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <div id = "cmi-per-left-col">
+                                        <p>Barricades and signboards</p>
+                                    </div>
+                                    <div id = "cmi-per-right-col">
+                                        <mat-radio-group 
+                                                required 
+                                                aria-label = "Select an option" 
+                                                [(ngModel)] = "this.cs_s1_cmi_per_q03_checkedInput" formControlName = "cs_s1_cmi_per_q03_checked">
+                                            <mat-radio-button *ngFor = "let rads of this.radioButtonGroupAlt" [value] = "rads">
+                                                {{ rads }}
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <div id = "cmi-per-left-col">
+                                        <p>De-energisation / lockout-tag out (LOTO)</p>
+                                    </div>
+                                    <div id = "cmi-per-right-col">
+                                        <mat-radio-group 
+                                                required 
+                                                aria-label = "Select an option" 
+                                                [(ngModel)] = "this.cs_s1_cmi_per_q04_checkedInput" formControlName = "cs_s1_cmi_per_q04_checked">
+                                            <mat-radio-button *ngFor = "let rads of this.radioButtonGroupAlt" [value] = "rads">
+                                                {{ rads }}
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <div id = "cmi-per-left-col">
+                                        <p>Blanking / bleeding of pipes</p>
+                                    </div>
+                                    <div id = "cmi-per-right-col">
+                                        <mat-radio-group 
+                                                required 
+                                                aria-label = "Select an option" 
+                                                [(ngModel)] = "this.cs_s1_cmi_per_q05_checkedInput" formControlName = "cs_s1_cmi_per_q05_checked">
+                                            <mat-radio-button *ngFor = "let rads of this.radioButtonGroupAlt" [value] = "rads">
+                                                {{ rads }}
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <div id = "cmi-per-left-col">
+                                        <p>Personal gas detector</p>
+                                    </div>
+                                    <div id = "cmi-per-right-col">
+                                        <mat-radio-group 
+                                                required 
+                                                aria-label = "Select an option" 
+                                                [(ngModel)] = "this.cs_s1_cmi_per_q06_checkedInput" formControlName = "cs_s1_cmi_per_q06_checked">
+                                            <mat-radio-button *ngFor = "let rads of this.radioButtonGroupAlt" [value] = "rads">
+                                                {{ rads }}
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <div id = "cmi-per-left-col">
+                                        <p>Torchlight</p>
+                                    </div>
+                                    <div id = "cmi-per-right-col">
+                                        <mat-radio-group 
+                                                required 
+                                                aria-label = "Select an option" 
+                                                [(ngModel)] = "this.cs_s1_cmi_per_q07_checkedInput" formControlName = "cs_s1_cmi_per_q07_checked">
+                                            <mat-radio-button *ngFor = "let rads of this.radioButtonGroupAlt" [value] = "rads">
+                                                {{ rads }}
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <div id = "cmi-per-left-col">
+                                        <p>Flame-proof light</p>
+                                    </div>
+                                    <div id = "cmi-per-right-col">
+                                        <mat-radio-group 
+                                                required 
+                                                aria-label = "Select an option" 
+                                                [(ngModel)] = "this.cs_s1_cmi_per_q08_checkedInput" formControlName = "cs_s1_cmi_per_q08_checked">
+                                            <mat-radio-button *ngFor = "let rads of this.radioButtonGroupAlt" [value] = "rads">
+                                                {{ rads }}
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-list-item>
+                            </mat-list>
+                        </div>
+                        <div id = "cmi-ppe-col">
+                            <p class = "subsection-title">Personal Protective Equipment (PPE)</p>
+                            <mat-list>
+                                <mat-list-item>
+                                    <div id = "cmi-per-left-col">
+                                        <p>Safety helmet</p>
+                                    </div>
+                                    <div id = "cmi-per-right-col">
+                                        <mat-radio-group 
+                                                required 
+                                                aria-label = "Select an option" 
+                                                [(ngModel)] = "this.cs_s1_cmi_ppe_q01_checkedInput" formControlName = "cs_s1_cmi_ppe_q01_checked">
+                                            <mat-radio-button *ngFor = "let rads of this.radioButtonGroupAlt" [value] = "rads">
+                                                {{ rads }}
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <div id = "cmi-per-left-col">
+                                        <p>Eye protection</p>
+                                    </div>
+                                    <div id = "cmi-per-right-col">
+                                        <mat-radio-group 
+                                                required 
+                                                aria-label = "Select an option" 
+                                                [(ngModel)] = "this.cs_s1_cmi_ppe_q02_checkedInput" formControlName = "cs_s1_cmi_ppe_q02_checked">
+                                            <mat-radio-button *ngFor = "let rads of this.radioButtonGroupAlt" [value] = "rads">
+                                                {{ rads }}
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <div id = "cmi-per-left-col">
+                                        <p>Hand protection</p>
+                                    </div>
+                                    <div id = "cmi-per-right-col">
+                                        <mat-radio-group 
+                                                required 
+                                                aria-label = "Select an option" 
+                                                [(ngModel)] = "this.cs_s1_cmi_ppe_q03_checkedInput" formControlName = "cs_s1_cmi_ppe_q03_checked">
+                                            <mat-radio-button *ngFor = "let rads of this.radioButtonGroupAlt" [value] = "rads">
+                                                {{ rads }}
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <div id = "cmi-per-left-col">
+                                        <p>Safety harness / lifelines</p>
+                                    </div>
+                                    <div id = "cmi-per-right-col">
+                                        <mat-radio-group 
+                                                required 
+                                                aria-label = "Select an option" 
+                                                [(ngModel)] = "this.cs_s1_cmi_ppe_q04_checkedInput" formControlName = "cs_s1_cmi_ppe_q04_checked">
+                                            <mat-radio-button *ngFor = "let rads of this.radioButtonGroupAlt" [value] = "rads">
+                                                {{ rads }}
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <div id = "cmi-per-left-col">
+                                        <p>Respiratory protection</p>
+                                    </div>
+                                    <div id = "cmi-per-right-col">
+                                        <mat-radio-group 
+                                                required 
+                                                aria-label = "Select an option" 
+                                                [(ngModel)] = "this.cs_s1_cmi_ppe_q05_checkedInput" formControlName = "cs_s1_cmi_ppe_q05_checked">
+                                            <mat-radio-button *ngFor = "let rads of this.radioButtonGroupAlt" [value] = "rads">
+                                                {{ rads }}
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <div id = "cmi-per-left-col">
+                                        <p>Name / identification badge</p>
+                                    </div>
+                                    <div id = "cmi-per-right-col">
+                                        <mat-radio-group 
+                                                required 
+                                                aria-label = "Select an option" 
+                                                [(ngModel)] = "this.cs_s1_cmi_ppe_q06_checkedInput" formControlName = "cs_s1_cmi_ppe_q06_checked">
+                                            <mat-radio-button *ngFor = "let rads of this.radioButtonGroupAlt" [value] = "rads">
+                                                {{ rads }}
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-list-item>
+                                <br>
+                                <mat-list-item>
+                                    <div id = "cmi-per-left-col">
+                                        <mat-form-field class = "cs-s1-cmi-ppe-specify-input" appearance = "fill">
+                                            <mat-label>Other PPE (please specify, if any)</mat-label>
+                                            <input style = "height: 15px" matInput [(ngModel)] = "this.cs_s1_cmi_ppe_q07_specifyInput" [ngModelOptions] = "{ standalone: true }">
+                                        </mat-form-field>
+                                    </div>
+                                </mat-list-item>
+                            </mat-list>
+                        </div>
+                    </div>
+                    <br>
+                    <mat-divider></mat-divider>
+                    <br>
+                    <h2>Particulars of CS Attendant</h2>
+                    <mat-label class = "required-label">* Required field</mat-label>
+                    <br><br>
+                    <div id = "ard-col">
+                        <mat-form-field class = "cs-s1-ard-name-input" appearance = "fill">
+                            <mat-label>Attendant name</mat-label>
+                            <input matInput required [(ngModel)] = "this.cs_s1_ard_nameInput" formControlName = "cs_s1_ard_name">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class = "cs-s1-ard-nric-or-fin-no-input" appearance = "fill">
+                            <mat-label>NRIC / FIN no.</mat-label>
+                            <input 
+                                matInput
+                                required 
+                                placeholder = "@_______#"
+                                [inputMask] = "this.nricOrFinNoInputMask"
+                                [(ngModel)] = "this.cs_s1_ard_nricOrFinNoInput" 
+                                formControlName = "cs_s1_ard_nricOrFinNo">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class = "cs-s1-ard-org-type-input" appearance = "fill">
+                            <mat-label>Organisation type</mat-label>
+                            <mat-select required formControlName = "cs_s1_ard_orgType" [(value)] = "this.cs_s1_ard_organisationTypeInput" (selectionChange) = "this.toggleArdOrgNameValidator(this.selectedPermitType, $event.value)">
+                                <mat-option>None</mat-option>
+                                <mat-option value = "Internal">Internal</mat-option>
+                                <mat-option value = "External">External</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <br>
+                        <div *ngIf = "this.cs_s1_ard_organisationTypeInput == 'External'">
+                            <mat-form-field class = "cs-s1-ard-org-name-input" appearance = "fill">
+                                <mat-label>Organisation name</mat-label>
+                                <input matInput required [(ngModel)] = "this.cs_s1_ard_organisationNameInput" formControlName = "cs_s1_ard_orgName">
+                            </mat-form-field>
+                            <br>
+                        </div>
+                        <mat-form-field class = "cs-s1-ard-dep-name-input" appearance = "fill">
+                            <mat-label>Department name</mat-label>
+                            <input matInput required [(ngModel)] = "this.cs_s1_ard_departmentNameInput" formControlName = "cs_s1_ard_depName">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class = "cs-s1-ard-contact-no-input" appearance = "fill">
+                            <mat-label>Contact no.</mat-label>
+                            <input 
+                                matInput 
+                                required
+                                placeholder = "+65 ____-____"
+                                [inputMask] = "this.contactNoInputMask"
+                                [(ngModel)] = "this.cs_s1_ard_contactNoInput" 
+                                formControlName = "cs_s1_ard_contactNo">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl] = "this.sectionOneCFormGroup" [errorMessage] = "this.errorMessage">
+            <form class = "section-one-form" [formGroup] = "this.sectionOneCFormGroup">
+                <ng-template matStepLabel>Section I (C): Applicant Details</ng-template>
+                <mat-label class = "section-title">NOTE: This section is to be completed by a supervisor</mat-label>
+                <br><br>
+                <h2>Applicant Details</h2>
+                <mat-label class = "required-label">* Required field</mat-label>
+                <br><br>
+                <mat-form-field class = "apl-name-input" appearance = "fill">
+                    <mat-label>Applicant name</mat-label>
+                    <input matInput required [(ngModel)] = "this.applicantNameInput" formControlName = "aplName">
+                </mat-form-field>
+                <br>
+                <mat-form-field class = "apl-nric-or-fin-no-input" appearance = "fill">
+                    <mat-label>NRIC / FIN no.</mat-label>
+                    <input 
+                        matInput
+                        required 
+                        placeholder = "@_______#"
+                        [inputMask] = "this.nricOrFinNoInputMask"
+                        [(ngModel)] = "this.applicantNricOrFinNoInput" 
+                        formControlName = "aplNricOrFinNo">
+                </mat-form-field>
+                <br>
+                <mat-form-field class = "apl-org-type-options" appearance = "fill">
+                    <mat-label>Organisation type</mat-label>
+                    <mat-select required formControlName = "aplOrgType" [(value)] = "this.selectedApplicantOrganisationType" (selectionChange) = "this.toggleApplicantOrgNameValidator($event.value)">
+                        <mat-option>None</mat-option>
+                        <mat-option value = "Internal">Internal</mat-option>
+                        <mat-option value = "External">External</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <div *ngIf = "this.selectedApplicantOrganisationType == 'External'">
+                    <mat-form-field class = "apl-org-name-options" appearance = "fill">
+                        <mat-label>Organisation name</mat-label>
+                        <input matInput required [(ngModel)] = "this.applicantOrganisationNameInput" formControlName = "aplOrgName">
+                    </mat-form-field>
+                    <br>
+                </div>
+                <mat-form-field class = "apl-dep-name-input" appearance = "fill">
+                    <mat-label>Department name</mat-label>
+                    <input matInput required [(ngModel)] = "this.applicantDepartmentNameInput" formControlName = "aplDepName">
+                </mat-form-field>
+                <br>
+                <mat-form-field class = "apl-contact-no-input" appearance = "fill">
+                    <mat-label>Contact no.</mat-label>
+                    <input 
+                        matInput 
+                        required
+                        placeholder = "+65 ____-____"
+                        [inputMask] = "this.contactNoInputMask"
+                        [(ngModel)] = "this.applicantContactNoInput" 
+                        formControlName = "aplContactNo">
+                </mat-form-field>
+                <br>
+                <mat-form-field class = "apl-email-input" appearance = "fill">
+                    <mat-label>Applicant email</mat-label>
+                    <input 
+                        matInput 
+                        required
+                        placeholder = "_@_._"
+                        [inputMask] = "this.applicantEmailInputMask"
+                        [(ngModel)] = "this.applicantEmailInput" 
+                        formControlName = "aplEmail">
+                </mat-form-field>
+                <div class = "apl-dcl-container">
+                    <mat-label style = "font-weight: 450;">NOTE</mat-label>
+                    <br><br>
+                    <mat-label>1.&emsp;The necessary safety measures must be complied with before the application is submitted to the WAH / CS safety assessor for his / her evaluation.</mat-label>
+                    <br><br>
+                    <mat-label>2.&emsp;Where reasonably practicable, applicant to provide a sketch of the area in WAH / CS where the entry is to be made or work is to be conducted on a separate sheet of paper and attach it with the permit.</mat-label>
+                    <br><br>
+                    <mat-label>3.&emsp;Upon submission and after approval from the authority, this permit shall be visible inside the system for the duration of the approved task and removed only upon task completion or upon its expiry.</mat-label>
+                    <br><br><br>
+                    <div id = "apl-dcl-checkbox">
+                        <mat-checkbox [(ngModel)] = "this.applicantDeclarationChecked" formControlName = "aplDclChecked">
+                            &emsp;I declare that the information provided is accurate and the control measures listed above <br>have been effectively implemented.
+                        </mat-checkbox>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button 
+                        mat-button
+                        (click) = "this.openSubmitDialogue()"
+                        [disabled] = "
+                            this.applicantNameInput == '' ||
+                            this.applicantNricOrFinNoInput == '' ||
+                            this.selectedApplicantOrganisationType == '' ||
+                            this.selectedApplicantOrganisationType == null || (
+                                this.selectedApplicantOrganisationType == 'External' 
+                                && this.applicantOrganisationNameInput == ''
+                            ) ||
+                            this.applicantContactNoInput == '' ||
+                            this.applicantEmailInput == '' ||
+                            this.applicantDeclarationChecked == false
+                        "
+                    >Submit</button>
+                </div>
+            </form>
+        </mat-step>
+    </mat-stepper>
+</div>
