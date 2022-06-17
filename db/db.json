@@ -1,0 +1,242 @@
+{
+  "ptw": [
+    {
+      "id": 1,
+      "ptwId": "PTW-000",
+      "locationOfWork": {
+        "main": "Biodiesel production sector",
+        "sub": "Biodiesel production"
+      },
+      "permitType": "Work at height (WAH)",
+      "startWorkingDateTime": "2022-06-16T16:00:00.000Z",
+      "endWorkingDateTime": "2022-06-16T16:00:00.000Z",
+      "taskDescription": "dsadasd",
+      "noOfWorkers": 1,
+      "noOfSupervisors": 1,
+      "workAtHeight": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "Yes",
+              "remarks": ""
+            },
+            "q02": {
+              "choice": "Yes",
+              "remarks": ""
+            },
+            "q03": {
+              "choice": "Yes",
+              "remarks": ""
+            },
+            "q04": {
+              "choice": "Yes",
+              "remarks": ""
+            },
+            "q05": {
+              "choice": "Yes",
+              "remarks": ""
+            },
+            "q06": {
+              "choice": "Yes",
+              "remarks": ""
+            },
+            "q07": {
+              "choice": "Yes",
+              "remarks": ""
+            },
+            "q08": {
+              "choice": "Yes",
+              "remarks": ""
+            },
+            "q09": {
+              "choice": "Yes",
+              "remarks": ""
+            },
+            "q10": {
+              "choice": "Yes",
+              "remarks": ""
+            },
+            "q11": {
+              "specify": ""
+            }
+          },
+          "checked": true,
+          "supervisorName": "dsadasd",
+          "timestamp": "2022-06-17T08:50:09.390Z"
+        },
+        "sectionTwo": {
+          "assessmentOfControlMeasures": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "siteSurveyFromSupervisor": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "multiLocOrExtentedDuration": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "checked": false,
+          "safetyAssessorName": "None",
+          "timestamp": "None"
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "checked": false,
+          "authorisedManagerName": "None",
+          "timestamp": "None"
+        }
+      },
+      "confinedSpace": {
+        "sectionOne": {
+          "potentialHazards": {
+            "atmo": "",
+            "nonAtmo": ""
+          },
+          "controlMeasuresImplemented": {
+            "preEntryReqs": {
+              "q01": "",
+              "q02": "",
+              "q03": "",
+              "q04": "",
+              "q05": "",
+              "q06": "",
+              "q07": "",
+              "q08": ""
+            },
+            "ppe": {
+              "q01": "",
+              "q02": "",
+              "q03": "",
+              "q04": "",
+              "q05": "",
+              "q06": "",
+              "q07": {
+                "specify": ""
+              }
+            }
+          },
+          "checked": true,
+          "supervisorName": "dsadasd",
+          "timestamp": "None"
+        },
+        "sectionTwo": {
+          "gasMonitoringRes": {
+            "oxygenLevel": 0,
+            "flammableGasLevel": 0,
+            "toxicGasLevel": 0,
+            "fitForEntry": false
+          },
+          "checked": false,
+          "safetyAssessorName": "None",
+          "timestamp": "None"
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": "None",
+            "q02": "None",
+            "q03": "None",
+            "q04": "None"
+          },
+          "checked": false,
+          "authorisedManagerName": "None",
+          "timestamp": "None"
+        }
+      },
+      "attendantDets": [
+        {
+          "id": 1,
+          "name": "sadad",
+          "nricOrFinNo": "S2131231F",
+          "contactNo": "+65 1231-3123"
+        },
+        {
+          "id": 2,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        },
+        {
+          "id": 3,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        },
+        {
+          "id": 4,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        },
+        {
+          "id": 5,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        }
+      ],
+      "applicantDets": {
+        "name": "dsadasd",
+        "nricOrFinNo": "A1232131V",
+        "orgType": "Internal",
+        "orgName": "",
+        "depName": "dasdasda",
+        "contactNo": "+65 3123-1232",
+        "email": "sadsad@ad.das"
+      },
+      "dailyEndorsement": {},
+      "ptwPost": {
+        "checked": false,
+        "supervisorName": "None",
+        "timestamp": "None"
+      },
+      "ptwStatus": {
+        "taskStatus": "Not Started",
+        "remarks": "None",
+        "checked": false,
+        "supervisorName": "None",
+        "timestamp": "None"
+      },
+      "checked": true,
+      "requestStatus": "Pending",
+      "statusRemarks": "None",
+      "timestamp": "2022-06-17T08:50:09.390Z"
+    }
+  ]
+}

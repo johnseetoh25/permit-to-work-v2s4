@@ -1,0 +1,44 @@
+.ptw-request-details-dialog {
+    width: 1000px;
+}
+
+.tab-content {
+    border-style: solid;
+    border-width: 0.05px;
+    border-color: rgb(224, 224, 224);
+    border-radius: 0.5em;
+}
+
+#scrollable-tc {
+    height: 325px;
+    overflow-y: scroll;
+}
+
+.mat-dialog-actions {
+    justify-content: flex-end;
+}
+
+#label-text-inside-grid {
+    position: absolute;
+    right: 5px;
+}
+
+#value-text-inside-grid {
+    position: absolute;
+    left: 5px;
+}
+
+#sa-label-text-inside-grid {
+    position: absolute;
+    left: 16px;
+}
+
+#sa-value-text-inside-grid {
+    position: absolute;
+    right: 64px;
+}
+
+#indented-grid-text {
+    position: absolute;
+    left: 32px;
+}

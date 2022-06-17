@@ -8,13 +8,13 @@
                         <mat-icon>menu</mat-icon>
                     </button>
                     <mat-menu #applicantMenu = "matMenu">
-                        <button mat-menu-item>
+                        <button mat-menu-item (click) = "this.navigateTo('tracking-log')">
                             <mat-icon>book</mat-icon>
                             <span>Tracking Log</span>
                         </button>
-                        <button mat-menu-item>
+                        <button mat-menu-item (click) = "this.navigateTo('')">
                             <mat-icon>exit_to_app</mat-icon>
-                            <span>Sign Out</span>
+                            <span>Exit</span>
                         </button>
                     </mat-menu>
             </mat-toolbar-row>
@@ -22,49 +22,172 @@
     </p>
 </header>
 <div class = "content-body">
-    <mat-stepper #stepper linear = "true">
+    <mat-stepper #stepper linear = "false">
         <mat-step [stepControl] = "this.sectionOneAFormGroup" [errorMessage] = "this.errorMessage">
             <form class = "common-section-form" [formGroup] = "this.sectionOneAFormGroup">
                 <ng-template matStepLabel>Section I (A): Basic Information</ng-template>
-                <mat-label class = "section-title">NOTE: This section is to be completed by a supervisor</mat-label>
+                <mat-label class = "section-title">NOTE: This section is to be completed by a representative supervisor</mat-label>
                 <br><br>
                 <h2>Application Form</h2>
                 <mat-label class = "required-label">* Required field</mat-label>
                 <br><br>
-                <mat-form-field class = "permit-type-options" appearance = "fill">
-                    <mat-label>Select permit type</mat-label>
-                    <mat-select required formControlName = "permitType" [(value)] = "this.selectedPermitType" (selectionChange) = "this.togglePTWFormValidators($event.value)">
-                        <mat-option>None</mat-option>
-                        <mat-option value = "Work at height (WAH)">Work at height (WAH)</mat-option>
-                        <mat-option value = "Confined space (CS)">Confined space (CS)</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <br>
                 <mat-form-field class = "location-of-work-options" appearance = "fill">
                     <mat-label>Select location of work</mat-label>
                     <mat-select required formControlName = "locationOfWork" [(value)] = "this.selectedLocationOfWork">
                         <mat-option>None</mat-option>
-                        <mat-option *ngIf = "this.selectedPermitType == 'Work at height (WAH)'" value = "Work at Height Training Platform">Work at Height Training Platform</mat-option>
-                        <mat-option *ngIf = "this.selectedPermitType == 'Confined space (CS)'" value = "Confined Space Training Room">Confined Space Training Room</mat-option>
+                        <mat-option value = "Biodiesel production sector">Biodiesel production sector</mat-option>
+                        <mat-option value = "Waste water treatment sector">Waste water treatment sector</mat-option>
+                        <mat-option value = "Work at height training platform">Work at height training platform</mat-option>
+                        <mat-option value = "Confined space training room">Confined space training room</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <br>
-                <section class = "multiloc-toggle-container" appearance = "fill">
-                    <mat-slide-toggle class = "multiloc-toggle" (change) = "this.taskCoversMultiLocs = $event.source.checked; this.checkMultiLocInputValidator(this.taskCoversMultiLocs);" [checked] = "this.taskCoversMultiLocs" disabled = "false">
-                        Task covers multiple locations
-                    </mat-slide-toggle>
-                </section>
+                <mat-form-field class = "loc-sector-options" appearance = "fill">
+                    <mat-label>Select location sector</mat-label>
+                    <mat-select required formControlName = "locationSector" [(value)] = "this.selectedLocationSector">
+                        <mat-option>None</mat-option>
+                        <div *ngIf = "this.selectedLocationOfWork == 'Work at height training platform' || 
+                            this.selectedLocationOfWork == 'Confined space training room'
+                        ">
+                            <mat-option value = "Non-applicable">Non-applicable</mat-option>
+                        </div>
+                        <div *ngIf = "this.selectedLocationOfWork == 'Biodiesel production sector'">
+                            <mat-option value = "Biodiesel production">Biodiesel production</mat-option>
+                            <mat-option value = "Biodiesel production">Biodiesel purification</mat-option>
+                            <mat-option value = "Biodiesel production">Biodiesel recovery</mat-option>
+                        </div>
+                        <div div *ngIf = "this.selectedLocationOfWork == 'Waste water treatment sector'">
+                            <mat-option value = "Primary treatment">Primary treatment</mat-option>
+                            <mat-option value = "Secondary treatment">Secondary treatment</mat-option>
+                            <mat-option value = "Ternary treatment">Ternary treatment</mat-option>
+                        </div>
+                    </mat-select>
+                </mat-form-field>
                 <br>
-                <div *ngIf = "this.taskCoversMultiLocs">
-                    <mat-form-field class = "other-loc-input" appearance = "fill">
-                        <mat-label>Other location(s)</mat-label>
-                        <input matInput required [(ngModel)] = "this.otherLocationsInput" formControlName = "otherLocs">
-                        <mat-hint>Separate each location by a comma (,) without any space</mat-hint>
-                    </mat-form-field>
+                <mat-form-field class = "permit-type-options" appearance = "fill">
+                    <mat-label>Select permit type</mat-label>
+                    <mat-select required formControlName = "permitType" [(value)] = "this.selectedPermitType" (selectionChange) = "this.togglePTWFormValidators($event.value)">
+                        <mat-option>None</mat-option>
+                        <mat-option 
+                            *ngIf = "
+                                this.selectedLocationOfWork == 'Biodiesel production sector' ||
+                                this.selectedLocationOfWork == 'Waste water treatment sector'
+                            "
+                            value = "Hot work (HW)">
+                            Hot work (HW)
+                        </mat-option>
+                        <mat-option 
+                            *ngIf = "
+                                this.selectedLocationOfWork == 'Biodiesel production sector' ||
+                                this.selectedLocationOfWork == 'Waste water treatment sector'
+                            "
+                            value = "Cold work (CW)">
+                            Cold work (CW)
+                        </mat-option>
+                        <mat-option 
+                            *ngIf = "
+                                this.selectedLocationOfWork == 'Biodiesel production sector' ||
+                                this.selectedLocationOfWork == 'Waste water treatment sector'
+                            "
+                            value = "Electrical (E)">
+                            Electrical (E)
+                        </mat-option>
+                        <mat-option 
+                            *ngIf = "
+                                this.selectedLocationOfWork == 'Biodiesel production sector' ||
+                                this.selectedLocationOfWork == 'Work at height training platform'
+                            "
+                            value = "Work at height (WAH)">
+                            Work at height (WAH)
+                        </mat-option>
+                        <mat-option 
+                            *ngIf = "
+                                this.selectedLocationOfWork == 'Confined space training room'
+                            "
+                            value = "Confined space (CS)">
+                            Confined space (CS)
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <div *ngIf = "this.selectedPermitType == 'Hot work (HW)'" class = "hwp-info-container">
+                    <mat-icon style = "color: brown">whatshot</mat-icon><mat-label style = "font-weight: 450;">HOT WORK PERMIT</mat-label>
                     <br><br>
+                    <mat-label>A hot work permit is required for work involving the use of a flame or other sources of ignition. Some examples include:</mat-label>
+                    <br><br>
+                    <mat-label>•&emsp;Electrical welding and use of welding machine,</mat-label>
+                    <br>
+                    <mat-label>•&emsp;Flame cutting,</mat-label>
+                    <br>
+                    <mat-label>•&emsp;Grinding (producing sparks)</mat-label>
                 </div>
-                <mat-divider></mat-divider>
+                <div *ngIf = "this.selectedPermitType == 'Cold work (CW)'" class = "cwp-info-container">
+                    <mat-icon style = "color: darkslateblue">ac_unit</mat-icon><mat-label style = "font-weight: 450;">COLD WORK PERMIT</mat-label>
+                    <br><br>
+                    <mat-label>A cold work permit is required for potentially hazardous work not covered by other types of work permits. Some examples include:</mat-label>
+                    <br><br>
+                    <mat-label>•&emsp;Chemical cleaning or use of solvents,</mat-label>
+                    <br>
+                    <mat-label>•&emsp;Handling of hazardous substances (e.g.: toxic / corrosive chemicals, asbestos etc.),</mat-label>
+                    <br>
+                    <mat-label>•&emsp;Use of resins, typically used during blade repairs,</mat-label>
+                    <br>
+                    <mat-label>•&emsp;Any painting activity,</mat-label>
+                    <br>
+                    <mat-label>•&emsp;Heavy lifts,</mat-label>
+                    <br>
+                    <mat-label>•&emsp;Erecting or dismantling scaffolds,</mat-label>
+                    <br>
+                    <mat-label>•&emsp;Any non-routine and potentially hazardous activity,</mat-label>
+                    <br>
+                    <mat-label>•&emsp;Any activity requiring specific control measures to confirm safety</mat-label>
+                </div>
+                <div *ngIf = "this.selectedPermitType == 'Electrical (E)'" class = "ep-info-container">
+                    <mat-icon style = "color: khaki">flash_on</mat-icon><mat-label style = "font-weight: 450;">ELECTRICAL PERMIT</mat-label>
+                    <br><br>
+                    <mat-label>An electrical permit is required for work on electrical systems where there is a possibility of contacting energised electrical conductors. Some examples include:</mat-label>
+                    <br><br>
+                    <mat-label>•&emsp;Work involving the installation or repair of electrical conductors,</mat-label>
+                    <br>
+                    <mat-label>•&emsp;Connection or disconnection of electric motors,</mat-label>
+                    <br>
+                    <mat-label>•&emsp;Reaching into any panel, transformer or other electrical enclosure which may have energised circuits, capacitors, wiring etc.,</mat-label>
+                    <br>
+                    <mat-label>•&emsp;Work on instrumentation, instrument panels, or telecom equipment,</mat-label>
+                    <br>
+                    <mat-label>•&emsp;Where removal of a part of the circuit takes place outside normal operating conditions</mat-label>
+                    <br>
+                </div>
+                <div *ngIf = "this.selectedPermitType == 'Work at height (WAH)'" class = "wahp-info-container">
+                    <mat-icon style = "color: darkslategrey">location_city</mat-icon><mat-label style = "font-weight: 450;">WORK AT HEIGHT PERMIT</mat-label>
+                    <br><br>
+                    <mat-label>A work at height permit is required for work in any place where, including a place at or below ground level, obtaining access to or egress from such place while at work, except by a staircase in permanent workplace, where, if measures required by the regulations were not taken, a person could fall a distance liable to cause personal injury. Some examples include:</mat-label>
+                    <br><br>
+                    <mat-label>•&emsp;Elevated place of work, e.g.: on a ladder or a flat roof,</mat-label>
+                    <br>
+                    <mat-label>•&emsp;Vicinity of an opening,</mat-label>
+                    <br>
+                    <mat-label>•&emsp;Vicinity of an edge,</mat-label>
+                    <br>
+                    <mat-label>•&emsp;Any other place (whether above or below ground), e.g.: fall through a fragile surface</mat-label>
+                    <br>
+                </div>
+                <div *ngIf = "this.selectedPermitType == 'Confined space (CS)'" class = "csp-info-container">
+                    <mat-icon style = "color: forestgreen">zoom_out_map</mat-icon><mat-label style = "font-weight: 450;">CONFINED SPACE PERMIT</mat-label>
+                    <br><br>
+                    <mat-label>A confined space permit is required to allow personnel to enter a confined space such as a blade, trench, tank vessel, etc. Other criteria include:</mat-label>
+                    <br><br>
+                    <mat-label>•&emsp;Limited openings for entry and exit,</mat-label>
+                    <br>
+                    <mat-label>•&emsp;The space is not intended for continuous human occupancy,</mat-label>
+                    <br>
+                    <mat-label>•&emsp;The space is large enough for you to enter and conduct work</mat-label>
+                    <br>
+                </div>
+                <div *ngIf = "this.selectedPermitType == ''"></div>
                 <br>
+                <mat-divider></mat-divider>
+                <br><br>
                 <mat-form-field class = "start-date-picker" appearance = "fill">
                     <mat-label>Select start date</mat-label>
                     <input 
@@ -124,12 +247,41 @@
                 <br>
                 <mat-form-field class = "no-of-workers-input" appearance = "fill">
                     <mat-label>No. of workers</mat-label>
-                    <input matInput type = "number" min = "1" value = "1" required [(ngModel)] = "this.noOfWorkersInput" formControlName = "noOfWorkers">
+                    <input 
+                        matInput 
+                        required
+                        type = "number" 
+                        min = "1" 
+                        max = "4" 
+                        value = "1"
+                        [(ngModel)] = "this.noOfWorkersEventValue" 
+                        (change) = "
+                            this.setNoOfWorkers(this.noOfWorkersEventValue);
+                            this.totalNoOfAttendants = this.calcNoOfTableRowDisplayed();
+                            this.toggleAttendantDetsTableRowValidator(this.totalNoOfAttendants);
+                        " 
+                        formControlName = "noOfWorkers">
+                    <mat-hint>Max: 4</mat-hint>
                 </mat-form-field>
                 <mat-form-field class = "no-of-spvs-input" appearance = "fill">
                     <mat-label>No. of supervisors</mat-label>
-                    <input matInput type = "number" min = "1" value = "1" required [(ngModel)] = "this.noOfSupervisorsInput" formControlName = "noOfSpvs">
+                    <input 
+                        matInput 
+                        required 
+                        type = "number" 
+                        min = "1" 
+                        max = "2" 
+                        value = "1"
+                        [(ngModel)] = "this.noOfSupervisorsEventValue" 
+                        (change) = "
+                            this.setNoOfSupervisors(this.noOfSupervisorsEventValue);
+                            this.totalNoOfAttendants = this.calcNoOfTableRowDisplayed();
+                            this.toggleAttendantDetsTableRowValidator(this.totalNoOfAttendants);
+                        " 
+                        formControlName = "noOfSpvs">
+                    <mat-hint>Max: 2</mat-hint>
                 </mat-form-field>
+                <br><br>
                 <div>
                     <button mat-button matStepperNext>Next</button>
                 </div>
@@ -139,7 +291,7 @@
             <form class = "section-one-form" [formGroup] = "this.sectionOneBFormGroup">
                 <ng-template matStepLabel>Section I (B): Safety Measures</ng-template>
                 <div *ngIf = "this.selectedPermitType == 'Work at height (WAH)'">
-                    <mat-label class = "section-title">NOTE: This section is to be completed by a supervisor</mat-label>
+                    <mat-label class = "section-title">NOTE: This section is to be completed by a representative supervisor</mat-label>
                     <br><br>
                     <h2>WAH Control Measures Implemented</h2>
                     <mat-label class = "required-label">* Please fill out all the check boxes below</mat-label>
@@ -379,61 +531,9 @@
                         </mat-list-item>
                     </mat-list>
                     <br>
-                    <mat-divider></mat-divider>
-                    <br>
-                    <h2>Particulars of WAH Attendant</h2>
-                    <mat-label class = "required-label">* Required field</mat-label>
-                    <br><br>
-                    <mat-form-field class = "wah-s1-ard-name-input" appearance = "fill">
-                        <mat-label>Attendant name</mat-label>
-                        <input matInput required [(ngModel)] = "this.wah_s1_ard_nameInput" formControlName = "wah_s1_ard_name">
-                    </mat-form-field>
-                    <br>
-                    <mat-form-field class = "wah-s1-ard-nric-or-fin-no-input" appearance = "fill">
-                        <mat-label>NRIC / FIN no.</mat-label>
-                        <input 
-                            matInput
-                            required 
-                            placeholder = "@_______#"
-                            [inputMask] = "this.nricOrFinNoInputMask"
-                            [(ngModel)] = "this.wah_s1_ard_nricOrFinNoInput" 
-                            formControlName = "wah_s1_ard_nricOrFinNo">
-                    </mat-form-field>
-                    <br>
-                    <mat-form-field class = "wah-s1-ard-org-type-input" appearance = "fill">
-                        <mat-label>Organisation type</mat-label>
-                        <mat-select required formControlName = "wah_s1_ard_orgType" [(value)] = "this.wah_s1_ard_organisationTypeInput" (selectionChange) = "this.toggleArdOrgNameValidator(this.selectedPermitType, $event.value)">
-                            <mat-option>None</mat-option>
-                            <mat-option value = "Internal">Internal</mat-option>
-                            <mat-option value = "External">External</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <br>
-                    <div *ngIf = "this.wah_s1_ard_organisationTypeInput == 'External'">
-                        <mat-form-field class = "wah-s1-ard-org-name-input" appearance = "fill">
-                            <mat-label>Organisation name</mat-label>
-                            <input matInput required [(ngModel)] = "this.wah_s1_ard_organisationNameInput" formControlName = "wah_s1_ard_orgName">
-                        </mat-form-field>
-                        <br>
-                    </div>
-                    <mat-form-field class = "wah-s1-ard-dep-name-input" appearance = "fill">
-                        <mat-label>Department name</mat-label>
-                        <input matInput required [(ngModel)] = "this.wah_s1_ard_departmentNameInput" formControlName = "wah_s1_ard_depName">
-                    </mat-form-field>
-                    <br>
-                    <mat-form-field class = "wah-s1-ard-contact-no-input" appearance = "fill">
-                        <mat-label>Contact no.</mat-label>
-                        <input 
-                            matInput 
-                            required
-                            placeholder = "+65 ____-____"
-                            [inputMask] = "this.contactNoInputMask"
-                            [(ngModel)] = "this.wah_s1_ard_contactNoInput" 
-                            formControlName = "wah_s1_ard_contactNo">
-                    </mat-form-field>
                 </div>
                 <div *ngIf = "this.selectedPermitType == 'Confined space (CS)'">
-                    <mat-label class = "section-title">NOTE: This section is to be completed by a supervisor</mat-label>
+                    <mat-label class = "section-title">NOTE: This section is to be completed by a representative supervisor</mat-label>
                     <br><br>
                     <h2>Potential CS Hazards</h2>
                     <mat-label class = "required-label">* Required field</mat-label>
@@ -685,60 +785,6 @@
                         </div>
                     </div>
                     <br>
-                    <mat-divider></mat-divider>
-                    <br>
-                    <h2>Particulars of CS Attendant</h2>
-                    <mat-label class = "required-label">* Required field</mat-label>
-                    <br><br>
-                    <div id = "ard-col">
-                        <mat-form-field class = "cs-s1-ard-name-input" appearance = "fill">
-                            <mat-label>Attendant name</mat-label>
-                            <input matInput required [(ngModel)] = "this.cs_s1_ard_nameInput" formControlName = "cs_s1_ard_name">
-                        </mat-form-field>
-                        <br>
-                        <mat-form-field class = "cs-s1-ard-nric-or-fin-no-input" appearance = "fill">
-                            <mat-label>NRIC / FIN no.</mat-label>
-                            <input 
-                                matInput
-                                required 
-                                placeholder = "@_______#"
-                                [inputMask] = "this.nricOrFinNoInputMask"
-                                [(ngModel)] = "this.cs_s1_ard_nricOrFinNoInput" 
-                                formControlName = "cs_s1_ard_nricOrFinNo">
-                        </mat-form-field>
-                        <br>
-                        <mat-form-field class = "cs-s1-ard-org-type-input" appearance = "fill">
-                            <mat-label>Organisation type</mat-label>
-                            <mat-select required formControlName = "cs_s1_ard_orgType" [(value)] = "this.cs_s1_ard_organisationTypeInput" (selectionChange) = "this.toggleArdOrgNameValidator(this.selectedPermitType, $event.value)">
-                                <mat-option>None</mat-option>
-                                <mat-option value = "Internal">Internal</mat-option>
-                                <mat-option value = "External">External</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <br>
-                        <div *ngIf = "this.cs_s1_ard_organisationTypeInput == 'External'">
-                            <mat-form-field class = "cs-s1-ard-org-name-input" appearance = "fill">
-                                <mat-label>Organisation name</mat-label>
-                                <input matInput required [(ngModel)] = "this.cs_s1_ard_organisationNameInput" formControlName = "cs_s1_ard_orgName">
-                            </mat-form-field>
-                            <br>
-                        </div>
-                        <mat-form-field class = "cs-s1-ard-dep-name-input" appearance = "fill">
-                            <mat-label>Department name</mat-label>
-                            <input matInput required [(ngModel)] = "this.cs_s1_ard_departmentNameInput" formControlName = "cs_s1_ard_depName">
-                        </mat-form-field>
-                        <br>
-                        <mat-form-field class = "cs-s1-ard-contact-no-input" appearance = "fill">
-                            <mat-label>Contact no.</mat-label>
-                            <input 
-                                matInput 
-                                required
-                                placeholder = "+65 ____-____"
-                                [inputMask] = "this.contactNoInputMask"
-                                [(ngModel)] = "this.cs_s1_ard_contactNoInput" 
-                                formControlName = "cs_s1_ard_contactNo">
-                        </mat-form-field>
-                    </div>
                 </div>
                 <div>
                     <button mat-button matStepperPrevious>Back</button>
@@ -748,9 +794,194 @@
         </mat-step>
         <mat-step [stepControl] = "this.sectionOneCFormGroup" [errorMessage] = "this.errorMessage">
             <form class = "section-one-form" [formGroup] = "this.sectionOneCFormGroup">
-                <ng-template matStepLabel>Section I (C): Applicant Details</ng-template>
-                <mat-label class = "section-title">NOTE: This section is to be completed by a supervisor</mat-label>
+                <ng-template matStepLabel>Section I (C): Personnel Details</ng-template>
+                <mat-label class = "section-title">NOTE: This section is to be completed by a representative supervisor</mat-label>
                 <br><br>
+                <h2>Attendant Details</h2>
+                <mat-label>The number of fillable rows are according to the total number of workers and supervisors (excluding the representative supervisor).</mat-label>
+                <br><br>
+                <mat-label class = "required-label">* Required field</mat-label>
+                <br><br>
+
+                <div>
+                    <mat-grid-list cols = "3" rowHeight = "65px">
+                        <mat-grid-tile-header>
+                            <mat-grid-tile>Name</mat-grid-tile>
+                            <mat-grid-tile>NRIC / FIN No.</mat-grid-tile>
+                            <mat-grid-tile>Contact No.</mat-grid-tile>
+                        </mat-grid-tile-header>
+
+                        <div *ngIf = "this.totalNoOfAttendants >= 1">
+                            <mat-grid-tile>
+                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <input 
+                                        matInput 
+                                        required 
+                                        [placeholder] = "'Attendant ' + this.attendantDetsData[0].id"
+                                        [(ngModel)] = "this.attendantDetsData[0].name"
+                                        formControlName = "ad1_name">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <input
+                                        matInput 
+                                        required
+                                        [inputMask] = "this.nricOrFinNoInputMask"
+                                        [(ngModel)] = "this.attendantDetsData[0].nricOrFinNo"
+                                        formControlName = "ad1_nricOrFinNo">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <input
+                                        matInput 
+                                        required
+                                        [inputMask] = "this.contactNoInputMask"
+                                        [(ngModel)] = "this.attendantDetsData[0].contactNo"
+                                        formControlName = "ad1_contactNo">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                        </div>
+
+                        <div *ngIf = "this.totalNoOfAttendants >= 2">
+                            <mat-grid-tile>
+                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <input 
+                                        matInput 
+                                        required 
+                                        [placeholder] = "'Attendant ' + this.attendantDetsData[1].id"
+                                        [(ngModel)] = "this.attendantDetsData[1].name"
+                                        formControlName = "ad2_name">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <input
+                                        matInput 
+                                        required
+                                        [inputMask] = "this.nricOrFinNoInputMask"
+                                        [(ngModel)] = "this.attendantDetsData[1].nricOrFinNo"
+                                        formControlName = "ad2_nricOrFinNo">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <input
+                                        matInput 
+                                        required
+                                        [inputMask] = "this.contactNoInputMask"
+                                        [(ngModel)] = "this.attendantDetsData[1].contactNo"
+                                        formControlName = "ad2_contactNo">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                        </div>
+
+                        <div *ngIf = "this.totalNoOfAttendants >= 3">
+                            <mat-grid-tile>
+                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <input 
+                                        matInput 
+                                        required 
+                                        [placeholder] = "'Attendant ' + this.attendantDetsData[2].id"
+                                        [(ngModel)] = "this.attendantDetsData[2].name"
+                                        formControlName = "ad3_name">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <input
+                                        matInput 
+                                        required
+                                        [inputMask] = "this.nricOrFinNoInputMask"
+                                        [(ngModel)] = "this.attendantDetsData[2].nricOrFinNo"
+                                        formControlName = "ad3_nricOrFinNo">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <input
+                                        matInput 
+                                        required
+                                        [inputMask] = "this.contactNoInputMask"
+                                        [(ngModel)] = "this.attendantDetsData[2].contactNo"
+                                        formControlName = "ad3_contactNo">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                        </div>
+
+                        <div *ngIf = "this.totalNoOfAttendants >= 4">
+                            <mat-grid-tile>
+                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <input 
+                                        matInput 
+                                        required 
+                                        [placeholder] = "'Attendant ' + this.attendantDetsData[3].id"
+                                        [(ngModel)] = "this.attendantDetsData[3].name"
+                                        formControlName = "ad4_name">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <input
+                                        matInput 
+                                        required
+                                        [inputMask] = "this.nricOrFinNoInputMask"
+                                        [(ngModel)] = "this.attendantDetsData[3].nricOrFinNo"
+                                        formControlName = "ad4_nricOrFinNo">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <input
+                                        matInput 
+                                        required
+                                        [inputMask] = "this.contactNoInputMask"
+                                        [(ngModel)] = "this.attendantDetsData[3].contactNo"
+                                        formControlName = "ad4_contactNo">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                        </div>
+
+                        <div *ngIf = "this.totalNoOfAttendants >= 5">
+                            <mat-grid-tile>
+                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <input 
+                                        matInput 
+                                        required 
+                                        [placeholder] = "'Attendant ' + this.attendantDetsData[4].id"
+                                        [(ngModel)] = "this.attendantDetsData[4].name"
+                                        formControlName = "ad5_name">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <input
+                                        matInput 
+                                        required
+                                        [inputMask] = "this.nricOrFinNoInputMask"
+                                        [(ngModel)] = "this.attendantDetsData[4].nricOrFinNo"
+                                        formControlName = "ad5_nricOrFinNo">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <input
+                                        matInput 
+                                        required
+                                        [inputMask] = "this.contactNoInputMask"
+                                        [(ngModel)] = "this.attendantDetsData[4].contactNo"
+                                        formControlName = "ad5_contactNo">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                        </div>
+                        
+                    </mat-grid-list>
+                </div>
+
+                <br><br>
+                <mat-divider></mat-divider>
+                <br>
                 <h2>Applicant Details</h2>
                 <mat-label class = "required-label">* Required field</mat-label>
                 <br><br>
@@ -815,15 +1046,13 @@
                 <div class = "apl-dcl-container">
                     <mat-label style = "font-weight: 450;">NOTE</mat-label>
                     <br><br>
-                    <mat-label>1.&emsp;The necessary safety measures must be complied with before the application is submitted to the WAH / CS safety assessor for his / her evaluation.</mat-label>
+                    <mat-label>1.&emsp;The necessary safety measures must be complied with before the application is submitted to the safety assessor for his / her evaluation.</mat-label>
                     <br><br>
-                    <mat-label>2.&emsp;Where reasonably practicable, applicant to provide a sketch of the area in WAH / CS where the entry is to be made or work is to be conducted on a separate sheet of paper and attach it with the permit.</mat-label>
-                    <br><br>
-                    <mat-label>3.&emsp;Upon submission and after approval from the authority, this permit shall be visible inside the system for the duration of the approved task and removed only upon task completion or upon its expiry.</mat-label>
+                    <mat-label>2.&emsp;Upon submission and after approval from the authority, this permit shall be visible inside the system for the duration of the approved task and removed only upon task completion or upon its expiry.</mat-label>
                     <br><br><br>
                     <div id = "apl-dcl-checkbox">
                         <mat-checkbox [(ngModel)] = "this.applicantDeclarationChecked" formControlName = "aplDclChecked">
-                            &emsp;I declare that the information provided is accurate and the control measures listed above <br>have been effectively implemented.
+                            &emsp;I declare that the information provided is accurate and the control<br>measures listed previously have been effectively implemented.
                         </mat-checkbox>
                     </div>
                 </div>

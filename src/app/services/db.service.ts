@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IPermitToWork } from '../interfaces/IPermitToWork';
+import { AttendantDets } from '../interfaces/AttendantDets';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DbService {
-  private ptwUrl: string = '/api/ptw';
+  private ptwUrl: string = '/db/ptw';
 
   constructor(private http : HttpClient) { }
 
@@ -16,7 +17,7 @@ export class DbService {
     return this.http.get<IPermitToWork[]>(this.ptwUrl);
   }
 
-  public post(body: IPermitToWork): Observable<IPermitToWork> {
+  public post(body: IPermitToWork | undefined): Observable<IPermitToWork | undefined> {
     const headers = { 
         'content-type': 'application/json' 
     };
@@ -33,8 +34,8 @@ export class DbService {
     permitType?: string,
     selectedLocationOfWork?: string,
     otherLocationOfWork?: string[],
-    startWorkingDateTime?: Date,
-    endWorkingDateTime?: Date,
+    startWorkingDateTime?: string,
+    endWorkingDateTime?: string,
     taskDescription?: string,
     noOfWorkers?: number,
     noOfSupervisors?: number,
@@ -61,16 +62,9 @@ export class DbService {
     wah_s1_cmi_q10_remarks?: string,
     wah_s1_cmi_q11_specify?: string,
 
-    wah_s1_ard_name?: string,
-    wah_s1_ard_nricOrFinNo?: string,
-    wah_s1_ard_orgType?: string,
-    wah_s1_ard_orgName?: string,
-    wah_s1_ard_depName?: string,
-    wah_s1_ard_contactNo?: string,
-
     wah_s1_checked?: boolean,
     wah_s1_supervisorName?: string,
-    wah_s1_timestamp?: Date,
+    wah_s1_timestamp?: string,
 
     wah_s2_acm_q01_choice?: string,
     wah_s2_acm_q01_remarks?: string,
@@ -89,7 +83,7 @@ export class DbService {
 
     wah_s2_checked?: boolean,
     wah_s2_safetyAssessorName?: string,
-    wah_s2_timestamp?: Date,
+    wah_s2_timestamp?: string,
 
     wah_s3_pr_q01_choice?: string,
     wah_s3_pr_q01_remarks?: string,
@@ -102,7 +96,7 @@ export class DbService {
 
     wah_s3_checked?: boolean,
     wah_s3_authorisedManagerName?: string,
-    wah_s3_timestamp?: Date,
+    wah_s3_timestamp?: string,
 
     cs_s1_ph_atmo?: string,
     cs_s1_ph_nonAtmo?: string,
@@ -124,13 +118,6 @@ export class DbService {
     cs_s1_cmi_ppe_q06_checked?: string,
     cs_s1_cmi_ppe_q07_specify?: string,
 
-    cs_s1_ard_name?: string,
-    cs_s1_ard_nricOrFinNo?: string,
-    cs_s1_ard_orgType?: string,
-    cs_s1_ard_orgName?: string,
-    cs_s1_ard_depName?: string,
-    cs_s1_ard_contactNo?: string,
-
     cs_s1_checked?: boolean,
     cs_s1_supervisorName?: string,
     cs_s1_timestamp?: string,
@@ -142,7 +129,7 @@ export class DbService {
 
     cs_s2_checked?: boolean,
     cs_s2_safetyAssessorName?: string,
-    cs_s2_timestamp?: Date,
+    cs_s2_timestamp?: string,
 
     cs_s3_pr_q01_choice?: string,
     cs_s3_pr_q02_choice?: string,
@@ -151,7 +138,27 @@ export class DbService {
 
     cs_s3_checked?: boolean,
     cs_s3_authorisedManagerName?: string,
-    cs_s3_timestamp?: Date,
+    cs_s3_timestamp?: string,
+
+    ad1_name?: string,
+    ad1_nricOrFinNo?: string,
+    ad1_contactNo?: string,
+
+    ad2_name?: string,
+    ad2_nricOrFinNo?: string,
+    ad2_contactNo?: string,
+
+    ad3_name?: string,
+    ad3_nricOrFinNo?: string,
+    ad3_contactNo?: string,
+
+    ad4_name?: string,
+    ad4_nricOrFinNo?: string,
+    ad4_contactNo?: string,
+
+    ad5_name?: string,
+    ad5_nricOrFinNo?: string,
+    ad5_contactNo?: string,
 
     ad_name?: string,
     ad_nricOrFinNo?: string,
@@ -169,7 +176,7 @@ export class DbService {
     ptwStatus_remarks?: string,
     ptwStatus_checked?: boolean,
     ptwStatus_supervisorName?: string,
-    ptwStatus_timestamp?: Date,
+    ptwStatus_timestamp?: string,
 
     checked?: boolean,
     reqStatus?: string,
@@ -239,14 +246,6 @@ export class DbService {
               q11: {
                 specify: wah_s1_cmi_q11_specify
               }
-            },
-            attendantRepDets: {
-              attendantRepName: wah_s1_ard_name,
-              nricOrFinNo: wah_s1_ard_nricOrFinNo,
-              orgType: wah_s1_ard_orgType,
-              orgName: wah_s1_ard_orgName,
-              depName: wah_s1_ard_depName,
-              contactNo: wah_s1_ard_contactNo
             },
             checked: wah_s1_checked,
             supervisorName: wah_s1_supervisorName,
@@ -340,14 +339,6 @@ export class DbService {
                 }
               }
             },
-            attendantRepDets: {
-              attendantRepName: cs_s1_ard_name,
-              nricOrFinNo: cs_s1_ard_nricOrFinNo,
-              orgType: cs_s1_ard_orgType,
-              orgName: cs_s1_ard_orgName,
-              depName: cs_s1_ard_depName,
-              contactNo: cs_s1_ard_contactNo
-            },
             checked: cs_s1_checked,
             supervisorName: cs_s1_supervisorName,
             timestamp: cs_s1_timestamp
@@ -375,6 +366,38 @@ export class DbService {
             timestamp: cs_s3_timestamp
           }
         },
+        attendantDets: [
+          {
+            id: 1,
+            name: ad1_name,
+            nricOrFinNo: ad1_nricOrFinNo,
+            contactNo: ad1_contactNo
+          },
+          {
+            id: 2,
+            name: ad2_name,
+            nricOrFinNo: ad2_nricOrFinNo,
+            contactNo: ad2_contactNo
+          },
+          {
+            id: 3,
+            name: ad3_name,
+            nricOrFinNo: ad3_nricOrFinNo,
+            contactNo: ad3_contactNo
+          },
+          {
+            id: 4,
+            name: ad4_name,
+            nricOrFinNo: ad4_nricOrFinNo,
+            contactNo: ad4_contactNo
+          },
+          {
+            id: 5,
+            name: ad5_name,
+            nricOrFinNo: ad5_nricOrFinNo,
+            contactNo: ad5_contactNo
+          },
+        ],
         applicantDets: {
           name: ad_name,
           nricOrFinNo: ad_nricOrFinNo,

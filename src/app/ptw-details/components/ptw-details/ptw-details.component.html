@@ -1,0 +1,69 @@
+<div class = "ptw-request-details-dialog" *ngFor = "let dt of this.targetPtw">
+    <h2 mat-dialog-title>PTW Details</h2>
+    <br>
+    <div style = "text-align: start;">
+        <h2 [ngStyle] = "
+            dt.requestStatus == 'Cancelled' ? { color: 'grey' } : 
+            dt.requestStatus == 'Approved' ? { color: 'green' } : 
+            dt.requestStatus == 'Rejected' ? { color: 'red' } : 
+            dt.requestStatus == 'Pending' ? { color: '' } : 
+            { color: '' }
+            ">{{ dt.requestStatus | uppercase }}</h2>
+        <h3 [ngStyle] = "
+            dt.requestStatus == 'Cancelled' ? { color: 'grey' } : 
+            dt.requestStatus == 'Approved' ? { color: 'green' } : 
+            dt.requestStatus == 'Rejected' ? { color: 'red' } : 
+            dt.requestStatus == 'Pending' ? { color: '' } : 
+            { color: '' }
+        ">{{ dt.ptwStatus?.taskStatus | uppercase }}</h3>
+        <div style = "width: 200px">
+            <mat-grid-list cols = "2" rowHeight = "25px">
+                <div>
+                    <mat-grid-tile>
+                        <div id = "label-text-inside-grid">
+                            <p><b>Checked by:</b></p>
+                        </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <div id = "value-text-inside-grid">
+                            <p>{{ dt.ptwStatus?.supervisorName }}</p>
+                        </div>
+                    </mat-grid-tile>
+                </div>
+                <div *ngIf = "dt.permitType == 'Work at height (WAH)'">
+                    <mat-grid-tile>
+                        <div id = "label-text-inside-grid">
+                            <p><b>Evaluated by:</b></p>
+                        </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <div id = "value-text-inside-grid">
+                            <p>{{ dt.workAtHeight?.sectionTwo?.safetyAssessorName }}</p>
+                        </div>
+                    </mat-grid-tile>
+                </div>
+                <div *ngIf = "dt.permitType == 'Confined space (CS)'">
+                    <mat-grid-tile>
+                        <div id = "label-text-inside-grid">
+                            <p><b>Evaluated by:</b></p>
+                        </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <div id = "value-text-inside-grid">
+                            <p>{{ dt.confinedSpace?.sectionTwo?.safetyAssessorName }}</p>
+                        </div>
+                    </mat-grid-tile>
+                    
+                </div>
+            </mat-grid-list>
+        </div>
+
+        <div *ngIf = "dt.statusRemarks != 'None'">
+            <p><b>Reason:</b>&emsp;{{ dt.statusRemarks }}</p>
+        </div>
+        <!-- <div *ngIf = "dt.ptwStatus?.timestamp != 'None'"><p><b>Date:</b>&emsp;{{ dt.ptwStatus?.timestamp }}</p></div> -->
+        <div *ngIf = "dt.timestamp != 'None'">
+            <p><b>Checked Date:</b>&emsp;{{ this.submissionTimestampDisplay | date: "mediumDate" }}</p>
+        </div>
+    </div>
+</div>

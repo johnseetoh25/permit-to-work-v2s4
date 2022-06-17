@@ -15,6 +15,14 @@ const routes: Routes = [
     loadChildren: () => import('./ptw-request/ptw-request.module').then(module => module.PtwRequestModule)
   },
   {
+    path: 'tracking-log',
+    loadChildren: () => import('./tracking-log/tracking-log.module').then(module => module.TrackingLogModule)
+  },
+  {
+    path: 'ptw-details',
+    loadChildren: () => import('./ptw-details/ptw-details.module').then(module => module.PtwDetailsModule)
+  },
+  {
     path: '',
     redirectTo: 'landing',
     pathMatch: 'full'

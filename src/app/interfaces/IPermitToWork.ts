@@ -1,14 +1,39 @@
+import { AttendantDets } from "./AttendantDets"
+
 export interface IPermitToWork {
 	// COMMON SECTION: To be completed by SUPERVISOR
 	id?: number, // JSON auto-ID
 	ptwId?: string, // Incremented
-    permitType?: string, // 2 types: | WAH | CS |
     locationOfWork?: {
-		option?: string, // 2 defaults: | Work at Height Training Platform (if WAH) | Confined Space Training Room (if CS) |
-		other?: string[] // If got multiple locs. Default: | NONE |
+		/*
+			4 mains:
+			- Biodiesel production sector
+				3 subs:
+					- Biodiesel production
+					- Biodiesel purification
+					- Ethanol recovery
+			- Waste water treatment sector
+				3 subs:
+					- Primary treatment
+					- Secondary treatment
+					- Ternary treatment
+			- Work at height training platform
+			- Confined space training room
+		*/
+		main?: string,
+		sub?: string
 	},
-    startWorkingDateTime?: Date,
-    endWorkingDateTime?: Date,
+	/*
+		4 mains:
+		- Hot work (HW)
+		- Cold work (CW)
+		- Electrical (E)
+		- Work at height (WAH)
+		- Confined space (CS)
+	*/
+	permitType?: string,
+    startWorkingDateTime?: string,
+    endWorkingDateTime?: string,
     taskDescription?: string,
 	noOfWorkers?: number,
 	noOfSupervisors?: number,
@@ -81,7 +106,7 @@ export interface IPermitToWork {
 			},
 			checked?: boolean, // Ensure that info is verified & approved
 			supervisorName?: string
-			timestamp?: Date // AUTO
+			timestamp?: string // AUTO
 		},
 		// SECTION II: To be completed by SAFETY ASSESSOR
 		sectionTwo?: {
@@ -123,7 +148,7 @@ export interface IPermitToWork {
 			},
 			checked?: boolean, // Ensure that info is verified & approved
 			safetyAssessorName?: string
-			timestamp?: Date // AUTO
+			timestamp?: string // AUTO
 		},
 		// SECTION III: To be completed by AUTHORISED MANAGER
 		sectionThree?: {
@@ -151,7 +176,7 @@ export interface IPermitToWork {
 			},
 			checked?: boolean, // Ensure that info is verified & approved
 			authorisedManagerName?: string,
-			timestamp?: Date // AUTO
+			timestamp?: string // AUTO
 		}
 	},
 	confinedSpace?: {
@@ -209,7 +234,7 @@ export interface IPermitToWork {
 			},
 			checked?: boolean, // Ensure that info is verified & approved
 			supervisorName?: string,
-			timestamp?: Date // AUTO
+			timestamp?: string // AUTO
 		},
 		// SECTION II: To be completed by SAFETY ASSESSOR
 		sectionTwo?: {
@@ -221,7 +246,7 @@ export interface IPermitToWork {
 			},
 			checked?: boolean, // Ensure that info is verified & approved
 			safetyAssessorName?: string,
-			timestamp?: Date // AUTO
+			timestamp?: string // AUTO
 		},
 		// SECTION III: To be completed by AUTHORISED MANAGER
 		sectionThree?: {
@@ -237,44 +262,67 @@ export interface IPermitToWork {
 			},
 			checked?: boolean, // Ensure that info is verified & approved
 			authorisedManagerName?: string,
-			timestamp?: Date // AUTO
+			timestamp?: string // AUTO
 		}
 	},
+	attendantDets?: [
+		{
+			id: number | undefined,
+			name?: string,
+			nricOrFinNo?: string, // Format: | @xxxxxxx# |
+			contactNo?: string // Format: | +65 xxxx-xxxx |
+		},
+		{
+			id: number | undefined,
+			name?: string,
+			nricOrFinNo?: string,
+			contactNo?: string
+		},
+		{
+			id: number | undefined,
+			name?: string,
+			nricOrFinNo?: string,
+			contactNo?: string
+		},
+		{
+			id: number | undefined,
+			name?: string,
+			nricOrFinNo?: string,
+			contactNo?: string
+		},
+		{
+			id: number | undefined,
+			name?: string,
+			nricOrFinNo?: string,
+			contactNo?: string
+		},
+	],
 	applicantDets?: {
 		name?: string,
 		nricOrFinNo?: string, // Format: | @xxxxxxx# |
 		orgType?: string, // 2 types: | INTERNAL | EXTERNAL |
 		orgName?: string, // Required if orgType == "EXTERNAL"
 		depName?: string, // Required if orgType == "EXTERNAL"
-		contactNo?: string,
+		contactNo?: string, // Format: | +65 xxxx-xxxx |
 		email?: string // For sending statement to the applicant
 	},
-	dailyEndorsement?: {
-		/*
-		0?: {
-			checked? : boolean, // Ensure that working conditions still fulfil permit grant
-			supervisorName?: string,
-			timestamp? : Date // AUTO
-		},
-		// And continues based on how many days of working...
-		*/
-	},
+	dailyEndorsement?: { /* DailyEndorsement.ts */ },
 	// To be completed by SUPERVISOR
 	ptwPost?: {
 		checked?: boolean, // Ensure that info is verified & approved
 		supervisorName?: string,
-		timestamp?: Date // AUTO
+		timestamp?: string // AUTO
 	},
 	// To be completed by SUPERVISOR
 	ptwStatus?: {
-		taskStatus?: string, // 5 states: | NOT YET STARTED | IN_PROGESS | COMPLETED | TERMINATED | EXPIRED |
+		taskStatus?: string, // 5 states: | NOT STARTED | IN_PROGESS | COMPLETED | TERMINATED | EXPIRED |
 		remarks?: string,
 		checked?: boolean, // Ensure that info is verified & approved
 		supervisorName?: string,
-		timestamp?: Date // AUTO
+		timestamp?: string // AUTO
 	},
 	checked?: boolean, // Ensure that info is verified & approved
 	requestStatus?: string, // 3 states: | PENDING | APPROVED | REJECTED |
 	statusRemarks?: string, // If requestStatus == 'REJECTED', need to specify
-	timestamp?: Date // AUTO
+	timestamp?: string // AUTO
 }

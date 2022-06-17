@@ -2,7 +2,7 @@
     <p>
         <mat-toolbar class = "applicant-toolbar">
             <mat-toolbar-row>
-                <span id = "toolbar-title">Home</span>
+                <span id = "toolbar-title">HOME</span>
                 <span class = "spacer"></span>
                     <button mat-icon-button class = "toolbar-menu-button" [matMenuTriggerFor] = "applicantMenu" aria-label = "Applicant toolbar menu">
                         <mat-icon>menu</mat-icon>
@@ -24,13 +24,23 @@
     </div>
     <div> 
         <mat-grid-list cols = "1" rowHeight= "75px">
-            <mat-grid-tile>To proceed, please select the following:</mat-grid-tile>
+            <mat-grid-tile>To proceed, please sign in as:</mat-grid-tile>
             <mat-grid-tile>
-                <a class = "sign-in-button" mat-raised-button (click) = "this.navigateTo('ptw-request')" routerLinkActive = "active" color = "primary"><mat-icon>person</mat-icon>&emsp;Apply for PTW</a>
+                <a 
+                    class = "sign-in-button" 
+                    mat-raised-button (click) = "this.navigateTo('ptw-request')" 
+                    routerLinkActive = "active" 
+                    color = "primary"
+                ><mat-icon>person</mat-icon>&emsp;AN APPLICANT</a>
             </mat-grid-tile>
             <mat-grid-tile><b>OR</b></mat-grid-tile>
             <mat-grid-tile>
-                <a class = "sign-in-button" mat-raised-button (click) = "this.navigateTo('')" routerLinkActive = "active" color = "accent"><mat-icon>supervisor_account</mat-icon>&emsp;Approve PTWs (require sign-in)</a>
+                <a 
+                    class = "sign-in-button" 
+                    mat-raised-button (click) = "this.navigateTo('')" 
+                    routerLinkActive = "active" 
+                    color = "accent"
+                ><mat-icon>supervisor_account</mat-icon>&emsp;A VALIDATOR (REQUIRE SIGN-IN)</a>
             </mat-grid-tile>
         </mat-grid-list>
     </div>

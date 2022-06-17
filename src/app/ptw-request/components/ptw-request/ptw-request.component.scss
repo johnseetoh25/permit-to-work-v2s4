@@ -35,7 +35,7 @@
 
 .permit-type-options, 
 .location-of-work-options, 
-.other-loc-input, 
+.loc-sector-options, 
 .task-desc-input, 
 .wah-s1-ard-name-input,
 .wah-s1-ard-nric-or-fin-no-input,
@@ -61,10 +61,57 @@
     width: 525px;
 }
 
-.apl-dcl-container {
-    width: 600px;
+mat-grid-list {
+    background-color: rgb(252, 252, 252);
+    width: 650px;
+}
+
+mat-grid-list mat-grid-tile-header {
+    font-weight: 425; 
+}
+
+mat-grid-list mat-grid-tile {
+    font-weight: medium;
+    border-width: 0.25px;
+    border-style: solid;
+    border-color: darkgrey;
+    border-radius: 2.5px;
+}
+
+.apl-dcl-container, 
+.hwp-info-container,
+.cwp-info-container,
+.ep-info-container,
+.wahp-info-container,
+.csp-info-container {
+    width: 475px;
     padding: 24px;
+    border-radius: 0.5em;
+}
+
+.apl-dcl-container, .cwp-info-container {
     background-color: aliceblue;
+}
+
+.hwp-info-container {
+    background-color: beige;
+}
+
+.cwp-info-container {
+    background-color: azure;
+}
+
+.ep-info-container {
+    background-color: dodgerblue;
+    color: beige
+}
+
+.wahp-info-container {
+    background-color: whitesmoke;
+}
+
+.csp-info-container {
+    background-color: lightcyan;
 }
 
 .start-date-picker, 

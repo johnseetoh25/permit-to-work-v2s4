@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { createMask } from '@ngneat/input-mask';
 import { SubmitDialogComponent } from 'src/app/submit-dialog/components/submit-dialog/submit-dialog.component';
 import { IPermitToWork } from 'src/app/interfaces/IPermitToWork';
+import { Router } from '@angular/router';
+import { AttendantDets } from 'src/app/interfaces/AttendantDets';
 
 @Component({
   selector: 'app-ptw-request',
@@ -22,32 +24,36 @@ import { IPermitToWork } from 'src/app/interfaces/IPermitToWork';
   ]
 })
 export class PtwRequestComponent implements OnInit {
-  public partiallyCompletedPTWData: IPermitToWork = {};
+  public static VALUE_NONE: string = "None";
 
+  public partiallyCompletedPTWData!: IPermitToWork;
 
   public errorMessage: string = "Please complete all the required fields.";
 
   public sectionOneAFormGroup!: FormGroup;
-    public selectedPermitType: string = "";
-
     public selectedLocationOfWork: string = "";
+    public selectedLocationSector: string = "";
+
+    public selectedPermitType: string = "";
 
     public taskCoversMultiLocs: boolean = false;
     public otherLocationsInput: string = "";
-      public otherLocationsArray: string[] = [];
     
     public startDateInput: Date = new Date();
     public endDateInput: Date = new Date();
-      public startDateTimeConcat: Date = new Date();
+      public startDateTimeConcat: string = "";
 
     public startTimeInput: Date = new Date();
     public endTimeInput: Date = new Date();
-      public endDateTimeConcat: Date = new Date();
+      public endDateTimeConcat: string = "";
 
     public taskDescriptionInput?: string = "";
 
-    public noOfWorkersInput: number = 1;
-    public noOfSupervisorsInput: number = 1;
+    public totalNoOfAttendants: number = 0;
+      public noOfWorkersEventValue: number = 1;
+        public noOfWorkersInput: number = 0;
+      public noOfSupervisorsEventValue: number = 1;
+        public noOfSupervisorsInput: number = 0;
   
   public radioButtonGroup: string[] = ['Yes', 'No', 'N/A'];
   public radioButtonGroupAlt: string[] = ['Yes', 'No'];
@@ -88,14 +94,6 @@ export class PtwRequestComponent implements OnInit {
     public wah_s1_cmi_q10_remarksInput: string = "";
 
     public wah_s1_cmi_q11_specifyInput: string = "";
-
-
-    public wah_s1_ard_nameInput: string = "";
-    public wah_s1_ard_nricOrFinNoInput: string = "";
-    public wah_s1_ard_organisationTypeInput: string = "";
-    public wah_s1_ard_organisationNameInput: string = "";
-    public wah_s1_ard_departmentNameInput: string = "";
-    public wah_s1_ard_contactNoInput: string = "";
     // ===========================================================================
 
     // ============================ Section I(B) for CS =============================
@@ -118,16 +116,64 @@ export class PtwRequestComponent implements OnInit {
     public cs_s1_cmi_ppe_q05_checkedInput: string = "";
     public cs_s1_cmi_ppe_q06_checkedInput: string = "";
     public cs_s1_cmi_ppe_q07_specifyInput: string = "";
-
-    public cs_s1_ard_nameInput: string = "";
-    public cs_s1_ard_nricOrFinNoInput: string = "";
-    public cs_s1_ard_organisationTypeInput: string = "";
-    public cs_s1_ard_organisationNameInput: string = "";
-    public cs_s1_ard_departmentNameInput: string = "";
-    public cs_s1_ard_contactNoInput: string = "";
     // ===========================================================================
 
   public sectionOneCFormGroup!: FormGroup;
+    public displayedHeaderColumns: string[] = [
+      "id",
+      "name",
+      "nricOrFinNo",
+      "contactNo"
+    ];
+    public attendantDetsData: Array<AttendantDets> = [
+      {
+        id: 1,
+        name: "",
+        nricOrFinNo: "",
+        contactNo: ""
+      },
+      {
+        id: 2,
+        name: "",
+        nricOrFinNo: "",
+        contactNo: ""
+      },
+      {
+        id: 3,
+        name: "",
+        nricOrFinNo: "",
+        contactNo: ""
+      },
+      {
+        id: 4,
+        name: "",
+        nricOrFinNo: "",
+        contactNo: ""
+      },
+      {
+        id: 5,
+        name: "",
+        nricOrFinNo: "",
+        contactNo: ""
+      }
+    ];
+
+    public setNoOfWorkers(value: any) {
+      this.noOfWorkersInput = value;
+      console.log("New no. of workers: ", this.noOfWorkersInput);
+    }
+
+    public setNoOfSupervisors(value: any) {
+      this.noOfSupervisorsInput = value;
+      console.log("New no. of supervisors: ", this.noOfSupervisorsInput);
+    }
+
+    public calcNoOfTableRowDisplayed(): number {
+      var total: number = Math.abs(this.noOfWorkersInput + (this.noOfSupervisorsInput - 1));
+      console.log("Total number of row: ", total);
+      return total;
+    }
+
     public applicantNameInput: string = "";
     public applicantNricOrFinNoInput: string = "";
       
@@ -143,15 +189,20 @@ export class PtwRequestComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public dialog: MatDialog, 
-    public dialogRef: MatDialogRef<SubmitDialogComponent>
+    public submitDialogRef: MatDialogRef<SubmitDialogComponent>,
+    private router: Router
   ) { }
 
   public ngOnInit(): void {
-    this.sectionOneAFormGroup = this.formBuilder.group({
-      permitType: ["", Validators.required],
+    this.setNoOfWorkers(this.noOfSupervisorsEventValue);
+    this.setNoOfSupervisors(this.noOfSupervisorsEventValue);
+    this.totalNoOfAttendants = this.calcNoOfTableRowDisplayed();
 
+    this.sectionOneAFormGroup = this.formBuilder.group({
       locationOfWork: ["", Validators.required],
-      otherLocs: ["", Validators.required],
+      locationSector: ["", Validators.required],
+
+      permitType: ["", Validators.required],
 
       startDate: ["", Validators.required],
       startTime: ["", Validators.required],
@@ -198,14 +249,6 @@ export class PtwRequestComponent implements OnInit {
       wah_s1_cmi_q10_remarks: [],
 
       wah_s1_cmi_q11_specify: ["", Validators.required],
-
-
-      wah_s1_ard_name: ["", Validators.required],
-      wah_s1_ard_nricOrFinNo: ["", [ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]],
-      wah_s1_ard_orgType: ["", Validators.required],
-      wah_s1_ard_orgName: ["", Validators.required],
-      wah_s1_ard_depName: ["", Validators.required],
-      wah_s1_ard_contactNo: ["", [ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]],
       // ===========================================================================
 
       // ============================ Section I(B) for CS =============================
@@ -227,18 +270,34 @@ export class PtwRequestComponent implements OnInit {
       cs_s1_cmi_ppe_q04_checked: ["", Validators.requiredTrue],
       cs_s1_cmi_ppe_q05_checked: ["", Validators.requiredTrue],
       cs_s1_cmi_ppe_q06_checked: ["", Validators.requiredTrue],
-      cs_s1_cmi_ppe_q07_specify: ["", Validators.required],
-
-      cs_s1_ard_name: ["", Validators.required],
-      cs_s1_ard_nricOrFinNo: ["", [ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]],
-      cs_s1_ard_orgType: ["", Validators.required],
-      cs_s1_ard_orgName: ["", Validators.required],
-      cs_s1_ard_depName: ["", Validators.required],
-      cs_s1_ard_contactNo: ["", [ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]],
+      cs_s1_cmi_ppe_q07_specify: ["", Validators.required]
       // ===========================================================================
     });
 
     this.sectionOneCFormGroup = this.formBuilder.group({
+      // Attendant details
+      ad1_name: ["", Validators.required],
+      ad1_nricOrFinNo: ["", [ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]],
+      ad1_contactNo: ["", [ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]],
+
+      ad2_name: ["", Validators.required],
+      ad2_nricOrFinNo: ["", [ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]],
+      ad2_contactNo: ["", [ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]],
+
+      ad3_name: ["", Validators.required],
+      ad3_nricOrFinNo: ["", [ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]],
+      ad3_contactNo: ["", [ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]],
+
+      ad4_name: ["", Validators.required],
+      ad4_nricOrFinNo: ["", [ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]],
+      ad4_contactNo: ["", [ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]],
+
+      ad5_name: ["", Validators.required],
+      ad5_nricOrFinNo: ["", [ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]],
+      ad5_contactNo: ["", [ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]],
+
+
+      // Applicant / supervisor details
       aplName: ["", Validators.required],
       aplNricOrFinNo: ["", [ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]],
       aplOrgType: ["", Validators.required],
@@ -246,29 +305,22 @@ export class PtwRequestComponent implements OnInit {
       aplDepName: ["", Validators.required],
       aplContactNo: ["", [ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]],
       aplEmail: ["", [ Validators.pattern(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/), Validators.required ]],
-      aplDclChecked: ["", Validators.requiredTrue]
+      aplDclChecked: ["", Validators.requiredTrue],
     });
 
-    this.checkMultiLocInputValidator(this.taskCoversMultiLocs);
+    this.toggleAttendantDetsTableRowValidator(this.totalNoOfAttendants);
   }
 
-  public concatStartDateTime(date: Date, time: Date): Date {
+  public concatStartDateTime(date: Date, time: Date): string {
     let tempDate = new Date(date.toDateString().concat(", ", time.toString()));
-    return tempDate;
+    let tempDateString = tempDate.toISOString();
+    return tempDateString;
   }
 
-  public concatEndDateTime(date: Date, time: Date): Date {
+  public concatEndDateTime(date: Date, time: Date): string {
     let tempDate = new Date(date.toDateString().concat(", ", time.toString()));
-    return tempDate;
-  }
-
-  public checkMultiLocInputValidator(checked: boolean): void {
-    if (checked) {
-      this.sectionOneAFormGroup.get('otherLocs')?.setValidators(Validators.required);
-    } else {
-      this.sectionOneAFormGroup.get('otherLocs')?.clearValidators();
-    }
-    this.sectionOneAFormGroup.get('otherLocs')?.updateValueAndValidity();
+    let tempDateString = tempDate.toISOString();
+    return tempDateString;
   }
 
   public togglePTWFormValidators(value: string): void {
@@ -536,20 +588,168 @@ export class PtwRequestComponent implements OnInit {
     }
   }
 
+  public toggleAttendantDetsTableRowValidator(total: number): void {
+    switch (total) {
+      case 1:
+        console.log("ONE");
+
+        this.sectionOneCFormGroup.get('ad1_name')?.setValidators(Validators.required);
+        this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad1_contactNo')?.setValidators([ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]);
+
+        this.sectionOneCFormGroup.get('ad2_name')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad2_nricOrFinNo')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad2_contactNo')?.clearValidators();
+
+        this.sectionOneCFormGroup.get('ad3_name')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad3_nricOrFinNo')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad3_contactNo')?.clearValidators();
+
+        this.sectionOneCFormGroup.get('ad4_name')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad4_nricOrFinNo')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad4_contactNo')?.clearValidators();
+
+        this.sectionOneCFormGroup.get('ad5_name')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad5_contactNo')?.clearValidators();
+
+        break;
+
+      case 2:
+        console.log("TWO");
+
+        this.sectionOneCFormGroup.get('ad1_name')?.setValidators(Validators.required);
+        this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad1_contactNo')?.setValidators([ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]);
+
+        this.sectionOneCFormGroup.get('ad2_name')?.setValidators(Validators.required);
+        this.sectionOneCFormGroup.get('ad2_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad2_contactNo')?.setValidators([ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]);
+
+        this.sectionOneCFormGroup.get('ad3_name')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad3_nricOrFinNo')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad3_contactNo')?.clearValidators();
+
+        this.sectionOneCFormGroup.get('ad4_name')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad4_nricOrFinNo')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad4_contactNo')?.clearValidators();
+
+        this.sectionOneCFormGroup.get('ad5_name')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad5_contactNo')?.clearValidators();
+
+        break;
+      
+      case 3:
+        console.log("THREE");
+
+        this.sectionOneCFormGroup.get('ad1_name')?.setValidators(Validators.required);
+        this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad1_contactNo')?.setValidators([ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]);
+
+        this.sectionOneCFormGroup.get('ad2_name')?.setValidators(Validators.required);
+        this.sectionOneCFormGroup.get('ad2_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad2_contactNo')?.setValidators([ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]);
+
+        this.sectionOneCFormGroup.get('ad3_name')?.setValidators(Validators.required);
+        this.sectionOneCFormGroup.get('ad3_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad3_contactNo')?.setValidators([ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]);
+
+        this.sectionOneCFormGroup.get('ad4_name')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad4_nricOrFinNo')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad4_contactNo')?.clearValidators();
+
+        this.sectionOneCFormGroup.get('ad5_name')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad5_contactNo')?.clearValidators();
+
+        break;
+
+      case 4:
+        console.log("FOUR");
+
+        this.sectionOneCFormGroup.get('ad1_name')?.setValidators(Validators.required);
+        this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad1_contactNo')?.setValidators([ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]);
+
+        this.sectionOneCFormGroup.get('ad2_name')?.setValidators(Validators.required);
+        this.sectionOneCFormGroup.get('ad2_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad2_contactNo')?.setValidators([ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]);
+
+        this.sectionOneCFormGroup.get('ad3_name')?.setValidators(Validators.required);
+        this.sectionOneCFormGroup.get('ad3_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad3_contactNo')?.setValidators([ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]);
+
+        this.sectionOneCFormGroup.get('ad4_name')?.setValidators(Validators.required);
+        this.sectionOneCFormGroup.get('ad4_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad4_contactNo')?.setValidators([ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]);
+
+        this.sectionOneCFormGroup.get('ad5_name')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad5_contactNo')?.clearValidators();
+
+        break;
+
+      case 5:
+        console.log("FIVE");
+
+        this.sectionOneCFormGroup.get('ad1_name')?.setValidators(Validators.required);
+        this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad1_contactNo')?.setValidators([ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]);
+
+        this.sectionOneCFormGroup.get('ad2_name')?.setValidators(Validators.required);
+        this.sectionOneCFormGroup.get('ad2_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad2_contactNo')?.setValidators([ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]);
+
+        this.sectionOneCFormGroup.get('ad3_name')?.setValidators(Validators.required);
+        this.sectionOneCFormGroup.get('ad3_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad3_contactNo')?.setValidators([ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]);
+
+        this.sectionOneCFormGroup.get('ad4_name')?.setValidators(Validators.required);
+        this.sectionOneCFormGroup.get('ad4_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad4_contactNo')?.setValidators([ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]);
+
+        this.sectionOneCFormGroup.get('ad5_name')?.setValidators(Validators.required);
+        this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad5_contactNo')?.setValidators([ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]);
+    
+        break;
+      }
+
+    this.sectionOneCFormGroup.get('ad1_name')?.updateValueAndValidity();
+    this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.updateValueAndValidity();
+    this.sectionOneCFormGroup.get('ad1_contactNo')?.updateValueAndValidity();
+
+    this.sectionOneCFormGroup.get('ad2_name')?.updateValueAndValidity();
+    this.sectionOneCFormGroup.get('ad2_nricOrFinNo')?.updateValueAndValidity();
+    this.sectionOneCFormGroup.get('ad2_contactNo')?.updateValueAndValidity();
+
+    this.sectionOneCFormGroup.get('ad3_name')?.updateValueAndValidity();
+    this.sectionOneCFormGroup.get('ad3_nricOrFinNo')?.updateValueAndValidity();
+    this.sectionOneCFormGroup.get('ad3_contactNo')?.updateValueAndValidity();
+
+    this.sectionOneCFormGroup.get('ad4_name')?.updateValueAndValidity();
+    this.sectionOneCFormGroup.get('ad4_nricOrFinNo')?.updateValueAndValidity();
+    this.sectionOneCFormGroup.get('ad4_contactNo')?.updateValueAndValidity();
+
+    this.sectionOneCFormGroup.get('ad5_name')?.updateValueAndValidity();
+    this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.updateValueAndValidity();
+    this.sectionOneCFormGroup.get('ad5_contactNo')?.updateValueAndValidity();
+  }
+
   public allocateFormData(dataSource: IPermitToWork): IPermitToWork {
     this.startDateTimeConcat = this.concatStartDateTime(this.startDateInput, this.startTimeInput);
     this.endDateTimeConcat = this.concatEndDateTime(this.endDateInput, this.endTimeInput);
 
-    this.otherLocationsArray = this.otherLocationsInput.split(",");
-
+    
     dataSource = {
       id: 0,
-      ptwId: "",
-      permitType: this.selectedPermitType,
+      ptwId: PtwRequestComponent.VALUE_NONE,
       locationOfWork: {
-        option: this.selectedLocationOfWork,
-        other: this.otherLocationsArray
+        main: this.selectedLocationOfWork,
+        sub: this.selectedLocationSector
       },
+      permitType: this.selectedPermitType,
       startWorkingDateTime: this.startDateTimeConcat,
       endWorkingDateTime: this.endDateTimeConcat,
       taskDescription: this.taskDescriptionInput,
@@ -602,75 +802,67 @@ export class PtwRequestComponent implements OnInit {
               specify: this.wah_s1_cmi_q11_specifyInput
             }
           },
-          attendantRepDets: {
-            attendantRepName: this.wah_s1_ard_nameInput,
-            nricOrFinNo: this.wah_s1_ard_nricOrFinNoInput,
-            orgType: this.wah_s1_ard_organisationTypeInput,
-            orgName: this.wah_s1_ard_organisationNameInput,
-            depName: this.wah_s1_ard_departmentNameInput,
-            contactNo: this.wah_s1_ard_contactNoInput
-          },
           checked: this.applicantDeclarationChecked,
           supervisorName: this.applicantNameInput,
-          //timestamp: <Data Alloc On Hold>
+          timestamp: PtwRequestComponent.VALUE_NONE
         },
         sectionTwo: {
           assessmentOfControlMeasures: {
             q01: {
-              choice: "",
-              remarks: ""
+              choice: PtwRequestComponent.VALUE_NONE,
+              remarks: PtwRequestComponent.VALUE_NONE
             },
             q02: {
-              choice: "",
-              remarks: ""
+              choice: PtwRequestComponent.VALUE_NONE,
+              remarks: PtwRequestComponent.VALUE_NONE
             }
           },
           siteSurveyFromSupervisor: {
             q01: {
-              choice: "",
-              remarks: ""
+              choice: PtwRequestComponent.VALUE_NONE,
+              remarks: PtwRequestComponent.VALUE_NONE
             },
             q02: {
-              choice: "",
-              remarks: ""
+              choice: PtwRequestComponent.VALUE_NONE,
+              remarks: PtwRequestComponent.VALUE_NONE
             }
           },
           multiLocOrExtentedDuration: {
             q01: {
-              choice: "",
-              remarks: ""
+              choice: PtwRequestComponent.VALUE_NONE,
+              remarks: PtwRequestComponent.VALUE_NONE
             },
             q02: {
-              choice: "",
-              remarks: ""
+              choice: PtwRequestComponent.VALUE_NONE,
+              remarks: PtwRequestComponent.VALUE_NONE
             }
           },
           checked: false,
-          safetyAssessorName: "",
-          //timestamp: <Data Alloc On Hold>
+          safetyAssessorName: PtwRequestComponent.VALUE_NONE,
+          timestamp: PtwRequestComponent.VALUE_NONE
         },
         sectionThree: {
           permitReview: {
             q01: {
-              choice: "",
-              remarks: ""
+              choice: PtwRequestComponent.VALUE_NONE,
+              remarks: PtwRequestComponent.VALUE_NONE
             },
             q02: {
-              choice: "", 
-              remarks: ""
+              choice: PtwRequestComponent.VALUE_NONE, 
+              remarks: PtwRequestComponent.VALUE_NONE
             },
             q03: {
-              choice: "",
-              remarks: ""
+              choice: PtwRequestComponent.VALUE_NONE,
+              remarks: PtwRequestComponent.VALUE_NONE
             },
             q04: {
-              choice: "",
-              remarks: ""
+              choice: PtwRequestComponent.VALUE_NONE,
+              remarks: PtwRequestComponent.VALUE_NONE
             }
           },
           checked: false,
-          authorisedManagerName: "",
-          //timestamp: <Data Alloc On Hold>
+          authorisedManagerName: PtwRequestComponent.VALUE_NONE,
+          timestamp: PtwRequestComponent.VALUE_NONE
         }
       },
       confinedSpace: {
@@ -702,17 +894,9 @@ export class PtwRequestComponent implements OnInit {
               }
             }
           },
-          attendantRepDets: {
-            attendantRepName: this.cs_s1_ard_nameInput,
-            nricOrFinNo: this.cs_s1_ard_nricOrFinNoInput,
-            orgType: this.cs_s1_ard_organisationTypeInput,
-            orgName: this.cs_s1_ard_organisationNameInput,
-            depName: this.cs_s1_ard_departmentNameInput,
-            contactNo: this.cs_s1_ard_contactNoInput
-          },
           checked: this.applicantDeclarationChecked,
           supervisorName: this.applicantNameInput,
-          //timestamp: <Data Alloc On Hold>
+          timestamp: PtwRequestComponent.VALUE_NONE
         },
         sectionTwo: {
           gasMonitoringRes: {
@@ -722,21 +906,53 @@ export class PtwRequestComponent implements OnInit {
             fitForEntry: false
           },
           checked: false,
-          safetyAssessorName: "",
-          //timestamp: <Data Alloc On Hold>
+          safetyAssessorName: PtwRequestComponent.VALUE_NONE,
+          timestamp: PtwRequestComponent.VALUE_NONE
         },
         sectionThree: {
           permitReview: {
-            q01: "",
-            q02: "",
-            q03: "",
-            q04: ""
+            q01: PtwRequestComponent.VALUE_NONE,
+            q02: PtwRequestComponent.VALUE_NONE,
+            q03: PtwRequestComponent.VALUE_NONE,
+            q04: PtwRequestComponent.VALUE_NONE
           },
           checked: false,
-          authorisedManagerName: "",
-          //timestamp: <Data Alloc On Hold>
+          authorisedManagerName: PtwRequestComponent.VALUE_NONE,
+          timestamp: PtwRequestComponent.VALUE_NONE
         }
       },
+      attendantDets: [
+        {
+          id: this.attendantDetsData[0].id,
+          name: this.attendantDetsData[0].name,
+          nricOrFinNo: this.attendantDetsData[0].nricOrFinNo,
+          contactNo: this.attendantDetsData[0].contactNo
+        },
+        {
+          id: this.attendantDetsData[1].id,
+          name: this.attendantDetsData[1].name,
+          nricOrFinNo: this.attendantDetsData[1].nricOrFinNo,
+          contactNo: this.attendantDetsData[1].contactNo
+        },
+        {
+          id: this.attendantDetsData[2].id,
+          name: this.attendantDetsData[2].name,
+          nricOrFinNo: this.attendantDetsData[2].nricOrFinNo,
+          contactNo: this.attendantDetsData[2].contactNo
+        },
+        {
+          id: this.attendantDetsData[3].id,
+          name: this.attendantDetsData[3].name,
+          nricOrFinNo: this.attendantDetsData[3].nricOrFinNo,
+          contactNo: this.attendantDetsData[3].contactNo
+        },
+        {
+          id: this.attendantDetsData[4].id,
+          name: this.attendantDetsData[4].name,
+          nricOrFinNo: this.attendantDetsData[4].nricOrFinNo,
+          contactNo: this.attendantDetsData[4].contactNo
+        },
+      ],
       applicantDets: {
         name: this.applicantNameInput,
         nricOrFinNo: this.applicantNricOrFinNoInput,
@@ -746,23 +962,23 @@ export class PtwRequestComponent implements OnInit {
         contactNo: this.applicantContactNoInput,
         email: this.applicantEmailInput
       },
+      dailyEndorsement: { },
       ptwPost: {
         checked: false,
-        supervisorName: "",
-        //timestamp: <Data Alloc On Hold>
+        supervisorName: PtwRequestComponent.VALUE_NONE,
+        timestamp: PtwRequestComponent.VALUE_NONE
       },
       ptwStatus: {
-        taskStatus: "",
-        remarks: "",
+        taskStatus: "Not Started",
+        remarks: PtwRequestComponent.VALUE_NONE,
         checked: false,
-        supervisorName: "",
-        //timestamp: <Data Alloc On Hold>
+        supervisorName: PtwRequestComponent.VALUE_NONE,
+        timestamp: PtwRequestComponent.VALUE_NONE
       },
       checked: this.applicantDeclarationChecked,
-      dailyEndorsement: { },
       requestStatus: "Pending",
-      statusRemarks: "",
-      //timestamp: <Data Alloc On Hold>
+      statusRemarks: PtwRequestComponent.VALUE_NONE,
+      timestamp: PtwRequestComponent.VALUE_NONE
     };
 
     return dataSource;
@@ -771,6 +987,10 @@ export class PtwRequestComponent implements OnInit {
   public openSubmitDialogue(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = this.allocateFormData(this.partiallyCompletedPTWData);
-    this.dialog.open(SubmitDialogComponent, dialogConfig);
+    this.submitDialogRef = this.dialog.open(SubmitDialogComponent, dialogConfig);
+  }
+
+  public navigateTo(url: string): void {
+    this.router.navigate(["/" + url], { replaceUrl: true });
   }
 }
