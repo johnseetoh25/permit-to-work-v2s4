@@ -7,6 +7,9 @@ import { SubmitDialogComponent } from 'src/app/submit-dialog/components/submit-d
 import { IPermitToWork } from 'src/app/interfaces/IPermitToWork';
 import { Router } from '@angular/router';
 import { AttendantDets } from 'src/app/interfaces/AttendantDets';
+import { DefaultValues } from 'src/app/constants/DefaultValues';
+import { RequestStatus } from 'src/app/constants/RequestStatus';
+import { TaskStatus } from 'src/app/constants/TaskStatus';
 
 @Component({
   selector: 'app-ptw-request',
@@ -24,8 +27,6 @@ import { AttendantDets } from 'src/app/interfaces/AttendantDets';
   ]
 })
 export class PtwRequestComponent implements OnInit {
-  public static VALUE_NONE: string = "None";
-
   public partiallyCompletedPTWData!: IPermitToWork;
 
   public errorMessage: string = "Please complete all the required fields.";
@@ -741,10 +742,51 @@ export class PtwRequestComponent implements OnInit {
     this.startDateTimeConcat = this.concatStartDateTime(this.startDateInput, this.startTimeInput);
     this.endDateTimeConcat = this.concatEndDateTime(this.endDateInput, this.endTimeInput);
 
-    
+    if (this.wah_s1_cmi_q01_choiceInput == "") { this.wah_s1_cmi_q01_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.wah_s1_cmi_q02_choiceInput == "") { this.wah_s1_cmi_q02_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.wah_s1_cmi_q03_choiceInput == "") { this.wah_s1_cmi_q03_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.wah_s1_cmi_q04_choiceInput == "") { this.wah_s1_cmi_q04_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.wah_s1_cmi_q05_choiceInput == "") { this.wah_s1_cmi_q05_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.wah_s1_cmi_q06_choiceInput == "") { this.wah_s1_cmi_q06_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.wah_s1_cmi_q07_choiceInput == "") { this.wah_s1_cmi_q07_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.wah_s1_cmi_q08_choiceInput == "") { this.wah_s1_cmi_q08_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.wah_s1_cmi_q09_choiceInput == "") { this.wah_s1_cmi_q09_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.wah_s1_cmi_q10_choiceInput == "") { this.wah_s1_cmi_q10_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.wah_s1_cmi_q01_remarksInput == "") { this.wah_s1_cmi_q01_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.wah_s1_cmi_q02_remarksInput == "") { this.wah_s1_cmi_q02_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.wah_s1_cmi_q03_remarksInput == "") { this.wah_s1_cmi_q03_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.wah_s1_cmi_q04_remarksInput == "") { this.wah_s1_cmi_q04_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.wah_s1_cmi_q05_remarksInput == "") { this.wah_s1_cmi_q05_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.wah_s1_cmi_q06_remarksInput == "") { this.wah_s1_cmi_q06_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.wah_s1_cmi_q07_remarksInput == "") { this.wah_s1_cmi_q07_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.wah_s1_cmi_q08_remarksInput == "") { this.wah_s1_cmi_q08_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.wah_s1_cmi_q09_remarksInput == "") { this.wah_s1_cmi_q09_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.wah_s1_cmi_q10_remarksInput == "") { this.wah_s1_cmi_q10_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.wah_s1_cmi_q11_specifyInput == "") { this.wah_s1_cmi_q11_specifyInput = DefaultValues.VALUE_NONE; }
+
+    if (this.cs_s1_ph_atmoInput == "") { this.cs_s1_ph_atmoInput = DefaultValues.VALUE_NONE; }
+    if (this.cs_s1_ph_nonAtmoInput == "") { this.cs_s1_ph_nonAtmoInput = DefaultValues.VALUE_NONE; }
+    if (this.cs_s1_cmi_per_q01_checkedInput == "") { this.cs_s1_cmi_per_q01_checkedInput = DefaultValues.VALUE_NONE; }
+    if (this.cs_s1_cmi_per_q02_checkedInput == "") { this.cs_s1_cmi_per_q02_checkedInput = DefaultValues.VALUE_NONE; }
+    if (this.cs_s1_cmi_per_q03_checkedInput == "") { this.cs_s1_cmi_per_q03_checkedInput = DefaultValues.VALUE_NONE; }
+    if (this.cs_s1_cmi_per_q04_checkedInput == "") { this.cs_s1_cmi_per_q04_checkedInput = DefaultValues.VALUE_NONE; }
+    if (this.cs_s1_cmi_per_q05_checkedInput == "") { this.cs_s1_cmi_per_q05_checkedInput = DefaultValues.VALUE_NONE; }
+    if (this.cs_s1_cmi_per_q06_checkedInput == "") { this.cs_s1_cmi_per_q06_checkedInput = DefaultValues.VALUE_NONE; }
+    if (this.cs_s1_cmi_per_q07_checkedInput == "") { this.cs_s1_cmi_per_q07_checkedInput = DefaultValues.VALUE_NONE; }
+    if (this.cs_s1_cmi_per_q08_checkedInput == "") { this.cs_s1_cmi_per_q08_checkedInput = DefaultValues.VALUE_NONE; }
+    if (this.cs_s1_cmi_ppe_q01_checkedInput == "") { this.cs_s1_cmi_ppe_q01_checkedInput = DefaultValues.VALUE_NONE; }
+    if (this.cs_s1_cmi_ppe_q02_checkedInput == "") { this.cs_s1_cmi_ppe_q02_checkedInput = DefaultValues.VALUE_NONE; }
+    if (this.cs_s1_cmi_ppe_q03_checkedInput == "") { this.cs_s1_cmi_ppe_q03_checkedInput = DefaultValues.VALUE_NONE; }
+    if (this.cs_s1_cmi_ppe_q04_checkedInput == "") { this.cs_s1_cmi_ppe_q04_checkedInput = DefaultValues.VALUE_NONE; }
+    if (this.cs_s1_cmi_ppe_q05_checkedInput == "") { this.cs_s1_cmi_ppe_q05_checkedInput = DefaultValues.VALUE_NONE; }
+    if (this.cs_s1_cmi_ppe_q06_checkedInput == "") { this.cs_s1_cmi_ppe_q06_checkedInput = DefaultValues.VALUE_NONE; }
+    if (this.cs_s1_cmi_ppe_q07_specifyInput == "") { this.cs_s1_cmi_ppe_q07_specifyInput = DefaultValues.VALUE_NONE; }
+
+    if (this.applicantOrganisationNameInput == "") { this.applicantOrganisationNameInput = DefaultValues.VALUE_NONE; }
+
     dataSource = {
       id: 0,
-      ptwId: PtwRequestComponent.VALUE_NONE,
+      ptwId: DefaultValues.VALUE_NONE,
       locationOfWork: {
         main: this.selectedLocationOfWork,
         sub: this.selectedLocationSector
@@ -801,68 +843,65 @@ export class PtwRequestComponent implements OnInit {
             q11: {
               specify: this.wah_s1_cmi_q11_specifyInput
             }
-          },
-          checked: this.applicantDeclarationChecked,
-          supervisorName: this.applicantNameInput,
-          timestamp: PtwRequestComponent.VALUE_NONE
+          }
         },
         sectionTwo: {
           assessmentOfControlMeasures: {
             q01: {
-              choice: PtwRequestComponent.VALUE_NONE,
-              remarks: PtwRequestComponent.VALUE_NONE
+              choice: DefaultValues.VALUE_NONE,
+              remarks: DefaultValues.VALUE_NONE
             },
             q02: {
-              choice: PtwRequestComponent.VALUE_NONE,
-              remarks: PtwRequestComponent.VALUE_NONE
+              choice: DefaultValues.VALUE_NONE,
+              remarks: DefaultValues.VALUE_NONE
             }
           },
           siteSurveyFromSupervisor: {
             q01: {
-              choice: PtwRequestComponent.VALUE_NONE,
-              remarks: PtwRequestComponent.VALUE_NONE
+              choice: DefaultValues.VALUE_NONE,
+              remarks: DefaultValues.VALUE_NONE
             },
             q02: {
-              choice: PtwRequestComponent.VALUE_NONE,
-              remarks: PtwRequestComponent.VALUE_NONE
+              choice: DefaultValues.VALUE_NONE,
+              remarks: DefaultValues.VALUE_NONE
             }
           },
           multiLocOrExtentedDuration: {
             q01: {
-              choice: PtwRequestComponent.VALUE_NONE,
-              remarks: PtwRequestComponent.VALUE_NONE
+              choice: DefaultValues.VALUE_NONE,
+              remarks: DefaultValues.VALUE_NONE
             },
             q02: {
-              choice: PtwRequestComponent.VALUE_NONE,
-              remarks: PtwRequestComponent.VALUE_NONE
+              choice: DefaultValues.VALUE_NONE,
+              remarks: DefaultValues.VALUE_NONE
             }
           },
           checked: false,
-          safetyAssessorName: PtwRequestComponent.VALUE_NONE,
-          timestamp: PtwRequestComponent.VALUE_NONE
+          safetyAssessorName: DefaultValues.VALUE_NONE,
+          timestamp: DefaultValues.VALUE_NONE
         },
         sectionThree: {
           permitReview: {
             q01: {
-              choice: PtwRequestComponent.VALUE_NONE,
-              remarks: PtwRequestComponent.VALUE_NONE
+              choice: DefaultValues.VALUE_NONE,
+              remarks: DefaultValues.VALUE_NONE
             },
             q02: {
-              choice: PtwRequestComponent.VALUE_NONE, 
-              remarks: PtwRequestComponent.VALUE_NONE
+              choice: DefaultValues.VALUE_NONE, 
+              remarks: DefaultValues.VALUE_NONE
             },
             q03: {
-              choice: PtwRequestComponent.VALUE_NONE,
-              remarks: PtwRequestComponent.VALUE_NONE
+              choice: DefaultValues.VALUE_NONE,
+              remarks: DefaultValues.VALUE_NONE
             },
             q04: {
-              choice: PtwRequestComponent.VALUE_NONE,
-              remarks: PtwRequestComponent.VALUE_NONE
+              choice: DefaultValues.VALUE_NONE,
+              remarks: DefaultValues.VALUE_NONE
             }
           },
           checked: false,
-          authorisedManagerName: PtwRequestComponent.VALUE_NONE,
-          timestamp: PtwRequestComponent.VALUE_NONE
+          authorisedManagerName: DefaultValues.VALUE_NONE,
+          timestamp: DefaultValues.VALUE_NONE
         }
       },
       confinedSpace: {
@@ -893,10 +932,7 @@ export class PtwRequestComponent implements OnInit {
                 specify: this.cs_s1_cmi_ppe_q07_specifyInput
               }
             }
-          },
-          checked: this.applicantDeclarationChecked,
-          supervisorName: this.applicantNameInput,
-          timestamp: PtwRequestComponent.VALUE_NONE
+          }
         },
         sectionTwo: {
           gasMonitoringRes: {
@@ -906,19 +942,19 @@ export class PtwRequestComponent implements OnInit {
             fitForEntry: false
           },
           checked: false,
-          safetyAssessorName: PtwRequestComponent.VALUE_NONE,
-          timestamp: PtwRequestComponent.VALUE_NONE
+          safetyAssessorName: DefaultValues.VALUE_NONE,
+          timestamp: DefaultValues.VALUE_NONE
         },
         sectionThree: {
           permitReview: {
-            q01: PtwRequestComponent.VALUE_NONE,
-            q02: PtwRequestComponent.VALUE_NONE,
-            q03: PtwRequestComponent.VALUE_NONE,
-            q04: PtwRequestComponent.VALUE_NONE
+            q01: DefaultValues.VALUE_NONE,
+            q02: DefaultValues.VALUE_NONE,
+            q03: DefaultValues.VALUE_NONE,
+            q04: DefaultValues.VALUE_NONE
           },
           checked: false,
-          authorisedManagerName: PtwRequestComponent.VALUE_NONE,
-          timestamp: PtwRequestComponent.VALUE_NONE
+          authorisedManagerName: DefaultValues.VALUE_NONE,
+          timestamp: DefaultValues.VALUE_NONE
         }
       },
       attendantDets: [
@@ -963,22 +999,17 @@ export class PtwRequestComponent implements OnInit {
         email: this.applicantEmailInput
       },
       dailyEndorsement: { },
-      ptwPost: {
-        checked: false,
-        supervisorName: PtwRequestComponent.VALUE_NONE,
-        timestamp: PtwRequestComponent.VALUE_NONE
-      },
       ptwStatus: {
-        taskStatus: "Not Started",
-        remarks: PtwRequestComponent.VALUE_NONE,
+        taskStatus: TaskStatus.STATUS_NOT_STARTED,
+        remarks: DefaultValues.VALUE_NONE,
         checked: false,
-        supervisorName: PtwRequestComponent.VALUE_NONE,
-        timestamp: PtwRequestComponent.VALUE_NONE
+        supervisorName: DefaultValues.VALUE_NONE,
+        timestamp: DefaultValues.VALUE_NONE
       },
       checked: this.applicantDeclarationChecked,
-      requestStatus: "Pending",
-      statusRemarks: PtwRequestComponent.VALUE_NONE,
-      timestamp: PtwRequestComponent.VALUE_NONE
+      requestStatus: RequestStatus.REQUEST_PENDING,
+      statusRemarks: DefaultValues.VALUE_NONE,
+      timestamp: DefaultValues.VALUE_NONE
     };
 
     return dataSource;

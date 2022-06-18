@@ -8,9 +8,9 @@
         "sub": "Biodiesel production"
       },
       "permitType": "Work at height (WAH)",
-      "startWorkingDateTime": "2022-06-16T16:00:00.000Z",
-      "endWorkingDateTime": "2022-06-16T16:00:00.000Z",
-      "taskDescription": "dsadasd",
+      "startWorkingDateTime": "2022-06-17T16:00:00.000Z",
+      "endWorkingDateTime": "2022-06-17T16:00:00.000Z",
+      "taskDescription": "abc",
       "noOfWorkers": 1,
       "noOfSupervisors": 1,
       "workAtHeight": {
@@ -18,51 +18,48 @@
           "controlMeasuresImplemented": {
             "q01": {
               "choice": "Yes",
-              "remarks": ""
+              "remarks": "None"
             },
             "q02": {
               "choice": "Yes",
-              "remarks": ""
+              "remarks": "None"
             },
             "q03": {
               "choice": "Yes",
-              "remarks": ""
+              "remarks": "None"
             },
             "q04": {
               "choice": "Yes",
-              "remarks": ""
+              "remarks": "None"
             },
             "q05": {
               "choice": "Yes",
-              "remarks": ""
+              "remarks": "None"
             },
             "q06": {
               "choice": "Yes",
-              "remarks": ""
+              "remarks": "None"
             },
             "q07": {
               "choice": "Yes",
-              "remarks": ""
+              "remarks": "None"
             },
             "q08": {
               "choice": "Yes",
-              "remarks": ""
+              "remarks": "None"
             },
             "q09": {
               "choice": "Yes",
-              "remarks": ""
+              "remarks": "None"
             },
             "q10": {
               "choice": "Yes",
-              "remarks": ""
+              "remarks": "None"
             },
             "q11": {
-              "specify": ""
+              "specify": "None"
             }
-          },
-          "checked": true,
-          "supervisorName": "dsadasd",
-          "timestamp": "2022-06-17T08:50:09.390Z"
+          }
         },
         "sectionTwo": {
           "assessmentOfControlMeasures": {
@@ -126,35 +123,32 @@
       "confinedSpace": {
         "sectionOne": {
           "potentialHazards": {
-            "atmo": "",
-            "nonAtmo": ""
+            "atmo": "None",
+            "nonAtmo": "None"
           },
           "controlMeasuresImplemented": {
             "preEntryReqs": {
-              "q01": "",
-              "q02": "",
-              "q03": "",
-              "q04": "",
-              "q05": "",
-              "q06": "",
-              "q07": "",
-              "q08": ""
+              "q01": "None",
+              "q02": "None",
+              "q03": "None",
+              "q04": "None",
+              "q05": "None",
+              "q06": "None",
+              "q07": "None",
+              "q08": "None"
             },
             "ppe": {
-              "q01": "",
-              "q02": "",
-              "q03": "",
-              "q04": "",
-              "q05": "",
-              "q06": "",
+              "q01": "None",
+              "q02": "None",
+              "q03": "None",
+              "q04": "None",
+              "q05": "None",
+              "q06": "None",
               "q07": {
-                "specify": ""
+                "specify": "None"
               }
             }
-          },
-          "checked": true,
-          "supervisorName": "dsadasd",
-          "timestamp": "None"
+          }
         },
         "sectionTwo": {
           "gasMonitoringRes": {
@@ -182,9 +176,9 @@
       "attendantDets": [
         {
           "id": 1,
-          "name": "sadad",
-          "nricOrFinNo": "S2131231F",
-          "contactNo": "+65 1231-3123"
+          "name": "Person 1",
+          "nricOrFinNo": "S1232131F",
+          "contactNo": "+65 4346-3532"
         },
         {
           "id": 2,
@@ -212,20 +206,15 @@
         }
       ],
       "applicantDets": {
-        "name": "dsadasd",
-        "nricOrFinNo": "A1232131V",
+        "name": "abc",
+        "nricOrFinNo": "W2413454E",
         "orgType": "Internal",
-        "orgName": "",
-        "depName": "dasdasda",
-        "contactNo": "+65 3123-1232",
-        "email": "sadsad@ad.das"
+        "orgName": "None",
+        "depName": "sadsa",
+        "contactNo": "+65 1231-2312",
+        "email": "asd@asd.ads"
       },
       "dailyEndorsement": {},
-      "ptwPost": {
-        "checked": false,
-        "supervisorName": "None",
-        "timestamp": "None"
-      },
       "ptwStatus": {
         "taskStatus": "Not Started",
         "remarks": "None",
@@ -236,7 +225,461 @@
       "checked": true,
       "requestStatus": "Pending",
       "statusRemarks": "None",
-      "timestamp": "2022-06-17T08:50:09.390Z"
+      "timestamp": "2022-06-18T07:10:42.752Z"
+    },
+    {
+      "id": 2,
+      "ptwId": "None",
+      "locationOfWork": {
+        "main": "Biodiesel production sector",
+        "sub": "Biodiesel production"
+      },
+      "permitType": "Work at height (WAH)",
+      "startWorkingDateTime": "2022-06-17T16:00:00.000Z",
+      "endWorkingDateTime": "2022-06-17T16:00:00.000Z",
+      "taskDescription": "abc",
+      "noOfWorkers": 1,
+      "noOfSupervisors": 1,
+      "workAtHeight": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q10": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q11": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessmentOfControlMeasures": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "siteSurveyFromSupervisor": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "multiLocOrExtentedDuration": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "checked": false,
+          "safetyAssessorName": "None",
+          "timestamp": "None"
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "checked": false,
+          "authorisedManagerName": "None",
+          "timestamp": "None"
+        }
+      },
+      "confinedSpace": {
+        "sectionOne": {
+          "potentialHazards": {
+            "atmo": "None",
+            "nonAtmo": "None"
+          },
+          "controlMeasuresImplemented": {
+            "preEntryReqs": {
+              "q01": "None",
+              "q02": "None",
+              "q03": "None",
+              "q04": "None",
+              "q05": "None",
+              "q06": "None",
+              "q07": "None",
+              "q08": "None"
+            },
+            "ppe": {
+              "q01": "None",
+              "q02": "None",
+              "q03": "None",
+              "q04": "None",
+              "q05": "None",
+              "q06": "None",
+              "q07": {
+                "specify": "None"
+              }
+            }
+          }
+        },
+        "sectionTwo": {
+          "gasMonitoringRes": {
+            "oxygenLevel": 0,
+            "flammableGasLevel": 0,
+            "toxicGasLevel": 0,
+            "fitForEntry": false
+          },
+          "checked": false,
+          "safetyAssessorName": "None",
+          "timestamp": "None"
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": "None",
+            "q02": "None",
+            "q03": "None",
+            "q04": "None"
+          },
+          "checked": false,
+          "authorisedManagerName": "None",
+          "timestamp": "None"
+        }
+      },
+      "attendantDets": [
+        {
+          "id": 1,
+          "name": "Person 1",
+          "nricOrFinNo": "S3242523F",
+          "contactNo": "+65 2132-1524"
+        },
+        {
+          "id": 2,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        },
+        {
+          "id": 3,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        },
+        {
+          "id": 4,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        },
+        {
+          "id": 5,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        }
+      ],
+      "applicantDets": {
+        "name": "abc",
+        "nricOrFinNo": "A1232131G",
+        "orgType": "Internal",
+        "orgName": "None",
+        "depName": "sada",
+        "contactNo": "+65 2314-4357",
+        "email": "asdsa@asdas.ads"
+      },
+      "dailyEndorsement": {},
+      "ptwStatus": {
+        "taskStatus": "Not Started",
+        "remarks": "None",
+        "checked": false,
+        "supervisorName": "None",
+        "timestamp": "None"
+      },
+      "checked": true,
+      "requestStatus": "Pending",
+      "statusRemarks": "None",
+      "timestamp": "2022-06-18T07:27:46.577Z"
+    },
+    {
+      "ptwId": "PTW-003",
+      "locationOfWork": {
+        "main": "Biodiesel production sector",
+        "sub": "Biodiesel production"
+      },
+      "permitType": "Work at height (WAH)",
+      "startWorkingDateTime": "2022-06-17T16:00:00.000Z",
+      "endWorkingDateTime": "2022-06-17T16:00:00.000Z",
+      "taskDescription": "abc",
+      "noOfWorkers": 1,
+      "noOfSupervisors": 1,
+      "workAtHeight": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q10": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q11": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessmentOfControlMeasures": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "siteSurveyFromSupervisor": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "multiLocOrExtentedDuration": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "checked": false,
+          "safetyAssessorName": "None",
+          "timestamp": "None"
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "checked": false,
+          "authorisedManagerName": "None",
+          "timestamp": "None"
+        }
+      },
+      "confinedSpace": {
+        "sectionOne": {
+          "potentialHazards": {
+            "atmo": "None",
+            "nonAtmo": "None"
+          },
+          "controlMeasuresImplemented": {
+            "preEntryReqs": {
+              "q01": "None",
+              "q02": "None",
+              "q03": "None",
+              "q04": "None",
+              "q05": "None",
+              "q06": "None",
+              "q07": "None",
+              "q08": "None"
+            },
+            "ppe": {
+              "q01": "None",
+              "q02": "None",
+              "q03": "None",
+              "q04": "None",
+              "q05": "None",
+              "q06": "None",
+              "q07": {
+                "specify": "None"
+              }
+            }
+          }
+        },
+        "sectionTwo": {
+          "gasMonitoringRes": {
+            "oxygenLevel": 0,
+            "flammableGasLevel": 0,
+            "toxicGasLevel": 0,
+            "fitForEntry": false
+          },
+          "checked": false,
+          "safetyAssessorName": "None",
+          "timestamp": "None"
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": "None",
+            "q02": "None",
+            "q03": "None",
+            "q04": "None"
+          },
+          "checked": false,
+          "authorisedManagerName": "None",
+          "timestamp": "None"
+        }
+      },
+      "attendantDets": [
+        {
+          "id": 1,
+          "name": "Person 1",
+          "nricOrFinNo": "A1232131F",
+          "contactNo": "+65 1231-3543"
+        },
+        {
+          "id": 2,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        },
+        {
+          "id": 3,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        },
+        {
+          "id": 4,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        },
+        {
+          "id": 5,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        }
+      ],
+      "applicantDets": {
+        "name": "abc",
+        "nricOrFinNo": "D1232213F",
+        "orgType": "Internal",
+        "orgName": "None",
+        "depName": "sadsad",
+        "contactNo": "+65 1231-2312",
+        "email": "dsad@adas.asd"
+      },
+      "dailyEndorsement": {},
+      "ptwStatus": {
+        "taskStatus": "Not Started",
+        "remarks": "None",
+        "checked": false,
+        "supervisorName": "None",
+        "timestamp": "None"
+      },
+      "checked": true,
+      "requestStatus": "Pending",
+      "statusRemarks": "None",
+      "timestamp": "2022-06-18T07:51:20.377Z",
+      "id": 3
     }
   ]
 }

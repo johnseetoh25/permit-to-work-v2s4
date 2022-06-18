@@ -22,7 +22,7 @@
     </p>
 </header>
 <div class = "content-body">
-    <mat-stepper #stepper linear = "false">
+    <mat-stepper #stepper linear = "true">
         <mat-step [stepControl] = "this.sectionOneAFormGroup" [errorMessage] = "this.errorMessage">
             <form class = "common-section-form" [formGroup] = "this.sectionOneAFormGroup">
                 <ng-template matStepLabel>Section I (A): Basic Information</ng-template>
@@ -798,25 +798,23 @@
                 <mat-label class = "section-title">NOTE: This section is to be completed by a representative supervisor</mat-label>
                 <br><br>
                 <h2>Attendant Details</h2>
-                <mat-label>The number of fillable rows are according to the total number of workers and supervisors (excluding the representative supervisor).</mat-label>
+                <mat-label>The number of fillable rows are subjected to the <b>total number of workers and supervisors</b> specified in Section I (A), <b>excluding the representative supervisor</b>.</mat-label>
                 <br><br>
                 <mat-label class = "required-label">* Required field</mat-label>
                 <br><br>
-
                 <div>
                     <mat-grid-list cols = "3" rowHeight = "65px">
                         <mat-grid-tile-header>
-                            <mat-grid-tile>Name</mat-grid-tile>
-                            <mat-grid-tile>NRIC / FIN No.</mat-grid-tile>
-                            <mat-grid-tile>Contact No.</mat-grid-tile>
+                            <mat-grid-tile>Name*</mat-grid-tile>
+                            <mat-grid-tile>NRIC / FIN No.*</mat-grid-tile>
+                            <mat-grid-tile>Contact No.*</mat-grid-tile>
                         </mat-grid-tile-header>
 
                         <div *ngIf = "this.totalNoOfAttendants >= 1">
                             <mat-grid-tile>
                                 <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
                                     <input 
-                                        matInput 
-                                        required 
+                                        matInput
                                         [placeholder] = "'Attendant ' + this.attendantDetsData[0].id"
                                         [(ngModel)] = "this.attendantDetsData[0].name"
                                         formControlName = "ad1_name">
@@ -825,8 +823,7 @@
                             <mat-grid-tile>
                                 <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
                                     <input
-                                        matInput 
-                                        required
+                                        matInput
                                         [inputMask] = "this.nricOrFinNoInputMask"
                                         [(ngModel)] = "this.attendantDetsData[0].nricOrFinNo"
                                         formControlName = "ad1_nricOrFinNo">
@@ -835,8 +832,7 @@
                             <mat-grid-tile>
                                 <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
                                     <input
-                                        matInput 
-                                        required
+                                        matInput
                                         [inputMask] = "this.contactNoInputMask"
                                         [(ngModel)] = "this.attendantDetsData[0].contactNo"
                                         formControlName = "ad1_contactNo">
@@ -849,7 +845,6 @@
                                 <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
                                     <input 
                                         matInput 
-                                        required 
                                         [placeholder] = "'Attendant ' + this.attendantDetsData[1].id"
                                         [(ngModel)] = "this.attendantDetsData[1].name"
                                         formControlName = "ad2_name">
@@ -858,8 +853,7 @@
                             <mat-grid-tile>
                                 <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
                                     <input
-                                        matInput 
-                                        required
+                                        matInput
                                         [inputMask] = "this.nricOrFinNoInputMask"
                                         [(ngModel)] = "this.attendantDetsData[1].nricOrFinNo"
                                         formControlName = "ad2_nricOrFinNo">
@@ -868,8 +862,7 @@
                             <mat-grid-tile>
                                 <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
                                     <input
-                                        matInput 
-                                        required
+                                        matInput
                                         [inputMask] = "this.contactNoInputMask"
                                         [(ngModel)] = "this.attendantDetsData[1].contactNo"
                                         formControlName = "ad2_contactNo">
@@ -881,8 +874,7 @@
                             <mat-grid-tile>
                                 <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
                                     <input 
-                                        matInput 
-                                        required 
+                                        matInput
                                         [placeholder] = "'Attendant ' + this.attendantDetsData[2].id"
                                         [(ngModel)] = "this.attendantDetsData[2].name"
                                         formControlName = "ad3_name">
@@ -891,8 +883,7 @@
                             <mat-grid-tile>
                                 <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
                                     <input
-                                        matInput 
-                                        required
+                                        matInput
                                         [inputMask] = "this.nricOrFinNoInputMask"
                                         [(ngModel)] = "this.attendantDetsData[2].nricOrFinNo"
                                         formControlName = "ad3_nricOrFinNo">
@@ -901,8 +892,7 @@
                             <mat-grid-tile>
                                 <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
                                     <input
-                                        matInput 
-                                        required
+                                        matInput
                                         [inputMask] = "this.contactNoInputMask"
                                         [(ngModel)] = "this.attendantDetsData[2].contactNo"
                                         formControlName = "ad3_contactNo">
@@ -915,7 +905,6 @@
                                 <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
                                     <input 
                                         matInput 
-                                        required 
                                         [placeholder] = "'Attendant ' + this.attendantDetsData[3].id"
                                         [(ngModel)] = "this.attendantDetsData[3].name"
                                         formControlName = "ad4_name">
@@ -924,8 +913,7 @@
                             <mat-grid-tile>
                                 <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
                                     <input
-                                        matInput 
-                                        required
+                                        matInput
                                         [inputMask] = "this.nricOrFinNoInputMask"
                                         [(ngModel)] = "this.attendantDetsData[3].nricOrFinNo"
                                         formControlName = "ad4_nricOrFinNo">
@@ -934,8 +922,7 @@
                             <mat-grid-tile>
                                 <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
                                     <input
-                                        matInput 
-                                        required
+                                        matInput
                                         [inputMask] = "this.contactNoInputMask"
                                         [(ngModel)] = "this.attendantDetsData[3].contactNo"
                                         formControlName = "ad4_contactNo">
@@ -947,8 +934,7 @@
                             <mat-grid-tile>
                                 <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
                                     <input 
-                                        matInput 
-                                        required 
+                                        matInput
                                         [placeholder] = "'Attendant ' + this.attendantDetsData[4].id"
                                         [(ngModel)] = "this.attendantDetsData[4].name"
                                         formControlName = "ad5_name">
@@ -957,8 +943,7 @@
                             <mat-grid-tile>
                                 <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
                                     <input
-                                        matInput 
-                                        required
+                                        matInput
                                         [inputMask] = "this.nricOrFinNoInputMask"
                                         [(ngModel)] = "this.attendantDetsData[4].nricOrFinNo"
                                         formControlName = "ad5_nricOrFinNo">
@@ -967,8 +952,7 @@
                             <mat-grid-tile>
                                 <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
                                     <input
-                                        matInput 
-                                        required
+                                        matInput
                                         [inputMask] = "this.contactNoInputMask"
                                         [(ngModel)] = "this.attendantDetsData[4].contactNo"
                                         formControlName = "ad5_contactNo">
@@ -978,7 +962,6 @@
                         
                     </mat-grid-list>
                 </div>
-
                 <br><br>
                 <mat-divider></mat-divider>
                 <br>
@@ -1043,16 +1026,19 @@
                         [(ngModel)] = "this.applicantEmailInput" 
                         formControlName = "aplEmail">
                 </mat-form-field>
+                <br><br>
+                <mat-divider></mat-divider>
+                <br><br>
                 <div class = "apl-dcl-container">
-                    <mat-label style = "font-weight: 450;">NOTE</mat-label>
+                    <mat-label style = "font-weight: 450;">DECLARATION BEFORE SUBMISSION</mat-label>
                     <br><br>
                     <mat-label>1.&emsp;The necessary safety measures must be complied with before the application is submitted to the safety assessor for his / her evaluation.</mat-label>
                     <br><br>
-                    <mat-label>2.&emsp;Upon submission and after approval from the authority, this permit shall be visible inside the system for the duration of the approved task and removed only upon task completion or upon its expiry.</mat-label>
-                    <br><br><br>
+                    <mat-label>2.&emsp;Upon submission and after approval from the authority, this permit shall be visible inside the E-PTW Management System tracking log for the duration of the approved task and removed only upon task completion or upon its expiry.</mat-label>
+                    <br><br>
                     <div id = "apl-dcl-checkbox">
                         <mat-checkbox [(ngModel)] = "this.applicantDeclarationChecked" formControlName = "aplDclChecked">
-                            &emsp;I declare that the information provided is accurate and the control<br>measures listed previously have been effectively implemented.
+                            &emsp;I declare that the information provided is accurate and the control measures listed previously<br>have been effectively implemented.
                         </mat-checkbox>
                     </div>
                 </div>

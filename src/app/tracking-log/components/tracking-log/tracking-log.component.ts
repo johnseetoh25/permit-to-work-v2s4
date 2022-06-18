@@ -22,9 +22,9 @@ export class TrackingLogComponent implements OnInit {
   public displayedHeaderColumns: string[] = [
     'id',
     'ptwId',
-    'permitType',
     'locationOfWork',
     'subsectorLocation',
+    'permitType',
     'startWorkingDateTime',
     'endWorkingDateTime',
     'applicantName',
@@ -38,8 +38,8 @@ export class TrackingLogComponent implements OnInit {
   public pageSize: number = 10;
   public pageSizeOptions: number[] = [5, 10, 25, 100];
 
-  public sortedData!: IPermitToWork[];
-  public activePageSortedData!: IPermitToWork[];
+  public sortedData: IPermitToWork[] = [];
+  public activePageSortedData: IPermitToWork[] = [];
 
   constructor(
     private db: DbService,
@@ -77,12 +77,12 @@ export class TrackingLogComponent implements OnInit {
           return this.compare(a.id, b.id, isAsc);
         case 'ptwId':
           return this.compare(a.ptwId, b.ptwId, isAsc);
-        case 'permitType':
-          return this.compare(a.permitType, b.permitType, isAsc);
         case 'locationOfWork':
           return this.compare(a.locationOfWork?.main, b.locationOfWork?.main, isAsc);
         case 'subsectorLocation':
           return this.compare(a.locationOfWork?.sub, b.locationOfWork?.sub, isAsc);
+        case 'permitType':
+          return this.compare(a.permitType, b.permitType, isAsc);
         case 'startWorkingDateTime':
           return this.compare(a.startWorkingDateTime, b.startWorkingDateTime, isAsc);
         case 'endWorkingDateTime':

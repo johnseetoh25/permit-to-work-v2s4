@@ -33,7 +33,7 @@ export class DbService {
     ptwId?: string,
     permitType?: string,
     selectedLocationOfWork?: string,
-    otherLocationOfWork?: string[],
+    selectedLocationSector?: string,
     startWorkingDateTime?: string,
     endWorkingDateTime?: string,
     taskDescription?: string,
@@ -61,10 +61,6 @@ export class DbService {
     wah_s1_cmi_q10_choice?: string,
     wah_s1_cmi_q10_remarks?: string,
     wah_s1_cmi_q11_specify?: string,
-
-    wah_s1_checked?: boolean,
-    wah_s1_supervisorName?: string,
-    wah_s1_timestamp?: string,
 
     wah_s2_acm_q01_choice?: string,
     wah_s2_acm_q01_remarks?: string,
@@ -118,10 +114,6 @@ export class DbService {
     cs_s1_cmi_ppe_q06_checked?: string,
     cs_s1_cmi_ppe_q07_specify?: string,
 
-    cs_s1_checked?: boolean,
-    cs_s1_supervisorName?: string,
-    cs_s1_timestamp?: string,
-
     cs_s2_gmr_oxygenLevel?: number,
     cs_s2_gmr_flammableGasLevel?: number,
     cs_s2_gmr_toxicGasLevel?: number,
@@ -168,10 +160,6 @@ export class DbService {
     ad_contactNo?: string,
     ad_email?: string,
 
-    ptwPost_checked?: boolean,
-    ptwPost_supervisorName?: string,
-    ptwPost_timestamp?: string,
-
     ptwStatus_taskStatus?: string,
     ptwStatus_remarks?: string,
     ptwStatus_checked?: boolean,
@@ -190,11 +178,11 @@ export class DbService {
     this.http.put(this.ptwUrl + "/" + id, 
       {
         ptwId: ptwId,
-        permitType: permitType,
         locationOfWork: {
-          option: selectedLocationOfWork,
-          other: otherLocationOfWork
+          main: selectedLocationOfWork,
+          sub: selectedLocationSector
         },
+        permitType: permitType,
         startWorkingDateTime: startWorkingDateTime,
         endWorkingDateTime: endWorkingDateTime,
         taskDescription: taskDescription,
@@ -246,10 +234,7 @@ export class DbService {
               q11: {
                 specify: wah_s1_cmi_q11_specify
               }
-            },
-            checked: wah_s1_checked,
-            supervisorName: wah_s1_supervisorName,
-            timestamp: wah_s1_timestamp
+            }
           },
           sectionTwo: {
             assessmentOfControlMeasures: {
@@ -338,10 +323,7 @@ export class DbService {
                   specify: cs_s1_cmi_ppe_q07_specify
                 }
               }
-            },
-            checked: cs_s1_checked,
-            supervisorName: cs_s1_supervisorName,
-            timestamp: cs_s1_timestamp
+            }
           },
           sectionTwo: {
             gasMonitoringRes: {
@@ -407,12 +389,7 @@ export class DbService {
           contactNo: ad_contactNo,
           email: ad_email
         },
-        dailyEndorsement: {},
-        ptwPost: {
-          checked: ptwPost_checked,
-          supervisorName: ptwPost_supervisorName,
-          timestamp: ptwPost_timestamp
-        },
+        dailyEndorsement: { },
         ptwStatus: {
           taskStatus: ptwStatus_taskStatus,
           remarks: ptwStatus_remarks,

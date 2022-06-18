@@ -1,5 +1,3 @@
-import { AttendantDets } from "./AttendantDets"
-
 export interface IPermitToWork {
 	// COMMON SECTION: To be completed by SUPERVISOR
 	id?: number, // JSON auto-ID
@@ -95,18 +93,7 @@ export interface IPermitToWork {
 				q11?: {
 					specify?: string
 				}
-			},
-			attendantRepDets?: {
-				attendantRepName?: string,
-				nricOrFinNo?: string, // Format: | @xxxxxxx# |
-				orgType?: string, // 2 types: | INTERNAL | EXTERNAL |
-				orgName?: string, // Required if orgType == "EXTERNAL"
-				depName?: string, // Required if orgType == "EXTERNAL"
-				contactNo?: string
-			},
-			checked?: boolean, // Ensure that info is verified & approved
-			supervisorName?: string
-			timestamp?: string // AUTO
+			}
 		},
 		// SECTION II: To be completed by SAFETY ASSESSOR
 		sectionTwo?: {
@@ -223,18 +210,7 @@ export interface IPermitToWork {
 						specify?: string
 					}
 				}
-			},
-			attendantRepDets?: {
-				attendantRepName?: string,
-				nricOrFinNo?: string, // Format: | @xxxxxxx# |
-				orgType?: string, // 2 types: | INTERNAL | EXTERNAL |
-				orgName?: string, // Required if orgType == "EXTERNAL"
-				depName?: string, // Required if orgType == "EXTERNAL"
-				contactNo?: string
-			},
-			checked?: boolean, // Ensure that info is verified & approved
-			supervisorName?: string,
-			timestamp?: string // AUTO
+			}
 		},
 		// SECTION II: To be completed by SAFETY ASSESSOR
 		sectionTwo?: {
@@ -268,33 +244,33 @@ export interface IPermitToWork {
 	attendantDets?: [
 		{
 			id: number | undefined,
-			name?: string,
-			nricOrFinNo?: string, // Format: | @xxxxxxx# |
-			contactNo?: string // Format: | +65 xxxx-xxxx |
+			name?: string | undefined,
+			nricOrFinNo?: string | undefined, // Format: | @xxxxxxx# |
+			contactNo?: string | undefined // Format: | +65 xxxx-xxxx |
 		},
 		{
 			id: number | undefined,
-			name?: string,
-			nricOrFinNo?: string,
-			contactNo?: string
+			name?: string | undefined,
+			nricOrFinNo?: string | undefined, // Format: | @xxxxxxx# |
+			contactNo?: string | undefined // Format: | +65 xxxx-xxxx |
 		},
 		{
 			id: number | undefined,
-			name?: string,
-			nricOrFinNo?: string,
-			contactNo?: string
+			name?: string | undefined,
+			nricOrFinNo?: string | undefined, // Format: | @xxxxxxx# |
+			contactNo?: string | undefined // Format: | +65 xxxx-xxxx |
 		},
 		{
 			id: number | undefined,
-			name?: string,
-			nricOrFinNo?: string,
-			contactNo?: string
+			name?: string | undefined,
+			nricOrFinNo?: string | undefined, // Format: | @xxxxxxx# |
+			contactNo?: string | undefined // Format: | +65 xxxx-xxxx |
 		},
 		{
 			id: number | undefined,
-			name?: string,
-			nricOrFinNo?: string,
-			contactNo?: string
+			name?: string | undefined,
+			nricOrFinNo?: string | undefined, // Format: | @xxxxxxx# |
+			contactNo?: string | undefined // Format: | +65 xxxx-xxxx |
 		},
 	],
 	applicantDets?: {
@@ -307,12 +283,6 @@ export interface IPermitToWork {
 		email?: string // For sending statement to the applicant
 	},
 	dailyEndorsement?: { /* DailyEndorsement.ts */ },
-	// To be completed by SUPERVISOR
-	ptwPost?: {
-		checked?: boolean, // Ensure that info is verified & approved
-		supervisorName?: string,
-		timestamp?: string // AUTO
-	},
 	// To be completed by SUPERVISOR
 	ptwStatus?: {
 		taskStatus?: string, // 5 states: | NOT STARTED | IN_PROGESS | COMPLETED | TERMINATED | EXPIRED |
