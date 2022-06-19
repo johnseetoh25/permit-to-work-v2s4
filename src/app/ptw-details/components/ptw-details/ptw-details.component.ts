@@ -18,7 +18,7 @@ import { formatDate } from '@angular/common';
 })
 export class PtwDetailsComponent implements OnInit {
   public targetPtw!: IPermitToWork[];
-
+  
   public submissionTimestampDisplay: Date | undefined;
 
   constructor(

@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { AttendantDets } from 'src/app/interfaces/AttendantDets';
 import { DefaultValues } from 'src/app/constants/DefaultValues';
 import { RequestStatus } from 'src/app/constants/RequestStatus';
+import { PermitStatus } from 'src/app/constants/PermitStatus';
 import { TaskStatus } from 'src/app/constants/TaskStatus';
 
 @Component({
@@ -875,10 +876,7 @@ export class PtwRequestComponent implements OnInit {
               choice: DefaultValues.VALUE_NONE,
               remarks: DefaultValues.VALUE_NONE
             }
-          },
-          checked: false,
-          safetyAssessorName: DefaultValues.VALUE_NONE,
-          timestamp: DefaultValues.VALUE_NONE
+          }
         },
         sectionThree: {
           permitReview: {
@@ -898,10 +896,7 @@ export class PtwRequestComponent implements OnInit {
               choice: DefaultValues.VALUE_NONE,
               remarks: DefaultValues.VALUE_NONE
             }
-          },
-          checked: false,
-          authorisedManagerName: DefaultValues.VALUE_NONE,
-          timestamp: DefaultValues.VALUE_NONE
+          }
         }
       },
       confinedSpace: {
@@ -940,10 +935,7 @@ export class PtwRequestComponent implements OnInit {
             flammableGasLevel: 0,
             toxicGasLevel: 0,
             fitForEntry: false
-          },
-          checked: false,
-          safetyAssessorName: DefaultValues.VALUE_NONE,
-          timestamp: DefaultValues.VALUE_NONE
+          }
         },
         sectionThree: {
           permitReview: {
@@ -951,10 +943,7 @@ export class PtwRequestComponent implements OnInit {
             q02: DefaultValues.VALUE_NONE,
             q03: DefaultValues.VALUE_NONE,
             q04: DefaultValues.VALUE_NONE
-          },
-          checked: false,
-          authorisedManagerName: DefaultValues.VALUE_NONE,
-          timestamp: DefaultValues.VALUE_NONE
+          }
         }
       },
       attendantDets: [
@@ -1000,10 +989,21 @@ export class PtwRequestComponent implements OnInit {
       },
       dailyEndorsement: { },
       ptwStatus: {
+        permitStatus: PermitStatus.STATUS_YET_INVALID,
         taskStatus: TaskStatus.STATUS_NOT_STARTED,
         remarks: DefaultValues.VALUE_NONE,
         checked: false,
         supervisorName: DefaultValues.VALUE_NONE,
+        timestamp: DefaultValues.VALUE_NONE
+      },
+      safetyAssessorEvaluation: {
+        passed: false,
+        name: DefaultValues.VALUE_NONE,
+        timestamp: DefaultValues.VALUE_NONE
+      },
+      authorisedManagerApproval: {
+        passed: false,
+        name: DefaultValues.VALUE_NONE,
         timestamp: DefaultValues.VALUE_NONE
       },
       checked: this.applicantDeclarationChecked,

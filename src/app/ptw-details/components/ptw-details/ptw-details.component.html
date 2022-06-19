@@ -1,69 +1,939 @@
 <div class = "ptw-request-details-dialog" *ngFor = "let dt of this.targetPtw">
-    <h2 mat-dialog-title>PTW Details</h2>
-    <br>
-    <div style = "text-align: start;">
-        <h2 [ngStyle] = "
-            dt.requestStatus == 'Cancelled' ? { color: 'grey' } : 
-            dt.requestStatus == 'Approved' ? { color: 'green' } : 
-            dt.requestStatus == 'Rejected' ? { color: 'red' } : 
-            dt.requestStatus == 'Pending' ? { color: '' } : 
-            { color: '' }
-            ">{{ dt.requestStatus | uppercase }}</h2>
-        <h3 [ngStyle] = "
-            dt.requestStatus == 'Cancelled' ? { color: 'grey' } : 
-            dt.requestStatus == 'Approved' ? { color: 'green' } : 
-            dt.requestStatus == 'Rejected' ? { color: 'red' } : 
-            dt.requestStatus == 'Pending' ? { color: '' } : 
-            { color: '' }
-        ">{{ dt.ptwStatus?.taskStatus | uppercase }}</h3>
-        <div style = "width: 200px">
-            <mat-grid-list cols = "2" rowHeight = "25px">
+    <div mat-dialog-title>
+        <mat-label style = "font-size: larger; font-weight: 500;">{{ dt.ptwId }}</mat-label><br>
+        <mat-icon *ngIf = "dt.permitType == 'Hot work (HW)'" style = "color: brown">whatshot</mat-icon>
+        <mat-icon *ngIf = "dt.permitType == 'Cold work (CW)'" style = "color: darkslateblue">ac_unit</mat-icon>
+        <mat-icon *ngIf = "dt.permitType == 'Electrical (E)'" style = "color: khaki">flash_on</mat-icon>
+        <mat-icon *ngIf = "dt.permitType == 'Work at height (WAH)'" style = "color: darkslategrey">location_city</mat-icon>
+        <mat-icon *ngIf = "dt.permitType == 'Confined space (CS)'" style = "color: forestgreen">zoom_out_map</mat-icon>
+        <mat-label style = "font-size: medium; font-weight: medium;"> {{ dt.permitType | uppercase }}</mat-label>
+    </div>
+    <div mat-dialog-content>
+        <div class = "status-cols">
+            <div id = "status-col">
                 <div>
-                    <mat-grid-tile>
-                        <div id = "label-text-inside-grid">
-                            <p><b>Checked by:</b></p>
-                        </div>
-                    </mat-grid-tile>
-                    <mat-grid-tile>
-                        <div id = "value-text-inside-grid">
-                            <p>{{ dt.ptwStatus?.supervisorName }}</p>
-                        </div>
-                    </mat-grid-tile>
+                    <mat-label>Request status</mat-label>
                 </div>
-                <div *ngIf = "dt.permitType == 'Work at height (WAH)'">
-                    <mat-grid-tile>
-                        <div id = "label-text-inside-grid">
-                            <p><b>Evaluated by:</b></p>
-                        </div>
-                    </mat-grid-tile>
-                    <mat-grid-tile>
-                        <div id = "value-text-inside-grid">
-                            <p>{{ dt.workAtHeight?.sectionTwo?.safetyAssessorName }}</p>
-                        </div>
-                    </mat-grid-tile>
+                <div>
+                    <mat-label>
+                        <h3 [ngStyle] = "
+                        dt.requestStatus == 'Pending' ? { color: 'grey' } :
+                        dt.requestStatus == 'Approved' ? { color: 'green' } : 
+                        dt.requestStatus == 'Rejected' ? { color: 'red' } : 
+                        { color: '' }
+                        ">{{ dt.requestStatus | uppercase }}</h3>
+                    </mat-label>
                 </div>
-                <div *ngIf = "dt.permitType == 'Confined space (CS)'">
-                    <mat-grid-tile>
-                        <div id = "label-text-inside-grid">
-                            <p><b>Evaluated by:</b></p>
-                        </div>
-                    </mat-grid-tile>
-                    <mat-grid-tile>
-                        <div id = "value-text-inside-grid">
-                            <p>{{ dt.confinedSpace?.sectionTwo?.safetyAssessorName }}</p>
-                        </div>
-                    </mat-grid-tile>
-                    
+            </div>
+            <div id = "status-col">
+                <div>
+                    <mat-label>Permit status</mat-label>
                 </div>
-            </mat-grid-list>
+                <div>
+                    <mat-label>
+                        <h3 [ngStyle] = "
+                        dt.ptwStatus?.permitStatus == 'Invalid' ? { color: 'grey' } :
+                        dt.ptwStatus?.permitStatus == 'Valid' ? { color: 'green' } : 
+                        dt.ptwStatus?.permitStatus == 'Terminated' ? { color: 'red' } : 
+                        dt.ptwStatus?.permitStatus == 'Expired' ? { color: 'red' } : 
+                        { color: '' }
+                        ">{{ dt.ptwStatus?.permitStatus | uppercase }}</h3>
+                    </mat-label>
+                </div>
+            </div>
+            <div id = "status-col">
+                <div>
+                    <mat-label>Task status</mat-label>
+                </div>
+                <div>
+                    <mat-label>
+                        <h3 [ngStyle] = "
+                        dt.ptwStatus?.taskStatus == 'Not Started' ? { color: 'grey' } : 
+                        dt.ptwStatus?.taskStatus == 'In Progress' ? { color: '' } : 
+                        dt.ptwStatus?.taskStatus == 'Completed' ? { color: 'green' } : 
+                        dt.ptwStatus?.taskStatus == 'Terminated' ? { color: 'red' } : 
+                        dt.ptwStatus?.taskStatus == 'Expired' ? { color: 'red' } : 
+                        { color: '' }
+                        ">{{ dt.ptwStatus?.taskStatus | uppercase }}</h3>
+                    </mat-label>
+                </div>
+            </div>
+            <div id = "status-col">
+                <div>
+                    <div>
+                        <mat-label>No. of attendants:&emsp;</mat-label><mat-label style = "font-weight: 450;">{{ dt.noOfWorkers! + dt.noOfSupervisors! }}</mat-label>
+                    </div>
+                    <div>
+                        <mat-icon style="color:brown">person</mat-icon><mat-label style = "font-size: smaller;">+</mat-label>
+                        <mat-icon *ngIf = "(dt.noOfWorkers! + dt.noOfSupervisors!) >= 2">person</mat-icon>
+                        <mat-icon *ngIf = "(dt.noOfWorkers! + dt.noOfSupervisors!) >= 3">person</mat-icon>
+                        <mat-icon *ngIf = "(dt.noOfWorkers! + dt.noOfSupervisors!) >= 4">person</mat-icon>
+                        <mat-icon *ngIf = "(dt.noOfWorkers! + dt.noOfSupervisors!) >= 5">person</mat-icon>
+                        <mat-icon *ngIf = "(dt.noOfWorkers! + dt.noOfSupervisors!) >= 6">person</mat-icon>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div *ngIf = "dt.statusRemarks != 'None'">
-            <p><b>Reason:</b>&emsp;{{ dt.statusRemarks }}</p>
+        <br>
+        <div>
+            <mat-label id = "label-text">&emsp;Application date:&emsp;</mat-label><mat-label>{{ this.submissionTimestampDisplay | date: "mediumDate" }}</mat-label>
         </div>
-        <!-- <div *ngIf = "dt.ptwStatus?.timestamp != 'None'"><p><b>Date:</b>&emsp;{{ dt.ptwStatus?.timestamp }}</p></div> -->
-        <div *ngIf = "dt.timestamp != 'None'">
-            <p><b>Checked Date:</b>&emsp;{{ this.submissionTimestampDisplay | date: "mediumDate" }}</p>
+        <br>
+        <mat-divider></mat-divider>
+        <div class = "apl-dets-cols">
+            <div id = "apl-dets-col">
+                <mat-label id = "label-text">Requested by:&emsp;</mat-label>
+                <mat-label>{{ dt.applicantDets?.name }}</mat-label>
+                <br><br>
+                <mat-label id = "label-text">NRIC / FIN no.:&emsp;</mat-label><mat-label>{{ dt.applicantDets?.nricOrFinNo }}</mat-label>
+            </div>
+            <div id = "apl-dets-col">
+                <div *ngIf = "dt.applicantDets?.orgType == 'External'"><mat-label id = "label-text">Organisation:&emsp;</mat-label>
+                    <mat-label>{{ dt.applicantDets?.orgName }} ({{ dt.applicantDets?.orgType }})</mat-label></div>
+                <div *ngIf = "dt.applicantDets?.orgType == 'Internal'"><mat-label id = "label-text">Organisation:&emsp;</mat-label>
+                    <mat-label>Internal</mat-label></div>
+                <br>
+                <mat-label id = "label-text">Department:&emsp;</mat-label><mat-label>{{ dt.applicantDets?.depName }}</mat-label>
+            </div>
+            <div id = "apl-dets-col">
+                <mat-label style = "font-weight: 450;">Contact no.:&emsp;</mat-label>
+                <mat-label>{{ dt.applicantDets?.contactNo }}</mat-label>
+                <br><br>
+                <mat-label style = "font-weight: 450;">Email address:&emsp;</mat-label>
+                <mat-label>{{ dt.applicantDets?.email }}</mat-label>
+            </div>
         </div>
+        <br>
+        <mat-divider></mat-divider>
+        <br>
+        <div>
+            <mat-tab-group mat-align-tabs = "start">
+                <mat-tab label = "Applicant Info">
+                    <div id = "scrollable-tc">
+                        <br>
+                        <mat-label id = "label-text">&emsp;Location of work:&emsp;</mat-label><mat-label>{{ dt.locationOfWork?.main }}</mat-label>
+                        <br><br>
+                        <mat-label id = "label-text">&emsp;Subsector:&emsp;</mat-label><mat-label>{{ dt.locationOfWork?.sub }}</mat-label>
+                        <br><br>
+                        <mat-label id = "label-text">&emsp;Working time:&emsp;</mat-label>
+                        <mat-label>{{ dt.startWorkingDateTime | date: "medium" }} - {{ dt.endWorkingDateTime | date: "medium" }}</mat-label>
+                        <br><br>
+                        <mat-label id = "label-text">&emsp;Task description:&emsp;</mat-label><mat-label>{{ dt.taskDescription }}</mat-label>
+                        <br><br>
+                        <mat-label id = "label-text">&emsp;Additional attendant details:&emsp;</mat-label>
+                        <br><br>
+                        <div id = "ad-dets-table">
+                            <mat-grid-list cols = "3" rowHeight = "35px">
+                                <mat-grid-tile-header>
+                                    <mat-grid-tile>Name</mat-grid-tile>
+                                    <mat-grid-tile>NRIC / FIN No.</mat-grid-tile>
+                                    <mat-grid-tile>Contact No.</mat-grid-tile>
+                                </mat-grid-tile-header>
+                                <div *ngIf = "(dt.noOfWorkers! + dt.noOfSupervisors!) - 1 >= 1">
+                                    <mat-grid-tile>{{ dt.attendantDets?.[0]?.name }}</mat-grid-tile>
+                                    <mat-grid-tile>{{ dt.attendantDets?.[0]?.nricOrFinNo }}</mat-grid-tile>
+                                    <mat-grid-tile>{{ dt.attendantDets?.[0]?.contactNo }}</mat-grid-tile>
+                                </div>
+                                <div *ngIf = "(dt.noOfWorkers! + dt.noOfSupervisors!) - 1 >= 2">
+                                    <mat-grid-tile>{{ dt.attendantDets?.[1]?.name }}</mat-grid-tile>
+                                    <mat-grid-tile>{{ dt.attendantDets?.[1]?.nricOrFinNo }}</mat-grid-tile>
+                                    <mat-grid-tile>{{ dt.attendantDets?.[1]?.contactNo }}</mat-grid-tile>
+                                </div>
+                                <div *ngIf = "(dt.noOfWorkers! + dt.noOfSupervisors!) - 1 >= 3">
+                                    <mat-grid-tile>{{ dt.attendantDets?.[2]?.name }}</mat-grid-tile>
+                                    <mat-grid-tile>{{ dt.attendantDets?.[2]?.nricOrFinNo }}</mat-grid-tile>
+                                    <mat-grid-tile>{{ dt.attendantDets?.[2]?.contactNo }}</mat-grid-tile>
+                                </div>
+                                <div *ngIf = "(dt.noOfWorkers! + dt.noOfSupervisors!) - 1 >= 4">
+                                    <mat-grid-tile>{{ dt.attendantDets?.[3]?.name }}</mat-grid-tile>
+                                    <mat-grid-tile>{{ dt.attendantDets?.[3]?.nricOrFinNo }}</mat-grid-tile>
+                                    <mat-grid-tile>{{ dt.attendantDets?.[3]?.contactNo }}</mat-grid-tile>
+                                </div>
+                                <div *ngIf = "(dt.noOfWorkers! + dt.noOfSupervisors!) - 1 >= 5">
+                                    <mat-grid-tile>{{ dt.attendantDets?.[4]?.name }}</mat-grid-tile>
+                                    <mat-grid-tile>{{ dt.attendantDets?.[4]?.nricOrFinNo }}</mat-grid-tile>
+                                    <mat-grid-tile>{{ dt.attendantDets?.[4]?.contactNo }}</mat-grid-tile>
+                                </div>
+                            </mat-grid-list>
+                        </div>
+                        <br><br>
+                    </div>
+                </mat-tab>
+                <mat-tab label = "Safety Measures">
+                    <div id = "scrollable-tc">
+                        <div *ngIf = "dt.permitType == 'Work at height (WAH)'">
+                            <div class = "wah-sm-cols">
+                                <div id = "wah-sm-col">
+                                    <mat-label id = "label-text">Safety measures</mat-label>
+                                </div>
+                                <div id = "wah-sm-col">
+                                    <mat-label id = "label-text">Implemented?</mat-label>
+                                </div>
+                                <div id = "wah-sm-col">
+                                    <mat-label id = "label-text">Remarks</mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-sm-cols">
+                                <div id = "wah-sm-col">
+                                    <mat-label>Due consideration given to eliminate work at heights tasks.</mat-label>
+                                </div>
+                                <div id = "wah-sm-col">
+                                    <mat-label>&emsp;{{ dt.workAtHeight?.sectionOne?.controlMeasuresImplemented?.q01?.choice }}</mat-label>
+                                </div>
+                                <div id = "wah-sm-col">
+                                    <mat-label>{{ dt.workAtHeight?.sectionOne?.controlMeasuresImplemented?.q01?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-sm-cols">
+                                <div id = "wah-sm-col">
+                                    <mat-label>Safe means of access or egress provided.</mat-label>
+                                </div>
+                                <div id = "wah-sm-col">
+                                    <mat-label>&emsp;{{ dt.workAtHeight?.sectionOne?.controlMeasuresImplemented?.q02?.choice }}</mat-label>
+                                </div>
+                                <div id = "wah-sm-col">
+                                    <mat-label>{{ dt.workAtHeight?.sectionOne?.controlMeasuresImplemented?.q02?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-sm-cols">
+                                <div id = "wah-sm-col">
+                                    <mat-label>Edge protection provided wherever there is falling risks.</mat-label>
+                                </div>
+                                <div id = "wah-sm-col">
+                                    <mat-label>&emsp;{{ dt.workAtHeight?.sectionOne?.controlMeasuresImplemented?.q03?.choice }}</mat-label>
+                                </div>
+                                <div id = "wah-sm-col">
+                                    <mat-label>{{ dt.workAtHeight?.sectionOne?.controlMeasuresImplemented?.q03?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-sm-cols">
+                                <div id = "wah-sm-col">
+                                    <mat-label>Fall prevention equipment used to provide access or work platform.</mat-label>
+                                </div>
+                                <div id = "wah-sm-col">
+                                    <mat-label>&emsp;{{ dt.workAtHeight?.sectionOne?.controlMeasuresImplemented?.q04?.choice }}</mat-label>
+                                </div>
+                                <div id = "wah-sm-col">
+                                    <mat-label>{{ dt.workAtHeight?.sectionOne?.controlMeasuresImplemented?.q04?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-sm-cols">
+                                <div id = "wah-sm-col">
+                                    <mat-label>Fall prevention equipment are adequate and in good condition.</mat-label>
+                                </div>
+                                <div id = "wah-sm-col">
+                                    <mat-label>&emsp;{{ dt.workAtHeight?.sectionOne?.controlMeasuresImplemented?.q05?.choice }}</mat-label>
+                                </div>
+                                <div id = "wah-sm-col">
+                                    <mat-label>{{ dt.workAtHeight?.sectionOne?.controlMeasuresImplemented?.q05?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-sm-cols">
+                                <div id = "wah-sm-col">
+                                    <mat-label>Anchorage/ lifeline installed and inspected by competent person.</mat-label>
+                                </div>
+                                <div id = "wah-sm-col">
+                                    <mat-label>&emsp;{{ dt.workAtHeight?.sectionOne?.controlMeasuresImplemented?.q06?.choice }}</mat-label>
+                                </div>
+                                <div id = "wah-sm-col">
+                                    <mat-label>{{ dt.workAtHeight?.sectionOne?.controlMeasuresImplemented?.q06?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-sm-cols">
+                                <div id = "wah-sm-col">
+                                    <mat-label>Travel restraint system used to exclude persons from falling risks.</mat-label>
+                                </div>
+                                <div id = "wah-sm-col">
+                                    <mat-label>&emsp;{{ dt.workAtHeight?.sectionOne?.controlMeasuresImplemented?.q07?.choice }}</mat-label>
+                                </div>
+                                <div id = "wah-sm-col">
+                                    <mat-label>{{ dt.workAtHeight?.sectionOne?.controlMeasuresImplemented?.q07?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-sm-cols">
+                                <div id = "wah-sm-col">
+                                    <mat-label>All persons subjected to falling risks are equipped with PFAS.</mat-label>
+                                </div>
+                                <div id = "wah-sm-col">
+                                    <mat-label>&emsp;{{ dt.workAtHeight?.sectionOne?.controlMeasuresImplemented?.q08?.choice }}</mat-label>
+                                </div>
+                                <div id = "wah-sm-col">
+                                    <mat-label>{{ dt.workAtHeight?.sectionOne?.controlMeasuresImplemented?.q08?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-sm-cols">
+                                <div id = "wah-sm-col">
+                                    <mat-label>All personnel are adequately trained to perform work at heights.</mat-label>
+                                </div>
+                                <div id = "wah-sm-col">
+                                    <mat-label>&emsp;{{ dt.workAtHeight?.sectionOne?.controlMeasuresImplemented?.q09?.choice }}</mat-label>
+                                </div>
+                                <div id = "wah-sm-col">
+                                    <mat-label>{{ dt.workAtHeight?.sectionOne?.controlMeasuresImplemented?.q09?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-sm-cols">
+                                <div id = "wah-sm-col">
+                                    <mat-label>Hazards and risk assessment are conducted and communicated.</mat-label>
+                                </div>
+                                <div id = "wah-sm-col">
+                                    <mat-label>&emsp;{{ dt.workAtHeight?.sectionOne?.controlMeasuresImplemented?.q10?.choice }}</mat-label>
+                                </div>
+                                <div id = "wah-sm-col">
+                                    <mat-label>{{ dt.workAtHeight?.sectionOne?.controlMeasuresImplemented?.q10?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-sm-cols">
+                                <div id = "wah-sm-col">
+                                    <mat-label id = "label-text">Others:</mat-label>
+                                </div>
+                                <div id = "wah-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "wah-sm-col">
+                                    <mat-label>&emsp;{{ dt.workAtHeight?.sectionOne?.controlMeasuresImplemented?.q11?.specify }}</mat-label>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf = "dt.permitType == 'Confined space (CS)'">
+                            <div class = "cs-sm-cols">
+                                <div id = "cs-sm-col">
+                                    <mat-label id = "label-text">POTENTIAL HAZARDS</mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-sm-cols">
+                                <div id = "cs-sm-col">
+                                    <mat-label id = "label-text">Atmospheric:</mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label>{{ dt.confinedSpace?.sectionOne?.potentialHazards?.atmo }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-sm-cols">
+                                <div id = "cs-sm-col">
+                                    <mat-label id = "label-text">Non-atmospheric:</mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label>{{ dt.confinedSpace?.sectionOne?.potentialHazards?.nonAtmo }}</mat-label>
+                                </div>
+                            </div>
+                            <br>
+                            <mat-divider></mat-divider>
+                            <div class = "cs-sm-cols">
+                                <div id = "cs-sm-col">
+                                    <mat-label id = "label-text">PRE-ENTRY REQUIREMENTS</mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-sm-cols">
+                                <div id = "cs-sm-col">
+                                    <mat-label id = "label-text">Safety measures</mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label id = "label-text">Implemented?</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-sm-cols">
+                                <div id = "cs-sm-col">
+                                    <mat-label>Ventilation</mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label>{{ dt.confinedSpace?.sectionOne?.controlMeasuresImplemented?.preEntryReqs?.q01 }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-sm-cols">
+                                <div id = "cs-sm-col">
+                                    <mat-label>Lighting</mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label>{{ dt.confinedSpace?.sectionOne?.controlMeasuresImplemented?.preEntryReqs?.q02 }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-sm-cols">
+                                <div id = "cs-sm-col">
+                                    <mat-label>Barricades and signboards</mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label>{{ dt.confinedSpace?.sectionOne?.controlMeasuresImplemented?.preEntryReqs?.q03 }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-sm-cols">
+                                <div id = "cs-sm-col">
+                                    <mat-label>De-energisation / lockout-tag out (LOTO)</mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label>{{ dt.confinedSpace?.sectionOne?.controlMeasuresImplemented?.preEntryReqs?.q04 }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-sm-cols">
+                                <div id = "cs-sm-col">
+                                    <mat-label>Blanking / bleeding of pipes</mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label>{{ dt.confinedSpace?.sectionOne?.controlMeasuresImplemented?.preEntryReqs?.q05 }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-sm-cols">
+                                <div id = "cs-sm-col">
+                                    <mat-label>Personal gas detector</mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label>{{ dt.confinedSpace?.sectionOne?.controlMeasuresImplemented?.preEntryReqs?.q06 }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-sm-cols">
+                                <div id = "cs-sm-col">
+                                    <mat-label>Torchlight</mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label>{{ dt.confinedSpace?.sectionOne?.controlMeasuresImplemented?.preEntryReqs?.q07 }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-sm-cols">
+                                <div id = "cs-sm-col">
+                                    <mat-label>Flame-proof light</mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label>{{ dt.confinedSpace?.sectionOne?.controlMeasuresImplemented?.preEntryReqs?.q08 }}</mat-label>
+                                </div>
+                            </div>
+                            <br>
+                            <mat-divider></mat-divider>
+                            <div class = "cs-sm-cols">
+                                <div id = "cs-sm-col">
+                                    <mat-label id = "label-text">PERSONAL PROTECTIVE EQUIPMENT (PPE)</mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-sm-cols">
+                                <div id = "cs-sm-col">
+                                    <mat-label>Safety helmet</mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label>{{ dt.confinedSpace?.sectionOne?.controlMeasuresImplemented?.ppe?.q01 }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-sm-cols">
+                                <div id = "cs-sm-col">
+                                    <mat-label>Eye protection</mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label>{{ dt.confinedSpace?.sectionOne?.controlMeasuresImplemented?.ppe?.q02 }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-sm-cols">
+                                <div id = "cs-sm-col">
+                                    <mat-label>Hand protection</mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label>{{ dt.confinedSpace?.sectionOne?.controlMeasuresImplemented?.ppe?.q03 }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-sm-cols">
+                                <div id = "cs-sm-col">
+                                    <mat-label>Safety harness / lifelines</mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label>{{ dt.confinedSpace?.sectionOne?.controlMeasuresImplemented?.ppe?.q04 }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-sm-cols">
+                                <div id = "cs-sm-col">
+                                    <mat-label>Respiratory protection</mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label>{{ dt.confinedSpace?.sectionOne?.controlMeasuresImplemented?.ppe?.q05 }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-sm-cols">
+                                <div id = "cs-sm-col">
+                                    <mat-label>Name / identification badge</mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label>{{ dt.confinedSpace?.sectionOne?.controlMeasuresImplemented?.ppe?.q06 }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-sm-cols">
+                                <div id = "cs-sm-col">
+                                    <mat-label id = "label-text">Other PPE:</mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cs-sm-col">
+                                    <mat-label>{{ dt.confinedSpace?.sectionOne?.controlMeasuresImplemented?.ppe?.q07?.specify }}</mat-label>
+                                </div>
+                            </div>
+                        </div>
+                        <br><br>
+                    </div>
+                </mat-tab>
+                <mat-tab label = "Evaluation Status">
+                    <div id = "scrollable-tc">
+                        <div class = "eval-note-cols">
+                            <mat-label id = "label-text">NOTE:&emsp;</mat-label>
+                            <mat-label style = "color: maroon">This section IS and HAS to be evaluated by a SAFETY ASSESSOR who has Validator access to this system. This process is required for further approval by an AUTHORISED MANAGER (who also has Validator access) to validate the permit.</mat-label>
+                        </div>
+                        <div class = "eval-note-cols">
+                            <div id = "eval-note-col">
+                                <mat-label id = "label-text">Evaluated by:&emsp;</mat-label>
+                                <mat-label>{{ dt.safetyAssessorEvaluation?.name }}</mat-label>
+                            </div>
+                            <div id = "eval-note-col">
+                                <mat-label id = "label-text">Date and time:&emsp;</mat-label>
+                                <mat-label>{{ dt.safetyAssessorEvaluation?.timestamp }}</mat-label>
+                            </div>
+                            <div id = "eval-note-col">
+                                <div *ngIf = "dt.safetyAssessorEvaluation?.passed || !dt.safetyAssessorEvaluation?.passed">
+                                    <div *ngIf = "dt.safetyAssessorEvaluation?.name != 'None' && dt.safetyAssessorEvaluation?.passed">
+                                        <mat-icon style = "color: darkgreen;">done_all</mat-icon><mat-label style = "color: darkgreen; font-weight: 450;">PASSED</mat-label>
+                                    </div>
+                                    <div *ngIf = "dt.safetyAssessorEvaluation?.name != 'None' && !dt.safetyAssessorEvaluation?.passed">
+                                        <mat-icon style = "color: crimson;">clear</mat-icon><mat-label style = "color: crimson; font-weight: 450;">NOT PASSED</mat-label>
+                                    </div>
+                                    <div *ngIf = "dt.safetyAssessorEvaluation?.name == 'None' && !dt.safetyAssessorEvaluation?.passed">
+                                        <mat-icon style = "color: grey;">priority_high</mat-icon><mat-label style = "color: grey; font-weight: 450;">NOT YET EVALUATED</mat-label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <mat-divider></mat-divider>
+                        <div *ngIf = "dt.permitType == 'Work at height (WAH)'">
+                            <div class = "wah-eval-cols">
+                                <div id = "wah-eval-col">
+                                    <mat-label id = "label-text">ASSESSMENT OF CONTROL MEASURES</mat-label>
+                                </div>
+                                <div id = "wah-eval-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "wah-eval-col">
+                                    <mat-label></mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-eval-cols">
+                                <div id = "wah-eval-col">
+                                    <mat-label id = "label-text">Assessments</mat-label>
+                                </div>
+                                <div id = "wah-eval-col">
+                                    <mat-label id = "label-text">&emsp;Verified?</mat-label>
+                                </div>
+                                <div id = "wah-eval-col">
+                                    <mat-label id = "label-text">Remarks</mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-eval-cols">
+                                <div id = "wah-eval-col">
+                                    <mat-label>All reasonably practicable measures have been taken.</mat-label>
+                                </div>
+                                <div id = "wah-eval-col">
+                                    <mat-label>&emsp;{{ dt.workAtHeight?.sectionTwo?.assessmentOfControlMeasures?.q01?.choice }}</mat-label>
+                                </div>
+                                <div id = "wah-eval-col">
+                                    <mat-label>{{ dt.workAtHeight?.sectionTwo?.assessmentOfControlMeasures?.q01?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-eval-cols">
+                                <div id = "wah-eval-col">
+                                    <mat-label>Verification of documents/ interview workers/ others.</mat-label>
+                                </div>
+                                <div id = "wah-eval-col">
+                                    <mat-label>&emsp;{{ dt.workAtHeight?.sectionTwo?.assessmentOfControlMeasures?.q02?.choice }}</mat-label>
+                                </div>
+                                <div id = "wah-eval-col">
+                                    <mat-label>{{ dt.workAtHeight?.sectionTwo?.assessmentOfControlMeasures?.q02?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <br>
+                            <mat-divider></mat-divider>
+                            <div class = "wah-eval-cols">
+                                <div id = "wah-eval-col">
+                                    <mat-label id = "label-text">SITE SURVEY FROM SUPERVISORS</mat-label>
+                                </div>
+                                <div id = "wah-eval-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "wah-eval-col">
+                                    <mat-label></mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-eval-cols">
+                                <div id = "wah-eval-col">
+                                    <mat-label id = "label-text">Assessments</mat-label>
+                                </div>
+                                <div id = "wah-eval-col">
+                                    <mat-label id = "label-text">&emsp;Verified?</mat-label>
+                                </div>
+                                <div id = "wah-eval-col">
+                                    <mat-label id = "label-text">Remarks</mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-eval-cols">
+                                <div id = "wah-eval-col">
+                                    <mat-label>All persons on site are protected from falling risks.</mat-label>
+                                </div>
+                                <div id = "wah-eval-col">
+                                    <mat-label>&emsp;{{ dt.workAtHeight?.sectionTwo?.siteSurveyFromSupervisor?.q01?.choice }}</mat-label>
+                                </div>
+                                <div id = "wah-eval-col">
+                                    <mat-label>{{ dt.workAtHeight?.sectionTwo?.siteSurveyFromSupervisor?.q01?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-eval-cols">
+                                <div id = "wah-eval-col">
+                                    <mat-label>Surrounding areas do not pose additional hazards.</mat-label>
+                                </div>
+                                <div id = "wah-eval-col">
+                                    <mat-label>&emsp;{{ dt.workAtHeight?.sectionTwo?.siteSurveyFromSupervisor?.q02?.choice }}</mat-label>
+                                </div>
+                                <div id = "wah-eval-col">
+                                    <mat-label>{{ dt.workAtHeight?.sectionTwo?.siteSurveyFromSupervisor?.q02?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <br>
+                            <mat-divider></mat-divider>
+                            <div class = "wah-eval-cols">
+                                <div id = "wah-eval-col">
+                                    <mat-label id = "label-text">MULTIPLE LOCATIONS / EXTENDED DURATION</mat-label>
+                                </div>
+                                <div id = "wah-eval-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "wah-eval-col">
+                                    <mat-label></mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-eval-cols">
+                                <div id = "wah-eval-col">
+                                    <mat-label id = "label-text">Assessments</mat-label>
+                                </div>
+                                <div id = "wah-eval-col">
+                                    <mat-label id = "label-text">&emsp;Verified?</mat-label>
+                                </div>
+                                <div id = "wah-eval-col">
+                                    <mat-label id = "label-text">Remarks</mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-eval-cols">
+                                <div id = "wah-eval-col">
+                                    <mat-label>Hazards are common at various locations/ time period.</mat-label>
+                                </div>
+                                <div id = "wah-eval-col">
+                                    <mat-label>&emsp;{{ dt.workAtHeight?.sectionTwo?.multiLocOrExtentedDuration?.q01?.choice }}</mat-label>
+                                </div>
+                                <div id = "wah-eval-col">
+                                    <mat-label>{{ dt.workAtHeight?.sectionTwo?.multiLocOrExtentedDuration?.q01?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-eval-cols">
+                                <div id = "wah-eval-col">
+                                    <mat-label>Control measures are applicable and effective.</mat-label>
+                                </div>
+                                <div id = "wah-eval-col">
+                                    <mat-label>&emsp;{{ dt.workAtHeight?.sectionTwo?.multiLocOrExtentedDuration?.q02?.choice }}</mat-label>
+                                </div>
+                                <div id = "wah-eval-col">
+                                    <mat-label>{{ dt.workAtHeight?.sectionTwo?.multiLocOrExtentedDuration?.q02?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf = "dt.permitType == 'Confined space (CS)'">
+                            <div class = "cs-eval-cols">
+                                <div id = "cs-eval-col">
+                                    <mat-label id = "label-text">GAS MONITORING RESULTS</mat-label>
+                                </div>
+                                <div id = "cs-eval-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cs-eval-col">
+                                    <mat-label></mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-eval-cols">
+                                <div id = "cs-eval-col">
+                                    <mat-label id = "label-text">Gases</mat-label>
+                                </div>
+                                <div id = "cs-eval-col">
+                                    <mat-label id = "label-text">&emsp;Level Results</mat-label>
+                                </div>
+                                <div id = "cs-eval-col">
+                                    <mat-label id = "label-text">Permissible entry levels</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-eval-cols">
+                                <div id = "cs-eval-col">
+                                    <mat-label>Oxygen (O₂) gas</mat-label>
+                                </div>
+                                <div id = "cs-eval-col">
+                                    <mat-label>&emsp;{{ dt.confinedSpace?.sectionTwo?.gasMonitoringRes?.oxygenLevel }}%</mat-label>
+                                </div>
+                                <div id = "cs-eval-col">
+                                    <mat-label>19.5 - 23.5%</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-eval-cols">
+                                <div id = "cs-eval-col">
+                                    <mat-label>Flammable gas</mat-label>
+                                </div>
+                                <div id = "cs-eval-col">
+                                    <mat-label>&emsp;{{ dt.confinedSpace?.sectionTwo?.gasMonitoringRes?.flammableGasLevel }}% LEL</mat-label>
+                                </div>
+                                <div id = "cs-eval-col">
+                                    <mat-label>Less than 10% LEL</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-eval-cols">
+                                <div id = "cs-eval-col">
+                                    <mat-label>Toxic gas</mat-label>
+                                </div>
+                                <div id = "cs-eval-col">
+                                    <mat-label>&emsp;{{ dt.confinedSpace?.sectionTwo?.gasMonitoringRes?.toxicGasLevel }} ppm</mat-label>
+                                </div>
+                                <div id = "cs-eval-col">
+                                    <mat-label>Any %</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-eval-cols">
+                                <div id = "cs-eval-col">
+                                    <mat-label id = "label-text">Fit for entry?</mat-label>
+                                </div>
+                                <div id = "cs-eval-col">
+                                    <mat-label *ngIf = "dt.confinedSpace?.sectionTwo?.gasMonitoringRes?.fitForEntry">&emsp;Yes</mat-label>
+                                    <mat-label *ngIf = "!dt.confinedSpace?.sectionTwo?.gasMonitoringRes?.fitForEntry">&emsp;No</mat-label>
+                                </div>
+                                <div id = "cs-eval-col">
+                                    <mat-label></mat-label>
+                                </div>
+                            </div>
+                        </div>
+                        <br><br>
+                    </div>
+                </mat-tab>
+                <mat-tab label = "Approval Status">
+                    <div id = "scrollable-tc">
+                        <div class = "am-note-cols">
+                            <mat-label id = "label-text">NOTE:&emsp;</mat-label>
+                            <mat-label style = "color: maroon">This section IS and HAS to be assessed by an AUTHORISED MANAGER to finalise the permit approval and issuance. If this permit is approved, it will become valid, and may be used to proceed with the work assignment.</mat-label>
+                        </div>
+                        <div class = "am-note-cols">
+                            <div id = "am-note-col">
+                                <mat-label id = "label-text">Approved / rejected by:&emsp;</mat-label>
+                                <mat-label>{{ dt.authorisedManagerApproval?.name }}</mat-label>
+                            </div>
+                            <div id = "am-note-col">
+                                <mat-label id = "label-text">Date and time:&emsp;</mat-label>
+                                <mat-label>{{ dt.authorisedManagerApproval?.timestamp }}</mat-label>
+                            </div>
+                            <div id = "am-note-col">
+                                <div *ngIf = "dt.authorisedManagerApproval?.passed || !dt.authorisedManagerApproval?.passed">
+                                    <div *ngIf = "dt.authorisedManagerApproval?.name != 'None' && dt.authorisedManagerApproval?.passed">
+                                        <mat-icon style = "color: darkgreen;">done_all</mat-icon><mat-label style = "color: darkgreen; font-weight: 450;">PASSED</mat-label>
+                                    </div>
+                                    <div *ngIf = "dt.authorisedManagerApproval?.name != 'None' && !dt.authorisedManagerApproval?.passed">
+                                        <mat-icon style = "color: crimson;">clear</mat-icon><mat-label style = "color: crimson; font-weight: 450;">NOT PASSED</mat-label>
+                                    </div>
+                                    <div *ngIf = "dt.authorisedManagerApproval?.name == 'None' && !dt.authorisedManagerApproval?.passed">
+                                        <mat-icon style = "color: grey;">priority_high</mat-icon><mat-label style = "color: grey; font-weight: 450;">NOT YET ASSESSED</mat-label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <mat-divider></mat-divider>
+                        <div *ngIf = "dt.permitType == 'Work at height (WAH)'">
+                            <div class = "wah-am-cols">
+                                <div id = "wah-am-col">
+                                    <mat-label id = "label-text">REVIEW OF PERMIT</mat-label>
+                                </div>
+                                <div id = "wah-am-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "wah-am-col">
+                                    <mat-label></mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-am-cols">
+                                <div id = "wah-am-col">
+                                    <mat-label id = "label-text">Criteria</mat-label>
+                                </div>
+                                <div id = "wah-am-col">
+                                    <mat-label id = "label-text">&emsp;Fulfilled?</mat-label>
+                                </div>
+                                <div id = "wah-am-col">
+                                    <mat-label id = "label-text">Remarks</mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-am-cols">
+                                <div id = "wah-am-col">
+                                    <mat-label>Proper permit-to-work evaluation has been completed.</mat-label>
+                                </div>
+                                <div id = "wah-am-col">
+                                    <mat-label>&emsp;{{ dt.workAtHeight?.sectionThree?.permitReview?.q01?.choice }}</mat-label>
+                                </div>
+                                <div id = "wah-am-col">
+                                    <mat-label>{{ dt.workAtHeight?.sectionThree?.permitReview?.q01?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-am-cols">
+                                <div id = "wah-am-col">
+                                    <mat-label>No incompatible works that may pose additional hazards.</mat-label>
+                                </div>
+                                <div id = "wah-am-col">
+                                    <mat-label>&emsp;{{ dt.workAtHeight?.sectionThree?.permitReview?.q02?.choice }}</mat-label>
+                                </div>
+                                <div id = "wah-am-col">
+                                    <mat-label>{{ dt.workAtHeight?.sectionThree?.permitReview?.q02?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-am-cols">
+                                <div id = "wah-am-col">
+                                    <mat-label>Control measures have been implemented effectively.</mat-label>
+                                </div>
+                                <div id = "wah-am-col">
+                                    <mat-label>&emsp;{{ dt.workAtHeight?.sectionThree?.permitReview?.q03?.choice }}</mat-label>
+                                </div>
+                                <div id = "wah-am-col">
+                                    <mat-label>{{ dt.workAtHeight?.sectionThree?.permitReview?.q03?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "wah-am-cols">
+                                <div id = "wah-am-col">
+                                    <mat-label>Fall from heights risks have been effectively mitigated.</mat-label>
+                                </div>
+                                <div id = "wah-am-col">
+                                    <mat-label>&emsp;{{ dt.workAtHeight?.sectionThree?.permitReview?.q04?.choice }}</mat-label>
+                                </div>
+                                <div id = "wah-am-col">
+                                    <mat-label>{{ dt.workAtHeight?.sectionThree?.permitReview?.q04?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf = "dt.permitType == 'Confined space (CS)'">
+                            <div class = "cs-am-cols-header">
+                                <div id = "cs-am-col-header">
+                                    <mat-label id = "label-text">REVIEW OF PERMIT</mat-label>
+                                </div>
+                                <div id = "cs-am-col-header">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cs-am-col-header">
+                                    <mat-label></mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-am-cols-header">
+                                <div id = "cs-am-col-header">
+                                    <mat-label id = "label-text">Criteria</mat-label>
+                                </div>
+                                <div id = "cs-am-col-header">
+                                    <mat-label id = "label-text">&emsp;Fulfilled?</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-am-cols">
+                                <div id = "cs-am-col">
+                                    <mat-label>The levels of oxygen, flammable gas and toxic substances are within the permissible range. (Refer to Evaluation Status tab)</mat-label>
+                                </div>
+                                <div id = "cs-am-col">
+                                    <mat-label>&emsp;{{ dt.confinedSpace?.sectionThree?.permitReview?.q01 }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-am-cols">
+                                <div id = "cs-am-col">
+                                    <mat-label>The confined space is adequately	ventilated.</mat-label>
+                                </div>
+                                <div id = "cs-am-col">
+                                    <mat-label>&emsp;{{ dt.confinedSpace?.sectionThree?.permitReview?.q02 }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-am-cols">
+                                <div id = "cs-am-col">
+                                    <mat-label>Effective steps have been taken to prevent any ingress of dangerous gases, vapours or any other dangerous substances into the confined space.</mat-label>
+                                </div>
+                                <div id = "cs-am-col">
+                                    <mat-label>&emsp;{{ dt.confinedSpace?.sectionThree?.permitReview?.q03 }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cs-am-cols">
+                                <div id = "cs-am-col">
+                                    <mat-label>All reasonably practicable measures have been taken to ensure the safety and health of persons who will be entering or working in the confined space.</mat-label>
+                                </div>
+                                <div id = "cs-am-col">
+                                    <mat-label>&emsp;{{ dt.confinedSpace?.sectionThree?.permitReview?.q04 }}</mat-label>
+                                </div>
+                            </div>
+                        </div>
+                        <br><br>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button disabled>Terminate / Cancel Permit</button>
+        <button mat-button mat-dialog-close>Close</button>
     </div>
 </div>

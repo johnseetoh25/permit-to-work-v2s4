@@ -2,13 +2,13 @@
     <p>
         <mat-toolbar class = "applicant-toolbar">
             <mat-toolbar-row>
-                <span id = "toolbar-title">HOME</span>
+                <mat-icon style = "color: rgb(25, 25, 25)">home</mat-icon><span id = "toolbar-title">&emsp;HOME</span>
                 <span class = "spacer"></span>
                     <button mat-icon-button class = "toolbar-menu-button" [matMenuTriggerFor] = "applicantMenu" aria-label = "Applicant toolbar menu">
                         <mat-icon>menu</mat-icon>
                     </button>
                     <mat-menu #applicantMenu = "matMenu">
-                        <button mat-menu-item (click) = "this.navigateTo('')">
+                        <button mat-menu-item (click) = "this.navigateTo('tracking-log')">
                             <mat-icon>book</mat-icon>
                             <span>Tracking Log</span>
                         </button>

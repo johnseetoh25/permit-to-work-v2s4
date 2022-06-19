@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title: string = 'permit-to-work-v2s1';
+  imageSource: string = "assets/images/temasek_polytechnic_logo.png";
+  imageAlt: string = "Temasek Polytechnic";
 
   constructor(private router: Router) { }
 

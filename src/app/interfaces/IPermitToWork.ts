@@ -132,10 +132,7 @@ export interface IPermitToWork {
 					choice?: string, // 3 values: | YES | NO | N/A |
 					remarks?: string
 				}
-			},
-			checked?: boolean, // Ensure that info is verified & approved
-			safetyAssessorName?: string
-			timestamp?: string // AUTO
+			}
 		},
 		// SECTION III: To be completed by AUTHORISED MANAGER
 		sectionThree?: {
@@ -160,10 +157,7 @@ export interface IPermitToWork {
 					choice?: string, // 3 values: | YES | NO | N/A |
 					remarks?: string
 				}
-			},
-			checked?: boolean, // Ensure that info is verified & approved
-			authorisedManagerName?: string,
-			timestamp?: string // AUTO
+			}
 		}
 	},
 	confinedSpace?: {
@@ -219,10 +213,7 @@ export interface IPermitToWork {
 				flammableGasLevel?: number, // Less than 10% LEL
 				toxicGasLevel?: number, // ppm
 				fitForEntry?: boolean, // Satisfied by gasMonitoringRes
-			},
-			checked?: boolean, // Ensure that info is verified & approved
-			safetyAssessorName?: string,
-			timestamp?: string // AUTO
+			}
 		},
 		// SECTION III: To be completed by AUTHORISED MANAGER
 		sectionThree?: {
@@ -235,10 +226,7 @@ export interface IPermitToWork {
 				q03?: string,
 				// Q4: All reasonably practicable measures have been taken to ensure the safety and health of persons who will be entering or working in the confined space.
 				q04?: string
-			},
-			checked?: boolean, // Ensure that info is verified & approved
-			authorisedManagerName?: string,
-			timestamp?: string // AUTO
+			}
 		}
 	},
 	attendantDets?: [
@@ -285,10 +273,23 @@ export interface IPermitToWork {
 	dailyEndorsement?: { /* DailyEndorsement.ts */ },
 	// To be completed by SUPERVISOR
 	ptwStatus?: {
-		taskStatus?: string, // 5 states: | NOT STARTED | IN_PROGESS | COMPLETED | TERMINATED | EXPIRED |
+		permitStatus?: string, // 4 states: | YET IN EFFECT | VALID | TERMINATED | EXPIRED |
+		taskStatus?: string, // 3 states: | NOT STARTED | IN PROGESS | COMPLETED |
 		remarks?: string,
 		checked?: boolean, // Ensure that info is verified & approved
 		supervisorName?: string,
+		timestamp?: string // AUTO
+	},
+	// To be completed by SAFETY ASSESSOR
+	safetyAssessorEvaluation?: {
+		passed?: boolean, // Ensure that info is verified & approved
+		name?: string,
+		timestamp?: string // AUTO
+	},
+	// To be completed by AUTHORISED MANAGER
+	authorisedManagerApproval?: {
+		passed?: boolean, // Ensure that info is verified & approved
+		name?: string,
 		timestamp?: string // AUTO
 	},
 	checked?: boolean, // Ensure that info is verified & approved

@@ -30,7 +30,7 @@ export class TrackingLogComponent implements OnInit {
     'applicantName',
     'submissionTimestamp',
     'requestStatus',
-    'taskStatus',
+    'permitStatus',
     'action'
   ];
 
@@ -93,7 +93,7 @@ export class TrackingLogComponent implements OnInit {
           return this.compare(a.timestamp, b.timestamp, isAsc);
         case 'requestStatus':
           return this.compare(a.requestStatus, b.requestStatus, isAsc);
-        case 'taskStatus':
+        case 'permitStatus':
           return this.compare(a.ptwStatus?.taskStatus, b.ptwStatus?.taskStatus, isAsc);
         default:
           return 0;

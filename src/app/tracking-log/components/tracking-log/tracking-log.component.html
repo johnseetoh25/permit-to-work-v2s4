@@ -2,7 +2,7 @@
     <p>
         <mat-toolbar class = "applicant-toolbar">
             <mat-toolbar-row>
-                <span id = "toolbar-title">PTW TRACKING LOG</span>
+                <mat-icon style = "color: rgb(25, 25, 25)">book</mat-icon><span id = "toolbar-title">&emsp;PTW TRACKING LOG</span>
                 <span class = "spacer"></span>
                 <button mat-icon-button class = "toolbar-menu-button" [matMenuTriggerFor] = "applicantMenu" aria-label = "Applicant toolbar menu">
                     <mat-icon>menu</mat-icon>
@@ -45,7 +45,13 @@
 
         <ng-container matColumnDef = "permitType">
             <th mat-sort-header = "permitType" mat-header-cell *matHeaderCellDef>Permit Type</th>
-            <td mat-cell *matCellDef = "let colElems">{{ colElems.permitType }}</td>
+            <td mat-cell *matCellDef = "let colElems">
+                <mat-icon *ngIf = "colElems.permitType == 'Hot work (HW)'" style = "color: brown">whatshot</mat-icon>
+                <mat-icon *ngIf = "colElems.permitType == 'Cold work (CW)'" style = "color: darkslateblue">ac_unit</mat-icon>
+                <mat-icon *ngIf = "colElems.permitType == 'Electrical (E)'" style = "color: khaki">flash_on</mat-icon>
+                <mat-icon *ngIf = "colElems.permitType == 'Work at height (WAH)'" style = "color: darkslategrey">location_city</mat-icon>
+                <mat-icon *ngIf = "colElems.permitType == 'Confined space (CS)'" style = "color: forestgreen">zoom_out_map</mat-icon>&emsp;{{ colElems.permitType }}
+            </td>
         </ng-container>
     
         <ng-container matColumnDef = "startWorkingDateTime">
@@ -80,17 +86,16 @@
             </td>
         </ng-container>
 
-        <ng-container matColumnDef = "taskStatus">
-            <th mat-sort-header = "taskStatus" mat-header-cell *matHeaderCellDef>Task Status</th>
+        <ng-container matColumnDef = "permitStatus">
+            <th mat-sort-header = "permitStatus" mat-header-cell *matHeaderCellDef>Permit Status</th>
             <td mat-cell *matCellDef = "let colElems" 
                 [ngStyle] = "
-                    colElems.ptwStatus?.taskStatus == 'Not Started' ? { color: 'gray' } : 
-                    colElems.ptwStatus?.taskStatus == 'In Progress' ? { color: 'green' } : 
-                    colElems.ptwStatus?.taskStatus == 'Completed' ? { color: 'red' } : 
-                    colElems.ptwStatus?.taskStatus == 'Terminated' ? { color: 'gray' } : 
-                    colElems.ptwStatus?.taskStatus == 'Expired' ? { color: 'gray' } : 
+                    colElems.ptwStatus?.permitStatus == 'Invalid' ? { color: 'gray' } : 
+                    colElems.ptwStatus?.permitStatus == 'Valid' ? { color: 'green' } : 
+                    colElems.ptwStatus?.permitStatus == 'Terminated' ? { color: 'red' } : 
+                    colElems.ptwStatus?.permitStatus == 'Expired' ? { color: 'red' } :
                     { color: '' }">
-                <strong>{{ colElems.ptwStatus?.taskStatus }}</strong>
+                <strong>{{ colElems.ptwStatus?.permitStatus }}</strong>
             </td>
         </ng-container>
 

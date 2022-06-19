@@ -1,5 +1,5 @@
 export abstract class RequestStatus {
-    static readonly REQUEST_PENDING = "Pending";
-    static readonly REQUEST_APPROVED = "Approved";
-    static readonly REQUEST_REJECTED = "Rejected";
+    static readonly REQUEST_PENDING: string = "Pending";
+    static readonly REQUEST_APPROVED: string = "Approved";
+    static readonly REQUEST_REJECTED: string = "Rejected";
 }

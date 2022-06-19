@@ -85,10 +85,6 @@ export class SubmitDialogComponent implements OnInit {
           data?.workAtHeight?.sectionTwo?.multiLocOrExtentedDuration?.q02?.choice,
           data?.workAtHeight?.sectionTwo?.multiLocOrExtentedDuration?.q02?.remarks,
 
-          data?.workAtHeight?.sectionTwo?.checked,
-          data?.workAtHeight?.sectionTwo?.safetyAssessorName,
-          data?.workAtHeight?.sectionTwo?.timestamp,
-
           data?.workAtHeight?.sectionThree?.permitReview?.q01?.choice,
           data?.workAtHeight?.sectionThree?.permitReview?.q01?.remarks,
           data?.workAtHeight?.sectionThree?.permitReview?.q02?.choice,
@@ -97,10 +93,6 @@ export class SubmitDialogComponent implements OnInit {
           data?.workAtHeight?.sectionThree?.permitReview?.q03?.remarks,
           data?.workAtHeight?.sectionThree?.permitReview?.q04?.choice,
           data?.workAtHeight?.sectionThree?.permitReview?.q04?.remarks,
-
-          data?.workAtHeight?.sectionThree?.checked,
-          data?.workAtHeight?.sectionThree?.authorisedManagerName,
-          data?.workAtHeight?.sectionThree?.timestamp,
 
           data?.confinedSpace?.sectionOne?.potentialHazards?.atmo,
           data?.confinedSpace?.sectionOne?.potentialHazards?.nonAtmo,
@@ -127,18 +119,10 @@ export class SubmitDialogComponent implements OnInit {
           data?.confinedSpace?.sectionTwo?.gasMonitoringRes?.toxicGasLevel,
           data?.confinedSpace?.sectionTwo?.gasMonitoringRes?.fitForEntry,
 
-          data?.confinedSpace?.sectionTwo?.checked,
-          data?.confinedSpace?.sectionTwo?.safetyAssessorName,
-          data?.confinedSpace?.sectionTwo?.timestamp,
-
           data?.confinedSpace?.sectionThree?.permitReview?.q01,
           data?.confinedSpace?.sectionThree?.permitReview?.q02,
           data?.confinedSpace?.sectionThree?.permitReview?.q03,
           data?.confinedSpace?.sectionThree?.permitReview?.q04,
-
-          data?.confinedSpace?.sectionThree?.checked,
-          data?.confinedSpace?.sectionThree?.authorisedManagerName,
-          data?.confinedSpace?.sectionThree?.timestamp,
 
           data?.attendantDets?.[0].name,
           data?.attendantDets?.[0].nricOrFinNo,
@@ -168,11 +152,20 @@ export class SubmitDialogComponent implements OnInit {
           data?.applicantDets?.contactNo,
           data?.applicantDets?.email,
 
+          data?.ptwStatus?.permitStatus,
           data?.ptwStatus?.taskStatus,
           data?.ptwStatus?.remarks,
           data?.ptwStatus?.checked,
           data?.ptwStatus?.supervisorName,
           data?.ptwStatus?.timestamp,
+
+          data?.safetyAssessorEvaluation?.passed,
+          data?.safetyAssessorEvaluation?.name,
+          data?.safetyAssessorEvaluation?.timestamp,
+
+          data?.authorisedManagerApproval?.passed,
+          data?.authorisedManagerApproval?.name,
+          data?.authorisedManagerApproval?.timestamp,
 
           data?.checked,
           data?.requestStatus,
@@ -183,7 +176,7 @@ export class SubmitDialogComponent implements OnInit {
         this.dialogRefSelf.close();
         this.dialogRefSelf.afterClosed().subscribe(() => {
           this.navigateTo("");
-          this.openSnackBar("A new PTW request has been made!", "OK");
+          this.openSnackBar("A new PTW request has been made! An email statement will be sent to you shortly.", "OK");
         });
     });
   }

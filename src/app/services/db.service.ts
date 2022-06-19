@@ -77,10 +77,6 @@ export class DbService {
     wah_s2_mloed_q02_choice?: string,
     wah_s2_mloed_q02_remarks?: string,
 
-    wah_s2_checked?: boolean,
-    wah_s2_safetyAssessorName?: string,
-    wah_s2_timestamp?: string,
-
     wah_s3_pr_q01_choice?: string,
     wah_s3_pr_q01_remarks?: string,
     wah_s3_pr_q02_choice?: string,
@@ -89,10 +85,6 @@ export class DbService {
     wah_s3_pr_q03_remarks?: string,
     wah_s3_pr_q04_choice?: string,
     wah_s3_pr_q04_remarks?: string,
-
-    wah_s3_checked?: boolean,
-    wah_s3_authorisedManagerName?: string,
-    wah_s3_timestamp?: string,
 
     cs_s1_ph_atmo?: string,
     cs_s1_ph_nonAtmo?: string,
@@ -119,18 +111,10 @@ export class DbService {
     cs_s2_gmr_toxicGasLevel?: number,
     cs_s2_gmr_fitForEntry?: boolean,
 
-    cs_s2_checked?: boolean,
-    cs_s2_safetyAssessorName?: string,
-    cs_s2_timestamp?: string,
-
     cs_s3_pr_q01_choice?: string,
     cs_s3_pr_q02_choice?: string,
     cs_s3_pr_q03_choice?: string,
     cs_s3_pr_q04_choice?: string,
-
-    cs_s3_checked?: boolean,
-    cs_s3_authorisedManagerName?: string,
-    cs_s3_timestamp?: string,
 
     ad1_name?: string,
     ad1_nricOrFinNo?: string,
@@ -160,11 +144,20 @@ export class DbService {
     ad_contactNo?: string,
     ad_email?: string,
 
+    ptwStatus_permitStatus?: string,
     ptwStatus_taskStatus?: string,
     ptwStatus_remarks?: string,
     ptwStatus_checked?: boolean,
     ptwStatus_supervisorName?: string,
     ptwStatus_timestamp?: string,
+
+    saEval_passed?: boolean,
+    saEval_name?: string,
+    saEval_timestamp?: string,
+
+    amApproval_passed?: boolean,
+    amApproval_name?: string,
+    amApproval_timestamp?: string,
 
     checked?: boolean,
     reqStatus?: string,
@@ -266,10 +259,7 @@ export class DbService {
                 choice: wah_s2_mloed_q02_choice,
                 remarks: wah_s2_mloed_q02_remarks
               }
-            },
-            checked: wah_s2_checked,
-            safetyAssessorName: wah_s2_safetyAssessorName,
-            timestamp: wah_s2_timestamp
+            }
           },
           sectionThree: {
             permitReview: {
@@ -289,10 +279,7 @@ export class DbService {
                 choice: wah_s3_pr_q04_choice,
                 remarks: wah_s3_pr_q04_remarks
               }
-            },
-            checked: wah_s3_checked,
-            authorisedManagerName: wah_s3_authorisedManagerName,
-            timestamp: wah_s3_timestamp
+            }
           }
         },
         confinedSpace: {
@@ -327,14 +314,11 @@ export class DbService {
           },
           sectionTwo: {
             gasMonitoringRes: {
-              oxygenLevel: cs_s2_gmr_oxygenLevel, // 19.5% - 23.5%
-              flammableGasLevel: cs_s2_gmr_flammableGasLevel, // Less than 10% LEL
-              toxicGasLevel: cs_s2_gmr_toxicGasLevel, // ppm
-              fitForEntry: cs_s2_gmr_fitForEntry, // Satisfied by gasMonitoringRes
-            },
-            checked: cs_s2_checked, // Ensure that info is verified & approved
-            safetyAssessorName: cs_s2_safetyAssessorName,
-            timestamp: cs_s2_timestamp
+              oxygenLevel: cs_s2_gmr_oxygenLevel,
+              flammableGasLevel: cs_s2_gmr_flammableGasLevel,
+              toxicGasLevel: cs_s2_gmr_toxicGasLevel,
+              fitForEntry: cs_s2_gmr_fitForEntry,
+            }
           },
           sectionThree: {
             permitReview: {
@@ -342,10 +326,7 @@ export class DbService {
               q02: cs_s3_pr_q02_choice,
               q03: cs_s3_pr_q03_choice,
               q04: cs_s3_pr_q04_choice
-            },
-            checked: cs_s3_checked,
-            authorisedManagerName: cs_s3_authorisedManagerName,
-            timestamp: cs_s3_timestamp
+            }
           }
         },
         attendantDets: [
@@ -391,11 +372,22 @@ export class DbService {
         },
         dailyEndorsement: { },
         ptwStatus: {
+          permitStatus: ptwStatus_permitStatus,
           taskStatus: ptwStatus_taskStatus,
           remarks: ptwStatus_remarks,
           checked: ptwStatus_checked,
           supervisorName: ptwStatus_supervisorName,
           timestamp: ptwStatus_timestamp
+        },
+        safetyAssessorEvaluation: {
+          passed: saEval_passed,
+          name: saEval_name,
+          timestamp: saEval_timestamp
+        },
+        authorisedManagerApproval: {
+          passed: amApproval_passed,
+          name: amApproval_name,
+          timestamp: amApproval_timestamp
         },
         checked: checked,
         requestStatus: reqStatus,
