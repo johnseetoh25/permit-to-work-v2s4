@@ -1129,6 +1129,232 @@
       "statusRemarks": "None",
       "timestamp": "2022-06-19T05:26:43.755Z",
       "id": 5
+    },
+    {
+      "ptwId": "PTW-006",
+      "locationOfWork": {
+        "main": "Biodiesel production sector",
+        "sub": "Biodiesel production"
+      },
+      "permitType": "Work at height (WAH)",
+      "startWorkingDateTime": "2022-06-20T00:00:00.000Z",
+      "endWorkingDateTime": "2022-06-20T09:30:00.000Z",
+      "taskDescription": "abc",
+      "noOfWorkers": 4,
+      "noOfSupervisors": 2,
+      "workAtHeight": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "Yes",
+              "remarks": "abc"
+            },
+            "q02": {
+              "choice": "No",
+              "remarks": "abc"
+            },
+            "q03": {
+              "choice": "N/A",
+              "remarks": "abc"
+            },
+            "q04": {
+              "choice": "Yes",
+              "remarks": "abcabc"
+            },
+            "q05": {
+              "choice": "No",
+              "remarks": "abc"
+            },
+            "q06": {
+              "choice": "Yes",
+              "remarks": "abc"
+            },
+            "q07": {
+              "choice": "No",
+              "remarks": "abc"
+            },
+            "q08": {
+              "choice": "N/A",
+              "remarks": "abc"
+            },
+            "q09": {
+              "choice": "Yes",
+              "remarks": "abc"
+            },
+            "q10": {
+              "choice": "No",
+              "remarks": "abc"
+            },
+            "q11": {
+              "specify": "abc"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessmentOfControlMeasures": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "siteSurveyFromSupervisor": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "multiLocOrExtentedDuration": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "confinedSpace": {
+        "sectionOne": {
+          "potentialHazards": {
+            "atmo": "None",
+            "nonAtmo": "None"
+          },
+          "controlMeasuresImplemented": {
+            "preEntryReqs": {
+              "q01": "None",
+              "q02": "None",
+              "q03": "None",
+              "q04": "None",
+              "q05": "None",
+              "q06": "None",
+              "q07": "None",
+              "q08": "None"
+            },
+            "ppe": {
+              "q01": "None",
+              "q02": "None",
+              "q03": "None",
+              "q04": "None",
+              "q05": "None",
+              "q06": "None",
+              "q07": {
+                "specify": "None"
+              }
+            }
+          }
+        },
+        "sectionTwo": {
+          "gasMonitoringRes": {
+            "oxygenLevel": 0,
+            "flammableGasLevel": 0,
+            "toxicGasLevel": 0,
+            "fitForEntry": false
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": "None",
+            "q02": "None",
+            "q03": "None",
+            "q04": "None"
+          }
+        }
+      },
+      "attendantDets": [
+        {
+          "id": 1,
+          "name": "Person 1",
+          "nricOrFinNo": "D2131231R",
+          "contactNo": "+65 2131-2312"
+        },
+        {
+          "id": 2,
+          "name": "Person 2",
+          "nricOrFinNo": "E1241241Q",
+          "contactNo": "+65 1242-3235"
+        },
+        {
+          "id": 3,
+          "name": "Person 3",
+          "nricOrFinNo": "E1112211T",
+          "contactNo": "+65 1343-2453"
+        },
+        {
+          "id": 4,
+          "name": "Person 4",
+          "nricOrFinNo": "T1245323F",
+          "contactNo": "+65 3563-6252"
+        },
+        {
+          "id": 5,
+          "name": "Person 5",
+          "nricOrFinNo": "T4312253R",
+          "contactNo": "+65 3256-5435"
+        }
+      ],
+      "applicantDets": {
+        "name": "Rick Smith",
+        "nricOrFinNo": "R5312113E",
+        "orgType": "Internal",
+        "orgName": "None",
+        "depName": "abc",
+        "contactNo": "+65 2421-5134",
+        "email": "abc@abc.abcd"
+      },
+      "dailyEndorsement": {},
+      "ptwStatus": {
+        "permitStatus": "Invalid",
+        "taskStatus": "Not Started",
+        "remarks": "None",
+        "checked": false,
+        "supervisorName": "None",
+        "timestamp": "None"
+      },
+      "safetyAssessorEvaluation": {
+        "passed": false,
+        "name": "None",
+        "timestamp": "None"
+      },
+      "authorisedManagerApproval": {
+        "passed": false,
+        "name": "None",
+        "timestamp": "None"
+      },
+      "checked": true,
+      "requestStatus": "Pending",
+      "statusRemarks": "None",
+      "timestamp": "2022-06-20T00:52:15.176Z",
+      "id": 6
     }
   ]
 }

@@ -49,7 +49,7 @@ export class PtwRequestComponent implements OnInit {
     public endTimeInput: Date = new Date();
       public endDateTimeConcat: string = "";
 
-    public taskDescriptionInput?: string = "";
+    public taskDescriptionInput: string = "";
 
     public totalNoOfAttendants: number = 0;
       public noOfWorkersEventValue: number = 1;

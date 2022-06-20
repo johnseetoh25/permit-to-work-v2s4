@@ -11,11 +11,11 @@ import { MessageService } from 'src/app/services/message.service';
   styleUrls: ['./submit-dialog.component.scss']
 })
 export class SubmitDialogComponent implements OnInit {
-  private ptwReqToSubmit: IPermitToWork | undefined;
+  private ptwReqToSubmit: IPermitToWork = <IPermitToWork>{};
 
   constructor(
     private dialogRefSelf: MatDialogRef<SubmitDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public injectedPartiallyCompletedPTWForm: IPermitToWork | undefined,
+    @Inject(MAT_DIALOG_DATA) public injectedPartiallyCompletedPTWForm: IPermitToWork,
     private db: DbService,
     private msg: MessageService,
     private router: Router
@@ -31,9 +31,9 @@ export class SubmitDialogComponent implements OnInit {
     console.log(this.ptwReqToSubmit);
   }
 
-  public postPtwReq(toSubmit: IPermitToWork | undefined): void {
+  public postPtwReq(toSubmit: IPermitToWork): void {
     this.db.post(toSubmit)
-      .subscribe((data : IPermitToWork | undefined) => {
+      .subscribe((data : IPermitToWork) => {
 
         var generatedPtwId: string = "PTW-" + data?.id?.toString().padStart(3, "0");
         this.db.update(
