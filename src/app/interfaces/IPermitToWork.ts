@@ -229,6 +229,300 @@ export interface IPermitToWork {
 			}
 		}
 	},
+	hotWork: {
+		// SECTION I: To be completed by SUPERVISOR
+		sectionOne: {
+			controlMeasuresImplemented: {
+				// Q1: A risk assessment has been completed.
+				q01: {
+					choice: string,
+					remarks: string
+				},
+				// Q2: The worker(s) are trained and competent to conduct hot work.
+				q02: {
+					choice: string,
+					remarks: string
+				},
+				// Q3: Combustible materials have been removed from the area of hot work.
+				q03: {
+					choice: string,
+					remarks: string
+				},
+				// Q4: Fire resistance sheeting has been used to protect the area of hot work.
+				q04: {
+					choice: string,
+					remarks: string
+				},
+				// Q5: The potential of the presence of flammable vapor has been checked and LEL is < 3%.
+				q05: {
+					choice: string,
+					remarks: string
+				},
+				// Q6: Hot work equipment (e.g.: welding kit) has been inspected and is in a good condition.
+				q06: {
+					choice: string,
+					remarks: string
+				},
+				// Q7: A second man or fire watch is in place for the hot work.
+				q07: {
+					choice: string,
+					remarks: string
+				},
+				// Q8: Hot work workers are equipped with appropriate PPE (e.g.: welding mask, protective gloves etc.).
+				q08: {
+					choice: string,
+					remarks: string
+				},
+				// Q9: Ventilation to remove hazardous welding fumes is in place.
+				q09: {
+					choice: string,
+					remarks: string
+				},
+				// Q10: Fire extinguisher is in place near hot work.
+				q10: {
+					choice: string,
+					remarks: string
+				},
+				// Q11: First aid kit is in place near hot work in the event of burns.
+				q11: {
+					choice: string,
+					remarks: string
+				},
+				// Q12: Other precautions required to undertake the work safely (please specify, if any).
+				q12: {
+					specify: string
+				},
+				// Q13: Other safety equipment required to undertake the work safely (please specify, if any).
+				q13: {
+					specify: string
+				}
+			}
+		},
+		// SECTION II: To be completed by SAFETY ASSESSOR
+		sectionTwo: {
+			// Q1: All reasonably practicable measures have been taken.
+			assessment: {
+				q01: {
+					choice: string,
+					remarks: string
+				}
+			}
+		},
+		// SECTION III: To be completed by AUTHORISED MANAGER
+		sectionThree: {
+			permitReview: {
+				// Q1: Proper permit-to-work evaluation has been completed.
+				q01: {
+					choice: string,
+					remarks: string
+				},
+				// Q2: No incompatible works that may pose additional hazards.
+				q02: {
+					choice: string,
+					remarks: string
+				},
+				// Q3: Control measures have been implemented effectively.
+				q03: {
+					choice: string,
+					remarks: string
+				},
+				// Q4: Hot work risks have been effectively mitigated.
+				q04: {
+					choice: string,
+					remarks: string
+				}
+			}
+		}
+	},
+	coldWork: {
+		// SECTION I: To be completed by SUPERVISOR
+		sectionOne: {
+			controlMeasuresImplemented: {
+				// Q1: A risk assessment has been completed.
+				q01: {
+					choice: string,
+					remarks: string
+				},
+				// Q2: The worker(s) are trained and competent to conduct the intended cold work.
+				q02: {
+					choice: string,
+					remarks: string
+				},
+				// Q3: Work environment is checked (e.g.: good ventilation, adequate lighting, and dry floor etc.).
+				q03: {
+					choice: string,
+					remarks: string
+				},
+				// Q4: Work equipment (e.g.: hand tool, power tool etc) has been inspected and is in a good condition.
+				q04: {
+					choice: string,
+					remarks: string
+				},
+				// Q5: Electrical and / or mechanical isolation has been undertaken.
+				q05: {
+					choice: string,
+					remarks: string
+				},
+				// Q6: No exposure to moving/ rotating machinery during cold work.
+				q06: {
+					choice: string,
+					remarks: string
+				},
+				// Q7: A second man or standby is in place for the cold work.
+				q07: {
+					choice: string,
+					remarks: string
+				},
+				// Q8: Workers are equipped with appropriate PPE (e.g.: safety helmet, protective gloves etc.).
+				q08: {
+					choice: string,
+					remarks: string
+				},
+				// Q9: First aid kit is in place near working area.
+				q09: {
+					choice: string,
+					remarks: string
+				},
+				// Q10: Other precautions required to undertake the work safely (please specify, if any).
+				q10: {
+					specify: string
+				},
+				// Q11: Other safety equipment required to undertake the work safely (please specify, if any).
+				q11: {
+					specify: string
+				}
+			}
+		},
+		// SECTION II: To be completed by SAFETY ASSESSOR
+		sectionTwo: {
+			// Q1: All reasonably practicable measures have been taken.
+			assessment: {
+				q01: {
+					choice: string,
+					remarks: string
+				}
+			}
+		},
+		// SECTION III: To be completed by AUTHORISED MANAGER
+		sectionThree: {
+			permitReview: {
+				// Q1: Proper permit-to-work evaluation has been completed.
+				q01: {
+					choice: string,
+					remarks: string
+				},
+				// Q2: No incompatible works that may pose additional hazards.
+				q02: {
+					choice: string,
+					remarks: string
+				},
+				// Q3: Control measures have been implemented effectively.
+				q03: {
+					choice: string,
+					remarks: string
+				},
+				// Q4: Cold work risks have been effectively mitigated.
+				q04: {
+					choice: string,
+					remarks: string
+				}
+			}
+		}
+	},
+	electrical: {
+		// SECTION I: To be completed by SUPERVISOR
+		sectionOne: {
+			controlMeasuresImplemented: {
+				// Q1: A risk assessment has been completed.
+				q01: {
+					choice: string,
+					remarks: string
+				},
+				// Q2: The worker(s) are trained and competent to conduct electrical work.
+				q02: {
+					choice: string,
+					remarks: string
+				},
+				// Q3: Electrical supply is turned off.
+				q03: {
+					choice: string,
+					remarks: string
+				},
+				// Q4: "Test for Dead" on the isolated equipment has been conducted.
+				q04: {
+					choice: string,
+					remarks: string
+				},
+				// Q5: Flammable/ combustible substances are removed from the area.
+				q05: {
+					choice: string,
+					remarks: string
+				},
+				// Q6: Electrical work equipment (e.g.: multimeter) has been inspected and is in a good condition.
+				q06: {
+					choice: string,
+					remarks: string
+				},
+				// Q7: Electrical work workers are equipped with appropriate PPE (e.g.: insulating gloves, safety boots etc.).
+				q07: {
+					choice: string,
+					remarks: string
+				},
+				// Q8: A second man or standby person is in place during live electrical test work.
+				q08: {
+					choice: string,
+					remarks: string
+				},
+				// Q9: First aid kit is in place near electrical work in the event of electrical shock.
+				q09: {
+					choice: string,
+					remarks: string
+				},
+				// Q10: Other precautions required to undertake the work safely (please specify, if any).
+				q10: {
+					specify: string
+				},
+				// Q11: Other safety equipment required to undertake the work safely (please specify, if any).
+				q11: {
+					specify: string
+				}
+			}
+		},
+		// SECTION II: To be completed by SAFETY ASSESSOR
+		sectionTwo: {
+			assessment: {
+				q01: {
+					choice: string,
+					remarks: string
+				}
+			}
+		},
+		// SECTION III: To be completed by AUTHORISED MANAGER
+		sectionThree: {
+			permitReview: {
+				// Q1: Proper permit-to-work evaluation has been completed.
+				q01: {
+					choice: string,
+					remarks: string
+				},
+				// Q2: No incompatible works that may pose additional hazards.
+				q02: {
+					choice: string,
+					remarks: string
+				},
+				// Q3: Control measures have been implemented effectively.
+				q03: {
+					choice: string,
+					remarks: string
+				},
+				// Q4: Electrical risks have been effectively mitigated.
+				q04: {
+					choice: string,
+					remarks: string
+				}
+			}
+		}
+	},
 	attendantDets: [
 		{
 			id: number,

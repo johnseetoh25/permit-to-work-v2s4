@@ -108,7 +108,7 @@ mat-grid-list mat-grid-tile {
 
 .ep-info-container {
     background-color: dodgerblue;
-    color: beige
+    color: white;
 }
 
 .wahp-info-container {
@@ -166,7 +166,8 @@ mat-grid-list mat-grid-tile {
     margin-bottom: 8px;
 }
 
-.wah-s1-cmi-remarks-input {
+.wah-s1-cmi-remarks-input, .hw-s1-cmi-remarks-input, 
+.cw-s1-cmi-remarks-input, .e-s1-cmi-remarks-input {
     width: 85%;
 }
 

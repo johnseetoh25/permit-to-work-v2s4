@@ -1,7 +1,9 @@
 <div class = "dialog-box">
     <h2 mat-dialog-title>Confirm Submission</h2>
     <br>
-    <div mat-dialog-content>Are you sure? This action cannot be undone.</div>
+    <div mat-dialog-content>
+        <mat-label>Are you sure? This action cannot be undone.</mat-label>
+    </div>
     <br>
     <div mat-dialog-actions>
         <button mat-button (click) = "this.submitApplication()">Yes</button>

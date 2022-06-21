@@ -11,6 +11,7 @@ import { DefaultValues } from 'src/app/constants/DefaultValues';
 import { RequestStatus } from 'src/app/constants/RequestStatus';
 import { PermitStatus } from 'src/app/constants/PermitStatus';
 import { TaskStatus } from 'src/app/constants/TaskStatus';
+import { PermitTypes } from 'src/app/constants/PermitTypes';
 
 @Component({
   selector: 'app-ptw-request',
@@ -96,7 +97,7 @@ export class PtwRequestComponent implements OnInit {
     public wah_s1_cmi_q10_remarksInput: string = "";
 
     public wah_s1_cmi_q11_specifyInput: string = "";
-    // ===========================================================================
+    // ==============================================================================
 
     // ============================ Section I(B) for CS =============================
     public cs_s1_ph_atmoInput: string = "";
@@ -118,7 +119,112 @@ export class PtwRequestComponent implements OnInit {
     public cs_s1_cmi_ppe_q05_checkedInput: string = "";
     public cs_s1_cmi_ppe_q06_checkedInput: string = "";
     public cs_s1_cmi_ppe_q07_specifyInput: string = "";
-    // ===========================================================================
+    // ==============================================================================
+
+    // ============================ Section I(B) for HW =============================
+    public hw_s1_cmi_q01_choiceInput: string = "";
+    public hw_s1_cmi_q01_remarksInput: string = "";
+
+    public hw_s1_cmi_q02_choiceInput: string = "";
+    public hw_s1_cmi_q02_remarksInput: string = "";
+
+    public hw_s1_cmi_q03_choiceInput: string = "";
+    public hw_s1_cmi_q03_remarksInput: string = "";
+
+    public hw_s1_cmi_q04_choiceInput: string = "";
+    public hw_s1_cmi_q04_remarksInput: string = "";
+
+    public hw_s1_cmi_q05_choiceInput: string = "";
+    public hw_s1_cmi_q05_remarksInput: string = "";
+
+    public hw_s1_cmi_q06_choiceInput: string = "";
+    public hw_s1_cmi_q06_remarksInput: string = "";
+
+    public hw_s1_cmi_q07_choiceInput: string = "";
+    public hw_s1_cmi_q07_remarksInput: string = "";
+
+    public hw_s1_cmi_q08_choiceInput: string = "";
+    public hw_s1_cmi_q08_remarksInput: string = "";
+
+    public hw_s1_cmi_q09_choiceInput: string = "";
+    public hw_s1_cmi_q09_remarksInput: string = "";
+
+    public hw_s1_cmi_q10_choiceInput: string = "";
+    public hw_s1_cmi_q10_remarksInput: string = "";
+
+    public hw_s1_cmi_q11_choiceInput: string = "";
+    public hw_s1_cmi_q11_remarksInput: string = "";
+
+    public hw_s1_cmi_q12_specifyInput: string = "";
+
+    public hw_s1_cmi_q13_specifyInput: string = "";
+    // ==============================================================================
+
+    // ============================ Section I(B) for CW =============================
+    public cw_s1_cmi_q01_choiceInput: string = "";
+    public cw_s1_cmi_q01_remarksInput: string = "";
+
+    public cw_s1_cmi_q02_choiceInput: string = "";
+    public cw_s1_cmi_q02_remarksInput: string = "";
+
+    public cw_s1_cmi_q03_choiceInput: string = "";
+    public cw_s1_cmi_q03_remarksInput: string = "";
+
+    public cw_s1_cmi_q04_choiceInput: string = "";
+    public cw_s1_cmi_q04_remarksInput: string = "";
+
+    public cw_s1_cmi_q05_choiceInput: string = "";
+    public cw_s1_cmi_q05_remarksInput: string = "";
+
+    public cw_s1_cmi_q06_choiceInput: string = "";
+    public cw_s1_cmi_q06_remarksInput: string = "";
+
+    public cw_s1_cmi_q07_choiceInput: string = "";
+    public cw_s1_cmi_q07_remarksInput: string = "";
+
+    public cw_s1_cmi_q08_choiceInput: string = "";
+    public cw_s1_cmi_q08_remarksInput: string = "";
+
+    public cw_s1_cmi_q09_choiceInput: string = "";
+    public cw_s1_cmi_q09_remarksInput: string = "";
+
+    public cw_s1_cmi_q10_specifyInput: string = "";
+
+    public cw_s1_cmi_q11_specifyInput: string = "";
+    // ==============================================================================
+
+    // ============================ Section I(B) for E ==============================
+    public e_s1_cmi_q01_choiceInput: string = "";
+    public e_s1_cmi_q01_remarksInput: string = "";
+
+    public e_s1_cmi_q02_choiceInput: string = "";
+    public e_s1_cmi_q02_remarksInput: string = "";
+
+    public e_s1_cmi_q03_choiceInput: string = "";
+    public e_s1_cmi_q03_remarksInput: string = "";
+
+    public e_s1_cmi_q04_choiceInput: string = "";
+    public e_s1_cmi_q04_remarksInput: string = "";
+
+    public e_s1_cmi_q05_choiceInput: string = "";
+    public e_s1_cmi_q05_remarksInput: string = "";
+
+    public e_s1_cmi_q06_choiceInput: string = "";
+    public e_s1_cmi_q06_remarksInput: string = "";
+
+    public e_s1_cmi_q07_choiceInput: string = "";
+    public e_s1_cmi_q07_remarksInput: string = "";
+
+    public e_s1_cmi_q08_choiceInput: string = "";
+    public e_s1_cmi_q08_remarksInput: string = "";
+
+    public e_s1_cmi_q09_choiceInput: string = "";
+    public e_s1_cmi_q09_remarksInput: string = "";
+
+    public e_s1_cmi_q10_specifyInput: string = "";
+
+    public e_s1_cmi_q11_specifyInput: string = "";
+    // ==============================================================================
 
   public sectionOneCFormGroup!: FormGroup;
     public displayedHeaderColumns: string[] = [
@@ -221,59 +327,75 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup = this.formBuilder.group({
       // ============================ Section I(B) for WAH ============================
       wah_s1_cmi_q01_choice: ["", Validators.required],
-      wah_s1_cmi_q01_remarks: [],
-
       wah_s1_cmi_q02_choice: ["", Validators.required],
-      wah_s1_cmi_q02_remarks: [],
-
       wah_s1_cmi_q03_choice: ["", Validators.required],
-      wah_s1_cmi_q03_remarks: [],
-
       wah_s1_cmi_q04_choice: ["", Validators.required],
-      wah_s1_cmi_q04_remarks: [],
-
       wah_s1_cmi_q05_choice: ["", Validators.required],
-      wah_s1_cmi_q05_remarks: [],
-
       wah_s1_cmi_q06_choice: ["", Validators.required],
-      wah_s1_cmi_q06_remarks: [],
-
       wah_s1_cmi_q07_choice: ["", Validators.required],
-      wah_s1_cmi_q07_remarks: [],
-
       wah_s1_cmi_q08_choice: ["", Validators.required],
-      wah_s1_cmi_q08_remarks: [],
-
       wah_s1_cmi_q09_choice: ["", Validators.required],
-      wah_s1_cmi_q09_remarks: [],
-
       wah_s1_cmi_q10_choice: ["", Validators.required],
-      wah_s1_cmi_q10_remarks: [],
-
-      wah_s1_cmi_q11_specify: ["", Validators.required],
-      // ===========================================================================
+      // ==============================================================================
 
       // ============================ Section I(B) for CS =============================
       cs_s1_ph_atmo: ["", Validators.required],
       cs_s1_ph_nonAtmo: ["", Validators.required],
 
-      cs_s1_cmi_per_q01_checked: ["", Validators.requiredTrue],
-      cs_s1_cmi_per_q02_checked: ["", Validators.requiredTrue],
-      cs_s1_cmi_per_q03_checked: ["", Validators.requiredTrue],
-      cs_s1_cmi_per_q04_checked: ["", Validators.requiredTrue],
-      cs_s1_cmi_per_q05_checked: ["", Validators.requiredTrue],
-      cs_s1_cmi_per_q06_checked: ["", Validators.requiredTrue],
-      cs_s1_cmi_per_q07_checked: ["", Validators.requiredTrue],
-      cs_s1_cmi_per_q08_checked: ["", Validators.requiredTrue],
+      cs_s1_cmi_per_q01_checked: ["", Validators.required],
+      cs_s1_cmi_per_q02_checked: ["", Validators.required],
+      cs_s1_cmi_per_q03_checked: ["", Validators.required],
+      cs_s1_cmi_per_q04_checked: ["", Validators.required],
+      cs_s1_cmi_per_q05_checked: ["", Validators.required],
+      cs_s1_cmi_per_q06_checked: ["", Validators.required],
+      cs_s1_cmi_per_q07_checked: ["", Validators.required],
+      cs_s1_cmi_per_q08_checked: ["", Validators.required],
 
-      cs_s1_cmi_ppe_q01_checked: ["", Validators.requiredTrue],
-      cs_s1_cmi_ppe_q02_checked: ["", Validators.requiredTrue],
-      cs_s1_cmi_ppe_q03_checked: ["", Validators.requiredTrue],
-      cs_s1_cmi_ppe_q04_checked: ["", Validators.requiredTrue],
-      cs_s1_cmi_ppe_q05_checked: ["", Validators.requiredTrue],
-      cs_s1_cmi_ppe_q06_checked: ["", Validators.requiredTrue],
-      cs_s1_cmi_ppe_q07_specify: ["", Validators.required]
-      // ===========================================================================
+      cs_s1_cmi_ppe_q01_checked: ["", Validators.required],
+      cs_s1_cmi_ppe_q02_checked: ["", Validators.required],
+      cs_s1_cmi_ppe_q03_checked: ["", Validators.required],
+      cs_s1_cmi_ppe_q04_checked: ["", Validators.required],
+      cs_s1_cmi_ppe_q05_checked: ["", Validators.required],
+      cs_s1_cmi_ppe_q06_checked: ["", Validators.required],
+      // ==============================================================================
+
+      // ============================ Section I(B) for HW =============================
+      hw_s1_cmi_q01_choice: ["", Validators.required],
+      hw_s1_cmi_q02_choice: ["", Validators.required],
+      hw_s1_cmi_q03_choice: ["", Validators.required],
+      hw_s1_cmi_q04_choice: ["", Validators.required],
+      hw_s1_cmi_q05_choice: ["", Validators.required],
+      hw_s1_cmi_q06_choice: ["", Validators.required],
+      hw_s1_cmi_q07_choice: ["", Validators.required],
+      hw_s1_cmi_q08_choice: ["", Validators.required],
+      hw_s1_cmi_q09_choice: ["", Validators.required],
+      hw_s1_cmi_q10_choice: ["", Validators.required],
+      hw_s1_cmi_q11_choice: ["", Validators.required],
+      // ==============================================================================
+
+      // ============================ Section I(B) for CW =============================
+      cw_s1_cmi_q01_choice: ["", Validators.required],
+      cw_s1_cmi_q02_choice: ["", Validators.required],
+      cw_s1_cmi_q03_choice: ["", Validators.required],
+      cw_s1_cmi_q04_choice: ["", Validators.required],
+      cw_s1_cmi_q05_choice: ["", Validators.required],
+      cw_s1_cmi_q06_choice: ["", Validators.required],
+      cw_s1_cmi_q07_choice: ["", Validators.required],
+      cw_s1_cmi_q08_choice: ["", Validators.required],
+      cw_s1_cmi_q09_choice: ["", Validators.required],
+      // ==============================================================================
+
+      // ============================ Section I(B) for E ==============================
+      e_s1_cmi_q01_choice: ["", Validators.required],
+      e_s1_cmi_q02_choice: ["", Validators.required],
+      e_s1_cmi_q03_choice: ["", Validators.required],
+      e_s1_cmi_q04_choice: ["", Validators.required],
+      e_s1_cmi_q05_choice: ["", Validators.required],
+      e_s1_cmi_q06_choice: ["", Validators.required],
+      e_s1_cmi_q07_choice: ["", Validators.required],
+      e_s1_cmi_q08_choice: ["", Validators.required],
+      e_s1_cmi_q09_choice: ["", Validators.required]
+      // ==============================================================================
     });
 
     this.sectionOneCFormGroup = this.formBuilder.group({
@@ -327,61 +449,351 @@ export class PtwRequestComponent implements OnInit {
 
   public togglePTWFormValidators(value: string): void {
     switch (value) {
-      case 'Work at height':
+      case PermitTypes.WORK_AT_HEIGHT:
         this.setRequiredAllWahValidators();
         this.clearAllCsValidators();
+        this.clearAllHwValidators();
+        this.clearAllCwValidators();
+        this.clearAllElecValidators();
+
+        this.clearFieldsOf(value);
+        this.clearFieldsOf(PermitTypes.CONFINED_SPACE);
+        this.clearFieldsOf(PermitTypes.HOT_WORK);
+        this.clearFieldsOf(PermitTypes.COLD_WORK);
+        this.clearFieldsOf(PermitTypes.ELECTRICAL);
+
+        this.updateAllValidators();
 
         break;
-      case 'Confined space':
+      case PermitTypes.CONFINED_SPACE:
         this.setRequiredAllCsValidators();
         this.clearAllWahValidators();
+        this.clearAllHwValidators();
+        this.clearAllCwValidators();
+        this.clearAllElecValidators();
+
+        this.clearFieldsOf(value);
+        this.clearFieldsOf(PermitTypes.WORK_AT_HEIGHT);
+        this.clearFieldsOf(PermitTypes.HOT_WORK);
+        this.clearFieldsOf(PermitTypes.COLD_WORK);
+        this.clearFieldsOf(PermitTypes.ELECTRICAL);
+
+        this.updateAllValidators();
+
+        break;
+      case PermitTypes.HOT_WORK:
+        this.setRequiredAllHwValidators();
+        this.clearAllWahValidators();
+        this.clearAllCsValidators();
+        this.clearAllCwValidators();
+        this.clearAllElecValidators();
+
+        this.clearFieldsOf(value);
+        this.clearFieldsOf(PermitTypes.WORK_AT_HEIGHT);
+        this.clearFieldsOf(PermitTypes.CONFINED_SPACE);
+        this.clearFieldsOf(PermitTypes.COLD_WORK);
+        this.clearFieldsOf(PermitTypes.ELECTRICAL);
+
+        this.updateAllValidators();
+
+        break;
+      case PermitTypes.COLD_WORK:
+        this.setRequiredAllCwValidators();
+        this.clearAllWahValidators();
+        this.clearAllCsValidators();
+        this.clearAllHwValidators();
+        this.clearAllElecValidators();
+
+        this.clearFieldsOf(value);
+        this.clearFieldsOf(PermitTypes.WORK_AT_HEIGHT);
+        this.clearFieldsOf(PermitTypes.CONFINED_SPACE);
+        this.clearFieldsOf(PermitTypes.HOT_WORK);
+        this.clearFieldsOf(PermitTypes.ELECTRICAL);
+
+        this.updateAllValidators();
+
+        break;
+      case PermitTypes.ELECTRICAL:
+        this.setRequiredAllElecValidators();
+        this.clearAllWahValidators();
+        this.clearAllCsValidators();
+        this.clearAllHwValidators();
+        this.clearAllCwValidators();
+
+        this.clearFieldsOf(value);
+        this.clearFieldsOf(PermitTypes.WORK_AT_HEIGHT);
+        this.clearFieldsOf(PermitTypes.CONFINED_SPACE);
+        this.clearFieldsOf(PermitTypes.HOT_WORK);
+        this.clearFieldsOf(PermitTypes.COLD_WORK);
+
+        this.updateAllValidators();
 
         break;
       default:
         this.clearAllWahValidators();
         this.clearAllCsValidators();
+        this.clearAllHwValidators();
+        this.clearAllCwValidators();
+        this.clearAllElecValidators();
+
+        this.clearFieldsOf(PermitTypes.WORK_AT_HEIGHT);
+        this.clearFieldsOf(PermitTypes.CONFINED_SPACE);
+        this.clearFieldsOf(PermitTypes.HOT_WORK);
+        this.clearFieldsOf(PermitTypes.COLD_WORK);
+        this.clearFieldsOf(PermitTypes.ELECTRICAL);
+
+        this.updateAllValidators();
+
+        break;
     }
 
+    console.log(value, " has been chosen.");
+  }
+
+  private clearFieldsOf(value: string): void {
+    switch (value) {
+      case PermitTypes.WORK_AT_HEIGHT:
+        this.wah_s1_cmi_q01_choiceInput = "";
+        this.wah_s1_cmi_q01_remarksInput = "";
+        this.wah_s1_cmi_q02_choiceInput = "";
+        this.wah_s1_cmi_q02_remarksInput = "";
+        this.wah_s1_cmi_q03_choiceInput = "";
+        this.wah_s1_cmi_q03_remarksInput = "";
+        this.wah_s1_cmi_q04_choiceInput = "";
+        this.wah_s1_cmi_q04_remarksInput = "";
+        this.wah_s1_cmi_q05_choiceInput = "";
+        this.wah_s1_cmi_q05_remarksInput = "";
+        this.wah_s1_cmi_q06_choiceInput = "";
+        this.wah_s1_cmi_q06_remarksInput = "";
+        this.wah_s1_cmi_q07_choiceInput = "";
+        this.wah_s1_cmi_q07_remarksInput = "";
+        this.wah_s1_cmi_q08_choiceInput = "";
+        this.wah_s1_cmi_q08_remarksInput = "";
+        this.wah_s1_cmi_q09_choiceInput = "";
+        this.wah_s1_cmi_q09_remarksInput = "";
+        this.wah_s1_cmi_q10_choiceInput = "";
+        this.wah_s1_cmi_q10_remarksInput = "";
+        this.wah_s1_cmi_q11_specifyInput = "";
+
+        break;
+      case PermitTypes.CONFINED_SPACE:
+        this.cs_s1_ph_atmoInput = "";
+        this.cs_s1_ph_nonAtmoInput = "";
+        this.cs_s1_cmi_per_q01_checkedInput = "";
+        this.cs_s1_cmi_per_q02_checkedInput = "";
+        this.cs_s1_cmi_per_q03_checkedInput = "";
+        this.cs_s1_cmi_per_q04_checkedInput = "";
+        this.cs_s1_cmi_per_q05_checkedInput = "";
+        this.cs_s1_cmi_per_q06_checkedInput = "";
+        this.cs_s1_cmi_per_q07_checkedInput = "";
+        this.cs_s1_cmi_per_q08_checkedInput = "";
+        this.cs_s1_cmi_ppe_q01_checkedInput = "";
+        this.cs_s1_cmi_ppe_q02_checkedInput = "";
+        this.cs_s1_cmi_ppe_q03_checkedInput = "";
+        this.cs_s1_cmi_ppe_q04_checkedInput = "";
+        this.cs_s1_cmi_ppe_q05_checkedInput = "";
+        this.cs_s1_cmi_ppe_q06_checkedInput = "";
+        this.cs_s1_cmi_ppe_q07_specifyInput = "";
+
+        break;
+      case PermitTypes.HOT_WORK:
+        this.hw_s1_cmi_q01_choiceInput= "";
+        this.hw_s1_cmi_q01_remarksInput = "";
+        this.hw_s1_cmi_q02_choiceInput = "";
+        this.hw_s1_cmi_q02_remarksInput = "";
+        this.hw_s1_cmi_q03_choiceInput = "";
+        this.hw_s1_cmi_q03_remarksInput = "";
+        this.hw_s1_cmi_q04_choiceInput = "";
+        this.hw_s1_cmi_q04_remarksInput = "";
+        this.hw_s1_cmi_q05_choiceInput = "";
+        this.hw_s1_cmi_q05_remarksInput = "";
+        this.hw_s1_cmi_q06_choiceInput = "";
+        this.hw_s1_cmi_q06_remarksInput = "";
+        this.hw_s1_cmi_q07_choiceInput = "";
+        this.hw_s1_cmi_q07_remarksInput = "";
+        this.hw_s1_cmi_q08_choiceInput = "";
+        this.hw_s1_cmi_q08_remarksInput = "";
+        this.hw_s1_cmi_q09_choiceInput = "";
+        this.hw_s1_cmi_q09_remarksInput = "";
+        this.hw_s1_cmi_q10_choiceInput = "";
+        this.hw_s1_cmi_q10_remarksInput = "";
+        this.hw_s1_cmi_q11_choiceInput = "";
+        this.hw_s1_cmi_q11_remarksInput = "";
+        this.hw_s1_cmi_q12_specifyInput = "";
+        this.hw_s1_cmi_q13_specifyInput = "";
+
+        break;
+      case PermitTypes.COLD_WORK:
+        this.cw_s1_cmi_q01_choiceInput = "";
+        this.cw_s1_cmi_q01_remarksInput = "";
+        this.cw_s1_cmi_q02_choiceInput = "";
+        this.cw_s1_cmi_q02_remarksInput = "";
+        this.cw_s1_cmi_q03_choiceInput = "";
+        this.cw_s1_cmi_q03_remarksInput = "";
+        this.cw_s1_cmi_q04_choiceInput = "";
+        this.cw_s1_cmi_q04_remarksInput = "";
+        this.cw_s1_cmi_q05_choiceInput = "";
+        this.cw_s1_cmi_q05_remarksInput = "";
+        this.cw_s1_cmi_q06_choiceInput = "";
+        this.cw_s1_cmi_q06_remarksInput = "";
+        this.cw_s1_cmi_q07_choiceInput = "";
+        this.cw_s1_cmi_q07_remarksInput = "";
+        this.cw_s1_cmi_q08_choiceInput = "";
+        this.cw_s1_cmi_q08_remarksInput = "";
+        this.cw_s1_cmi_q09_choiceInput = "";
+        this.cw_s1_cmi_q09_remarksInput = "";
+        this.cw_s1_cmi_q10_specifyInput = "";
+        this.cw_s1_cmi_q11_specifyInput = "";
+
+        break;
+      case PermitTypes.ELECTRICAL:
+        this.e_s1_cmi_q01_choiceInput = "";
+        this.e_s1_cmi_q01_remarksInput = "";
+        this.e_s1_cmi_q02_choiceInput = "";
+        this.e_s1_cmi_q02_remarksInput = "";
+        this.e_s1_cmi_q03_choiceInput = "";
+        this.e_s1_cmi_q03_remarksInput = "";
+        this.e_s1_cmi_q04_choiceInput = "";
+        this.e_s1_cmi_q04_remarksInput = "";
+        this.e_s1_cmi_q05_choiceInput = "";
+        this.e_s1_cmi_q05_remarksInput = "";
+        this.e_s1_cmi_q06_choiceInput = "";
+        this.e_s1_cmi_q06_remarksInput = "";
+        this.e_s1_cmi_q07_choiceInput = "";
+        this.e_s1_cmi_q07_remarksInput = "";
+        this.e_s1_cmi_q08_choiceInput = "";
+        this.e_s1_cmi_q08_remarksInput = "";
+        this.e_s1_cmi_q09_choiceInput = "";
+        this.e_s1_cmi_q09_remarksInput = "";
+        this.e_s1_cmi_q10_specifyInput = "";
+        this.e_s1_cmi_q11_specifyInput = "";
+
+        break;
+      default:
+        this.wah_s1_cmi_q01_choiceInput = "";
+        this.wah_s1_cmi_q01_remarksInput = "";
+        this.wah_s1_cmi_q02_choiceInput = "";
+        this.wah_s1_cmi_q02_remarksInput = "";
+        this.wah_s1_cmi_q03_choiceInput = "";
+        this.wah_s1_cmi_q03_remarksInput = "";
+        this.wah_s1_cmi_q04_choiceInput = "";
+        this.wah_s1_cmi_q04_remarksInput = "";
+        this.wah_s1_cmi_q05_choiceInput = "";
+        this.wah_s1_cmi_q05_remarksInput = "";
+        this.wah_s1_cmi_q06_choiceInput = "";
+        this.wah_s1_cmi_q06_remarksInput = "";
+        this.wah_s1_cmi_q07_choiceInput = "";
+        this.wah_s1_cmi_q07_remarksInput = "";
+        this.wah_s1_cmi_q08_choiceInput = "";
+        this.wah_s1_cmi_q08_remarksInput = "";
+        this.wah_s1_cmi_q09_choiceInput = "";
+        this.wah_s1_cmi_q09_remarksInput = "";
+        this.wah_s1_cmi_q10_choiceInput = "";
+        this.wah_s1_cmi_q10_remarksInput = "";
+        this.wah_s1_cmi_q11_specifyInput = "";
+        this.cs_s1_ph_atmoInput = "";
+        this.cs_s1_ph_nonAtmoInput = "";
+        this.cs_s1_cmi_per_q01_checkedInput = "";
+        this.cs_s1_cmi_per_q02_checkedInput = "";
+        this.cs_s1_cmi_per_q03_checkedInput = "";
+        this.cs_s1_cmi_per_q04_checkedInput = "";
+        this.cs_s1_cmi_per_q05_checkedInput = "";
+        this.cs_s1_cmi_per_q06_checkedInput = "";
+        this.cs_s1_cmi_per_q07_checkedInput = "";
+        this.cs_s1_cmi_per_q08_checkedInput = "";
+        this.cs_s1_cmi_ppe_q01_checkedInput = "";
+        this.cs_s1_cmi_ppe_q02_checkedInput = "";
+        this.cs_s1_cmi_ppe_q03_checkedInput = "";
+        this.cs_s1_cmi_ppe_q04_checkedInput = "";
+        this.cs_s1_cmi_ppe_q05_checkedInput = "";
+        this.cs_s1_cmi_ppe_q06_checkedInput = "";
+        this.cs_s1_cmi_ppe_q07_specifyInput = "";
+        this.hw_s1_cmi_q01_choiceInput= "";
+        this.hw_s1_cmi_q01_remarksInput = "";
+        this.hw_s1_cmi_q02_choiceInput = "";
+        this.hw_s1_cmi_q02_remarksInput = "";
+        this.hw_s1_cmi_q03_choiceInput = "";
+        this.hw_s1_cmi_q03_remarksInput = "";
+        this.hw_s1_cmi_q04_choiceInput = "";
+        this.hw_s1_cmi_q04_remarksInput = "";
+        this.hw_s1_cmi_q05_choiceInput = "";
+        this.hw_s1_cmi_q05_remarksInput = "";
+        this.hw_s1_cmi_q06_choiceInput = "";
+        this.hw_s1_cmi_q06_remarksInput = "";
+        this.hw_s1_cmi_q07_choiceInput = "";
+        this.hw_s1_cmi_q07_remarksInput = "";
+        this.hw_s1_cmi_q08_choiceInput = "";
+        this.hw_s1_cmi_q08_remarksInput = "";
+        this.hw_s1_cmi_q09_choiceInput = "";
+        this.hw_s1_cmi_q09_remarksInput = "";
+        this.hw_s1_cmi_q10_choiceInput = "";
+        this.hw_s1_cmi_q10_remarksInput = "";
+        this.hw_s1_cmi_q11_choiceInput = "";
+        this.hw_s1_cmi_q11_remarksInput = "";
+        this.hw_s1_cmi_q12_specifyInput = "";
+        this.hw_s1_cmi_q13_specifyInput = "";
+        this.cw_s1_cmi_q01_choiceInput = "";
+        this.cw_s1_cmi_q01_remarksInput = "";
+        this.cw_s1_cmi_q02_choiceInput = "";
+        this.cw_s1_cmi_q02_remarksInput = "";
+        this.cw_s1_cmi_q03_choiceInput = "";
+        this.cw_s1_cmi_q03_remarksInput = "";
+        this.cw_s1_cmi_q04_choiceInput = "";
+        this.cw_s1_cmi_q04_remarksInput = "";
+        this.cw_s1_cmi_q05_choiceInput = "";
+        this.cw_s1_cmi_q05_remarksInput = "";
+        this.cw_s1_cmi_q06_choiceInput = "";
+        this.cw_s1_cmi_q06_remarksInput = "";
+        this.cw_s1_cmi_q07_choiceInput = "";
+        this.cw_s1_cmi_q07_remarksInput = "";
+        this.cw_s1_cmi_q08_choiceInput = "";
+        this.cw_s1_cmi_q08_remarksInput = "";
+        this.cw_s1_cmi_q09_choiceInput = "";
+        this.cw_s1_cmi_q09_remarksInput = "";
+        this.cw_s1_cmi_q10_specifyInput = "";
+        this.cw_s1_cmi_q11_specifyInput = "";
+        this.e_s1_cmi_q01_choiceInput = "";
+        this.e_s1_cmi_q01_remarksInput = "";
+        this.e_s1_cmi_q02_choiceInput = "";
+        this.e_s1_cmi_q02_remarksInput = "";
+        this.e_s1_cmi_q03_choiceInput = "";
+        this.e_s1_cmi_q03_remarksInput = "";
+        this.e_s1_cmi_q04_choiceInput = "";
+        this.e_s1_cmi_q04_remarksInput = "";
+        this.e_s1_cmi_q05_choiceInput = "";
+        this.e_s1_cmi_q05_remarksInput = "";
+        this.e_s1_cmi_q06_choiceInput = "";
+        this.e_s1_cmi_q06_remarksInput = "";
+        this.e_s1_cmi_q07_choiceInput = "";
+        this.e_s1_cmi_q07_remarksInput = "";
+        this.e_s1_cmi_q08_choiceInput = "";
+        this.e_s1_cmi_q08_remarksInput = "";
+        this.e_s1_cmi_q09_choiceInput = "";
+        this.e_s1_cmi_q09_remarksInput = "";
+        this.e_s1_cmi_q10_specifyInput = "";
+        this.e_s1_cmi_q11_specifyInput = "";
+
+        break;
+    }
+    
+    console.log(value, " fields have been cleared.");
+  }
+
+  private updateAllValidators(): void {
+    // ==============================================================================
     this.sectionOneBFormGroup.get('wah_s1_cmi_q01_choice')?.updateValueAndValidity();
-    this.sectionOneBFormGroup.get('wah_s1_cmi_q01_remarks')?.updateValueAndValidity();
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q02_choice')?.updateValueAndValidity();
-    this.sectionOneBFormGroup.get('wah_s1_cmi_q02_remarks')?.updateValueAndValidity();
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q03_choice')?.updateValueAndValidity();
-    this.sectionOneBFormGroup.get('wah_s1_cmi_q03_remarks')?.updateValueAndValidity();
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q04_choice')?.updateValueAndValidity();
-    this.sectionOneBFormGroup.get('wah_s1_cmi_q04_remarks')?.updateValueAndValidity();
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q05_choice')?.updateValueAndValidity();
-    this.sectionOneBFormGroup.get('wah_s1_cmi_q05_remarks')?.updateValueAndValidity();
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q06_choice')?.updateValueAndValidity();
-    this.sectionOneBFormGroup.get('wah_s1_cmi_q06_remarks')?.updateValueAndValidity();
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q07_choice')?.updateValueAndValidity();
-    this.sectionOneBFormGroup.get('wah_s1_cmi_q07_remarks')?.updateValueAndValidity();
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q08_choice')?.updateValueAndValidity();
-    this.sectionOneBFormGroup.get('wah_s1_cmi_q08_remarks')?.updateValueAndValidity();
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q09_choice')?.updateValueAndValidity();
-    this.sectionOneBFormGroup.get('wah_s1_cmi_q09_remarks')?.updateValueAndValidity();
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q10_choice')?.updateValueAndValidity();
-    this.sectionOneBFormGroup.get('wah_s1_cmi_q10_remarks')?.updateValueAndValidity();
+    // ==============================================================================
 
-    this.sectionOneBFormGroup.get('wah_s1_cmi_q11_specify')?.updateValueAndValidity();
-
-    this.sectionOneBFormGroup.get('wah_s1_ard_name')?.updateValueAndValidity();
-    this.sectionOneBFormGroup.get('wah_s1_ard_nricOrFinNo')?.updateValueAndValidity();
-    this.sectionOneBFormGroup.get('wah_s1_ard_orgType')?.updateValueAndValidity();
-    this.sectionOneBFormGroup.get('wah_s1_ard_orgName')?.updateValueAndValidity();
-    this.sectionOneBFormGroup.get('wah_s1_ard_depName')?.updateValueAndValidity();
-    this.sectionOneBFormGroup.get('wah_s1_ard_contactNo')?.updateValueAndValidity();
-
-
+    // ==============================================================================
     this.sectionOneBFormGroup.get('cs_s1_ph_atmo')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('cs_s1_ph_nonAtmo')?.updateValueAndValidity();
 
@@ -393,132 +805,99 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('cs_s1_cmi_per_q06_checked')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('cs_s1_cmi_per_q07_checked')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('cs_s1_cmi_per_q08_checked')?.updateValueAndValidity();
-
     this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q01_checked')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q02_checked')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q03_checked')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q04_checked')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q05_checked')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q06_checked')?.updateValueAndValidity();
-    this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q07_specify')?.updateValueAndValidity();
+    // ==============================================================================
 
-    this.sectionOneBFormGroup.get('cs_s1_ard_name')?.updateValueAndValidity();
-    this.sectionOneBFormGroup.get('cs_s1_ard_nricOrFinNo')?.updateValueAndValidity();
-    this.sectionOneBFormGroup.get('cs_s1_ard_orgType')?.updateValueAndValidity();
-    this.sectionOneBFormGroup.get('cs_s1_ard_orgName')?.updateValueAndValidity();
-    this.sectionOneBFormGroup.get('cs_s1_ard_depName')?.updateValueAndValidity();
-    this.sectionOneBFormGroup.get('cs_s1_ard_contactNo')?.updateValueAndValidity();
+    // ==============================================================================
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q01_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q02_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q03_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q04_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q05_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q06_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q07_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q08_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q09_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q10_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q11_choice')?.updateValueAndValidity();
+    // ==============================================================================
+
+    // ==============================================================================
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q01_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q02_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q03_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q04_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q05_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q06_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q07_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q08_choice')?.updateValueAndValidity();
+  
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q09_choice')?.updateValueAndValidity();
+    // ==============================================================================
+
+    // ==============================================================================
+    this.sectionOneBFormGroup.get('e_s1_cmi_q01_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('e_s1_cmi_q02_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('e_s1_cmi_q03_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('e_s1_cmi_q04_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('e_s1_cmi_q05_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('e_s1_cmi_q06_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('e_s1_cmi_q07_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('e_s1_cmi_q08_choice')?.updateValueAndValidity();
+    this.sectionOneBFormGroup.get('e_s1_cmi_q09_choice')?.updateValueAndValidity();
+    // ==============================================================================
   }
 
   private setRequiredAllWahValidators(): void {
     this.sectionOneBFormGroup.get('wah_s1_cmi_q01_choice')?.setValidators(Validators.required);
-    //this.sectionOneBFormGroup.get('wah_s1_cmi_q01_remarks')?.setValidators(Validators.required);
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q02_choice')?.setValidators(Validators.required);
-    //this.sectionOneBFormGroup.get('wah_s1_cmi_q02_remarks')?.setValidators(Validators.required);
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q03_choice')?.setValidators(Validators.required);
-    //this.sectionOneBFormGroup.get('wah_s1_cmi_q03_remarks')?.setValidators(Validators.required);
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q04_choice')?.setValidators(Validators.required);
-    //this.sectionOneBFormGroup.get('wah_s1_cmi_q04_remarks')?.setValidators(Validators.required);
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q05_choice')?.setValidators(Validators.required);
-    //this.sectionOneBFormGroup.get('wah_s1_cmi_q05_remarks')?.setValidators(Validators.required);
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q06_choice')?.setValidators(Validators.required);
-    //this.sectionOneBFormGroup.get('wah_s1_cmi_q06_remarks')?.setValidators(Validators.required);
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q07_choice')?.setValidators(Validators.required);
-    //this.sectionOneBFormGroup.get('wah_s1_cmi_q07_remarks')?.setValidators(Validators.required);
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q08_choice')?.setValidators(Validators.required);
-    //this.sectionOneBFormGroup.get('wah_s1_cmi_q08_remarks')?.setValidators(Validators.required);
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q09_choice')?.setValidators(Validators.required);
-    //this.sectionOneBFormGroup.get('wah_s1_cmi_q09_remarks')?.setValidators(Validators.required);
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q10_choice')?.setValidators(Validators.required);
-    //this.sectionOneBFormGroup.get('wah_s1_cmi_q10_remarks')?.setValidators(Validators.required);
-
-    this.sectionOneBFormGroup.get('wah_s1_cmi_q11_specify')?.setValidators(Validators.required);
-
-    this.sectionOneBFormGroup.get('wah_s1_ard_name')?.setValidators(Validators.required);
-    this.sectionOneBFormGroup.get('wah_s1_ard_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
-    this.sectionOneBFormGroup.get('wah_s1_ard_orgType')?.setValidators(Validators.required);
-    this.sectionOneBFormGroup.get('wah_s1_ard_orgName')?.setValidators(Validators.required);
-    this.sectionOneBFormGroup.get('wah_s1_ard_depName')?.setValidators(Validators.required);
-    this.sectionOneBFormGroup.get('wah_s1_ard_contactNo')?.setValidators([ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]);
   }
 
   private clearAllWahValidators(): void {
     this.sectionOneBFormGroup.get('wah_s1_cmi_q01_choice')?.clearValidators();
-    //this.sectionOneBFormGroup.get('wah_s1_cmi_q01_remarks')?.clearValidators();
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q02_choice')?.clearValidators();
-    //this.sectionOneBFormGroup.get('wah_s1_cmi_q02_remarks')?.clearValidators();
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q03_choice')?.clearValidators();
-    //this.sectionOneBFormGroup.get('wah_s1_cmi_q03_remarks')?.clearValidators();
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q04_choice')?.clearValidators();
-    //this.sectionOneBFormGroup.get('wah_s1_cmi_q04_remarks')?.clearValidators();
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q05_choice')?.clearValidators();
-    //this.sectionOneBFormGroup.get('wah_s1_cmi_q05_remarks')?.clearValidators();
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q06_choice')?.clearValidators();
-    //this.sectionOneBFormGroup.get('wah_s1_cmi_q06_remarks')?.clearValidators();
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q07_choice')?.clearValidators();
-    //this.sectionOneBFormGroup.get('wah_s1_cmi_q07_remarks')?.clearValidators();
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q08_choice')?.clearValidators();
-    //this.sectionOneBFormGroup.get('wah_s1_cmi_q08_remarks')?.clearValidators();
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q09_choice')?.clearValidators();
-    //this.sectionOneBFormGroup.get('wah_s1_cmi_q09_remarks')?.clearValidators();
-
     this.sectionOneBFormGroup.get('wah_s1_cmi_q10_choice')?.clearValidators();
-    //this.sectionOneBFormGroup.get('wah_s1_cmi_q10_remarks')?.clearValidators();
-
-    this.sectionOneBFormGroup.get('wah_s1_cmi_q11_specify')?.clearValidators();
-
-    this.sectionOneBFormGroup.get('wah_s1_ard_name')?.clearValidators();
-    this.sectionOneBFormGroup.get('wah_s1_ard_nricOrFinNo')?.clearValidators();
-    this.sectionOneBFormGroup.get('wah_s1_ard_orgType')?.clearValidators();
-    this.sectionOneBFormGroup.get('wah_s1_ard_orgName')?.clearValidators();
-    this.sectionOneBFormGroup.get('wah_s1_ard_depName')?.clearValidators();
-    this.sectionOneBFormGroup.get('wah_s1_ard_contactNo')?.clearValidators();
   }
 
   private setRequiredAllCsValidators(): void {
     this.sectionOneBFormGroup.get('cs_s1_ph_atmo')?.setValidators(Validators.required);
     this.sectionOneBFormGroup.get('cs_s1_ph_nonAtmo')?.setValidators(Validators.required);
 
-    this.sectionOneBFormGroup.get('cs_s1_cmi_per_q01_checked')?.setValidators(Validators.requiredTrue);
-    this.sectionOneBFormGroup.get('cs_s1_cmi_per_q02_checked')?.setValidators(Validators.requiredTrue);
-    this.sectionOneBFormGroup.get('cs_s1_cmi_per_q03_checked')?.setValidators(Validators.requiredTrue);
-    this.sectionOneBFormGroup.get('cs_s1_cmi_per_q04_checked')?.setValidators(Validators.requiredTrue);
-    this.sectionOneBFormGroup.get('cs_s1_cmi_per_q05_checked')?.setValidators(Validators.requiredTrue);
-    this.sectionOneBFormGroup.get('cs_s1_cmi_per_q06_checked')?.setValidators(Validators.requiredTrue);
-    this.sectionOneBFormGroup.get('cs_s1_cmi_per_q07_checked')?.setValidators(Validators.requiredTrue);
-    this.sectionOneBFormGroup.get('cs_s1_cmi_per_q08_checked')?.setValidators(Validators.requiredTrue);
+    this.sectionOneBFormGroup.get('cs_s1_cmi_per_q01_checked')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('cs_s1_cmi_per_q02_checked')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('cs_s1_cmi_per_q03_checked')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('cs_s1_cmi_per_q04_checked')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('cs_s1_cmi_per_q05_checked')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('cs_s1_cmi_per_q06_checked')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('cs_s1_cmi_per_q07_checked')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('cs_s1_cmi_per_q08_checked')?.setValidators(Validators.required);
 
-    this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q01_checked')?.setValidators(Validators.requiredTrue);
-    this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q02_checked')?.setValidators(Validators.requiredTrue);
-    this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q03_checked')?.setValidators(Validators.requiredTrue);
-    this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q04_checked')?.setValidators(Validators.requiredTrue);
-    this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q05_checked')?.setValidators(Validators.requiredTrue);
-    this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q06_checked')?.setValidators(Validators.requiredTrue);
-    this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q07_specify')?.setValidators(Validators.required);
-
-    this.sectionOneBFormGroup.get('cs_s1_ard_name')?.setValidators(Validators.required);
-    this.sectionOneBFormGroup.get('cs_s1_ard_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
-    this.sectionOneBFormGroup.get('cs_s1_ard_orgType')?.setValidators(Validators.required);
-    this.sectionOneBFormGroup.get('cs_s1_ard_orgName')?.setValidators(Validators.required);
-    this.sectionOneBFormGroup.get('cs_s1_ard_depName')?.setValidators(Validators.required);
-    this.sectionOneBFormGroup.get('cs_s1_ard_contactNo')?.setValidators([ Validators.pattern(/^\+65 [0-9]{0,4}-[0-9]{0,4}$/), Validators.required ]);
+    this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q01_checked')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q02_checked')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q03_checked')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q04_checked')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q05_checked')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q06_checked')?.setValidators(Validators.required);
   }
 
   private clearAllCsValidators(): void {
@@ -540,14 +919,82 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q04_checked')?.clearValidators();
     this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q05_checked')?.clearValidators();
     this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q06_checked')?.clearValidators();
-    this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q07_specify')?.clearValidators();
+  }
 
-    this.sectionOneBFormGroup.get('cs_s1_ard_name')?.clearValidators();
-    this.sectionOneBFormGroup.get('cs_s1_ard_nricOrFinNo')?.clearValidators();
-    this.sectionOneBFormGroup.get('cs_s1_ard_orgType')?.clearValidators();
-    this.sectionOneBFormGroup.get('cs_s1_ard_orgName')?.clearValidators();
-    this.sectionOneBFormGroup.get('cs_s1_ard_depName')?.clearValidators();
-    this.sectionOneBFormGroup.get('cs_s1_ard_contactNo')?.clearValidators();
+  private setRequiredAllHwValidators(): void {
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q01_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q02_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q03_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q04_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q05_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q06_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q07_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q08_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q09_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q10_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q11_choice')?.setValidators(Validators.required);
+  }
+
+  private clearAllHwValidators(): void {
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q01_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q02_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q03_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q04_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q05_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q06_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q07_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q08_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q09_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q10_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('hw_s1_cmi_q11_choice')?.clearValidators();
+  }
+
+  private setRequiredAllCwValidators(): void {
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q01_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q02_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q03_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q04_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q05_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q06_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q07_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q08_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q09_choice')?.setValidators(Validators.required);
+  }
+
+  private clearAllCwValidators(): void {
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q01_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q02_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q03_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q04_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q05_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q06_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q07_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q08_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('cw_s1_cmi_q09_choice')?.clearValidators();
+  }
+
+  private setRequiredAllElecValidators(): void {
+    this.sectionOneBFormGroup.get('e_s1_cmi_q01_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('e_s1_cmi_q02_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('e_s1_cmi_q03_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('e_s1_cmi_q04_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('e_s1_cmi_q05_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('e_s1_cmi_q06_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('e_s1_cmi_q07_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('e_s1_cmi_q08_choice')?.setValidators(Validators.required);
+    this.sectionOneBFormGroup.get('e_s1_cmi_q09_choice')?.setValidators(Validators.required);
+  }
+
+  private clearAllElecValidators(): void {
+    this.sectionOneBFormGroup.get('e_s1_cmi_q01_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('e_s1_cmi_q02_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('e_s1_cmi_q03_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('e_s1_cmi_q04_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('e_s1_cmi_q05_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('e_s1_cmi_q06_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('e_s1_cmi_q07_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('e_s1_cmi_q08_choice')?.clearValidators();
+    this.sectionOneBFormGroup.get('e_s1_cmi_q09_choice')?.clearValidators();
   }
 
   public toggleApplicantOrgNameValidator(value : string) : void {
@@ -783,6 +1230,73 @@ export class PtwRequestComponent implements OnInit {
     if (this.cs_s1_cmi_ppe_q06_checkedInput == "") { this.cs_s1_cmi_ppe_q06_checkedInput = DefaultValues.VALUE_NONE; }
     if (this.cs_s1_cmi_ppe_q07_specifyInput == "") { this.cs_s1_cmi_ppe_q07_specifyInput = DefaultValues.VALUE_NONE; }
 
+    if (this.hw_s1_cmi_q01_choiceInput == "") { this.hw_s1_cmi_q01_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.hw_s1_cmi_q02_choiceInput == "") { this.hw_s1_cmi_q02_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.hw_s1_cmi_q03_choiceInput == "") { this.hw_s1_cmi_q03_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.hw_s1_cmi_q04_choiceInput == "") { this.hw_s1_cmi_q04_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.hw_s1_cmi_q05_choiceInput == "") { this.hw_s1_cmi_q05_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.hw_s1_cmi_q06_choiceInput == "") { this.hw_s1_cmi_q06_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.hw_s1_cmi_q07_choiceInput == "") { this.hw_s1_cmi_q07_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.hw_s1_cmi_q08_choiceInput == "") { this.hw_s1_cmi_q08_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.hw_s1_cmi_q09_choiceInput == "") { this.hw_s1_cmi_q09_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.hw_s1_cmi_q10_choiceInput == "") { this.hw_s1_cmi_q10_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.hw_s1_cmi_q11_choiceInput == "") { this.hw_s1_cmi_q11_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.hw_s1_cmi_q01_remarksInput == "") { this.hw_s1_cmi_q01_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.hw_s1_cmi_q02_remarksInput == "") { this.hw_s1_cmi_q02_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.hw_s1_cmi_q03_remarksInput == "") { this.hw_s1_cmi_q03_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.hw_s1_cmi_q04_remarksInput == "") { this.hw_s1_cmi_q04_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.hw_s1_cmi_q05_remarksInput == "") { this.hw_s1_cmi_q05_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.hw_s1_cmi_q06_remarksInput == "") { this.hw_s1_cmi_q06_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.hw_s1_cmi_q07_remarksInput == "") { this.hw_s1_cmi_q07_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.hw_s1_cmi_q08_remarksInput == "") { this.hw_s1_cmi_q08_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.hw_s1_cmi_q09_remarksInput == "") { this.hw_s1_cmi_q09_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.hw_s1_cmi_q10_remarksInput == "") { this.hw_s1_cmi_q10_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.hw_s1_cmi_q11_remarksInput == "") { this.hw_s1_cmi_q11_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.hw_s1_cmi_q12_specifyInput == "") { this.hw_s1_cmi_q12_specifyInput = DefaultValues.VALUE_NONE; }
+    if (this.hw_s1_cmi_q13_specifyInput == "") { this.hw_s1_cmi_q13_specifyInput = DefaultValues.VALUE_NONE; }
+
+    if (this.cw_s1_cmi_q01_choiceInput == "") { this.cw_s1_cmi_q01_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.cw_s1_cmi_q02_choiceInput == "") { this.cw_s1_cmi_q02_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.cw_s1_cmi_q03_choiceInput == "") { this.cw_s1_cmi_q03_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.cw_s1_cmi_q04_choiceInput == "") { this.cw_s1_cmi_q04_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.cw_s1_cmi_q05_choiceInput == "") { this.cw_s1_cmi_q05_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.cw_s1_cmi_q06_choiceInput == "") { this.cw_s1_cmi_q06_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.cw_s1_cmi_q07_choiceInput == "") { this.cw_s1_cmi_q07_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.cw_s1_cmi_q08_choiceInput == "") { this.cw_s1_cmi_q08_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.cw_s1_cmi_q09_choiceInput == "") { this.cw_s1_cmi_q09_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.cw_s1_cmi_q01_remarksInput == "") { this.cw_s1_cmi_q01_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.cw_s1_cmi_q02_remarksInput == "") { this.cw_s1_cmi_q02_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.cw_s1_cmi_q03_remarksInput == "") { this.cw_s1_cmi_q03_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.cw_s1_cmi_q04_remarksInput == "") { this.cw_s1_cmi_q04_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.cw_s1_cmi_q05_remarksInput == "") { this.cw_s1_cmi_q05_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.cw_s1_cmi_q06_remarksInput == "") { this.cw_s1_cmi_q06_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.cw_s1_cmi_q07_remarksInput == "") { this.cw_s1_cmi_q07_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.cw_s1_cmi_q08_remarksInput == "") { this.cw_s1_cmi_q08_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.cw_s1_cmi_q09_remarksInput == "") { this.cw_s1_cmi_q09_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.cw_s1_cmi_q10_specifyInput == "") { this.cw_s1_cmi_q10_specifyInput = DefaultValues.VALUE_NONE; }
+    if (this.cw_s1_cmi_q11_specifyInput == "") { this.cw_s1_cmi_q11_specifyInput = DefaultValues.VALUE_NONE; }
+
+    if (this.e_s1_cmi_q01_choiceInput == "") { this.e_s1_cmi_q01_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.e_s1_cmi_q02_choiceInput == "") { this.e_s1_cmi_q02_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.e_s1_cmi_q03_choiceInput == "") { this.e_s1_cmi_q03_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.e_s1_cmi_q04_choiceInput == "") { this.e_s1_cmi_q04_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.e_s1_cmi_q05_choiceInput == "") { this.e_s1_cmi_q05_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.e_s1_cmi_q06_choiceInput == "") { this.e_s1_cmi_q06_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.e_s1_cmi_q07_choiceInput == "") { this.e_s1_cmi_q07_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.e_s1_cmi_q08_choiceInput == "") { this.e_s1_cmi_q08_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.e_s1_cmi_q09_choiceInput == "") { this.e_s1_cmi_q09_choiceInput = DefaultValues.VALUE_NONE; }
+    if (this.e_s1_cmi_q01_remarksInput == "") { this.e_s1_cmi_q01_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.e_s1_cmi_q02_remarksInput == "") { this.e_s1_cmi_q02_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.e_s1_cmi_q03_remarksInput == "") { this.e_s1_cmi_q03_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.e_s1_cmi_q04_remarksInput == "") { this.e_s1_cmi_q04_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.e_s1_cmi_q05_remarksInput == "") { this.e_s1_cmi_q05_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.e_s1_cmi_q06_remarksInput == "") { this.e_s1_cmi_q06_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.e_s1_cmi_q07_remarksInput == "") { this.e_s1_cmi_q07_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.e_s1_cmi_q08_remarksInput == "") { this.e_s1_cmi_q08_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.e_s1_cmi_q09_remarksInput == "") { this.e_s1_cmi_q09_remarksInput = DefaultValues.VALUE_NONE; }
+    if (this.e_s1_cmi_q10_specifyInput == "") { this.e_s1_cmi_q10_specifyInput = DefaultValues.VALUE_NONE; }
+    if (this.e_s1_cmi_q11_specifyInput == "") { this.e_s1_cmi_q11_specifyInput = DefaultValues.VALUE_NONE; }
+
     if (this.applicantOrganisationNameInput == "") { this.applicantOrganisationNameInput = DefaultValues.VALUE_NONE; }
 
     dataSource = {
@@ -943,6 +1457,242 @@ export class PtwRequestComponent implements OnInit {
             q02: DefaultValues.VALUE_NONE,
             q03: DefaultValues.VALUE_NONE,
             q04: DefaultValues.VALUE_NONE
+          }
+        }
+      },
+      hotWork: {
+        sectionOne: {
+          controlMeasuresImplemented: {
+            q01: {
+              choice: this.hw_s1_cmi_q01_choiceInput,
+              remarks: this.hw_s1_cmi_q01_remarksInput
+            },
+            q02: {
+              choice: this.hw_s1_cmi_q02_choiceInput,
+              remarks: this.hw_s1_cmi_q02_remarksInput
+            },
+            q03: {
+              choice: this.hw_s1_cmi_q03_choiceInput,
+              remarks: this.hw_s1_cmi_q03_remarksInput
+            },
+            q04: {
+              choice: this.hw_s1_cmi_q04_choiceInput,
+              remarks: this.hw_s1_cmi_q04_remarksInput
+            },
+            q05: {
+              choice: this.hw_s1_cmi_q05_choiceInput,
+              remarks: this.hw_s1_cmi_q05_remarksInput
+            },
+            q06: {
+              choice: this.hw_s1_cmi_q06_choiceInput,
+              remarks: this.hw_s1_cmi_q06_remarksInput
+            },
+            q07: {
+              choice: this.hw_s1_cmi_q07_choiceInput,
+              remarks: this.hw_s1_cmi_q07_remarksInput
+            },
+            q08: {
+              choice: this.hw_s1_cmi_q08_choiceInput,
+              remarks: this.hw_s1_cmi_q08_remarksInput
+            },
+            q09: {
+              choice: this.hw_s1_cmi_q09_choiceInput,
+              remarks: this.hw_s1_cmi_q09_remarksInput
+            },
+            q10: {
+              choice: this.hw_s1_cmi_q10_choiceInput,
+              remarks: this.hw_s1_cmi_q10_remarksInput
+            },
+            q11: {
+              choice: this.hw_s1_cmi_q11_choiceInput,
+              remarks: this.hw_s1_cmi_q11_remarksInput
+            },
+            q12: {
+              specify: this.hw_s1_cmi_q12_specifyInput
+            },
+            q13: {
+              specify: this.hw_s1_cmi_q13_specifyInput
+            }
+          }
+        },
+        sectionTwo: {
+          assessment: {
+            q01: {
+              choice: DefaultValues.VALUE_NONE,
+              remarks: DefaultValues.VALUE_NONE
+            }
+          }
+        },
+        sectionThree: {
+          permitReview: {
+            q01: {
+              choice: DefaultValues.VALUE_NONE,
+              remarks: DefaultValues.VALUE_NONE
+            },
+            q02: {
+              choice: DefaultValues.VALUE_NONE,
+              remarks: DefaultValues.VALUE_NONE
+            },
+            q03: {
+              choice: DefaultValues.VALUE_NONE,
+              remarks: DefaultValues.VALUE_NONE
+            },
+            q04: {
+              choice: DefaultValues.VALUE_NONE,
+              remarks: DefaultValues.VALUE_NONE
+            }
+          }
+        }
+      },
+      coldWork: {
+        sectionOne: {
+          controlMeasuresImplemented: {
+            q01: {
+              choice: this.cw_s1_cmi_q01_choiceInput,
+              remarks: this.cw_s1_cmi_q01_remarksInput
+            },
+            q02: {
+              choice: this.cw_s1_cmi_q02_choiceInput,
+              remarks: this.cw_s1_cmi_q02_remarksInput
+            },
+            q03: {
+              choice: this.cw_s1_cmi_q03_choiceInput,
+              remarks: this.cw_s1_cmi_q03_remarksInput
+            },
+            q04: {
+              choice: this.cw_s1_cmi_q04_choiceInput,
+              remarks: this.cw_s1_cmi_q04_remarksInput
+            },
+            q05: {
+              choice: this.cw_s1_cmi_q05_choiceInput,
+              remarks: this.cw_s1_cmi_q05_remarksInput
+            },
+            q06: {
+              choice: this.cw_s1_cmi_q06_choiceInput,
+              remarks: this.cw_s1_cmi_q06_remarksInput
+            },
+            q07: {
+              choice: this.cw_s1_cmi_q07_choiceInput,
+              remarks: this.cw_s1_cmi_q07_remarksInput
+            },
+            q08: {
+              choice: this.cw_s1_cmi_q08_choiceInput,
+              remarks: this.cw_s1_cmi_q08_remarksInput
+            },
+            q09: {
+              choice: this.cw_s1_cmi_q09_choiceInput,
+              remarks: this.cw_s1_cmi_q09_remarksInput
+            },
+            q10: {
+              specify: this.cw_s1_cmi_q10_specifyInput
+            },
+            q11: {
+              specify: this.cw_s1_cmi_q11_specifyInput
+            }
+          }
+        },
+        sectionTwo: {
+          assessment: {
+            q01: {
+              choice: DefaultValues.VALUE_NONE,
+              remarks: DefaultValues.VALUE_NONE
+            }
+          }
+        },
+        sectionThree: {
+          permitReview: {
+            q01: {
+              choice: DefaultValues.VALUE_NONE,
+              remarks: DefaultValues.VALUE_NONE
+            },
+            q02: {
+              choice: DefaultValues.VALUE_NONE,
+              remarks: DefaultValues.VALUE_NONE
+            },
+            q03: {
+              choice: DefaultValues.VALUE_NONE,
+              remarks: DefaultValues.VALUE_NONE
+            },
+            q04: {
+              choice: DefaultValues.VALUE_NONE,
+              remarks: DefaultValues.VALUE_NONE
+            }
+          }
+        }
+      },
+      electrical: {
+        sectionOne: {
+          controlMeasuresImplemented: {
+            q01: {
+              choice: this.e_s1_cmi_q01_choiceInput,
+              remarks: this.e_s1_cmi_q01_remarksInput
+            },
+            q02: {
+              choice: this.e_s1_cmi_q02_choiceInput,
+              remarks: this.e_s1_cmi_q02_remarksInput
+            },
+            q03: {
+              choice: this.e_s1_cmi_q03_choiceInput,
+              remarks: this.e_s1_cmi_q03_remarksInput
+            },
+            q04: {
+              choice: this.e_s1_cmi_q04_choiceInput,
+              remarks: this.e_s1_cmi_q04_remarksInput
+            },
+            q05: {
+              choice: this.e_s1_cmi_q05_choiceInput,
+              remarks: this.e_s1_cmi_q05_remarksInput
+            },
+            q06: {
+              choice: this.e_s1_cmi_q06_choiceInput,
+              remarks: this.e_s1_cmi_q06_remarksInput
+            },
+            q07: {
+              choice: this.e_s1_cmi_q07_choiceInput,
+              remarks: this.e_s1_cmi_q07_remarksInput
+            },
+            q08: {
+              choice: this.e_s1_cmi_q08_choiceInput,
+              remarks: this.e_s1_cmi_q08_remarksInput
+            },
+            q09: {
+              choice: this.e_s1_cmi_q09_choiceInput,
+              remarks: this.e_s1_cmi_q09_remarksInput
+            },
+            q10: {
+              specify: this.e_s1_cmi_q10_specifyInput
+            },
+            q11: {
+              specify: this.e_s1_cmi_q11_specifyInput
+            }
+          }
+        },
+        sectionTwo: {
+          assessment: {
+            q01: {
+              choice: DefaultValues.VALUE_NONE,
+              remarks: DefaultValues.VALUE_NONE
+            }
+          }
+        },
+        sectionThree: {
+          permitReview: {
+            q01: {
+              choice: DefaultValues.VALUE_NONE,
+              remarks: DefaultValues.VALUE_NONE
+            },
+            q02: {
+              choice: DefaultValues.VALUE_NONE,
+              remarks: DefaultValues.VALUE_NONE
+            },
+            q03: {
+              choice: DefaultValues.VALUE_NONE,
+              remarks: DefaultValues.VALUE_NONE
+            },
+            q04: {
+              choice: DefaultValues.VALUE_NONE,
+              remarks: DefaultValues.VALUE_NONE
+            }
           }
         }
       },

@@ -167,7 +167,7 @@
                                     <mat-label id = "label-text">Safety measures</mat-label>
                                 </div>
                                 <div id = "wah-sm-col">
-                                    <mat-label id = "label-text">Implemented?</mat-label>
+                                    <mat-label id = "label-text">&emsp;Implemented?</mat-label>
                                 </div>
                                 <div id = "wah-sm-col">
                                     <mat-label id = "label-text">Remarks</mat-label>
@@ -532,6 +532,430 @@
                                 </div>
                             </div>
                         </div>
+                        <div *ngIf = "dt.permitType == 'Hot work (HW)'">
+                            <div class = "hw-sm-cols">
+                                <div id = "hw-sm-col">
+                                    <mat-label id = "label-text">Safety measures</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label id = "label-text">&emsp;Implemented?</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label id = "label-text">Remarks</mat-label>
+                                </div>
+                            </div>
+                            <div class = "hw-sm-cols">
+                                <div id = "hw-sm-col">
+                                    <mat-label>A risk assessment has been completed.</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label>&emsp;{{ dt.hotWork?.sectionOne?.controlMeasuresImplemented?.q01?.choice }}</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label>{{ dt.hotWork?.sectionOne?.controlMeasuresImplemented?.q01?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "hw-sm-cols">
+                                <div id = "hw-sm-col">
+                                    <mat-label>The worker(s) are trained and competent to conduct hot work.</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label>&emsp;{{ dt.hotWork?.sectionOne?.controlMeasuresImplemented?.q02?.choice }}</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label>{{ dt.hotWork?.sectionOne?.controlMeasuresImplemented?.q02?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "hw-sm-cols">
+                                <div id = "hw-sm-col">
+                                    <mat-label>Combustible materials have been removed from the area of hot work.</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label>&emsp;{{ dt.hotWork?.sectionOne?.controlMeasuresImplemented?.q03?.choice }}</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label>{{ dt.hotWork?.sectionOne?.controlMeasuresImplemented?.q03?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "hw-sm-cols">
+                                <div id = "hw-sm-col">
+                                    <mat-label>Fire resistance sheeting has been used to protect the area of hot work.</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label>&emsp;{{ dt.hotWork?.sectionOne?.controlMeasuresImplemented?.q04?.choice }}</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label>{{ dt.hotWork?.sectionOne?.controlMeasuresImplemented?.q04?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "hw-sm-cols">
+                                <div id = "hw-sm-col">
+                                    <mat-label>The potential of the presence of flammable vapor has been checked and LEL is < 3%.</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label>&emsp;{{ dt.hotWork?.sectionOne?.controlMeasuresImplemented?.q05?.choice }}</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label>{{ dt.hotWork?.sectionOne?.controlMeasuresImplemented?.q05?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "hw-sm-cols">
+                                <div id = "hw-sm-col">
+                                    <mat-label>Hot work equipment (e.g.: welding kit) has been inspected and is in a good condition.</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label>&emsp;{{ dt.hotWork?.sectionOne?.controlMeasuresImplemented?.q06?.choice }}</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label>{{ dt.hotWork?.sectionOne?.controlMeasuresImplemented?.q06?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "hw-sm-cols">
+                                <div id = "hw-sm-col">
+                                    <mat-label>A second man or fire watch is in place for the hot work.</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label>&emsp;{{ dt.hotWork?.sectionOne?.controlMeasuresImplemented?.q07?.choice }}</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label>{{ dt.hotWork?.sectionOne?.controlMeasuresImplemented?.q07?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "hw-sm-cols">
+                                <div id = "hw-sm-col">
+                                    <mat-label>Hot work workers are equipped with appropriate PPE (e.g.: welding mask, protective gloves etc.).</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label>&emsp;{{ dt.hotWork?.sectionOne?.controlMeasuresImplemented?.q08?.choice }}</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label>{{ dt.hotWork?.sectionOne?.controlMeasuresImplemented?.q08?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "hw-sm-cols">
+                                <div id = "hw-sm-col">
+                                    <mat-label>Ventilation to remove hazardous welding fumes is in place.</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label>&emsp;{{ dt.hotWork?.sectionOne?.controlMeasuresImplemented?.q09?.choice }}</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label>{{ dt.hotWork?.sectionOne?.controlMeasuresImplemented?.q09?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "hw-sm-cols">
+                                <div id = "hw-sm-col">
+                                    <mat-label>Fire extinguisher is in place near hot work.</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label>&emsp;{{ dt.hotWork?.sectionOne?.controlMeasuresImplemented?.q10?.choice }}</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label>{{ dt.hotWork?.sectionOne?.controlMeasuresImplemented?.q10?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "hw-sm-cols">
+                                <div id = "hw-sm-col">
+                                    <mat-label>First aid kit is in place near hot work in the event of burns.</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label>&emsp;{{ dt.hotWork?.sectionOne?.controlMeasuresImplemented?.q11?.choice }}</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label>{{ dt.hotWork?.sectionOne?.controlMeasuresImplemented?.q11?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "hw-sm-cols">
+                                <div id = "hw-sm-col">
+                                    <mat-label id = "label-text">Other precautions required to undertake the work safely (please specify, if any).</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label>&emsp;{{ dt.hotWork?.sectionOne?.controlMeasuresImplemented?.q12?.specify }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "hw-sm-cols">
+                                <div id = "hw-sm-col">
+                                    <mat-label id = "label-text">Other safety equipment required to undertake the work safely (please specify, if any).</mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "hw-sm-col">
+                                    <mat-label>&emsp;{{ dt.hotWork?.sectionOne?.controlMeasuresImplemented?.q13?.specify }}</mat-label>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf = "dt.permitType == 'Cold work (CW)'">
+                            <div class = "cw-sm-cols">
+                                <div id = "cw-sm-col">
+                                    <mat-label id = "label-text">Safety measures</mat-label>
+                                </div>
+                                <div id = "cw-sm-col">
+                                    <mat-label id = "label-text">&emsp;Implemented?</mat-label>
+                                </div>
+                                <div id = "cw-sm-col">
+                                    <mat-label id = "label-text">Remarks</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cw-sm-cols">
+                                <div id = "cw-sm-col">
+                                    <mat-label>A risk assessment has been completed.</mat-label>
+                                </div>
+                                <div id = "cw-sm-col">
+                                    <mat-label>&emsp;{{ dt.coldWork?.sectionOne?.controlMeasuresImplemented?.q01?.choice }}</mat-label>
+                                </div>
+                                <div id = "cw-sm-col">
+                                    <mat-label>{{ dt.coldWork?.sectionOne?.controlMeasuresImplemented?.q01?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cw-sm-cols">
+                                <div id = "cw-sm-col">
+                                    <mat-label>The worker(s) are trained and competent to conduct the intended cold work.</mat-label>
+                                </div>
+                                <div id = "cw-sm-col">
+                                    <mat-label>&emsp;{{ dt.coldWork?.sectionOne?.controlMeasuresImplemented?.q02?.choice }}</mat-label>
+                                </div>
+                                <div id = "cw-sm-col">
+                                    <mat-label>{{ dt.coldWork?.sectionOne?.controlMeasuresImplemented?.q02?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cw-sm-cols">
+                                <div id = "cw-sm-col">
+                                    <mat-label>Work environment is checked (e.g.: good ventilation, adequate lighting, and dry floor etc.).</mat-label>
+                                </div>
+                                <div id = "cw-sm-col">
+                                    <mat-label>&emsp;{{ dt.coldWork?.sectionOne?.controlMeasuresImplemented?.q03?.choice }}</mat-label>
+                                </div>
+                                <div id = "cw-sm-col">
+                                    <mat-label>{{ dt.coldWork?.sectionOne?.controlMeasuresImplemented?.q03?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cw-sm-cols">
+                                <div id = "cw-sm-col">
+                                    <mat-label>Work equipment (e.g.: hand tool, power tool etc) has been inspected and is in a good condition.</mat-label>
+                                </div>
+                                <div id = "cw-sm-col">
+                                    <mat-label>&emsp;{{ dt.coldWork?.sectionOne?.controlMeasuresImplemented?.q04?.choice }}</mat-label>
+                                </div>
+                                <div id = "cw-sm-col">
+                                    <mat-label>{{ dt.coldWork?.sectionOne?.controlMeasuresImplemented?.q04?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cw-sm-cols">
+                                <div id = "cw-sm-col">
+                                    <mat-label>Electrical and / or mechanical isolation has been undertaken.</mat-label>
+                                </div>
+                                <div id = "cw-sm-col">
+                                    <mat-label>&emsp;{{ dt.coldWork?.sectionOne?.controlMeasuresImplemented?.q05?.choice }}</mat-label>
+                                </div>
+                                <div id = "cw-sm-col">
+                                    <mat-label>{{ dt.coldWork?.sectionOne?.controlMeasuresImplemented?.q05?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cw-sm-cols">
+                                <div id = "cw-sm-col">
+                                    <mat-label>No exposure to moving/ rotating machinery during cold work.</mat-label>
+                                </div>
+                                <div id = "cw-sm-col">
+                                    <mat-label>&emsp;{{ dt.coldWork?.sectionOne?.controlMeasuresImplemented?.q06?.choice }}</mat-label>
+                                </div>
+                                <div id = "cw-sm-col">
+                                    <mat-label>{{ dt.coldWork?.sectionOne?.controlMeasuresImplemented?.q06?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cw-sm-cols">
+                                <div id = "cw-sm-col">
+                                    <mat-label>A second man or standby is in place for the cold work.</mat-label>
+                                </div>
+                                <div id = "cw-sm-col">
+                                    <mat-label>&emsp;{{ dt.coldWork?.sectionOne?.controlMeasuresImplemented?.q07?.choice }}</mat-label>
+                                </div>
+                                <div id = "cw-sm-col">
+                                    <mat-label>{{ dt.coldWork?.sectionOne?.controlMeasuresImplemented?.q07?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cw-sm-cols">
+                                <div id = "cw-sm-col">
+                                    <mat-label>Workers are equipped with appropriate PPE (e.g.: safety helmet, protective gloves etc.).</mat-label>
+                                </div>
+                                <div id = "cw-sm-col">
+                                    <mat-label>&emsp;{{ dt.coldWork?.sectionOne?.controlMeasuresImplemented?.q08?.choice }}</mat-label>
+                                </div>
+                                <div id = "cw-sm-col">
+                                    <mat-label>{{ dt.coldWork?.sectionOne?.controlMeasuresImplemented?.q08?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cw-sm-cols">
+                                <div id = "cw-sm-col">
+                                    <mat-label>First aid kit is in place near working area.</mat-label>
+                                </div>
+                                <div id = "cw-sm-col">
+                                    <mat-label>&emsp;{{ dt.coldWork?.sectionOne?.controlMeasuresImplemented?.q09?.choice }}</mat-label>
+                                </div>
+                                <div id = "cw-sm-col">
+                                    <mat-label>{{ dt.coldWork?.sectionOne?.controlMeasuresImplemented?.q09?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cw-sm-cols">
+                                <div id = "cw-sm-col">
+                                    <mat-label id = "label-text">Other precautions required to undertake the work safely (please specify, if any).</mat-label>
+                                </div>
+                                <div id = "cw-sm-col">
+                                    <mat-label>&emsp;{{ dt.coldWork?.sectionOne?.controlMeasuresImplemented?.q10?.specify }}</mat-label>
+                                </div>
+                                <div id = "cw-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                            </div>
+                            <div class = "cw-sm-cols">
+                                <div id = "cw-sm-col">
+                                    <mat-label id = "label-text">Other safety equipment required to undertake the work safely (please specify, if any).</mat-label>
+                                </div>
+                                <div id = "cw-sm-col">
+                                    <mat-label>&emsp;{{ dt.coldWork?.sectionOne?.controlMeasuresImplemented?.q11?.specify }}</mat-label>
+                                </div>
+                                <div id = "cw-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf = "dt.permitType == 'Electrical (E)'">
+                            <div class = "e-sm-cols">
+                                <div id = "e-sm-col">
+                                    <mat-label id = "label-text">Safety measures</mat-label>
+                                </div>
+                                <div id = "e-sm-col">
+                                    <mat-label id = "label-text">&emsp;Implemented?</mat-label>
+                                </div>
+                                <div id = "e-sm-col">
+                                    <mat-label id = "label-text">Remarks</mat-label>
+                                </div>
+                            </div>
+                            <div class = "e-sm-cols">
+                                <div id = "e-sm-col">
+                                    <mat-label>A risk assessment has been completed.</mat-label>
+                                </div>
+                                <div id = "e-sm-col">
+                                    <mat-label>&emsp;{{ dt.electrical?.sectionOne?.controlMeasuresImplemented?.q01?.choice }}</mat-label>
+                                </div>
+                                <div id = "e-sm-col">
+                                    <mat-label>{{ dt.electrical?.sectionOne?.controlMeasuresImplemented?.q01?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "e-sm-cols">
+                                <div id = "e-sm-col">
+                                    <mat-label>The worker(s) are trained and competent to conduct electrical work.</mat-label>
+                                </div>
+                                <div id = "e-sm-col">
+                                    <mat-label>&emsp;{{ dt.electrical?.sectionOne?.controlMeasuresImplemented?.q02?.choice }}</mat-label>
+                                </div>
+                                <div id = "e-sm-col">
+                                    <mat-label>{{ dt.electrical?.sectionOne?.controlMeasuresImplemented?.q02?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "e-sm-cols">
+                                <div id = "e-sm-col">
+                                    <mat-label>Electrical supply is turned off.</mat-label>
+                                </div>
+                                <div id = "e-sm-col">
+                                    <mat-label>&emsp;{{ dt.electrical?.sectionOne?.controlMeasuresImplemented?.q03?.choice }}</mat-label>
+                                </div>
+                                <div id = "e-sm-col">
+                                    <mat-label>{{ dt.electrical?.sectionOne?.controlMeasuresImplemented?.q03?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "e-sm-cols">
+                                <div id = "e-sm-col">
+                                    <mat-label>"Test for Dead" on the isolated equipment has been conducted.</mat-label>
+                                </div>
+                                <div id = "e-sm-col">
+                                    <mat-label>&emsp;{{ dt.electrical?.sectionOne?.controlMeasuresImplemented?.q04?.choice }}</mat-label>
+                                </div>
+                                <div id = "e-sm-col">
+                                    <mat-label>{{ dt.electrical?.sectionOne?.controlMeasuresImplemented?.q04?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "e-sm-cols">
+                                <div id = "e-sm-col">
+                                    <mat-label>Flammable/ combustible substances are removed from the area.</mat-label>
+                                </div>
+                                <div id = "e-sm-col">
+                                    <mat-label>&emsp;{{ dt.electrical?.sectionOne?.controlMeasuresImplemented?.q05?.choice }}</mat-label>
+                                </div>
+                                <div id = "e-sm-col">
+                                    <mat-label>{{ dt.electrical?.sectionOne?.controlMeasuresImplemented?.q05?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "e-sm-cols">
+                                <div id = "e-sm-col">
+                                    <mat-label>Electrical work equipment (e.g.: multimeter) has been inspected and is in a good condition.</mat-label>
+                                </div>
+                                <div id = "e-sm-col">
+                                    <mat-label>&emsp;{{ dt.electrical?.sectionOne?.controlMeasuresImplemented?.q06?.choice }}</mat-label>
+                                </div>
+                                <div id = "e-sm-col">
+                                    <mat-label>{{ dt.electrical?.sectionOne?.controlMeasuresImplemented?.q06?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "e-sm-cols">
+                                <div id = "e-sm-col">
+                                    <mat-label>Electrical work workers are equipped with appropriate PPE (e.g.: insulating gloves, safety boots etc.).</mat-label>
+                                </div>
+                                <div id = "e-sm-col">
+                                    <mat-label>&emsp;{{ dt.electrical?.sectionOne?.controlMeasuresImplemented?.q07?.choice }}</mat-label>
+                                </div>
+                                <div id = "e-sm-col">
+                                    <mat-label>{{ dt.electrical?.sectionOne?.controlMeasuresImplemented?.q07?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "e-sm-cols">
+                                <div id = "e-sm-col">
+                                    <mat-label>A second man or standby person is in place during live electrical test work.</mat-label>
+                                </div>
+                                <div id = "e-sm-col">
+                                    <mat-label>&emsp;{{ dt.electrical?.sectionOne?.controlMeasuresImplemented?.q08?.choice }}</mat-label>
+                                </div>
+                                <div id = "e-sm-col">
+                                    <mat-label>{{ dt.electrical?.sectionOne?.controlMeasuresImplemented?.q08?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "e-sm-cols">
+                                <div id = "e-sm-col">
+                                    <mat-label>First aid kit is in place near electrical work in the event of electrical shock.</mat-label>
+                                </div>
+                                <div id = "e-sm-col">
+                                    <mat-label>&emsp;{{ dt.electrical?.sectionOne?.controlMeasuresImplemented?.q09?.choice }}</mat-label>
+                                </div>
+                                <div id = "e-sm-col">
+                                    <mat-label>{{ dt.electrical?.sectionOne?.controlMeasuresImplemented?.q09?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "e-sm-cols">
+                                <div id = "e-sm-col">
+                                    <mat-label id = "label-text">Other precautions required to undertake the work safely (please specify, if any).</mat-label>
+                                </div>
+                                <div id = "e-sm-col">
+                                    <mat-label>&emsp;{{ dt.electrical?.sectionOne?.controlMeasuresImplemented?.q10?.specify }}</mat-label>
+                                </div>
+                                <div id = "e-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                            </div>
+                            <div class = "e-sm-cols">
+                                <div id = "e-sm-col">
+                                    <mat-label id = "label-text">Other safety equipment required to undertake the work safely (please specify, if any).</mat-label>
+                                </div>
+                                <div id = "e-sm-col">
+                                    <mat-label>&emsp;{{ dt.electrical?.sectionOne?.controlMeasuresImplemented?.q11?.specify }}</mat-label>
+                                </div>
+                                <div id = "e-sm-col">
+                                    <mat-label></mat-label>
+                                </div>
+                            </div>
+                        </div>
                         <br><br>
                     </div>
                 </mat-tab>
@@ -772,6 +1196,111 @@
                                 </div>
                             </div>
                         </div>
+                        <div *ngIf = "dt.permitType == 'Hot work (HW)'">
+                            <div class = "hw-eval-cols">
+                                <div id = "hw-eval-col">
+                                    <mat-label id = "label-text">EVALUATION OF CONTROL MEASURES</mat-label>
+                                </div>
+                                <div id = "hw-eval-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "hw-eval-col">
+                                    <mat-label></mat-label>
+                                </div>
+                            </div>
+                            <div class = "hw-eval-cols">
+                                <div id = "hw-eval-col">
+                                    <mat-label id = "label-text">Assessment</mat-label>
+                                </div>
+                                <div id = "hw-eval-col">
+                                    <mat-label id = "label-text">&emsp;Verified?</mat-label>
+                                </div>
+                                <div id = "hw-eval-col">
+                                    <mat-label id = "label-text">Remarks</mat-label>
+                                </div>
+                            </div>
+                            <div class = "hw-eval-cols">
+                                <div id = "hw-eval-col">
+                                    <mat-label>All reasonably practicable measures have been taken.</mat-label>
+                                </div>
+                                <div id = "hw-eval-col">
+                                    <mat-label>&emsp;{{ dt.hotWork?.sectionTwo?.assessment?.q01?.choice }}</mat-label>
+                                </div>
+                                <div id = "hw-eval-col">
+                                    <mat-label>{{ dt.hotWork?.sectionTwo?.assessment?.q01?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf = "dt.permitType == 'Cold work (CW)'">
+                            <div class = "cw-eval-cols">
+                                <div id = "cw-eval-col">
+                                    <mat-label id = "label-text">EVALUATION OF CONTROL MEASURES</mat-label>
+                                </div>
+                                <div id = "cw-eval-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cw-eval-col">
+                                    <mat-label></mat-label>
+                                </div>
+                            </div>
+                            <div class = "cw-eval-cols">
+                                <div id = "cw-eval-col">
+                                    <mat-label id = "label-text">Assessment</mat-label>
+                                </div>
+                                <div id = "cw-eval-col">
+                                    <mat-label id = "label-text">&emsp;Verified?</mat-label>
+                                </div>
+                                <div id = "cw-eval-col">
+                                    <mat-label id = "label-text">Remarks</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cw-eval-cols">
+                                <div id = "cw-eval-col">
+                                    <mat-label>All reasonably practicable measures have been taken.</mat-label>
+                                </div>
+                                <div id = "cw-eval-col">
+                                    <mat-label>&emsp;{{ dt.coldWork?.sectionTwo?.assessment?.q01?.choice }}</mat-label>
+                                </div>
+                                <div id = "cw-eval-col">
+                                    <mat-label>{{ dt.coldWork?.sectionTwo?.assessment?.q01?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf = "dt.permitType == 'Electrical (E)'">
+                            <div class = "e-eval-cols">
+                                <div id = "e-eval-col">
+                                    <mat-label id = "label-text">EVALUATION OF CONTROL MEASURES</mat-label>
+                                </div>
+                                <div id = "e-eval-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "e-eval-col">
+                                    <mat-label></mat-label>
+                                </div>
+                            </div>
+                            <div class = "e-eval-cols">
+                                <div id = "e-eval-col">
+                                    <mat-label id = "label-text">Assessment</mat-label>
+                                </div>
+                                <div id = "e-eval-col">
+                                    <mat-label id = "label-text">&emsp;Verified?</mat-label>
+                                </div>
+                                <div id = "e-eval-col">
+                                    <mat-label id = "label-text">Remarks</mat-label>
+                                </div>
+                            </div>
+                            <div class = "e-eval-cols">
+                                <div id = "e-eval-col">
+                                    <mat-label>All reasonably practicable measures have been taken.</mat-label>
+                                </div>
+                                <div id = "e-eval-col">
+                                    <mat-label>&emsp;{{ dt.electrical?.sectionTwo?.assessment?.q01?.choice }}</mat-label>
+                                </div>
+                                <div id = "e-eval-col">
+                                    <mat-label>{{ dt.electrical?.sectionTwo?.assessment?.q01?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                        </div>
                         <br><br>
                     </div>
                 </mat-tab>
@@ -926,6 +1455,210 @@
                                 </div>
                             </div>
                         </div>
+                        <div *ngIf = "dt.permitType == 'Hot work (HW)'">
+                            <div class = "hw-am-cols">
+                                <div id = "hw-am-col">
+                                    <mat-label id = "label-text">REVIEW OF PERMIT</mat-label>
+                                </div>
+                                <div id = "hw-am-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "hw-am-col">
+                                    <mat-label></mat-label>
+                                </div>
+                            </div>
+                            <div class = "hw-am-cols">
+                                <div id = "hw-am-col">
+                                    <mat-label id = "label-text">Criteria</mat-label>
+                                </div>
+                                <div id = "hw-am-col">
+                                    <mat-label id = "label-text">&emsp;Fulfilled?</mat-label>
+                                </div>
+                                <div id = "hw-am-col">
+                                    <mat-label id = "label-text">Remarks</mat-label>
+                                </div>
+                            </div>
+                            <div class = "hw-am-cols">
+                                <div id = "hw-am-col">
+                                    <mat-label>Proper permit-to-work evaluation has been completed.</mat-label>
+                                </div>
+                                <div id = "hw-am-col">
+                                    <mat-label>&emsp;{{ dt.hotWork?.sectionThree?.permitReview?.q01?.choice }}</mat-label>
+                                </div>
+                                <div id = "hw-am-col">
+                                    <mat-label>{{ dt.hotWork?.sectionThree?.permitReview?.q01?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "hw-am-cols">
+                                <div id = "hw-am-col">
+                                    <mat-label>No incompatible works that may pose additional hazards.</mat-label>
+                                </div>
+                                <div id = "hw-am-col">
+                                    <mat-label>&emsp;{{ dt.hotWork?.sectionThree?.permitReview?.q02?.choice }}</mat-label>
+                                </div>
+                                <div id = "hw-am-col">
+                                    <mat-label>{{ dt.hotWork?.sectionThree?.permitReview?.q02?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "hw-am-cols">
+                                <div id = "hw-am-col">
+                                    <mat-label>Control measures have been implemented effectively.</mat-label>
+                                </div>
+                                <div id = "hw-am-col">
+                                    <mat-label>&emsp;{{ dt.hotWork?.sectionThree?.permitReview?.q03?.choice }}</mat-label>
+                                </div>
+                                <div id = "hw-am-col">
+                                    <mat-label>{{ dt.hotWork?.sectionThree?.permitReview?.q03?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "hw-am-cols">
+                                <div id = "hw-am-col">
+                                    <mat-label>Hot work risks have been effectively mitigated.</mat-label>
+                                </div>
+                                <div id = "hw-am-col">
+                                    <mat-label>&emsp;{{ dt.hotWork?.sectionThree?.permitReview?.q04?.choice }}</mat-label>
+                                </div>
+                                <div id = "hw-am-col">
+                                    <mat-label>{{ dt.hotWork?.sectionThree?.permitReview?.q04?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf = "dt.permitType == 'Cold work (CW)'">
+                            <div class = "cw-am-cols">
+                                <div id = "cw-am-col">
+                                    <mat-label id = "label-text">REVIEW OF PERMIT</mat-label>
+                                </div>
+                                <div id = "cw-am-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "cw-am-col">
+                                    <mat-label></mat-label>
+                                </div>
+                            </div>
+                            <div class = "cw-am-cols">
+                                <div id = "cw-am-col">
+                                    <mat-label id = "label-text">Criteria</mat-label>
+                                </div>
+                                <div id = "cw-am-col">
+                                    <mat-label id = "label-text">&emsp;Fulfilled?</mat-label>
+                                </div>
+                                <div id = "cw-am-col">
+                                    <mat-label id = "label-text">Remarks</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cw-am-cols">
+                                <div id = "cw-am-col">
+                                    <mat-label>Proper permit-to-work evaluation has been completed.</mat-label>
+                                </div>
+                                <div id = "cw-am-col">
+                                    <mat-label>&emsp;{{ dt.coldWork?.sectionThree?.permitReview?.q01?.choice }}</mat-label>
+                                </div>
+                                <div id = "cw-am-col">
+                                    <mat-label>{{ dt.coldWork?.sectionThree?.permitReview?.q01?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cw-am-cols">
+                                <div id = "cw-am-col">
+                                    <mat-label>No incompatible works that may pose additional hazards.</mat-label>
+                                </div>
+                                <div id = "cw-am-col">
+                                    <mat-label>&emsp;{{ dt.coldWork?.sectionThree?.permitReview?.q02?.choice }}</mat-label>
+                                </div>
+                                <div id = "cw-am-col">
+                                    <mat-label>{{ dt.coldWork?.sectionThree?.permitReview?.q02?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cw-am-cols">
+                                <div id = "cw-am-col">
+                                    <mat-label>Control measures have been implemented effectively.</mat-label>
+                                </div>
+                                <div id = "cw-am-col">
+                                    <mat-label>&emsp;{{ dt.coldWork?.sectionThree?.permitReview?.q03?.choice }}</mat-label>
+                                </div>
+                                <div id = "cw-am-col">
+                                    <mat-label>{{ dt.coldWork?.sectionThree?.permitReview?.q03?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "cw-am-cols">
+                                <div id = "cw-am-col">
+                                    <mat-label>Cold work risks have been effectively mitigated.</mat-label>
+                                </div>
+                                <div id = "cw-am-col">
+                                    <mat-label>&emsp;{{ dt.coldWork?.sectionThree?.permitReview?.q04?.choice }}</mat-label>
+                                </div>
+                                <div id = "cw-am-col">
+                                    <mat-label>{{ dt.coldWork?.sectionThree?.permitReview?.q04?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf = "dt.permitType == 'Electrical (E)'">
+                            <div class = "e-am-cols">
+                                <div id = "e-am-col">
+                                    <mat-label id = "label-text">REVIEW OF PERMIT</mat-label>
+                                </div>
+                                <div id = "e-am-col">
+                                    <mat-label></mat-label>
+                                </div>
+                                <div id = "e-am-col">
+                                    <mat-label></mat-label>
+                                </div>
+                            </div>
+                            <div class = "e-am-cols">
+                                <div id = "e-am-col">
+                                    <mat-label id = "label-text">Criteria</mat-label>
+                                </div>
+                                <div id = "e-am-col">
+                                    <mat-label id = "label-text">&emsp;Fulfilled?</mat-label>
+                                </div>
+                                <div id = "e-am-col">
+                                    <mat-label id = "label-text">Remarks</mat-label>
+                                </div>
+                            </div>
+                            <div class = "e-am-cols">
+                                <div id = "e-am-col">
+                                    <mat-label>Proper permit-to-work evaluation has been completed.</mat-label>
+                                </div>
+                                <div id = "e-am-col">
+                                    <mat-label>&emsp;{{ dt.electrical?.sectionThree?.permitReview?.q01?.choice }}</mat-label>
+                                </div>
+                                <div id = "e-am-col">
+                                    <mat-label>{{ dt.electrical?.sectionThree?.permitReview?.q01?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "e-am-cols">
+                                <div id = "e-am-col">
+                                    <mat-label>No incompatible works that may pose additional hazards.</mat-label>
+                                </div>
+                                <div id = "e-am-col">
+                                    <mat-label>&emsp;{{ dt.electrical?.sectionThree?.permitReview?.q02?.choice }}</mat-label>
+                                </div>
+                                <div id = "e-am-col">
+                                    <mat-label>{{ dt.electrical?.sectionThree?.permitReview?.q02?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "e-am-cols">
+                                <div id = "e-am-col">
+                                    <mat-label>Control measures have been implemented effectively.</mat-label>
+                                </div>
+                                <div id = "e-am-col">
+                                    <mat-label>&emsp;{{ dt.electrical?.sectionThree?.permitReview?.q03?.choice }}</mat-label>
+                                </div>
+                                <div id = "e-am-col">
+                                    <mat-label>{{ dt.electrical?.sectionThree?.permitReview?.q03?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                            <div class = "e-am-cols">
+                                <div id = "e-am-col">
+                                    <mat-label>Electrical risks have been effectively mitigated.</mat-label>
+                                </div>
+                                <div id = "e-am-col">
+                                    <mat-label>&emsp;{{ dt.electrical?.sectionThree?.permitReview?.q04?.choice }}</mat-label>
+                                </div>
+                                <div id = "e-am-col">
+                                    <mat-label>{{ dt.electrical?.sectionThree?.permitReview?.q04?.remarks }}</mat-label>
+                                </div>
+                            </div>
+                        </div>
                         <br><br>
                     </div>
                 </mat-tab>
@@ -933,7 +1666,7 @@
         </div>
     </div>
     <div mat-dialog-actions>
-        <button mat-button disabled>Terminate / Cancel Permit</button>
+        <button mat-button (click) = "this.openTerminateDialog()">Terminate / Cancel Permit</button>
         <button mat-button mat-dialog-close>Close</button>
     </div>
 </div>

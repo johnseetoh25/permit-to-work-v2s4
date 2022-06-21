@@ -116,6 +116,109 @@ export class DbService {
     cs_s3_pr_q03_choice: string,
     cs_s3_pr_q04_choice: string,
 
+    hw_s1_cmi_q01_choice: string,
+    hw_s1_cmi_q01_remarks: string,
+    hw_s1_cmi_q02_choice: string,
+    hw_s1_cmi_q02_remarks: string,
+    hw_s1_cmi_q03_choice: string,
+    hw_s1_cmi_q03_remarks: string,
+    hw_s1_cmi_q04_choice: string,
+    hw_s1_cmi_q04_remarks: string,
+    hw_s1_cmi_q05_choice: string,
+    hw_s1_cmi_q05_remarks: string,
+    hw_s1_cmi_q06_choice: string,
+    hw_s1_cmi_q06_remarks: string,
+    hw_s1_cmi_q07_choice: string,
+    hw_s1_cmi_q07_remarks: string,
+    hw_s1_cmi_q08_choice: string,
+    hw_s1_cmi_q08_remarks: string,
+    hw_s1_cmi_q09_choice: string,
+    hw_s1_cmi_q09_remarks: string,
+    hw_s1_cmi_q10_choice: string,
+    hw_s1_cmi_q10_remarks: string,
+    hw_s1_cmi_q11_choice: string,
+    hw_s1_cmi_q11_remarks: string,
+    hw_s1_cmi_q12_specify: string,
+    hw_s1_cmi_q13_specify: string,
+
+    hw_s2_a_q01_choice: string,
+    hw_s2_a_q01_remarks: string,
+
+    hw_s3_pr_q01_choice: string,
+    hw_s3_pr_q01_remarks: string,
+    hw_s3_pr_q02_choice: string,
+    hw_s3_pr_q02_remarks: string,
+    hw_s3_pr_q03_choice: string,
+    hw_s3_pr_q03_remarks: string,
+    hw_s3_pr_q04_choice: string,
+    hw_s3_pr_q04_remarks: string,
+
+    cw_s1_cmi_q01_choice: string,
+    cw_s1_cmi_q01_remarks: string,
+    cw_s1_cmi_q02_choice: string,
+    cw_s1_cmi_q02_remarks: string,
+    cw_s1_cmi_q03_choice: string,
+    cw_s1_cmi_q03_remarks: string,
+    cw_s1_cmi_q04_choice: string,
+    cw_s1_cmi_q04_remarks: string,
+    cw_s1_cmi_q05_choice: string,
+    cw_s1_cmi_q05_remarks: string,
+    cw_s1_cmi_q06_choice: string,
+    cw_s1_cmi_q06_remarks: string,
+    cw_s1_cmi_q07_choice: string,
+    cw_s1_cmi_q07_remarks: string,
+    cw_s1_cmi_q08_choice: string,
+    cw_s1_cmi_q08_remarks: string,
+    cw_s1_cmi_q09_choice: string,
+    cw_s1_cmi_q09_remarks: string,
+    cw_s1_cmi_q10_specify: string,
+    cw_s1_cmi_q11_specify: string,
+
+    cw_s2_a_q01_choice: string,
+    cw_s2_a_q01_remarks: string,
+
+    cw_s3_pr_q01_choice: string,
+    cw_s3_pr_q01_remarks: string,
+    cw_s3_pr_q02_choice: string,
+    cw_s3_pr_q02_remarks: string,
+    cw_s3_pr_q03_choice: string,
+    cw_s3_pr_q03_remarks: string,
+    cw_s3_pr_q04_choice: string,
+    cw_s3_pr_q04_remarks: string,
+
+    e_s1_cmi_q01_choice: string,
+    e_s1_cmi_q01_remarks: string,
+    e_s1_cmi_q02_choice: string,
+    e_s1_cmi_q02_remarks: string,
+    e_s1_cmi_q03_choice: string,
+    e_s1_cmi_q03_remarks: string,
+    e_s1_cmi_q04_choice: string,
+    e_s1_cmi_q04_remarks: string,
+    e_s1_cmi_q05_choice: string,
+    e_s1_cmi_q05_remarks: string,
+    e_s1_cmi_q06_choice: string,
+    e_s1_cmi_q06_remarks: string,
+    e_s1_cmi_q07_choice: string,
+    e_s1_cmi_q07_remarks: string,
+    e_s1_cmi_q08_choice: string,
+    e_s1_cmi_q08_remarks: string,
+    e_s1_cmi_q09_choice: string,
+    e_s1_cmi_q09_remarks: string,
+    e_s1_cmi_q10_specify: string,
+    e_s1_cmi_q11_specify: string,
+
+    e_s2_a_q01_choice: string,
+    e_s2_a_q01_remarks: string,
+
+    e_s3_pr_q01_choice: string,
+    e_s3_pr_q01_remarks: string,
+    e_s3_pr_q02_choice: string,
+    e_s3_pr_q02_remarks: string,
+    e_s3_pr_q03_choice: string,
+    e_s3_pr_q03_remarks: string,
+    e_s3_pr_q04_choice: string,
+    e_s3_pr_q04_remarks: string,
+
     ad1_name: string,
     ad1_nricOrFinNo: string,
     ad1_contactNo: string,
@@ -326,6 +429,242 @@ export class DbService {
               q02: cs_s3_pr_q02_choice,
               q03: cs_s3_pr_q03_choice,
               q04: cs_s3_pr_q04_choice
+            }
+          }
+        },
+        hotWork: {
+          sectionOne: {
+            controlMeasuresImplemented: {
+              q01: {
+                choice: hw_s1_cmi_q01_choice,
+                remarks: hw_s1_cmi_q01_remarks
+              },
+              q02: {
+                choice: hw_s1_cmi_q02_choice,
+                remarks: hw_s1_cmi_q02_remarks
+              },
+              q03: {
+                choice: hw_s1_cmi_q03_choice,
+                remarks: hw_s1_cmi_q03_remarks
+              },
+              q04: {
+                choice: hw_s1_cmi_q04_choice,
+                remarks: hw_s1_cmi_q04_remarks
+              },
+              q05: {
+                choice: hw_s1_cmi_q05_choice,
+                remarks: hw_s1_cmi_q05_remarks
+              },
+              q06: {
+                choice: hw_s1_cmi_q06_choice,
+                remarks: hw_s1_cmi_q06_remarks
+              },
+              q07: {
+                choice: hw_s1_cmi_q07_choice,
+                remarks: hw_s1_cmi_q07_remarks
+              },
+              q08: {
+                choice: hw_s1_cmi_q08_choice,
+                remarks: hw_s1_cmi_q08_remarks
+              },
+              q09: {
+                choice: hw_s1_cmi_q09_choice,
+                remarks: hw_s1_cmi_q09_remarks
+              },
+              q10: {
+                choice: hw_s1_cmi_q10_choice,
+                remarks: hw_s1_cmi_q10_remarks
+              },
+              q11: {
+                choice: hw_s1_cmi_q11_choice,
+                remarks: hw_s1_cmi_q11_remarks
+              },
+              q12: {
+                specify: hw_s1_cmi_q12_specify
+              },
+              q13: {
+                specify: hw_s1_cmi_q13_specify
+              }
+            }
+          },
+          sectionTwo: {
+            assessment: {
+              q01: {
+                choice: hw_s2_a_q01_choice,
+                remarks: hw_s2_a_q01_remarks
+              }
+            }
+          },
+          sectionThree: {
+            permitReview: {
+              q01: {
+                choice: hw_s3_pr_q01_choice,
+                remarks: hw_s3_pr_q01_remarks
+              },
+              q02: {
+                choice: hw_s3_pr_q02_choice,
+                remarks: hw_s3_pr_q02_remarks
+              },
+              q03: {
+                choice: hw_s3_pr_q03_choice,
+                remarks: hw_s3_pr_q03_remarks
+              },
+              q04: {
+                choice: hw_s3_pr_q04_choice,
+                remarks: hw_s3_pr_q04_remarks
+              }
+            }
+          }
+        },
+        coldWork: {
+          sectionOne: {
+            controlMeasuresImplemented: {
+              q01: {
+                choice: cw_s1_cmi_q01_choice,
+                remarks: cw_s1_cmi_q01_remarks
+              },
+              q02: {
+                choice: cw_s1_cmi_q02_choice,
+                remarks: cw_s1_cmi_q02_remarks
+              },
+              q03: {
+                choice: cw_s1_cmi_q03_choice,
+                remarks: cw_s1_cmi_q03_remarks
+              },
+              q04: {
+                choice: cw_s1_cmi_q04_choice,
+                remarks: cw_s1_cmi_q04_remarks
+              },
+              q05: {
+                choice: cw_s1_cmi_q05_choice,
+                remarks: cw_s1_cmi_q05_remarks
+              },
+              q06: {
+                choice: cw_s1_cmi_q06_choice,
+                remarks: cw_s1_cmi_q06_remarks
+              },
+              q07: {
+                choice: cw_s1_cmi_q07_choice,
+                remarks: cw_s1_cmi_q07_remarks
+              },
+              q08: {
+                choice: cw_s1_cmi_q08_choice,
+                remarks: cw_s1_cmi_q08_remarks
+              },
+              q09: {
+                choice: cw_s1_cmi_q09_choice,
+                remarks: cw_s1_cmi_q09_remarks
+              },
+              q10: {
+                specify: cw_s1_cmi_q10_specify
+              },
+              q11: {
+                specify: cw_s1_cmi_q11_specify
+              }
+            }
+          },
+          sectionTwo: {
+            assessment: {
+              q01: {
+                choice: cw_s2_a_q01_choice,
+                remarks: cw_s2_a_q01_remarks
+              }
+            }
+          },
+          sectionThree: {
+            permitReview: {
+              q01: {
+                choice: cw_s3_pr_q01_choice,
+                remarks: cw_s3_pr_q01_remarks
+              },
+              q02: {
+                choice: cw_s3_pr_q02_choice,
+                remarks: cw_s3_pr_q02_remarks
+              },
+              q03: {
+                choice: cw_s3_pr_q03_choice,
+                remarks: cw_s3_pr_q03_remarks
+              },
+              q04: {
+                choice: cw_s3_pr_q04_choice,
+                remarks: cw_s3_pr_q04_remarks
+              }
+            }
+          }
+        },
+        electrical: {
+          sectionOne: {
+            controlMeasuresImplemented: {
+              q01: {
+                choice: e_s1_cmi_q01_choice,
+                remarks: e_s1_cmi_q01_remarks
+              },
+              q02: {
+                choice: e_s1_cmi_q02_choice,
+                remarks: e_s1_cmi_q02_remarks
+              },
+              q03: {
+                choice: e_s1_cmi_q03_choice,
+                remarks: e_s1_cmi_q03_remarks
+              },
+              q04: {
+                choice: e_s1_cmi_q04_choice,
+                remarks: e_s1_cmi_q04_remarks
+              },
+              q05: {
+                choice: e_s1_cmi_q05_choice,
+                remarks: e_s1_cmi_q05_remarks
+              },
+              q06: {
+                choice: e_s1_cmi_q06_choice,
+                remarks: e_s1_cmi_q06_remarks
+              },
+              q07: {
+                choice: e_s1_cmi_q07_choice,
+                remarks: e_s1_cmi_q07_remarks
+              },
+              q08: {
+                choice: e_s1_cmi_q08_choice,
+                remarks: e_s1_cmi_q08_remarks
+              },
+              q09: {
+                choice: e_s1_cmi_q09_choice,
+                remarks: e_s1_cmi_q09_remarks
+              },
+              q10: {
+                specify: e_s1_cmi_q10_specify
+              },
+              q11: {
+                specify: e_s1_cmi_q11_specify
+              }
+            }
+          },
+          sectionTwo: {
+            assessment: {
+              q01: {
+                choice: e_s2_a_q01_choice,
+                remarks: e_s2_a_q01_remarks
+              }
+            }
+          },
+          sectionThree: {
+            permitReview: {
+              q01: {
+                choice: e_s3_pr_q01_choice,
+                remarks: e_s3_pr_q01_remarks
+              },
+              q02: {
+                choice: e_s3_pr_q02_choice,
+                remarks: e_s3_pr_q02_remarks
+              },
+              q03: {
+                choice: e_s3_pr_q03_choice,
+                remarks: e_s3_pr_q03_remarks
+              },
+              q04: {
+                choice: e_s3_pr_q04_choice,
+                remarks: e_s3_pr_q04_remarks
+              }
             }
           }
         },
