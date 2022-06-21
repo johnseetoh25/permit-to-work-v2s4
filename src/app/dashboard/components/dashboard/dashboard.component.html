@@ -1,0 +1,24 @@
+<header>
+    <p>
+        <mat-toolbar class = "applicant-toolbar">
+            <mat-toolbar-row>
+                <mat-icon style = "color: rgb(25, 25, 25)">dashboard</mat-icon><span id = "toolbar-title">&emsp;DASHBOARD</span>
+                <span class = "spacer"></span>
+                <span id = "signed-in-as-label">Signed in as []</span>
+                <button mat-icon-button class = "toolbar-menu-button" [matMenuTriggerFor] = "applicantMenu" aria-label = "Applicant toolbar menu">
+                    <mat-icon>menu</mat-icon>
+                </button>
+                <mat-menu #applicantMenu = "matMenu">
+                    <button mat-menu-item (click) = "this.navigateTo('')">
+                        <mat-icon>book</mat-icon>
+                        <span>Tracking Log (Manage Requests)</span>
+                    </button>
+                    <button mat-menu-item (click) = "this.openSignOutDialogue()">
+                        <mat-icon>exit_to_app</mat-icon>
+                        <span>Sign Out</span>
+                    </button>
+                </mat-menu>
+            </mat-toolbar-row>
+        </mat-toolbar>
+    </p>
+</header>

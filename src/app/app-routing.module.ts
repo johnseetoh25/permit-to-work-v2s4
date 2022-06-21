@@ -23,6 +23,14 @@ const routes: Routes = [
     loadChildren: () => import('./ptw-details/ptw-details.module').then(module => module.PtwDetailsModule)
   },
   {
+    path: 'validator-sign-in',
+    loadChildren: () => import('./validator-sign-in/validator-sign-in.module').then(module => module.ValidatorSignInModule)
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module').then(module => module.DashboardModule)
+  },
+  {
     path: '',
     redirectTo: 'landing',
     pathMatch: 'full'

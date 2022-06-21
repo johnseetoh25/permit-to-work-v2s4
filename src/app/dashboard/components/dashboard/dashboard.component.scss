@@ -1,0 +1,25 @@
+.content-body {
+    padding-top: 8px;
+    margin: 16px;
+    padding-bottom: 16px;
+}
+
+.applicant-toolbar {
+    background-color: rgb(207, 218, 228);
+}
+
+mat-grid-list {
+    margin: 8px;
+}
+
+mat-grid-tile {
+    background-color: white;
+}
+
+#toolbar-title, #signed-in-as-label {
+    font-size: medium;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}

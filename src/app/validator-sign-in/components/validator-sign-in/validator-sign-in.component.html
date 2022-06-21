@@ -1,0 +1,49 @@
+<header>
+    <p>
+        <mat-toolbar class = "applicant-toolbar">
+            <mat-toolbar-row>
+                <mat-icon style = "color: rgb(25, 25, 25)">supervisor_account</mat-icon><span id = "toolbar-title">&emsp;VALIDATOR SIGN-IN</span>
+                <span class = "spacer"></span>
+                    <button mat-icon-button class = "toolbar-menu-button" [matMenuTriggerFor] = "applicantMenu" aria-label = "Applicant toolbar menu">
+                        <mat-icon>menu</mat-icon>
+                    </button>
+                    <mat-menu #applicantMenu = "matMenu">
+                        <button mat-menu-item (click) = "this.navigateTo('tracking-log')">
+                            <mat-icon>book</mat-icon>
+                            <span>Tracking Log</span>
+                        </button>
+                        <button mat-menu-item (click) = "this.navigateTo('')">
+                            <mat-icon>home</mat-icon>
+                            <span>Home</span>
+                        </button>
+                    </mat-menu>
+            </mat-toolbar-row>
+        </mat-toolbar>
+    </p>
+</header>
+<div class = "content-body">
+    <div class = "landing-title">
+        <h2>Permit-to-Work (PTW)</h2>
+        <h3>E-Management System</h3>
+    </div>
+    <div class = "sign-in-body">
+        <br>
+        <p>Sign-in as validator</p>
+        <br>
+        <form class = "sign-in-form" [formGroup] = "validatorSignInFormGroup" (ngSubmit) = "onSubmit()">
+            <mat-form-field class = "user-email-input" appearance = "fill">
+                <mat-label>User ID</mat-label>
+                <input matInput required formControlName = "userId" placeholder = "Enter user ID" (change) = "this.userIdInput = this.validatorSignInFormGroup.get('userId')?.value;">
+            </mat-form-field>
+            <br>
+            <mat-form-field class = "user-pw-input" appearance = "fill">
+                <mat-label>Password</mat-label>
+                <input matInput required type = "password" formControlName = "userPw" placeholder = "Enter password" (change) = "this.userPwInput = this.validatorSignInFormGroup.get('userPw')?.value;">
+            </mat-form-field>
+            <br>
+            <button [disabled] = "this.auth.signingIn" class = "sign-in-button" mat-raised-button color = "primary">Sign-in</button>
+            <br>
+            <button class = "back-button" (click) = "this.navigateTo('landing')" routerLinkActive = "active" mat-raised-button color = "primary">Back</button>
+        </form>
+    </div>
+</div>

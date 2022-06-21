@@ -22,7 +22,7 @@
     </p>
 </header>
 <div class = "content-body">
-    <mat-stepper #stepper linear = "false">
+    <mat-stepper #stepper linear = "true">
         <mat-step [stepControl] = "this.sectionOneAFormGroup" [errorMessage] = "this.errorMessage">
             <form class = "common-section-form" [formGroup] = "this.sectionOneAFormGroup">
                 <ng-template matStepLabel>Section I (A): Basic Information</ng-template>

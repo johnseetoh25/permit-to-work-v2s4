@@ -17,7 +17,7 @@
                     class = "rft-option" 
                     *ngFor = "let reason of this.reasonsForTermination" 
                     [value] = "reason"
-                    (change) = "this.determineNewPermitStatus(reason)">
+                    (change) = "this.determineNewPermitStatus(reason); this.typeToConfirmInput = ''">
                     <mat-label *ngIf = "reason == 'Completed'">Job is completed</mat-label>
                     <mat-label *ngIf = "reason == 'Overtime'">Job is overtime / expired</mat-label>
                     <mat-label *ngIf = "reason == 'Condition Changed'">Change in condition</mat-label>

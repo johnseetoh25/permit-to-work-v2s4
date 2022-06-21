@@ -35,7 +35,7 @@ export class TrackingLogComponent implements OnInit {
   ];
 
   public pageLength: number = 1000;
-  public pageSize: number = 10;
+  public pageSize: number = 100;
   public pageSizeOptions: number[] = [5, 10, 25, 100];
 
   public sortedData: IPermitToWork[] = [];
