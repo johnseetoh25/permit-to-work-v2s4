@@ -28,7 +28,6 @@ export class SubmitDialogComponent implements OnInit {
 
     this.ptwReqToSubmit = this.injectedPartiallyCompletedPTWForm;
     this.postPtwReq(this.ptwReqToSubmit);
-    console.log(this.ptwReqToSubmit);
   }
 
   public postPtwReq(toSubmit: IPermitToWork): void {

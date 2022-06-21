@@ -1739,7 +1739,7 @@ export class PtwRequestComponent implements OnInit {
       },
       dailyEndorsement: { },
       ptwStatus: {
-        permitStatus: PermitStatus.STATUS_YET_INVALID,
+        permitStatus: PermitStatus.STATUS_INVALID,
         taskStatus: TaskStatus.STATUS_NOT_STARTED,
         remarks: DefaultValues.VALUE_NONE,
         checked: false,

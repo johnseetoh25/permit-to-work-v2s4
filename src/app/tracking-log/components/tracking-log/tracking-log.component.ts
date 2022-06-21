@@ -44,7 +44,7 @@ export class TrackingLogComponent implements OnInit {
   constructor(
     private db: DbService,
     public dialog: MatDialog, 
-    public dialogRefPtwDets : MatDialogRef<PtwDetailsComponent>,
+    public dialogRefPtwDets: MatDialogRef<PtwDetailsComponent>,
     private router: Router,
     private msg: MessageService
   ) { }
@@ -55,7 +55,7 @@ export class TrackingLogComponent implements OnInit {
 
   public refresh(): void {
     this.db.fetch()
-      .subscribe((data : IPermitToWork[]) => {
+      .subscribe((data: IPermitToWork[]) => {
         console.log(data);
         this.sortedData = data;
         this.activePageSortedData = this.sortedData.slice(0, this.pageSize);

@@ -12,14 +12,14 @@
         <div class = "status-cols">
             <div id = "status-col">
                 <div>
-                    <mat-label>Request status</mat-label>
+                    <mat-label>Preliminary request status</mat-label>
                 </div>
                 <div>
                     <mat-label>
                         <h3 [ngStyle] = "
                         dt.requestStatus == 'Pending' ? { color: 'grey' } :
                         dt.requestStatus == 'Approved' ? { color: 'green' } : 
-                        dt.requestStatus == 'Rejected' ? { color: 'red' } : 
+                        dt.requestStatus == 'Rejected' ? { color: 'maroon' } : 
                         { color: '' }
                         ">{{ dt.requestStatus | uppercase }}</h3>
                     </mat-label>
@@ -27,23 +27,7 @@
             </div>
             <div id = "status-col">
                 <div>
-                    <mat-label>Permit status</mat-label>
-                </div>
-                <div>
-                    <mat-label>
-                        <h3 [ngStyle] = "
-                        dt.ptwStatus?.permitStatus == 'Invalid' ? { color: 'grey' } :
-                        dt.ptwStatus?.permitStatus == 'Valid' ? { color: 'green' } : 
-                        dt.ptwStatus?.permitStatus == 'Terminated' ? { color: 'red' } : 
-                        dt.ptwStatus?.permitStatus == 'Expired' ? { color: 'red' } : 
-                        { color: '' }
-                        ">{{ dt.ptwStatus?.permitStatus | uppercase }}</h3>
-                    </mat-label>
-                </div>
-            </div>
-            <div id = "status-col">
-                <div>
-                    <mat-label>Task status</mat-label>
+                    <mat-label>Current task status</mat-label>
                 </div>
                 <div>
                     <mat-label>
@@ -51,10 +35,27 @@
                         dt.ptwStatus?.taskStatus == 'Not Started' ? { color: 'grey' } : 
                         dt.ptwStatus?.taskStatus == 'In Progress' ? { color: '' } : 
                         dt.ptwStatus?.taskStatus == 'Completed' ? { color: 'green' } : 
-                        dt.ptwStatus?.taskStatus == 'Terminated' ? { color: 'red' } : 
-                        dt.ptwStatus?.taskStatus == 'Expired' ? { color: 'red' } : 
+                        dt.ptwStatus?.taskStatus == 'Condition Changed' ? { color: 'darkgoldenrod' } : 
+                        dt.ptwStatus?.taskStatus == 'Overtime' ? { color: 'maroon' } : 
                         { color: '' }
                         ">{{ dt.ptwStatus?.taskStatus | uppercase }}</h3>
+                    </mat-label>
+                </div>
+            </div>
+            <div id = "status-col">
+                <div>
+                    <mat-label>Current permit status</mat-label>
+                </div>
+                <div>
+                    <mat-label>
+                        <h3 [ngStyle] = "
+                        dt.ptwStatus?.permitStatus == 'Invalid' ? { color: 'grey' } :
+                        dt.ptwStatus?.permitStatus == 'Valid' ? { color: 'green' } : 
+                        dt.ptwStatus?.permitStatus == 'Terminated' ? { color: 'maroon' } : 
+                        dt.ptwStatus?.permitStatus == 'Expired' ? { color: 'maroon' } : 
+                        dt.ptwStatus?.permitStatus == 'Closed' ? { color: 'firebrick' } : 
+                        { color: '' }
+                        ">{{ dt.ptwStatus?.permitStatus | uppercase }}</h3>
                     </mat-label>
                 </div>
             </div>
@@ -75,33 +76,43 @@
             </div>
         </div>
         <br>
-        <div>
-            <mat-label id = "label-text">&emsp;Application date:&emsp;</mat-label><mat-label>{{ this.submissionTimestampDisplay | date: "mediumDate" }}</mat-label>
+        <div class = "req-cancel-cols">
+            <div 
+                id = "req-cancel-col"
+                style = "
+                    padding: 1px; 
+                    background-color: cornflowerblue; 
+                    color: white; 
+                    text-align: center;
+                    border-width: 2.5px;
+                    border-radius: 5px;
+                ">
+                <mat-label>Requested on </mat-label>
+                <mat-label id = "label-text">{{ this.submissionTimestampDisplay | date: "mediumDate" }}</mat-label>
+            </div>
+            <div 
+                id = "req-cancel-col" 
+                style = "
+                    padding: 1px; 
+                    background-color: brown; 
+                    color: white; 
+                    text-align: center;
+                    border-width: 2.5px;
+                    border-radius: 5px;
+                "
+                *ngIf = "
+                    dt.ptwStatus.permitStatus == 'Closed' || 
+                    dt.ptwStatus.permitStatus == 'Terminated' || 
+                    dt.ptwStatus.permitStatus == 'Expired'
+                ">
+                <mat-label>Ceased to effect on </mat-label>
+                <mat-label id = "label-text">{{ this.cancellationTimestampDisplay | date: "mediumDate" }}</mat-label>
+            </div>
         </div>
-        <br>
-        <mat-divider></mat-divider>
-        <div class = "apl-dets-cols">
-            <div id = "apl-dets-col">
-                <mat-label id = "label-text">Requested by:&emsp;</mat-label>
-                <mat-label>{{ dt.applicantDets?.name }}</mat-label>
-                <br><br>
-                <mat-label id = "label-text">NRIC / FIN no.:&emsp;</mat-label><mat-label>{{ dt.applicantDets?.nricOrFinNo }}</mat-label>
-            </div>
-            <div id = "apl-dets-col">
-                <div *ngIf = "dt.applicantDets?.orgType == 'External'"><mat-label id = "label-text">Organisation:&emsp;</mat-label>
-                    <mat-label>{{ dt.applicantDets?.orgName }} ({{ dt.applicantDets?.orgType }})</mat-label></div>
-                <div *ngIf = "dt.applicantDets?.orgType == 'Internal'"><mat-label id = "label-text">Organisation:&emsp;</mat-label>
-                    <mat-label>Internal</mat-label></div>
-                <br>
-                <mat-label id = "label-text">Department:&emsp;</mat-label><mat-label>{{ dt.applicantDets?.depName }}</mat-label>
-            </div>
-            <div id = "apl-dets-col">
-                <mat-label style = "font-weight: 450;">Contact no.:&emsp;</mat-label>
-                <mat-label>{{ dt.applicantDets?.contactNo }}</mat-label>
-                <br><br>
-                <mat-label style = "font-weight: 450;">Email address:&emsp;</mat-label>
-                <mat-label>{{ dt.applicantDets?.email }}</mat-label>
-            </div>
+        <div style = "color: brown;" *ngIf = "dt.ptwStatus?.taskStatus == 'Condition Changed'">
+            <br>
+            <mat-label id = "label-text">Specific condition change(s):&emsp;</mat-label>
+            <mat-label>{{ dt.ptwStatus?.remarks }}</mat-label>
         </div>
         <br>
         <mat-divider></mat-divider>
@@ -111,14 +122,41 @@
                 <mat-tab label = "Applicant Info">
                     <div id = "scrollable-tc">
                         <br>
+                        <mat-label id = "label-text">&emsp;WORK / TASK DETAILS</mat-label>
+                        <br><br>
                         <mat-label id = "label-text">&emsp;Location of work:&emsp;</mat-label><mat-label>{{ dt.locationOfWork?.main }}</mat-label>
                         <br><br>
                         <mat-label id = "label-text">&emsp;Subsector:&emsp;</mat-label><mat-label>{{ dt.locationOfWork?.sub }}</mat-label>
                         <br><br>
-                        <mat-label id = "label-text">&emsp;Working time:&emsp;</mat-label>
+                        <mat-label id = "label-text">&emsp;Working time (permit effective period):&emsp;</mat-label>
                         <mat-label>{{ dt.startWorkingDateTime | date: "medium" }} - {{ dt.endWorkingDateTime | date: "medium" }}</mat-label>
                         <br><br>
                         <mat-label id = "label-text">&emsp;Task description:&emsp;</mat-label><mat-label>{{ dt.taskDescription }}</mat-label>
+                        <br><br>
+                        <mat-divider></mat-divider>
+                        <br>
+                        <mat-label id = "label-text">&emsp;PERSONNEL DETAILS</mat-label>
+                        <br><br>
+                        <mat-label><mat-label id = "label-text">&emsp;Applicant name:&emsp;</mat-label>{{ dt.applicantDets?.name }}</mat-label>
+                        <br><br>
+                        <mat-label id = "label-text">&emsp;Applicant NRIC / FIN no.:&emsp;</mat-label><mat-label>{{ dt.applicantDets?.nricOrFinNo }}</mat-label>
+                        <br><br>
+                        <div *ngIf = "dt.applicantDets?.orgType == 'External'">
+                            <mat-label id = "label-text">&emsp;Applicant organisation:&emsp;</mat-label>
+                            <mat-label>{{ dt.applicantDets?.orgName }} ({{ dt.applicantDets?.orgType }})</mat-label>
+                        </div>
+                        <div *ngIf = "dt.applicantDets?.orgType == 'Internal'">
+                            <mat-label id = "label-text">&emsp;Applicant organisation:&emsp;</mat-label>
+                            <mat-label>Internal</mat-label>
+                        </div>
+                        <br>
+                        <mat-label id = "label-text">&emsp;Applicant department:&emsp;</mat-label><mat-label>{{ dt.applicantDets?.depName }}</mat-label>
+                        <br><br>
+                        <mat-label style = "font-weight: 450;">&emsp;Applicant contact no.:&emsp;</mat-label>
+                        <mat-label>{{ dt.applicantDets?.contactNo }}</mat-label>
+                        <br><br>
+                        <mat-label style = "font-weight: 450;">&emsp;Applicant email address:&emsp;</mat-label>
+                        <mat-label>{{ dt.applicantDets?.email }}</mat-label>
                         <br><br>
                         <mat-label id = "label-text">&emsp;Additional attendant details:&emsp;</mat-label>
                         <br><br>
@@ -980,7 +1018,7 @@
                                         <mat-icon style = "color: darkgreen;">done_all</mat-icon><mat-label style = "color: darkgreen; font-weight: 450;">PASSED</mat-label>
                                     </div>
                                     <div *ngIf = "dt.safetyAssessorEvaluation?.name != 'None' && !dt.safetyAssessorEvaluation?.passed">
-                                        <mat-icon style = "color: crimson;">clear</mat-icon><mat-label style = "color: crimson; font-weight: 450;">NOT PASSED</mat-label>
+                                        <mat-icon style = "color: maroon;">clear</mat-icon><mat-label style = "color: maroon; font-weight: 450;">NOT PASSED</mat-label>
                                     </div>
                                     <div *ngIf = "dt.safetyAssessorEvaluation?.name == 'None' && !dt.safetyAssessorEvaluation?.passed">
                                         <mat-icon style = "color: grey;">priority_high</mat-icon><mat-label style = "color: grey; font-weight: 450;">NOT YET EVALUATED</mat-label>
@@ -1308,7 +1346,7 @@
                     <div id = "scrollable-tc">
                         <div class = "am-note-cols">
                             <mat-label id = "label-text">NOTE:&emsp;</mat-label>
-                            <mat-label style = "color: maroon">This section IS and HAS to be assessed by an AUTHORISED MANAGER to finalise the permit approval and issuance. If this permit is approved, it will become valid, and may be used to proceed with the work assignment.</mat-label>
+                            <mat-label style = "color: maroon">This section IS and HAS to be assessed by an AUTHORISED MANAGER to finalise the permit approval and issuance. If this permit is approved, it will immediately become valid, and may be used to proceed with the work assignment.</mat-label>
                         </div>
                         <div class = "am-note-cols">
                             <div id = "am-note-col">
@@ -1666,7 +1704,16 @@
         </div>
     </div>
     <div mat-dialog-actions>
-        <button mat-button (click) = "this.openTerminateDialog()">Terminate / Cancel Permit</button>
+        <button 
+            mat-button 
+            color = "warn"
+            [disabled] = "
+                (dt.requestStatus != 'Approved' &&
+                dt.ptwStatus.taskStatus != 'In Progress' &&
+                dt.ptwStatus.permitStatus != 'Valid') ||
+                dt.ptwStatus.checked
+            "
+            (click) = "this.openTerminateDialog()">Close / Terminate this Permit</button>
         <button mat-button mat-dialog-close>Close</button>
     </div>
 </div>

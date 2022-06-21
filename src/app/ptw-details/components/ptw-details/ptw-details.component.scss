@@ -1,5 +1,6 @@
 .ptw-request-details-dialog {
     width: 1000px;
+    height: 50%;
 }
 
 .tab-content {
@@ -39,6 +40,15 @@
 #status-col {
     float: left;
     width: 225px;
+}
+
+.req-cancel-cols {
+    overflow: hidden;
+}
+
+#req-cancel-col {
+    float: left;
+    width: 300px;
 }
 
 .apl-dets-cols {
