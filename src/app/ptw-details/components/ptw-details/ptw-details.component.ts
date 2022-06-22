@@ -15,6 +15,8 @@ export class PtwDetailsComponent implements OnInit {
   
   public submissionTimestampDisplay: Date = new Date();
   public cancellationTimestampDisplay: Date = new Date();
+  public evaluatedTimestampDisplay: Date = new Date();
+  public authorisedTimestampDisplay: Date = new Date();
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public fetchedId: any,
@@ -27,6 +29,12 @@ export class PtwDetailsComponent implements OnInit {
       this.submissionTimestampDisplay = new Date(this.targetPtw[0].timestamp);
       if (this.targetPtw[0].ptwStatus.timestamp != DefaultValues.VALUE_NONE) {
         this.cancellationTimestampDisplay = new Date(this.targetPtw[0].ptwStatus.timestamp);
+      }
+      if (this.targetPtw[0].safetyAssessorEvaluation.timestamp != DefaultValues.VALUE_NONE) {
+        this.evaluatedTimestampDisplay = new Date(this.targetPtw[0].safetyAssessorEvaluation.timestamp);
+      }
+      if (this.targetPtw[0].authorisedManagerApproval.timestamp != DefaultValues.VALUE_NONE) {
+        this.authorisedTimestampDisplay = new Date(this.targetPtw[0].authorisedManagerApproval.timestamp);
       }
     });
   }

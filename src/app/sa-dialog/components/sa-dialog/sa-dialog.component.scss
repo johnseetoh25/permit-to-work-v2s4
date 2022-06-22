@@ -6,6 +6,10 @@
     height: 500px;
 }
 
+.mat-dialog-actions {
+    justify-content: flex-end;
+}
+
 .required-label {
     color: crimson;
 }
@@ -20,13 +24,12 @@
 }
 
 .wah-s2-acm-remarks-input {
+    width: 350px;
     height: 10px;
 }
-
-.wah-s2-acm-remarks-input {
-    width: 50%;
-}
-
-#acm-left-col, #acm-right-col {
-    width: 100%;
+.cs-s2-gmr-input, 
+.hw-s2-a-remarks-input, 
+.cw-s2-a-remarks-input, 
+.e-s2-a-remarks-input {
+    width: 350px;
 }

@@ -1,1 +1,583 @@
-<p>am-dialog works!</p>
+<div class = "dialog-box">
+    <h2 mat-dialog-title>Authorised Manager Approval</h2>
+    <br>
+    <div *ngFor = "let dt of this.fetched.ptw">
+        <div mat-dialog-content *ngIf = "dt.permitType == 'Work at height (WAH)'">
+            <mat-label class = "required-label">* Required field</mat-label>
+            <br><br>
+            <mat-label id = "label-text">PERMIT REVIEW</mat-label>
+            <br><br>
+            <div>
+                <div>
+                    <mat-label>Proper permit-to-work evaluation has been completed.*</mat-label>
+                    <br><br>
+                </div>
+                <div>
+                    <mat-radio-group 
+                        required 
+                        aria-label = "Select an option" 
+                        [(ngModel)] = "this.wah_s3_pr_q01_choiceInput">
+                        <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                            {{ rads }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div>
+                    <mat-form-field class = "wah-s3-pr-remarks-input" appearance = "outline">
+                        <mat-label>Remarks</mat-label>
+                        <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.wah_s3_pr_q01_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                    </mat-form-field>
+                </div>
+            </div>
+            <br><br>
+            <div>
+                <div>
+                    <mat-label>No incompatible works that may pose additional hazards.*</mat-label>
+                    <br><br>
+                </div>
+                <div>
+                    <mat-radio-group 
+                        required 
+                        aria-label = "Select an option" 
+                        [(ngModel)] = "this.wah_s3_pr_q02_choiceInput">
+                        <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                            {{ rads }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div>
+                    <mat-form-field class = "wah-s3-pr-remarks-input" appearance = "outline">
+                        <mat-label>Remarks</mat-label>
+                        <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.wah_s3_pr_q02_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                    </mat-form-field>
+                </div>
+            </div>
+            <br><br>
+            <div>
+                <div>
+                    <mat-label>Control measures have been implemented effectively.*</mat-label>
+                    <br><br>
+                </div>
+                <div>
+                    <mat-radio-group 
+                        required 
+                        aria-label = "Select an option" 
+                        [(ngModel)] = "this.wah_s3_pr_q03_choiceInput">
+                        <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                            {{ rads }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div>
+                    <mat-form-field class = "wah-s3-pr-remarks-input" appearance = "outline">
+                        <mat-label>Remarks</mat-label>
+                        <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.wah_s3_pr_q03_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                    </mat-form-field>
+                </div>
+            </div>
+            <br><br>
+            <div>
+                <div>
+                    <mat-label>Fall from heights risks have been effectively mitigated.*</mat-label>
+                    <br><br>
+                </div>
+                <div>
+                    <mat-radio-group 
+                        required 
+                        aria-label = "Select an option" 
+                        [(ngModel)] = "this.wah_s3_pr_q04_choiceInput">
+                        <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                            {{ rads }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div>
+                    <mat-form-field class = "wah-s3-pr-remarks-input" appearance = "outline">
+                        <mat-label>Remarks</mat-label>
+                        <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.wah_s3_pr_q04_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                    </mat-form-field>
+                </div>
+            </div>
+            <br><br>
+            <mat-divider></mat-divider>
+            <br>
+            <mat-label id = "label-text">DECLARATION</mat-label>
+            <br><br>
+            <div>
+                <mat-checkbox [(ngModel)] = "this.authorisedManagerReviewPassed">
+                    <mat-label>
+                        I authorise the work at heights to the conditions and duration stated in this permit.
+                    </mat-label>
+                </mat-checkbox>
+            </div>
+        </div>
+        <div mat-dialog-content *ngIf = "dt.permitType == 'Confined space (CS)'">
+            <mat-label class = "required-label">* Required field</mat-label>
+            <br><br>
+            <mat-label id = "label-text">PERMIT REVIEW</mat-label>
+            <br><br>
+            <div>
+                <div>
+                    <mat-label>The levels of oxygen, flammable gas and toxic substances are within the permissible range.*<br>(Refer to EVALUATION STATUS tab)</mat-label>
+                    <br><br>
+                </div>
+                <div>
+                    <mat-radio-group 
+                        required 
+                        aria-label = "Select an option" 
+                        [(ngModel)] = "this.cs_s3_pr_q01_choiceInput">
+                        <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                            {{ rads }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+            <br>
+            <div>
+                <div>
+                    <mat-label>The confined space is adequately	ventilated.*</mat-label>
+                    <br><br>
+                </div>
+                <div>
+                    <mat-radio-group 
+                        required 
+                        aria-label = "Select an option" 
+                        [(ngModel)] = "this.cs_s3_pr_q02_choiceInput">
+                        <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                            {{ rads }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+            <br>
+            <div>
+                <div>
+                    <mat-label>Effective steps have been taken to prevent any ingress of dangerous gases, vapours or any other dangerous substances into the confined space.*</mat-label>
+                    <br><br>
+                </div>
+                <div>
+                    <mat-radio-group 
+                        required 
+                        aria-label = "Select an option" 
+                        [(ngModel)] = "this.cs_s3_pr_q03_choiceInput">
+                        <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                            {{ rads }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+            <br>
+            <div>
+                <div>
+                    <mat-label>All reasonably practicable measures have been taken to ensure the safety and health of persons who will be entering or working in the confined space.*</mat-label>
+                    <br><br>
+                </div>
+                <div>
+                    <mat-radio-group 
+                        required 
+                        aria-label = "Select an option" 
+                        [(ngModel)] = "this.cs_s3_pr_q04_choiceInput">
+                        <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                            {{ rads }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+            <br>
+            <mat-divider></mat-divider>
+            <br>
+            <mat-label id = "label-text">DECLARATION</mat-label>
+            <br><br>
+            <div>
+                <mat-checkbox [(ngModel)] = "this.authorisedManagerReviewPassed">
+                    <mat-label>
+                        I authorise the confined space to the conditions and duration stated in this permit.
+                    </mat-label>
+                </mat-checkbox>
+            </div>
+        </div>
+        <div mat-dialog-content *ngIf = "dt.permitType == 'Hot work (HW)'">
+            <mat-label class = "required-label">* Required field</mat-label>
+            <br><br>
+            <mat-label id = "label-text">PERMIT REVIEW</mat-label>
+            <br><br>
+            <div>
+                <div>
+                    <mat-label>Proper permit-to-work evaluation has been completed.*</mat-label>
+                    <br><br>
+                </div>
+                <div>
+                    <mat-radio-group 
+                        required 
+                        aria-label = "Select an option" 
+                        [(ngModel)] = "this.hw_s3_pr_q01_choiceInput">
+                        <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                            {{ rads }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div>
+                    <mat-form-field class = "hw-s3-pr-remarks-input" appearance = "outline">
+                        <mat-label>Remarks</mat-label>
+                        <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.hw_s3_pr_q01_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <mat-label>No incompatible works that may pose additional hazards.*</mat-label>
+                    <br><br>
+                </div>
+                <div>
+                    <mat-radio-group 
+                        required 
+                        aria-label = "Select an option" 
+                        [(ngModel)] = "this.hw_s3_pr_q02_choiceInput">
+                        <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                            {{ rads }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div>
+                    <mat-form-field class = "hw-s3-pr-remarks-input" appearance = "outline">
+                        <mat-label>Remarks</mat-label>
+                        <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.hw_s3_pr_q02_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <mat-label>Control measures have been implemented effectively.*</mat-label>
+                    <br><br>
+                </div>
+                <div>
+                    <mat-radio-group 
+                        required 
+                        aria-label = "Select an option" 
+                        [(ngModel)] = "this.hw_s3_pr_q03_choiceInput">
+                        <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                            {{ rads }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div>
+                    <mat-form-field class = "hw-s3-pr-remarks-input" appearance = "outline">
+                        <mat-label>Remarks</mat-label>
+                        <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.hw_s3_pr_q03_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <mat-label>Hot work risks have been effectively mitigated.*</mat-label>
+                    <br><br>
+                </div>
+                <div>
+                    <mat-radio-group 
+                        required 
+                        aria-label = "Select an option" 
+                        [(ngModel)] = "this.hw_s3_pr_q04_choiceInput">
+                        <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                            {{ rads }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div>
+                    <mat-form-field class = "hw-s3-pr-remarks-input" appearance = "outline">
+                        <mat-label>Remarks</mat-label>
+                        <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.hw_s3_pr_q04_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                    </mat-form-field>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <br>
+            <mat-label id = "label-text">DECLARATION</mat-label>
+            <br><br>
+            <div>
+                <mat-checkbox [(ngModel)] = "this.authorisedManagerReviewPassed">
+                    <mat-label>
+                        I authorise the hot work to the conditions and duration stated in this permit.
+                    </mat-label>
+                </mat-checkbox>
+            </div>
+        </div>
+        <div mat-dialog-content *ngIf = "dt.permitType == 'Cold work (CW)'">
+            <mat-label class = "required-label">* Required field</mat-label>
+            <br><br>
+            <mat-label id = "label-text">PERMIT REVIEW</mat-label>
+            <br><br>
+            <div>
+                <div>
+                    <mat-label>Proper permit-to-work evaluation has been completed.*</mat-label>
+                    <br><br>
+                </div>
+                <div>
+                    <mat-radio-group 
+                        required 
+                        aria-label = "Select an option" 
+                        [(ngModel)] = "this.cw_s3_pr_q01_choiceInput">
+                        <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                            {{ rads }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div>
+                    <mat-form-field class = "cw-s3-pr-remarks-input" appearance = "outline">
+                        <mat-label>Remarks</mat-label>
+                        <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.cw_s3_pr_q01_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <mat-label>No incompatible works that may pose additional hazards.*</mat-label>
+                    <br><br>
+                </div>
+                <div>
+                    <mat-radio-group 
+                        required 
+                        aria-label = "Select an option" 
+                        [(ngModel)] = "this.cw_s3_pr_q02_choiceInput">
+                        <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                            {{ rads }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div>
+                    <mat-form-field class = "cw-s3-pr-remarks-input" appearance = "outline">
+                        <mat-label>Remarks</mat-label>
+                        <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.cw_s3_pr_q02_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <mat-label>Control measures have been implemented effectively.*</mat-label>
+                    <br><br>
+                </div>
+                <div>
+                    <mat-radio-group 
+                        required 
+                        aria-label = "Select an option" 
+                        [(ngModel)] = "this.cw_s3_pr_q03_choiceInput">
+                        <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                            {{ rads }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div>
+                    <mat-form-field class = "cw-s3-pr-remarks-input" appearance = "outline">
+                        <mat-label>Remarks</mat-label>
+                        <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.cw_s3_pr_q03_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <mat-label>Cold work risks have been effectively mitigated.*</mat-label>
+                    <br><br>
+                </div>
+                <div>
+                    <mat-radio-group 
+                        required 
+                        aria-label = "Select an option" 
+                        [(ngModel)] = "this.cw_s3_pr_q04_choiceInput">
+                        <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                            {{ rads }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div>
+                    <mat-form-field class = "cw-s3-pr-remarks-input" appearance = "outline">
+                        <mat-label>Remarks</mat-label>
+                        <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.cw_s3_pr_q04_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                    </mat-form-field>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <br>
+            <mat-label id = "label-text">DECLARATION</mat-label>
+            <br><br>
+            <div>
+                <mat-checkbox [(ngModel)] = "this.authorisedManagerReviewPassed">
+                    <mat-label>
+                        I authorise the cold work to the conditions and duration stated in this permit.
+                    </mat-label>
+                </mat-checkbox>
+            </div>
+        </div>
+        <div mat-dialog-content *ngIf = "dt.permitType == 'Electrical (E)'">
+            <mat-label class = "required-label">* Required field</mat-label>
+            <br><br>
+            <mat-label id = "label-text">PERMIT REVIEW</mat-label>
+            <br><br>
+            <div>
+                <div>
+                    <mat-label>Proper permit-to-work evaluation has been completed.*</mat-label>
+                    <br><br>
+                </div>
+                <div>
+                    <mat-radio-group 
+                        required 
+                        aria-label = "Select an option" 
+                        [(ngModel)] = "this.e_s3_pr_q01_choiceInput">
+                        <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                            {{ rads }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div>
+                    <mat-form-field class = "e-s3-pr-remarks-input" appearance = "outline">
+                        <mat-label>Remarks</mat-label>
+                        <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.e_s3_pr_q01_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <mat-label>No incompatible works that may pose additional hazards.*</mat-label>
+                    <br><br>
+                </div>
+                <div>
+                    <mat-radio-group 
+                        required 
+                        aria-label = "Select an option" 
+                        [(ngModel)] = "this.e_s3_pr_q02_choiceInput">
+                        <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                            {{ rads }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div>
+                    <mat-form-field class = "e-s3-pr-remarks-input" appearance = "outline">
+                        <mat-label>Remarks</mat-label>
+                        <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.e_s3_pr_q02_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <mat-label>Control measures have been implemented effectively.*</mat-label>
+                    <br><br>
+                </div>
+                <div>
+                    <mat-radio-group 
+                        required 
+                        aria-label = "Select an option" 
+                        [(ngModel)] = "this.e_s3_pr_q03_choiceInput">
+                        <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                            {{ rads }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div>
+                    <mat-form-field class = "e-s3-pr-remarks-input" appearance = "outline">
+                        <mat-label>Remarks</mat-label>
+                        <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.e_s3_pr_q03_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <mat-label>Electrical risks have been effectively mitigated.*</mat-label>
+                    <br><br>
+                </div>
+                <div>
+                    <mat-radio-group 
+                        required 
+                        aria-label = "Select an option" 
+                        [(ngModel)] = "this.e_s3_pr_q04_choiceInput">
+                        <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                            {{ rads }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div>
+                    <mat-form-field class = "e-s3-pr-remarks-input" appearance = "outline">
+                        <mat-label>Remarks</mat-label>
+                        <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.e_s3_pr_q04_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                    </mat-form-field>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <br>
+            <mat-label id = "label-text">DECLARATION</mat-label>
+            <br><br>
+            <div>
+                <mat-checkbox [(ngModel)] = "this.authorisedManagerReviewPassed">
+                    <mat-label>
+                        I authorise the electrical risks to the conditions and duration stated in this permit.
+                    </mat-label>
+                </mat-checkbox>
+            </div>
+        </div>
+    </div>
+    <div mat-dialog-actions *ngFor = "let dt of this.fetched.ptw">
+        <div *ngIf = "dt.permitType == 'Work at height (WAH)'">
+            <button 
+                    mat-button 
+                    [disabled] = "
+                        this.wah_s3_pr_q01_choiceInput == '' ||
+                        this.wah_s3_pr_q02_choiceInput == '' ||
+                        this.wah_s3_pr_q03_choiceInput == '' ||
+                        this.wah_s3_pr_q04_choiceInput == '' ||
+                        !this.authorisedManagerReviewPassed
+                    "
+                    (click) = "this.authorisePtw()">
+                    SUBMIT EVALUATION</button>
+        </div>
+        <div *ngIf = "dt.permitType == 'Confined space (CS)'">
+            <button 
+                    mat-button 
+                    [disabled] = "
+                        this.cs_s3_pr_q01_choiceInput == '' ||
+                        this.cs_s3_pr_q02_choiceInput == '' ||
+                        this.cs_s3_pr_q03_choiceInput == '' ||
+                        this.cs_s3_pr_q04_choiceInput == '' ||
+                        !this.authorisedManagerReviewPassed
+                    "
+                    (click) = "this.authorisePtw()">
+                    SUBMIT EVALUATION</button>
+        </div>
+        <div *ngIf = "dt.permitType == 'Hot work (HW)'">
+            <button 
+                    mat-button 
+                    [disabled] = "
+                        this.hw_s3_pr_q01_choiceInput == '' ||
+                        this.hw_s3_pr_q02_choiceInput == '' ||
+                        this.hw_s3_pr_q03_choiceInput == '' ||
+                        this.hw_s3_pr_q04_choiceInput == '' ||
+                        !this.authorisedManagerReviewPassed
+                    "
+                    (click) = "this.authorisePtw()">
+                    SUBMIT EVALUATION</button>
+        </div>
+        <div *ngIf = "dt.permitType == 'Cold work (CW)'">
+            <button 
+                    mat-button 
+                    [disabled] = "
+                        this.cw_s3_pr_q01_choiceInput == '' ||
+                        this.cw_s3_pr_q02_choiceInput == '' ||
+                        this.cw_s3_pr_q03_choiceInput == '' ||
+                        this.cw_s3_pr_q04_choiceInput == '' ||
+                        !this.authorisedManagerReviewPassed
+                    "
+                    (click) = "this.authorisePtw()">
+                    SUBMIT EVALUATION</button>
+        </div>
+        <div *ngIf = "dt.permitType == 'Electrical (E)'">
+            <button 
+                    mat-button 
+                    [disabled] = "
+                        this.e_s3_pr_q01_choiceInput == '' ||
+                        this.e_s3_pr_q02_choiceInput == '' ||
+                        this.e_s3_pr_q03_choiceInput == '' ||
+                        this.e_s3_pr_q04_choiceInput == '' ||
+                        !this.authorisedManagerReviewPassed
+                    "
+                    (click) = "this.authorisePtw()">
+                    SUBMIT EVALUATION</button>
+        </div>
+        <button mat-button mat-dialog-close>Cancel</button>
+    </div>
+</div>

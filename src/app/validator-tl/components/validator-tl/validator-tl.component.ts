@@ -146,7 +146,10 @@ export class ValidatorTlComponent implements OnInit {
 
   public async expandSelectedPtw(id: string): Promise<void> {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = id;
+    dialogConfig.data = {
+      id: id,
+      userName: this.userNameDisplay
+    };
     this.dialogRefPtwDets = this.dialog.open(ValidatorReqdetsComponent, dialogConfig);
   }
 

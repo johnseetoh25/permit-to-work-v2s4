@@ -1009,13 +1009,9 @@
                                 <mat-label>{{ dt.safetyAssessorEvaluation?.name }}</mat-label>
                             </div>
                             <div id = "eval-note-col">
-                                <mat-label id = "label-text">Date and time:&emsp;</mat-label>
-                                <mat-label>{{ dt.safetyAssessorEvaluation?.timestamp }}</mat-label>
-                            </div>
-                            <div id = "eval-note-col">
                                 <div *ngIf = "dt.safetyAssessorEvaluation?.passed || !dt.safetyAssessorEvaluation?.passed">
                                     <div *ngIf = "dt.safetyAssessorEvaluation?.name != 'None' && dt.safetyAssessorEvaluation?.passed">
-                                        <mat-icon style = "color: darkgreen;">done_all</mat-icon><mat-label style = "color: darkgreen; font-weight: 450;">PASSED</mat-label>
+                                        <mat-icon style = "color: darkgreen;">done_all</mat-icon><mat-label style = "color: darkgreen; font-weight: 450;">PASSED&emsp;<mat-label>{{ this.evaluatedTimestampDisplay | date: "medium" }}</mat-label></mat-label>
                                     </div>
                                     <div *ngIf = "dt.safetyAssessorEvaluation?.name != 'None' && !dt.safetyAssessorEvaluation?.passed">
                                         <mat-icon style = "color: maroon;">clear</mat-icon><mat-label style = "color: maroon; font-weight: 450;">NOT PASSED</mat-label>
@@ -1354,19 +1350,15 @@
                                 <mat-label>{{ dt.authorisedManagerApproval?.name }}</mat-label>
                             </div>
                             <div id = "am-note-col">
-                                <mat-label id = "label-text">Date and time:&emsp;</mat-label>
-                                <mat-label>{{ dt.authorisedManagerApproval?.timestamp }}</mat-label>
-                            </div>
-                            <div id = "am-note-col">
                                 <div *ngIf = "dt.authorisedManagerApproval?.passed || !dt.authorisedManagerApproval?.passed">
                                     <div *ngIf = "dt.authorisedManagerApproval?.name != 'None' && dt.authorisedManagerApproval?.passed">
-                                        <mat-icon style = "color: darkgreen;">done_all</mat-icon><mat-label style = "color: darkgreen; font-weight: 450;">PASSED</mat-label>
+                                        <mat-icon style = "color: darkgreen;">done_all</mat-icon><mat-label style = "color: darkgreen; font-weight: 450;">PASSED&emsp;<mat-label>{{ this.authorisedTimestampDisplay | date: "medium" }}</mat-label></mat-label>
                                     </div>
                                     <div *ngIf = "dt.authorisedManagerApproval?.name != 'None' && !dt.authorisedManagerApproval?.passed">
                                         <mat-icon style = "color: crimson;">clear</mat-icon><mat-label style = "color: crimson; font-weight: 450;">NOT PASSED</mat-label>
                                     </div>
                                     <div *ngIf = "dt.authorisedManagerApproval?.name == 'None' && !dt.authorisedManagerApproval?.passed">
-                                        <mat-icon style = "color: grey;">priority_high</mat-icon><mat-label style = "color: grey; font-weight: 450;">NOT YET ASSESSED</mat-label>
+                                        <mat-icon style = "color: grey;">priority_high</mat-icon><mat-label style = "color: grey; font-weight: 450;">NOT YET AUTHORISED</mat-label>
                                     </div>
                                 </div>
                             </div>
