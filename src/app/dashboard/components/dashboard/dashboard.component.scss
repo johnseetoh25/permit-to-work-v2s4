@@ -33,3 +33,39 @@ mat-grid-tile {
     padding-right: 10px;
     border-radius: 0.5em;
 }
+
+#left-content-container {
+    width: 50%;
+    float: left;
+}
+
+#pending-req-item {
+    width: 100%;
+}
+
+#left-content, #right-content, #pending-reqs-content {
+    padding: 8px;
+}
+
+#pending-reqs-content {
+    padding: 16px;
+    height: 400px;
+    overflow-y: scroll;
+    background-color: rgb(250, 250, 250);
+}
+
+.permit-status-statistics {
+    display: flex;
+}
+
+#pss-item {
+    background-color: dimgray;
+    border-radius: 5px;
+    color: whitesmoke;
+    margin: 10px;
+}
+
+#right-content-container {
+    float: right;
+    width: 48.75%;
+}

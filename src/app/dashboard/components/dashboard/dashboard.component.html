@@ -27,3 +27,77 @@
         </mat-toolbar>
     </p>
 </header>
+<div class = "content-body">
+    <div id = "left-content-container">
+        <mat-card>
+            <div id = "left-content">
+                <mat-card-header>
+                    <mat-card-title>OVERVIEW</mat-card-title>
+                    <mat-card-subtitle>All recent permit statuses</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-list class = "permit-status-statistics">
+                        <mat-list-item id = "pss-item">{{ this.invalidPermitNo }} Invalid</mat-list-item>
+                        <mat-list-item id = "pss-item">{{ this.validPermitNo }} Valid</mat-list-item>
+                        <mat-list-item id = "pss-item">{{ this.expiredPermitNo }} Expired</mat-list-item>
+                        <mat-list-item id = "pss-item">{{ this.terminatedPermitNo }} Terminated</mat-list-item>
+                        <mat-list-item id = "pss-item">{{ this.closedPermitNo }} Closed</mat-list-item>
+                    </mat-list>
+                </mat-card-content>
+            </div>
+        </mat-card>
+        <br>
+        <mat-card>
+            <div id = "left-content">
+                <mat-card-header>
+                    <mat-card-title>PENDING REQUESTS ({{ this.pendingReqList.length }})</mat-card-title>
+                    <mat-card-subtitle>Select one to view & assess</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content id = "pending-reqs-content">
+                    <mat-list class = "pending-reqs-list" *ngFor = "let pending of this.pendingReqList">
+                        <br><br><br><br>
+                        <mat-list-item>
+                            <div id = "pending-req-item">
+                                <mat-card>
+                                    <mat-card-header>
+                                            <mat-card-title>
+                                                <mat-label style = "font-size:medium; font-weight: 425;">
+                                                    {{ pending.ptwId }}
+                                                </mat-label>
+                                            </mat-card-title>
+                                            <mat-card-subtitle>
+                                                <mat-icon *ngIf = "pending.permitType == 'Hot work (HW)'" style = "color: brown">whatshot</mat-icon>
+                                                <mat-icon *ngIf = "pending.permitType == 'Cold work (CW)'" style = "color: darkslateblue">ac_unit</mat-icon>
+                                                <mat-icon *ngIf = "pending.permitType == 'Electrical (E)'" style = "color: khaki">flash_on</mat-icon>
+                                                <mat-icon *ngIf = "pending.permitType == 'Work at height (WAH)'" style = "color: darkslategrey">location_city</mat-icon>
+                                                <mat-icon *ngIf = "pending.permitType == 'Confined space (CS)'" style = "color: forestgreen">zoom_out_map</mat-icon>
+                                                {{ pending.permitType }}
+                                            </mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-card-content>
+                                        <mat-label style = "font-weight: 425;">&emsp;{{ pending.locationOfWork.main }}&emsp;⯁&emsp;{{ pending.locationOfWork.sub }}</mat-label>
+                                        <br><br>
+                                        <mat-label style = "font-weight: 425;">&emsp;Effective period:</mat-label><mat-label>&emsp;{{ pending.startWorkingDateTime | date: "medium" }} - {{ pending.endWorkingDateTime | date: "medium" }}</mat-label>
+                                        <br><br>
+                                        <mat-label style = "font-weight: 425;">&emsp;Task:</mat-label><mat-label>&emsp;{{ pending.taskDescription }}&emsp;||&emsp;<mat-label style = "font-weight: 425;">Applied by:</mat-label>&emsp;{{ pending.applicantDets.name }} on <u>{{ pending.timestamp | date: "medium" }}</u></mat-label>
+                                    </mat-card-content>
+                                </mat-card>
+                            </div>
+                        </mat-list-item>
+                        <br><br><br><br>
+                    </mat-list>
+                </mat-card-content>
+            </div>
+        </mat-card>
+    </div>
+    <div id = "right-content-container">
+        <mat-card>
+            <div id = "right-content">
+                <mat-card-header>
+                    <mat-card-title>TRENDING GRAPH</mat-card-title>
+                    <mat-card-subtitle>Visual overview of permits per month</mat-card-subtitle>
+                </mat-card-header>
+            </div>
+        </mat-card>
+    </div>
+</div>

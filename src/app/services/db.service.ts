@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IPermitToWork } from '../interfaces/IPermitToWork';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { PermitStatus } from '../constants/PermitStatus';
+import { RequestStatus } from '../constants/RequestStatus';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +29,32 @@ export class DbService {
     return this.http.post(this.ptwUrl, body, { 'headers': headers });
   }
 
-  public fetchWith(id : number): Observable<IPermitToWork[]> {
+  public fetchWith(id: number): Observable<IPermitToWork[]> {
     return this.http.get<IPermitToWork[]>(this.ptwUrl + "?id=" + id.toString());
+  }
+
+  public returnInvalidPermits(): Observable<IPermitToWork[]> {
+    return this.http.get<IPermitToWork[]>(this.ptwUrl + "?ptwStatus.permitStatus=" + PermitStatus.STATUS_INVALID);
+  }
+
+  public returnValidPermits(): Observable<IPermitToWork[]> {
+    return this.http.get<IPermitToWork[]>(this.ptwUrl + "?ptwStatus.permitStatus=" + PermitStatus.STATUS_VALID);
+  }
+
+  public returnExpiredPermits(): Observable<IPermitToWork[]> {
+    return this.http.get<IPermitToWork[]>(this.ptwUrl + "?ptwStatus.permitStatus=" + PermitStatus.STATUS_EXPIRED);
+  }
+
+  public returnTerminatedPermits(): Observable<IPermitToWork[]> {
+    return this.http.get<IPermitToWork[]>(this.ptwUrl + "?ptwStatus.permitStatus=" + PermitStatus.STATUS_TERMINATED);
+  }
+
+  public returnClosedPermits(): Observable<IPermitToWork[]> {
+    return this.http.get<IPermitToWork[]>(this.ptwUrl + "?ptwStatus.permitStatus=" + PermitStatus.STATUS_CLOSED);
+  }
+
+  public returnPendingReqs(): Observable<IPermitToWork[]> {
+    return this.http.get<IPermitToWork[]>(this.ptwUrl + "?requestStatus=" + RequestStatus.REQUEST_PENDING);
   }
 
   public update(

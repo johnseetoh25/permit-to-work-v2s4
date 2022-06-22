@@ -2786,12 +2786,12 @@
       },
       "dailyEndorsement": {},
       "ptwStatus": {
-        "permitStatus": "Valid",
-        "taskStatus": "In Progress",
-        "remarks": "None",
-        "checked": false,
-        "supervisorName": "None",
-        "timestamp": "None"
+        "permitStatus": "Terminated",
+        "taskStatus": "Condition Changed",
+        "remarks": "Nothing special.",
+        "checked": true,
+        "supervisorName": "Kin Lim",
+        "timestamp": "2022-06-22T18:54:14.988Z"
       },
       "safetyAssessorEvaluation": {
         "passed": true,

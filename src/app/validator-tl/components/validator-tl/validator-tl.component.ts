@@ -68,7 +68,7 @@ export class ValidatorTlComponent implements OnInit {
       if (resp[0]?.userId != null) {
         console.log("Currently signed in validator:", resp[0].userId);
         this.auth.signIn(resp[0].userId, resp[0].userPw);
-        this.userNameDisplay = resp[0].userName;
+        this.userNameDisplay = resp[0].userName + " (" + resp[0].userId + ")";
       } else {
         console.log("Currently signed in validator: None");
         this.router.navigate(['validator-sign-in'], { replaceUrl: true });
