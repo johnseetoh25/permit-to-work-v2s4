@@ -278,7 +278,7 @@ export class SubmitDialogComponent implements OnInit {
         this.dialogRefSelf.close();
         this.dialogRefSelf.afterClosed().subscribe(() => {
           this.navigateTo("");
-          this.openSnackBar("A new PTW request has been made! An email statement will be sent to you shortly.", "OK");
+          this.openSnackBar("A new PTW request has been made! An email statement will be sent to you shortly.", "");
         });
     });
   }

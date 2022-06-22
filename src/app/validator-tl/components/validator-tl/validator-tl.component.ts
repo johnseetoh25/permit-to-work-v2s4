@@ -4,13 +4,16 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dial
 import { IPermitToWork } from 'src/app/interfaces/IPermitToWork';
 import { Sort } from '@angular/material/sort';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { MessageService } from 'src/app/services/message.service';
+import { User } from 'src/app/interfaces/User';
 import { PtwDetailsComponent } from 'src/app/ptw-details/components/ptw-details/ptw-details.component';
+import { SignoutDialogComponent } from 'src/app/signout-dialog/components/signout-dialog/signout-dialog.component';
 
 @Component({
-  selector: 'app-tracking-log',
-  templateUrl: './tracking-log.component.html',
-  styleUrls: ['./tracking-log.component.scss'],
+  selector: 'app-validator-tl',
+  templateUrl: './validator-tl.component.html',
+  styleUrls: ['./validator-tl.component.scss'],
   providers: [
     {
       provide: MatDialogRef,
@@ -18,7 +21,7 @@ import { PtwDetailsComponent } from 'src/app/ptw-details/components/ptw-details/
     }
   ]
 })
-export class TrackingLogComponent implements OnInit {
+export class ValidatorTlComponent implements OnInit {
   public displayedHeaderColumns: string[] = [
     'id',
     'ptwId',
@@ -47,12 +50,27 @@ export class TrackingLogComponent implements OnInit {
     private db: DbService,
     public dialog: MatDialog, 
     public dialogRefPtwDets: MatDialogRef<PtwDetailsComponent>,
+    public dialogRefSignOut: MatDialogRef<SignoutDialogComponent>,
     private router: Router,
+    private auth: AuthService,
     private msg: MessageService
   ) { }
 
   public ngOnInit(): void { 
     this.refresh();
+    this.checkSession();
+  }
+
+  public checkSession(): void {
+    this.auth.checkSession(true).subscribe((resp: User[]) => { 
+      if (resp[0]?.userId != null) {
+        console.log("Currently signed in validator:", resp[0].userId);
+        this.auth.signIn(resp[0].userId, resp[0].userPw);
+      } else {
+        console.log("Currently signed in validator: None");
+        this.router.navigate(['validator-sign-in'], { replaceUrl: true });
+      }
+    });
   }
 
   public refresh(): void {
@@ -131,6 +149,11 @@ export class TrackingLogComponent implements OnInit {
 
   public navigateTo(url: string): void {
     this.router.navigate(["/" + url], { replaceUrl: true });
+  }
+
+  public openSignOutDialog() : void {
+    const dialogConfig = new MatDialogConfig();
+    this.dialogRefSignOut = this.dialog.open(SignoutDialogComponent, dialogConfig);
   }
 
   public openSnackBar(msg: string, action: string): void {

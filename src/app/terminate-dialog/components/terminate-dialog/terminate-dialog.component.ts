@@ -314,7 +314,7 @@ export class TerminateDialogComponent implements OnInit {
     this.dialogRefPtwDets.close();
     this.dialogRefSelf.afterClosed().subscribe(() => {
       this.navigateTo("tracking-log");
-      this.openSnackBar("The permit has been closed / terminated!", "OK");
+      this.openSnackBar("The permit has been closed / terminated!", "");
     });
     this.dialogRefPtwDets.afterClosed().subscribe(() => {
       window.location.reload();

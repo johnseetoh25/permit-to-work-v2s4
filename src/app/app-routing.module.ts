@@ -31,6 +31,10 @@ const routes: Routes = [
     loadChildren: () => import('./dashboard/dashboard.module').then(module => module.DashboardModule)
   },
   {
+    path: 'validator-tl',
+    loadChildren: () => import('./validator-tl/validator-tl.module').then(module => module.ValidatorTlModule)
+  },
+  {
     path: '',
     redirectTo: 'landing',
     pathMatch: 'full'

@@ -9,11 +9,11 @@
                     <mat-icon>menu</mat-icon>
                 </button>
                 <mat-menu #applicantMenu = "matMenu">
-                    <button mat-menu-item (click) = "this.navigateTo('')">
+                    <button mat-menu-item (click) = "this.navigateTo('validator-tl')">
                         <mat-icon>book</mat-icon>
                         <span>Tracking Log (Manage Requests)</span>
                     </button>
-                    <button mat-menu-item (click) = "this.openSignOutDialogue()">
+                    <button mat-menu-item (click) = "this.openSignOutDialog()">
                         <mat-icon>exit_to_app</mat-icon>
                         <span>Sign Out</span>
                     </button>

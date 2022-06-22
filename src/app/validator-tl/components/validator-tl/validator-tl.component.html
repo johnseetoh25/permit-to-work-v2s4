@@ -2,19 +2,20 @@
     <p>
         <mat-toolbar class = "applicant-toolbar">
             <mat-toolbar-row>
-                <mat-icon style = "color: rgb(25, 25, 25)">book</mat-icon><span id = "toolbar-title">&emsp;PTW TRACKING LOG (APPLICANT MODE)</span>
+                <mat-icon style = "color: rgb(25, 25, 25)">book</mat-icon><span id = "toolbar-title">&emsp;PTW TRACKING LOG (VALIDATOR MODE)</span>
                 <span class = "spacer"></span>
+                <span id = "signed-in-as-label">Signed in as []</span>
                 <button mat-icon-button class = "toolbar-menu-button" [matMenuTriggerFor] = "applicantMenu" aria-label = "Applicant toolbar menu">
                     <mat-icon>menu</mat-icon>
                 </button>
                 <mat-menu #applicantMenu = "matMenu">
-                    <button mat-menu-item (click) = "this.navigateTo('ptw-request')">
-                        <mat-icon>note_add</mat-icon>
-                        <span>Request Form (Applicant)</span>
+                    <button mat-menu-item (click) = "this.navigateTo('dashboard')">
+                        <mat-icon>dashboard</mat-icon>
+                        <span>Dashboard</span>
                     </button>
-                    <button mat-menu-item (click) = "this.navigateTo('')">
+                    <button mat-menu-item (click) = "this.openSignOutDialog()">
                         <mat-icon>exit_to_app</mat-icon>
-                        <span>Exit</span>
+                        <span>Sign Out</span>
                     </button>
                 </mat-menu>
             </mat-toolbar-row>

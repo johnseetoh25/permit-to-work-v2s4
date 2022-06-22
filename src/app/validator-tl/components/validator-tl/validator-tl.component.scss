@@ -1,0 +1,37 @@
+.content-body {
+    padding-top: 8px;
+    margin: 16px;
+}
+
+.applicant-toolbar {
+    background-color: rgb(207, 218, 228);
+}
+
+#toolbar-title, #signed-in-as-label {
+    font-size: medium;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.tracking-log-table {
+    width: 100%;
+}
+
+#no-data-container {
+    height: 600px;
+    background-color: white;
+    border-color: whitesmoke;
+    border-style: solid;
+    border-width: 2.5px;
+    padding: 50px;
+    text-align: center;
+    font-size: medium;
+    color: grey;
+    font-weight: 425;
+}
+
+.refresh-container {
+    text-align: end;
+}

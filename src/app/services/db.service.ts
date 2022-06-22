@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IPermitToWork } from '../interfaces/IPermitToWork';
-import { AttendantDets } from '../interfaces/AttendantDets';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,10 @@ import { AttendantDets } from '../interfaces/AttendantDets';
 export class DbService {
   private ptwUrl: string = '/db/ptw';
 
-  constructor(private http : HttpClient) { }
+  public horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  public verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+
+  constructor(private http : HttpClient, private snackBar: MatSnackBar) { }
 
   public fetch(): Observable<IPermitToWork[]> {
     console.log(this.ptwUrl);
@@ -734,6 +737,14 @@ export class DbService {
         timestamp: timestamp
       }, { "headers": headers }).subscribe(resp => {
         console.log(resp);
+    });
+  }
+
+  public openSnackBar(msg: string, action: string): void {
+    this.snackBar.open(msg, action, {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      duration: 3000
     });
   }
 }
