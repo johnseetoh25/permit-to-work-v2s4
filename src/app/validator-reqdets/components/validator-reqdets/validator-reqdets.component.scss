@@ -1,0 +1,170 @@
+.ptw-request-details-dialog {
+    width: 1000px;
+    height: 50%;
+}
+
+.tab-content {
+    border-style: solid;
+    border-width: 0.05px;
+    border-color: rgb(224, 224, 224);
+    border-radius: 0.5em;
+}
+
+#scrollable-tc {
+    height: 325px;
+    overflow-y: scroll;
+    background-color: rgb(250, 250, 250);
+}
+
+#label-text {
+    font-weight: 450;
+}
+
+.mat-dialog-title {
+    text-align: center;
+}
+
+.mat-dialog-actions {
+    justify-content: flex-end;
+}
+
+.status-cols {
+    width: 965px;
+    height: 45px;
+    overflow: hidden;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    padding: 16px;
+}
+
+#status-col {
+    float: left;
+    width: 225px;
+}
+
+.req-cancel-cols {
+    overflow: hidden;
+}
+
+#req-cancel-col {
+    float: left;
+    width: 300px;
+}
+
+.apl-dets-cols {
+    width: 965px;
+    height: 42.5px;
+    overflow: hidden;
+    padding: 16px;
+}
+
+#apl-dets-col {
+    float: left;
+    width: 300px;
+}
+
+.wah-sm-cols,
+.hw-sm-cols, 
+.cw-sm-cols,
+.wah-eval-cols, 
+.hw-eval-cols,
+.cw-eval-cols,
+.e-eval-cols,
+.cs-eval-cols,
+.wah-am-cols,
+.hw-am-cols,
+.cw-am-cols,
+.e-am-cols {
+    width: 900px;
+    height: 10px;
+    padding: 24px;
+}
+
+#wah-sm-col,
+#hw-sm-col,
+#cw-sm-col,
+#wah-eval-col,
+#hw-eval-col,
+#cw-eval-col,
+#e-eval-col, 
+#cs-eval-col,
+#wah-am-col,
+#hw-am-col,
+#cw-am-col,
+#e-am-col {
+    float: left;
+    width: 300px;
+}
+
+.cs-am-cols {
+    width: 900px;
+    height: 17.5px;
+    padding: 24px;
+}
+
+.cs-am-cols-header {
+    width: 900px;
+    height: 10px;
+    padding: 24px; 
+}
+
+#cs-am-col-header {
+    float: left;
+    width: 325px;
+}
+
+#cs-am-col {
+    float: left;
+    width: 325px;
+}
+
+.eval-note-cols, .am-note-cols {
+    width: 900px;
+    height: 10px;
+    padding: 24px;
+}
+
+#eval-note-col, #am-note-col {
+    float: left;
+    width: 300px;
+}
+
+.cs-sm-cols {
+    width: 900px;
+    height: 1px;
+    padding: 24px;
+}
+
+#cs-sm-col {
+    float: left;
+    width: 300px;
+}
+
+.e-sm-cols {
+    width: 900px;
+    height: 15px;
+    padding: 24px;
+}
+
+#e-sm-col {
+    float: left;
+    width: 300px;
+}
+
+#ad-dets-table {
+    width: 75%; 
+    padding-left: 24px;
+}
+
+mat-grid-list mat-grid-tile-header {
+    font-weight: 425;
+}
+
+mat-grid-list mat-grid-tile {
+    font-weight: medium;
+    border-width: 0.25px;
+    border-style: solid;
+    border-color: darkgrey;
+    border-radius: 2.5px;
+    background-color: white;
+}

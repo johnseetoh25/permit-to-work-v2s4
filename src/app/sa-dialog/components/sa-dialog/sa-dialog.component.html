@@ -1,0 +1,41 @@
+<div class = "dialog-box">
+    <h2 mat-dialog-title>Safety Assessor Evaluation</h2>
+    <br>
+    <div *ngFor = "let dt of this.targetPtw">
+        <div mat-dialog-content *ngIf = "dt.permitType == 'Work at height (WAH)'">
+            <div>
+                <mat-label id = "label-text">ASSESSMENT OF CONTROL MEASURES</mat-label>
+                <br><br>
+                <mat-label>All reasonably practicable measures have been taken.</mat-label>
+                <br><br>
+                <div id = "acm-left-col">
+                    <mat-radio-group 
+                        required 
+                        aria-label = "Select an option" 
+                        [(ngModel)] = "this.wah_s2_acm_q01_choiceInput">
+                        <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                            {{ rads }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div id = "acm-right-col">
+                    <mat-form-field class = "wah-s2-acm-remarks-input" appearance = "outline" floatLabel = "never">
+                        <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.wah_s2_acm_q01_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div mat-dialog-content *ngIf = "dt.permitType == 'Confined space (CS)'">
+            <mat-label>Confined space (CS)</mat-label>
+        </div>
+        <div mat-dialog-content *ngIf = "dt.permitType == 'Hot work (HW)'">
+            <mat-label>Hot work (HW)</mat-label>
+        </div>
+        <div mat-dialog-content *ngIf = "dt.permitType == 'Cold work (CW)'">
+            <mat-label>Cold work (CW)</mat-label>
+        </div>
+        <div mat-dialog-content *ngIf = "dt.permitType == 'Electrical (E)'">
+            <mat-label>Electrical (E)</mat-label>
+        </div>
+    </div>
+</div>

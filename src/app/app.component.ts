@@ -16,9 +16,11 @@ import { SignoutDialogComponent } from './signout-dialog/components/signout-dial
   ]
 })
 export class AppComponent {
-  title: string = 'permit-to-work-v2s1';
-  imageSource: string = "assets/images/temasek_polytechnic_logo.png";
-  imageAlt: string = "Temasek Polytechnic";
+  public title: string = 'permit-to-work-v2s1';
+  public imageSource: string = "assets/images/temasek_polytechnic_logo.png";
+  public imageAlt: string = "Temasek Polytechnic";
+
+  public homeTitleAsSignOut: boolean = false;
 
   constructor(
     public router: Router,

@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: () => import('./ptw-details/ptw-details.module').then(module => module.PtwDetailsModule)
   },
   {
+    path: 'validator-reqdets',
+    loadChildren: () => import('./validator-reqdets/validator-reqdets.module').then(module => module.ValidatorReqdetsModule)
+  },
+  {
     path: 'validator-sign-in',
     loadChildren: () => import('./validator-sign-in/validator-sign-in.module').then(module => module.ValidatorSignInModule)
   },

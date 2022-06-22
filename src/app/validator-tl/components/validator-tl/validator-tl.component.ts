@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { MessageService } from 'src/app/services/message.service';
 import { User } from 'src/app/interfaces/User';
-import { PtwDetailsComponent } from 'src/app/ptw-details/components/ptw-details/ptw-details.component';
+import { ValidatorReqdetsComponent } from 'src/app/validator-reqdets/components/validator-reqdets/validator-reqdets.component';
 import { SignoutDialogComponent } from 'src/app/signout-dialog/components/signout-dialog/signout-dialog.component';
 
 @Component({
@@ -51,7 +51,7 @@ export class ValidatorTlComponent implements OnInit {
   constructor(
     private db: DbService,
     public dialog: MatDialog, 
-    public dialogRefPtwDets: MatDialogRef<PtwDetailsComponent>,
+    public dialogRefPtwDets: MatDialogRef<ValidatorReqdetsComponent>,
     public dialogRefSignOut: MatDialogRef<SignoutDialogComponent>,
     private router: Router,
     private auth: AuthService,
@@ -147,7 +147,7 @@ export class ValidatorTlComponent implements OnInit {
   public async expandSelectedPtw(id: string): Promise<void> {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = id;
-    this.dialogRefPtwDets = this.dialog.open(PtwDetailsComponent, dialogConfig);
+    this.dialogRefPtwDets = this.dialog.open(ValidatorReqdetsComponent, dialogConfig);
   }
 
   public navigateTo(url: string): void {
