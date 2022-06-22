@@ -4,7 +4,9 @@
             <mat-toolbar-row>
                 <mat-icon style = "color: rgb(25, 25, 25)">dashboard</mat-icon><span id = "toolbar-title">&emsp;DASHBOARD</span>
                 <span class = "spacer"></span>
-                <span id = "signed-in-as-label">Signed in as []</span>
+                <div id = "signed-in-as" *ngIf = "this.userNameDisplay != ''">
+                    <span id = "signed-in-as-label">Welcome back, <mat-label style = "font-weight: 525">{{ this.userNameDisplay }}</mat-label></span>
+                </div>
                 <button mat-icon-button class = "toolbar-menu-button" [matMenuTriggerFor] = "applicantMenu" aria-label = "Applicant toolbar menu">
                     <mat-icon>menu</mat-icon>
                 </button>

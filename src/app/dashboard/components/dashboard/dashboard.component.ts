@@ -18,6 +18,7 @@ import { SignoutDialogComponent } from 'src/app/signout-dialog/components/signou
   ]
 })
 export class DashboardComponent implements OnInit {
+  public userNameDisplay: string = "";
 
   constructor(
     private router: Router,
@@ -28,6 +29,7 @@ export class DashboardComponent implements OnInit {
 
   public ngOnInit(): void { 
     this.checkSession(); 
+    //this.userNameDisplay = this.auth.currentUser.userName;
   }
 
   public navigateTo(url : string) : void {
@@ -39,6 +41,7 @@ export class DashboardComponent implements OnInit {
       if (resp[0]?.userId != null) {
         console.log("Currently signed in validator:", resp[0].userId);
         this.auth.signIn(resp[0].userId, resp[0].userPw);
+        this.userNameDisplay = resp[0].userName;
       } else {
         console.log("Currently signed in validator: None");
         this.router.navigate(['validator-sign-in'], { replaceUrl: true });
@@ -49,9 +52,5 @@ export class DashboardComponent implements OnInit {
   public openSignOutDialog() : void {
     const dialogConfig = new MatDialogConfig();
     this.dialogRefSignOut = this.dialog.open(SignoutDialogComponent, dialogConfig);
-  }
-
-  public openSnackBar(msg : string, action : string) : void {
-    this.msgService.openSnackBar(msg, action);
   }
 }

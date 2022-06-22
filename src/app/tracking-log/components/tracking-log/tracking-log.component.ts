@@ -134,6 +134,6 @@ export class TrackingLogComponent implements OnInit {
   }
 
   public openSnackBar(msg: string, action: string): void {
-    this.msg.openSnackBar(msg, action);
+    this.msg.openSnackBar(msg, action, 3000);
   }
 }

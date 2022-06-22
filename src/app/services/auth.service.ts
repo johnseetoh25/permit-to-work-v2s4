@@ -75,14 +75,15 @@ export class AuthService {
       (res: User[]) => {
         if (res[0] == null) {
           this.signingIn = false;
-          this.openSnackBar("User does not exist. Please try again.", "");
+          this.openSnackBar("User does not exist. Please try again.", "", 3000);
         } else {
           if (res[0].userPw == userPw) {
             if (!res[0].inSession) {
-              this.openSnackBar("Signed in successfully as validator.", "");
-              this.router.navigate(['dashboard'], { replaceUrl: true });
+              this.openSnackBar("Signed in successfully as validator.", "", 3000);
+              this.router.navigate(['dashboard'], { queryParams: { userId: res[0].userId }, replaceUrl: true });
             } else {
-              //this.openSnackBar("Auto signed-in!", "");
+              this.openSnackBar("Auto sign-in enabled!", "", 3500);
+              this.router.navigate([], { queryParams: { userId: res[0].userId }, replaceUrl: true });
             }
             this.signingIn = false;
 
@@ -90,7 +91,7 @@ export class AuthService {
             this.setSession(true, this.currentUser);
           } else {
             this.signingIn = false;
-            this.openSnackBar("Password does not match. Please try again.", "");
+            this.openSnackBar("Password does not match. Please try again.", "", 3000);
           }
         }
       },
@@ -105,17 +106,17 @@ export class AuthService {
   public signOut(): void {
     this.router.navigate(["landing"], { replaceUrl: true }).then(() => {
       this.setSession(false, this.currentUser);
-      this.openSnackBar("You have been successfully signed out.", "");
+      this.openSnackBar("You have been successfully signed out.", "", 3000);
     }).finally(() => {
       this.dialog.closeAll();
     });
   }
   
-  public openSnackBar(msg: string, action: string): void {
+  public openSnackBar(msg: string, action: string, duration: number): void {
     this.snackBar.open(msg, action, {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
-      duration: 3000
+      duration: duration
     });
   }
 }

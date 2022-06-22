@@ -14,11 +14,11 @@ export class MessageService {
   
   constructor(private snackBar: MatSnackBar) { }
 
-  public openSnackBar(msg : string, action : string): void {
+  public openSnackBar(msg: string, action: string, duration: number): void {
     this.snackBar.open(msg, action, {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
-      duration: 3000
+      duration: duration
     });
   }
 }

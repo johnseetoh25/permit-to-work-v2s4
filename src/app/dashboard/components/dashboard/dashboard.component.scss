@@ -23,3 +23,13 @@ mat-grid-tile {
 .spacer {
     flex: 1 1 auto;
 }
+
+#signed-in-as {
+    background-color: rebeccapurple;
+    font-weight: lighter;
+    color: whitesmoke;
+    margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 0.5em;
+}

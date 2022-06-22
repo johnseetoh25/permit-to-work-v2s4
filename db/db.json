@@ -3,14 +3,14 @@
     {
       "userId": "SPV001",
       "userPw": "test1",
-      "userName": "Validator 1",
-      "inSession": false,
+      "userName": "Oliver Roberts",
+      "inSession": true,
       "id": 1
     },
     {
       "userId": "SPV002",
       "userPw": "test2",
-      "userName": "Validator 2",
+      "userName": "Arnoldo Nielsen",
       "inSession": false,
       "id": 2
     }
