@@ -4,6 +4,7 @@ import { SharedModule } from '../shared/shared.module';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SignoutDialogComponent } from '../signout-dialog/components/signout-dialog/signout-dialog.component';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,10 @@ import { SignoutDialogComponent } from '../signout-dialog/components/signout-dia
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    SharedModule
+    SharedModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    })
   ]
 })
 export class DashboardModule { }

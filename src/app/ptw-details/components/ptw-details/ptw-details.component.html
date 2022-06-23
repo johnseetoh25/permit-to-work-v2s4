@@ -88,7 +88,7 @@
                     border-radius: 5px;
                 ">
                 <mat-label>Requested on </mat-label>
-                <mat-label id = "label-text">{{ this.submissionTimestampDisplay | date: "mediumDate" }}</mat-label>
+                <mat-label id = "label-text">{{ this.submissionTimestampDisplay | date: "medium" }}</mat-label>
             </div>
             <div 
                 id = "req-cancel-col" 
@@ -105,8 +105,8 @@
                     dt.ptwStatus.permitStatus == 'Terminated' || 
                     dt.ptwStatus.permitStatus == 'Expired'
                 ">
-                <mat-label>Ceased to effect on </mat-label>
-                <mat-label id = "label-text">{{ this.cancellationTimestampDisplay | date: "mediumDate" }}</mat-label>
+                <mat-label>Closed on </mat-label>
+                <mat-label id = "label-text">{{ this.cancellationTimestampDisplay | date: "medium" }}</mat-label>
             </div>
         </div>
         <div style = "color: brown;" *ngIf = "dt.ptwStatus?.taskStatus == 'Condition Changed'">

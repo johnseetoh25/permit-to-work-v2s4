@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { InputMaskModule } from '@ngneat/input-mask';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,10 @@ import { InputMaskModule } from '@ngneat/input-mask';
     BrowserAnimationsModule,
     HttpClientModule,
     SharedModule,
-    InputMaskModule
+    InputMaskModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

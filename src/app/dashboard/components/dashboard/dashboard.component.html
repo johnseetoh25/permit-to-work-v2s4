@@ -32,34 +32,34 @@
         <mat-card>
             <div id = "left-content">
                 <mat-card-header>
-                    <mat-card-title>Overview</mat-card-title>
-                    <mat-card-subtitle>All recent permit statuses</mat-card-subtitle>
+                    <mat-card-title>Permits Overview</mat-card-title>
+                    <mat-card-subtitle>All recent permit statuses at a glance</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
                     <mat-list class = "permit-status-statistics">
                         <mat-list-item id = "pss-item" style = "background-color: rgb(25, 25, 25);">
-                            <mat-label id = "label-text">{{ this.invalidPermitNo }}</mat-label>
-                            <mat-label>&emsp;Invalid</mat-label>
+                            <mat-label id = "label-text">{{ this.invalidPermitNo }}&emsp;</mat-label>
+                            <mat-label style = "font-size: 14px"><mat-icon style = "vertical-align: middle; font-size: 22px;">not_interested</mat-icon>&emsp;Invalid</mat-label>
                         </mat-list-item>
                         <mat-list-item id = "pss-item" style = "background-color: green;">
-                            <mat-label id = "label-text">{{ this.validPermitNo }}</mat-label>
-                            <mat-label>&emsp;Valid</mat-label>
+                            <mat-label id = "label-text">{{ this.validPermitNo }}&emsp;</mat-label>
+                            <mat-label style = "font-size: 14px"><mat-icon style = "vertical-align: middle; font-size: 22px;">done_outline</mat-icon>&emsp;Valid</mat-label>
                         </mat-list-item>
                         <mat-list-item id = "pss-item" style = "background-color: grey;">
-                            <mat-label id = "label-text">{{ this.expiredPermitNo }}</mat-label>
-                            <mat-label>&emsp;Expired</mat-label>
+                            <mat-label id = "label-text">{{ this.expiredPermitNo }}&emsp;</mat-label>
+                            <mat-label style = "font-size: 14px"><mat-icon style = "vertical-align: middle; font-size: 22px;">warning</mat-icon>&emsp;Expired</mat-label>
                         </mat-list-item>
                         <mat-list-item id = "pss-item" style = "background-color: firebrick;">
-                            <mat-label id = "label-text">{{ this.terminatedPermitNo }}</mat-label>
-                            <mat-label>&emsp;Terminated</mat-label>
+                            <mat-label id = "label-text">{{ this.terminatedPermitNo }}&emsp;</mat-label>
+                            <mat-label style = "font-size: 14px"><mat-icon style = "vertical-align: middle; font-size: 22px;">clear</mat-icon>&emsp;Terminated</mat-label>
                         </mat-list-item>
                         <mat-list-item id = "pss-item" style = "background-color: dodgerblue;">
-                            <mat-label id = "label-text">{{ this.closedPermitNo }}</mat-label>
-                            <mat-label>&emsp;Closed</mat-label>
+                            <mat-label id = "label-text">{{ this.closedPermitNo }}&emsp;</mat-label>
+                            <mat-label style = "font-size: 14px"><mat-icon style = "vertical-align: middle; font-size: 22px;">block</mat-icon>&emsp;Closed</mat-label>
                         </mat-list-item>
                     </mat-list>
                 </mat-card-content>
-                <mat-card-actions align = "end">
+                <mat-card-actions align = "end" style = "margin-right: 10px;">
                     <button 
                         mat-stroked-button
                         appearance = "accent" 
@@ -71,8 +71,8 @@
         <mat-card>
             <div id = "left-content">
                 <mat-card-header>
-                    <mat-card-title>Pending Requests ({{ this.pendingReqList.length }}) <button mat-icon-button color = "primary" (click) = "this.allocatePermitQueryRes()"><mat-icon>refresh</mat-icon></button></mat-card-title>
-                    <mat-card-subtitle>Select one to view & assess</mat-card-subtitle>
+                    <mat-card-title>Pending Requests ({{ this.pendingReqList.length }})</mat-card-title>
+                    <mat-card-subtitle>Select one to view, assess and authorise</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content id = "pending-reqs-content">
                     <mat-list class = "pending-reqs-list" *ngFor = "let pending of this.pendingReqList">
@@ -102,7 +102,7 @@
                                         <mat-label>&emsp;{{ pending.startWorkingDateTime | date: "medium" }} - {{ pending.endWorkingDateTime | date: "medium" }}</mat-label>
                                         <br><br>
                                         <mat-label style = "font-weight: 425;">&emsp;Task:</mat-label>
-                                        <mat-label>&emsp;{{ pending.taskDescription }}&emsp;❖&emsp;<mat-label style = "font-weight: 425;">Applied by:</mat-label>&emsp;{{ pending.applicantDets.name }} on <u>{{ pending.timestamp | date: "medium" }}</u></mat-label>
+                                        <mat-label>&emsp;{{ pending.taskDescription }}&emsp;❖&emsp;<mat-label style = "font-weight: 425;">Applied by:</mat-label>&emsp;{{ pending.applicantDets.name }} on <u>{{ pending.timestamp | date: "mediumDate" }}</u></mat-label>
                                     </mat-card-content>
                                     <mat-card-actions align = "end">
                                         <div *ngIf = "pending.safetyAssessorEvaluation?.passed || !pending.safetyAssessorEvaluation?.passed">
@@ -127,7 +127,7 @@
                                                 <mat-icon style = "color: grey;">priority_high</mat-icon><mat-label style = "color: grey; font-weight: 450; font-size: 14px;">NOT YET AUTHORISED&emsp;</mat-label>
                                             </div>
                                         </div>
-                                        <div>
+                                        <div style = "margin-right: 15px;">
                                             <button 
                                             mat-stroked-button
                                             appearance = "accent"
@@ -148,9 +148,14 @@
         <mat-card>
             <div id = "right-content">
                 <mat-card-header>
-                    <mat-card-title>Trending Graph</mat-card-title>
-                    <mat-card-subtitle>Visual overview of permits per month</mat-card-subtitle>
+                    <mat-card-title>Tasks History</mat-card-title>
+                    <mat-card-subtitle>Graphical overview of task statuses per monthly basis</mat-card-subtitle>
                 </mat-card-header>
+                <mat-card-content>
+                    <div echarts
+                     style = "height: 700px"
+                     [options] = "this.ptwHistGraphOptions"></div> 
+                </mat-card-content>
             </div>
         </mat-card>
     </div>

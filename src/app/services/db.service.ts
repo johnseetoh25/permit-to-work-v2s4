@@ -57,6 +57,8 @@ export class DbService {
     return this.http.get<IPermitToWork[]>(this.ptwUrl + "?requestStatus=" + RequestStatus.REQUEST_PENDING);
   }
 
+  
+
   public update(
     id: number,
     ptwId: string,

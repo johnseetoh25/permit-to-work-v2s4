@@ -8,6 +8,9 @@ import { DbService } from 'src/app/services/db.service';
 import { MessageService } from 'src/app/services/message.service';
 import { IPermitToWork } from 'src/app/interfaces/IPermitToWork';
 import { ValidatorReqdetsComponent } from 'src/app/validator-reqdets/components/validator-reqdets/validator-reqdets.component';
+import * as echarts from 'echarts';
+import { EChartsOption } from 'echarts';
+import { TaskStatus } from 'src/app/constants/TaskStatus';
 
 @Component({
   selector: 'app-dashboard',
@@ -30,6 +33,8 @@ export class DashboardComponent implements OnInit {
   public closedPermitNo: number = 0;
 
   public pendingReqList: IPermitToWork[] = [];
+
+  public ptwHistGraphOptions : EChartsOption = {};
 
   constructor(
     private router: Router,
@@ -69,6 +74,29 @@ export class DashboardComponent implements OnInit {
     this.db.returnPendingReqs().subscribe((resp: IPermitToWork[]) => {
       this.pendingReqList = resp;
     });
+
+    this.ptwHistGraphOptions = {
+      legend: {},
+      tooltip: {},
+      dataset: {
+        source: [
+          [
+            "Task Status", 
+            TaskStatus.STATUS_NOT_STARTED, 
+            TaskStatus.STATUS_IN_PROGRESS, 
+            TaskStatus.STATUS_OVERTIME, 
+            TaskStatus.STATUS_CONDITION_CHANGED, 
+            TaskStatus.STATUS_COMPLETED],
+          ["Jan", 43.3, 85.8, 33.8, 13.7, 33.3],
+          ["Feb", 83.1, 73.4, 75.2, 98.17, 45.4],
+          ["Mar", 86.4, 65.2, 27.54, 33.43, 12.5],
+          ["Apr", 72.4, 53.9, 88.23, 14.34, 76,1]
+        ]
+      },
+      xAxis: { type: "category" },
+      yAxis: {},
+      series: [{ type: "bar" }, { type: "bar" }, { type: "bar" }, { type: "bar" }, { type: "bar" }]
+    };
   }
 
   public navigateTo(url : string) : void {
