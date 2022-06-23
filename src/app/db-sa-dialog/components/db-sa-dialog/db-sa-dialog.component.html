@@ -1,0 +1,431 @@
+<div class = "dialog-box">
+    <h2 mat-dialog-title>Safety Assessor Evaluation</h2>
+    <br>
+    <div *ngFor = "let dt of this.fetched.ptw">
+        <div mat-dialog-content *ngIf = "dt.permitType == 'Work at height (WAH)'">
+            <div>
+                <mat-label class = "required-label">* Required field</mat-label>
+                <br><br>
+                <mat-label id = "label-text">ASSESSMENT OF CONTROL MEASURES</mat-label>
+                <br><br>
+                <div>
+                    <div>
+                        <mat-label>All reasonably practicable measures have been taken.*</mat-label>
+                        <br><br>
+                    </div>
+                    <div>
+                        <mat-radio-group 
+                            required 
+                            aria-label = "Select an option" 
+                            [(ngModel)] = "this.wah_s2_acm_q01_choiceInput">
+                            <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                {{ rads }}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div>
+                        <mat-form-field class = "wah-s2-acm-remarks-input" appearance = "outline">
+                            <mat-label>Remarks</mat-label>
+                            <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.wah_s2_acm_q01_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br><br>
+                <div>
+                    <div>
+                        <mat-label>Verification of documents / interview workers / others.*</mat-label>
+                        <br><br>
+                    </div>
+                    <div>
+                        <mat-radio-group 
+                            required 
+                            aria-label = "Select an option" 
+                            [(ngModel)] = "this.wah_s2_acm_q02_choiceInput">
+                            <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                {{ rads }}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div>
+                        <mat-form-field class = "wah-s2-acm-remarks-input" appearance = "outline">
+                            <mat-label>Remarks</mat-label>
+                            <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.wah_s2_acm_q02_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br><br>
+                <mat-divider></mat-divider>
+                <br>
+                <mat-label id = "label-text">SITE SURVEY FROM SUPERVISORS</mat-label>
+                <br><br>
+                <div>
+                    <div>
+                        <mat-label>All persons on site are protected from falling risks.*</mat-label>
+                        <br><br>
+                    </div>
+                    <div>
+                        <mat-radio-group 
+                            required 
+                            aria-label = "Select an option" 
+                            [(ngModel)] = "this.wah_s2_ssfs_q01_choiceInput">
+                            <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                {{ rads }}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div>
+                        <mat-form-field class = "wah-s2-acm-remarks-input" appearance = "outline">
+                            <mat-label>Remarks</mat-label>
+                            <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.wah_s2_ssfs_q01_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br><br>
+                <div>
+                    <div>
+                        <mat-label>Surrounding areas do not pose additional hazards.*</mat-label>
+                        <br><br>
+                    </div>
+                    <div>
+                        <mat-radio-group 
+                            required 
+                            aria-label = "Select an option" 
+                            [(ngModel)] = "this.wah_s2_ssfs_q02_choiceInput">
+                            <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                {{ rads }}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div>
+                        <mat-form-field class = "wah-s2-acm-remarks-input" appearance = "outline">
+                            <mat-label>Remarks</mat-label>
+                            <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.wah_s2_ssfs_q02_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br><br>
+                <mat-divider></mat-divider>
+                <br>
+                <mat-label id = "label-text">MULTIPLE LOCATIONS / EXTENDED DURATION</mat-label>
+                <br><br>
+                <div>
+                    <div>
+                        <mat-label>Hazards are common at various locations / time period.*</mat-label>
+                        <br><br>
+                    </div>
+                    <div>
+                        <mat-radio-group 
+                            required 
+                            aria-label = "Select an option" 
+                            [(ngModel)] = "this.wah_s2_mloed_q01_choiceInput">
+                            <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                {{ rads }}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div>
+                        <mat-form-field class = "wah-s2-acm-remarks-input" appearance = "outline">
+                            <mat-label>Remarks</mat-label>
+                            <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.wah_s2_mloed_q01_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br><br>
+                <div>
+                    <div>
+                        <mat-label>Control measures are applicable and effective.*</mat-label>
+                        <br><br>
+                    </div>
+                    <div>
+                        <mat-radio-group 
+                            required 
+                            aria-label = "Select an option" 
+                            [(ngModel)] = "this.wah_s2_mloed_q02_choiceInput">
+                            <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                {{ rads }}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div>
+                        <mat-form-field class = "wah-s2-acm-remarks-input" appearance = "outline">
+                            <mat-label>Remarks</mat-label>
+                            <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.wah_s2_mloed_q02_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br><br>
+                <mat-divider></mat-divider>
+                <br>
+                <mat-label id = "label-text">DECLARATION</mat-label>
+                <br><br>
+                <div>
+                    <mat-checkbox [(ngModel)] = "this.safetyAssessorEvaluationPassed">
+                        <mat-label>
+                            I have evaluated the application and am satisfied that all reasonably practicable measures
+                            <br>have been taken effectively.
+                        </mat-label>
+                    </mat-checkbox>
+                </div>
+            </div>
+        </div>
+        <div mat-dialog-content *ngIf = "dt.permitType == 'Confined space (CS)'">
+            <div>
+                <mat-label class = "required-label">* Required field</mat-label>
+                <br><br>
+                <mat-label id = "label-text">GAS MONITORING RESULTS</mat-label>
+                <br><br>
+                <div>
+                    <div>
+                        <mat-label>Oxygen (O₂) gas level (%)*</mat-label>
+                        <br><br>
+                    </div>
+                    <div>
+                        <mat-form-field class = "cs-s2-gmr-input" appearance = "outline">
+                            <mat-label>Permissible level</mat-label>
+                            <input required type = "number" min = "0" style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.cs_s2_gmr_oxygenLevelInput" [ngModelOptions] = "{ standalone: true }">
+                        </mat-form-field>
+                        <mat-label>&emsp;Permissible: 19.5% - 23.5%</mat-label>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <mat-label>Flammable gas level (% LEL)*</mat-label>
+                        <br><br>
+                    </div>
+                    <div>
+                        <mat-form-field class = "cs-s2-gmr-input" appearance = "outline">
+                            <mat-label>Permissible level</mat-label>
+                            <input required type = "number" min = "0" style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.cs_s2_gmr_flammableGasLevelInput" [ngModelOptions] = "{ standalone: true }">
+                        </mat-form-field>
+                        <mat-label>&emsp;Permissible: Less than 10% LEL</mat-label>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <mat-label>Toxic gas level (ppm)*</mat-label>
+                        <br><br>
+                    </div>
+                    <div>
+                        <mat-form-field class = "cs-s2-gmr-input" appearance = "outline">
+                            <mat-label>Permissible level</mat-label>
+                            <input required type = "number" min = "0" style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.cs_s2_gmr_toxicGasLevelInput" [ngModelOptions] = "{ standalone: true }">
+                        </mat-form-field>
+                        <mat-label></mat-label>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <mat-label>Fit for entry?*</mat-label>
+                        <br><br>
+                    </div>
+                    <div>
+                        <mat-slide-toggle [(ngModel)] = "this.cs_s2_gmr_fitForEntryInput">
+                            <mat-label id = "label-text" *ngIf = "this.cs_s2_gmr_fitForEntryInput">&emsp;Fit for entry</mat-label>
+                            <mat-label id = "label-text" *ngIf = "!this.cs_s2_gmr_fitForEntryInput">&emsp;Not fit for entry</mat-label>
+                        </mat-slide-toggle>
+                    </div>
+                </div>
+                <br>
+                <mat-divider></mat-divider>
+                <br>
+                <mat-label id = "label-text">DECLARATION</mat-label>
+                <br><br>
+                <div>
+                    <mat-checkbox [(ngModel)] = "this.safetyAssessorEvaluationPassed">
+                        <mat-label>
+                            I have evaluated the application and am satisfied that all reasonably practicable measures
+                            <br>have been taken effectively.
+                        </mat-label>
+                    </mat-checkbox>
+                </div>
+            </div>
+        </div>
+        <div mat-dialog-content *ngIf = "dt.permitType == 'Hot work (HW)'">
+            <div>
+                <mat-label class = "required-label">* Required field</mat-label>
+                <br><br>
+                <mat-label id = "label-text">ASSESSMENT OF CONTROL MEASURES</mat-label>
+                <br><br>
+                <div>
+                    <div>
+                        <mat-label>All reasonably practicable measures have been taken.*</mat-label>
+                        <br><br>
+                    </div>
+                    <div>
+                        <mat-radio-group 
+                            required 
+                            aria-label = "Select an option" 
+                            [(ngModel)] = "this.hw_s2_a_q01_choiceInput">
+                            <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                {{ rads }}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div>
+                        <mat-form-field class = "hw-s2-a-remarks-input" appearance = "outline">
+                            <mat-label>Remarks</mat-label>
+                            <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.hw_s2_a_q01_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <mat-divider></mat-divider>
+                <br>
+                <mat-label id = "label-text">DECLARATION</mat-label>
+                <br><br>
+                <div>
+                    <mat-checkbox [(ngModel)] = "this.safetyAssessorEvaluationPassed">
+                        <mat-label>
+                            I have evaluated the application and am satisfied that all reasonably practicable measures
+                            <br>have been taken effectively.
+                        </mat-label>
+                    </mat-checkbox>
+                </div>
+            </div>
+        </div>
+        <div mat-dialog-content *ngIf = "dt.permitType == 'Cold work (CW)'">
+            <div>
+                <mat-label class = "required-label">* Required field</mat-label>
+                <br><br>
+                <mat-label id = "label-text">ASSESSMENT OF CONTROL MEASURES</mat-label>
+                <br><br>
+                <div>
+                    <div>
+                        <mat-label>All reasonably practicable measures have been taken.*</mat-label>
+                        <br><br>
+                    </div>
+                    <div>
+                        <mat-radio-group 
+                            required 
+                            aria-label = "Select an option" 
+                            [(ngModel)] = "this.cw_s2_a_q01_choiceInput">
+                            <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                {{ rads }}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div>
+                        <mat-form-field class = "cw-s2-a-remarks-input" appearance = "outline">
+                            <mat-label>Remarks</mat-label>
+                            <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.cw_s2_a_q01_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <mat-divider></mat-divider>
+                <br>
+                <mat-label id = "label-text">DECLARATION</mat-label>
+                <br><br>
+                <div>
+                    <mat-checkbox [(ngModel)] = "this.safetyAssessorEvaluationPassed">
+                        <mat-label>
+                            I have evaluated the application and am satisfied that all reasonably practicable measures
+                            <br>have been taken effectively.
+                        </mat-label>
+                    </mat-checkbox>
+                </div>
+            </div>
+        </div>
+        <div mat-dialog-content *ngIf = "dt.permitType == 'Electrical (E)'">
+            <div>
+                <mat-label class = "required-label">* Required field</mat-label>
+                <br><br>
+                <mat-label id = "label-text">ASSESSMENT OF CONTROL MEASURES</mat-label>
+                <br><br>
+                <div>
+                    <div>
+                        <mat-label>All reasonably practicable measures have been taken.*</mat-label>
+                        <br><br>
+                    </div>
+                    <div>
+                        <mat-radio-group 
+                            required 
+                            aria-label = "Select an option" 
+                            [(ngModel)] = "this.e_s2_a_q01_choiceInput">
+                            <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                {{ rads }}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div>
+                        <mat-form-field class = "e-s2-a-remarks-input" appearance = "outline">
+                            <mat-label>Remarks</mat-label>
+                            <input style = "height: 15px" matInput placeholder = "Remarks" [(ngModel)] = "this.e_s2_a_q01_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <mat-divider></mat-divider>
+                <br>
+                <mat-label id = "label-text">DECLARATION</mat-label>
+                <br><br>
+                <div>
+                    <mat-checkbox [(ngModel)] = "this.safetyAssessorEvaluationPassed">
+                        <mat-label>
+                            I have evaluated the application and am satisfied that all reasonably practicable measures
+                            <br>have been taken effectively.
+                        </mat-label>
+                    </mat-checkbox>
+                </div>
+            </div>
+        </div>
+        <div mat-dialog-actions *ngFor = "let dt of this.fetched.ptw">
+            <div *ngIf = "dt.permitType == 'Work at height (WAH)'">
+                <button 
+                    mat-button 
+                    [disabled] = "
+                        this.wah_s2_acm_q01_choiceInput == '' ||
+                        this.wah_s2_acm_q02_choiceInput == '' ||
+                        this.wah_s2_ssfs_q01_choiceInput == '' ||
+                        this.wah_s2_ssfs_q02_choiceInput == '' ||
+                        this.wah_s2_mloed_q01_choiceInput == '' ||
+                        this.wah_s2_mloed_q02_choiceInput == '' ||
+                        !this.safetyAssessorEvaluationPassed
+                    "
+                    (click) = "this.evaluatePtw()">
+                    SUBMIT EVALUATION</button>
+            </div>
+            <div *ngIf = "dt.permitType == 'Confined space (CS)'">
+                <button 
+                    mat-button 
+                    [disabled] = "
+                        this.cs_s2_gmr_oxygenLevelInput == null ||
+                        this.cs_s2_gmr_flammableGasLevelInput == null ||
+                        this.cs_s2_gmr_toxicGasLevelInput == null ||
+                        this.cs_s2_gmr_fitForEntryInput == null ||
+                        !this.safetyAssessorEvaluationPassed
+                    "
+                    (click) = "this.evaluatePtw()">
+                    SUBMIT EVALUATION</button>
+            </div>
+            <div *ngIf = "dt.permitType == 'Hot work (HW)'">
+                <button 
+                    mat-button 
+                    [disabled] = "
+                        this.hw_s2_a_q01_choiceInput == '' ||
+                        !this.safetyAssessorEvaluationPassed
+                    "
+                    (click) = "this.evaluatePtw()">
+                    SUBMIT EVALUATION</button>
+            </div>
+            <div *ngIf = "dt.permitType == 'Cold work (CW)'">
+                <button 
+                    mat-button 
+                    [disabled] = "
+                        this.cw_s2_a_q01_choiceInput == '' ||
+                        !this.safetyAssessorEvaluationPassed
+                    "
+                    (click) = "this.evaluatePtw()">
+                    SUBMIT EVALUATION</button>
+            </div>
+            <div *ngIf = "dt.permitType == 'Electrical (E)'">
+                <button 
+                    mat-button 
+                    [disabled] = "
+                        this.e_s2_a_q01_choiceInput == '' ||
+                        !this.safetyAssessorEvaluationPassed
+                    "
+                    (click) = "this.evaluatePtw()">
+                    SUBMIT EVALUATION</button>
+            </div>
+            <button mat-button mat-dialog-close>Cancel</button>
+        </div>
+    </div>
+</div>

@@ -5,7 +5,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { SignoutDialogComponent } from 'src/app/signout-dialog/components/signout-dialog/signout-dialog.component';
 import { DbService } from 'src/app/services/db.service';
+import { MessageService } from 'src/app/services/message.service';
 import { IPermitToWork } from 'src/app/interfaces/IPermitToWork';
+import { ValidatorReqdetsComponent } from 'src/app/validator-reqdets/components/validator-reqdets/validator-reqdets.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -34,7 +36,9 @@ export class DashboardComponent implements OnInit {
     private auth: AuthService,
     private db: DbService,
     public dialog: MatDialog, 
-    public dialogRefSignOut: MatDialogRef<SignoutDialogComponent>) { }
+    public dialogRefSignOut: MatDialogRef<SignoutDialogComponent>,
+    public dialogRefVldReqDets: MatDialogRef<ValidatorReqdetsComponent>,
+    private msg: MessageService) { }
 
   public ngOnInit(): void { 
     this.checkSession();
@@ -84,8 +88,22 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  public async expandSelectedPtw(id: string): Promise<void> {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      id: id,
+      userName: this.userNameDisplay,
+      from: "dashboard"
+    };
+    this.dialogRefVldReqDets = this.dialog.open(ValidatorReqdetsComponent, dialogConfig);
+  }
+
   public openSignOutDialog() : void {
     const dialogConfig = new MatDialogConfig();
     this.dialogRefSignOut = this.dialog.open(SignoutDialogComponent, dialogConfig);
+  }
+
+  public openSnackBar(msg: string, action: string): void {
+    this.msg.openSnackBar(msg, action, 3000);
   }
 }

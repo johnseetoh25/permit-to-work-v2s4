@@ -1,0 +1,35 @@
+.dialog-box {
+    width: 700px;
+}
+
+.mat-dialog-content {
+    height: 500px;
+}
+
+.mat-dialog-actions {
+    justify-content: flex-end;
+}
+
+.required-label {
+    color: crimson;
+}
+
+#label-text {
+    font-weight: 425;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+    margin-bottom: 8px;
+}
+
+.wah-s2-acm-remarks-input {
+    width: 350px;
+    height: 10px;
+}
+.cs-s2-gmr-input, 
+.hw-s2-a-remarks-input, 
+.cw-s2-a-remarks-input, 
+.e-s2-a-remarks-input {
+    width: 350px;
+}

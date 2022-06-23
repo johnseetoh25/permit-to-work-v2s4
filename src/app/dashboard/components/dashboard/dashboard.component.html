@@ -130,7 +130,8 @@
                                         <div>
                                             <button 
                                             mat-stroked-button
-                                            appearance = "accent">VIEW & MANAGE</button>
+                                            appearance = "accent"
+                                            (click) = "this.expandSelectedPtw(pending.id.toString())">VIEW & MANAGE</button>
                                         </div>
                                         
                                     </mat-card-actions>
