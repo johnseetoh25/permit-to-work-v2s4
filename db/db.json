@@ -4,7 +4,7 @@
       "userId": "SPV001",
       "userPw": "test1",
       "userName": "Oliver Roberts",
-      "inSession": true,
+      "inSession": false,
       "id": 1
     },
     {
@@ -32,7 +32,7 @@
       "userId": "SPV005",
       "userPw": "test5",
       "userName": "Esmond Dickinson",
-      "inSession": false,
+      "inSession": true,
       "id": 5
     }
   ],
@@ -1109,15 +1109,15 @@
             "oxygenLevel": 0,
             "flammableGasLevel": 0,
             "toxicGasLevel": 0,
-            "fitForEntry": false
+            "fitForEntry": true
           }
         },
         "sectionThree": {
           "permitReview": {
-            "q01": "None",
-            "q02": "None",
-            "q03": "None",
-            "q04": "None"
+            "q01": "Yes",
+            "q02": "Yes",
+            "q03": "Yes",
+            "q04": "Yes"
           }
         }
       },
@@ -1400,25 +1400,25 @@
       },
       "dailyEndorsement": {},
       "ptwStatus": {
-        "permitStatus": "Invalid",
-        "taskStatus": "Not Started",
+        "permitStatus": "Valid",
+        "taskStatus": "In Progress",
         "remarks": "None",
         "checked": false,
         "supervisorName": "None",
         "timestamp": "None"
       },
       "safetyAssessorEvaluation": {
-        "passed": false,
-        "name": "None",
-        "timestamp": "None"
+        "passed": true,
+        "name": "Esmond Dickinson (SPV005)",
+        "timestamp": "2022-06-23T00:59:36.817Z"
       },
       "authorisedManagerApproval": {
-        "passed": false,
-        "name": "None",
-        "timestamp": "None"
+        "passed": true,
+        "name": "Esmond Dickinson (SPV005)",
+        "timestamp": "2022-06-23T00:59:53.368Z"
       },
       "checked": true,
-      "requestStatus": "Pending",
+      "requestStatus": "Approved",
       "statusRemarks": "None",
       "timestamp": "2022-06-22T14:42:24.398Z",
       "id": 3

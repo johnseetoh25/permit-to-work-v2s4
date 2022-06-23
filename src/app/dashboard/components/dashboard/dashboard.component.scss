@@ -20,6 +20,10 @@ mat-grid-tile {
     font-size: medium;
 }
 
+#label-text {
+    font-weight: 425;
+}
+
 .spacer {
     flex: 1 1 auto;
 }
@@ -49,7 +53,7 @@ mat-grid-tile {
 
 #pending-reqs-content {
     padding: 16px;
-    height: 400px;
+    height: 335px;
     overflow-y: scroll;
     background-color: rgb(250, 250, 250);
 }

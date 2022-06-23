@@ -29,9 +29,6 @@ export class DashboardComponent implements OnInit {
 
   public pendingReqList: IPermitToWork[] = [];
 
-  public startWorkingDateTime: Date = new Date();
-  public endWorkingDateTime: Date = new Date();
-
   constructor(
     private router: Router,
     private auth: AuthService,
