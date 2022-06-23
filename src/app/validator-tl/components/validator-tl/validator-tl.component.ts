@@ -148,8 +148,7 @@ export class ValidatorTlComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
       id: id,
-      userName: this.userNameDisplay,
-      from: "tl"
+      userName: this.userNameDisplay
     };
     this.dialogRefPtwDets = this.dialog.open(ValidatorReqdetsComponent, dialogConfig);
   }

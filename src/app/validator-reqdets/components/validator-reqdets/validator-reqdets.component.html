@@ -1695,7 +1695,7 @@
             </mat-tab-group>
         </div>
     </div>
-    <div mat-dialog-actions *ngIf = "this.fetched.from == 'tl'">
+    <div mat-dialog-actions>
         <button 
             mat-button 
             color = "primary"
@@ -1703,7 +1703,7 @@
                 dt.safetyAssessorEvaluation.passed &&
                 dt.safetyAssessorEvaluation.name != 'None'
             "
-            (click) = "this.openSafetyAssessorDialog('tl')">Assess this Permit</button>
+            (click) = "this.openSafetyAssessorDialog()">Assess this Permit</button>
         <button 
             mat-button 
             color = "primary"
@@ -1714,29 +1714,7 @@
                     dt.authorisedManagerApproval.name != 'None'
                 )
             "
-            (click) = "this.openAuthorisedManagerDialog('tl')">Authorise this Permit</button>
-        <button mat-button mat-dialog-close>Close</button>
-    </div>
-    <div mat-dialog-actions *ngIf = "this.fetched.from == 'dashboard'">
-        <button 
-            mat-button 
-            color = "primary"
-            [disabled] = "
-                dt.safetyAssessorEvaluation.passed &&
-                dt.safetyAssessorEvaluation.name != 'None'
-            "
-            (click) = "this.openSafetyAssessorDialog('dashboard')">Assess this Permit</button>
-        <button 
-            mat-button 
-            color = "primary"
-            [disabled] = "
-                !dt.safetyAssessorEvaluation.passed ||
-                (
-                    dt.authorisedManagerApproval.passed &&
-                    dt.authorisedManagerApproval.name != 'None'
-                )
-            "
-            (click) = "this.openAuthorisedManagerDialog('dashboard')">Authorise this Permit</button>
+            (click) = "this.openAuthorisedManagerDialog()">Authorise this Permit</button>
         <button mat-button mat-dialog-close>Close</button>
     </div>
 </div>
