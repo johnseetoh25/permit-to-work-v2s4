@@ -92,10 +92,12 @@ mat-grid-list mat-grid-tile {
     width: 625px;
     padding: 24px;
     border-radius: 0.5em;
+    padding-right: 32px;
+    background-color: rgb(207, 218, 228);
 }
 
-.apl-dcl-container, .cwp-info-container {
-    background-color:gainsboro;
+.cwp-info-container {
+    background-color: gainsboro;
 }
 
 .hwp-info-container {

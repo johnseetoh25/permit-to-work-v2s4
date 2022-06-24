@@ -51,11 +51,11 @@
             <ng-container matColumnDef = "permitType">
                 <th mat-sort-header = "permitType" mat-header-cell *matHeaderCellDef>Permit Type</th>
                 <td mat-cell *matCellDef = "let colElems">
-                    <mat-icon *ngIf = "colElems.permitType == 'Hot work (HW)'" style = "color: brown">whatshot</mat-icon>
-                    <mat-icon *ngIf = "colElems.permitType == 'Cold work (CW)'" style = "color: darkslateblue">ac_unit</mat-icon>
-                    <mat-icon *ngIf = "colElems.permitType == 'Electrical (E)'" style = "color: khaki">flash_on</mat-icon>
-                    <mat-icon *ngIf = "colElems.permitType == 'Work at height (WAH)'" style = "color: darkslategrey">location_city</mat-icon>
-                    <mat-icon *ngIf = "colElems.permitType == 'Confined space (CS)'" style = "color: forestgreen">zoom_out_map</mat-icon>&emsp;{{ colElems.permitType }}
+                    <mat-icon *ngIf = "colElems.permitType == 'Hot work permit (HWP)'" style = "color: brown; vertical-align: middle;">whatshot</mat-icon>
+                    <mat-icon *ngIf = "colElems.permitType == 'Cold work permit (CWP)'" style = "color: darkslateblue; vertical-align: middle;">ac_unit</mat-icon>
+                    <mat-icon *ngIf = "colElems.permitType == 'Electrical permit (EP)'" style = "color: khaki; vertical-align: middle;">flash_on</mat-icon>
+                    <mat-icon *ngIf = "colElems.permitType == 'Work at height permit (WAHP)'" style = "color: darkslategrey; vertical-align: middle;">location_city</mat-icon>
+                    <mat-icon *ngIf = "colElems.permitType == 'Confined space permit (CSP)'" style = "color: forestgreen; vertical-align: middle;">zoom_out_map</mat-icon>&emsp;{{ colElems.permitType }}
                 </td>
             </ng-container>
         

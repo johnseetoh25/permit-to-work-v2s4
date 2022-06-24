@@ -23,11 +23,11 @@ export interface IPermitToWork {
 	},
 	/*
 		4 mains:
-		- Hot work (HW)
-		- Cold work (CW)
-		- Electrical (E)
-		- Work at height (WAH)
-		- Confined space (CS)
+		- Hot work permit (HWP)
+		- Cold work permit (CWP)
+		- Electrical permit (EP)
+		- Work at height permit (WAHP)
+		- Confined space permit (CSP)
 	*/
 	permitType: string,
     startWorkingDateTime: string,

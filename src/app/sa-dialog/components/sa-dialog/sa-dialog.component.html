@@ -2,7 +2,7 @@
     <h2 mat-dialog-title>Safety Assessor Evaluation</h2>
     <br>
     <div *ngFor = "let dt of this.fetched.ptw">
-        <div mat-dialog-content *ngIf = "dt.permitType == 'Work at height (WAH)'">
+        <div mat-dialog-content *ngIf = "dt.permitType == 'Work at height permit (WAHP)'">
             <div>
                 <mat-label class = "required-label">* Required field</mat-label>
                 <br><br>
@@ -168,7 +168,7 @@
                 </div>
             </div>
         </div>
-        <div mat-dialog-content *ngIf = "dt.permitType == 'Confined space (CS)'">
+        <div mat-dialog-content *ngIf = "dt.permitType == 'Confined space permit (CSP)'">
             <div>
                 <mat-label class = "required-label">* Required field</mat-label>
                 <br><br>
@@ -240,7 +240,7 @@
                 </div>
             </div>
         </div>
-        <div mat-dialog-content *ngIf = "dt.permitType == 'Hot work (HW)'">
+        <div mat-dialog-content *ngIf = "dt.permitType == 'Hot work permit (HWP)'">
             <div>
                 <mat-label class = "required-label">* Required field</mat-label>
                 <br><br>
@@ -282,7 +282,7 @@
                 </div>
             </div>
         </div>
-        <div mat-dialog-content *ngIf = "dt.permitType == 'Cold work (CW)'">
+        <div mat-dialog-content *ngIf = "dt.permitType == 'Cold work permit (CWP)'">
             <div>
                 <mat-label class = "required-label">* Required field</mat-label>
                 <br><br>
@@ -324,7 +324,7 @@
                 </div>
             </div>
         </div>
-        <div mat-dialog-content *ngIf = "dt.permitType == 'Electrical (E)'">
+        <div mat-dialog-content *ngIf = "dt.permitType == 'Electrical permit (EP)'">
             <div>
                 <mat-label class = "required-label">* Required field</mat-label>
                 <br><br>
@@ -367,7 +367,7 @@
             </div>
         </div>
         <div mat-dialog-actions *ngFor = "let dt of this.fetched.ptw">
-            <div *ngIf = "dt.permitType == 'Work at height (WAH)'">
+            <div *ngIf = "dt.permitType == 'Work at height permit (WAHP)'">
                 <button 
                     mat-button 
                     [disabled] = "
@@ -382,7 +382,7 @@
                     (click) = "this.evaluatePtw()">
                     SUBMIT EVALUATION</button>
             </div>
-            <div *ngIf = "dt.permitType == 'Confined space (CS)'">
+            <div *ngIf = "dt.permitType == 'Confined space permit (CSP)'">
                 <button 
                     mat-button 
                     [disabled] = "
@@ -395,7 +395,7 @@
                     (click) = "this.evaluatePtw()">
                     SUBMIT EVALUATION</button>
             </div>
-            <div *ngIf = "dt.permitType == 'Hot work (HW)'">
+            <div *ngIf = "dt.permitType == 'Hot work permit (HWP)'">
                 <button 
                     mat-button 
                     [disabled] = "
@@ -405,7 +405,7 @@
                     (click) = "this.evaluatePtw()">
                     SUBMIT EVALUATION</button>
             </div>
-            <div *ngIf = "dt.permitType == 'Cold work (CW)'">
+            <div *ngIf = "dt.permitType == 'Cold work permit (CWP)'">
                 <button 
                     mat-button 
                     [disabled] = "
@@ -415,7 +415,7 @@
                     (click) = "this.evaluatePtw()">
                     SUBMIT EVALUATION</button>
             </div>
-            <div *ngIf = "dt.permitType == 'Electrical (E)'">
+            <div *ngIf = "dt.permitType == 'Electrical permit (EP)'">
                 <button 
                     mat-button 
                     [disabled] = "

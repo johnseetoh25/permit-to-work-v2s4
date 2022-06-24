@@ -1,11 +1,11 @@
 <div class = "ptw-request-details-dialog" *ngFor = "let dt of this.targetPtw">
     <div mat-dialog-title>
         <mat-label style = "font-size: larger; font-weight: 500;">{{ dt.ptwId }}</mat-label><br>
-        <mat-icon *ngIf = "dt.permitType == 'Hot work (HW)'" style = "color: brown">whatshot</mat-icon>
-        <mat-icon *ngIf = "dt.permitType == 'Cold work (CW)'" style = "color: darkslateblue">ac_unit</mat-icon>
-        <mat-icon *ngIf = "dt.permitType == 'Electrical (E)'" style = "color: khaki">flash_on</mat-icon>
-        <mat-icon *ngIf = "dt.permitType == 'Work at height (WAH)'" style = "color: darkslategrey">location_city</mat-icon>
-        <mat-icon *ngIf = "dt.permitType == 'Confined space (CS)'" style = "color: forestgreen">zoom_out_map</mat-icon>
+        <mat-icon *ngIf = "dt.permitType == 'Hot work permit (HWP)'" style = "color: brown">whatshot</mat-icon>
+        <mat-icon *ngIf = "dt.permitType == 'Cold work permit (CWP)'" style = "color: darkslateblue">ac_unit</mat-icon>
+        <mat-icon *ngIf = "dt.permitType == 'Electrical permit (EP)'" style = "color: khaki">flash_on</mat-icon>
+        <mat-icon *ngIf = "dt.permitType == 'Work at height permit (WAHP)'" style = "color: darkslategrey">location_city</mat-icon>
+        <mat-icon *ngIf = "dt.permitType == 'Confined space permit (CSP)'" style = "color: forestgreen">zoom_out_map</mat-icon>
         <mat-label style = "font-size: medium; font-weight: medium;"> {{ dt.permitType | uppercase }}</mat-label>
     </div>
     <div mat-dialog-content>
@@ -199,7 +199,7 @@
                 </mat-tab>
                 <mat-tab label = "Safety Measures">
                     <div id = "scrollable-tc">
-                        <div *ngIf = "dt.permitType == 'Work at height (WAH)'">
+                        <div *ngIf = "dt.permitType == 'Work at height permit (WAHP)'">
                             <div class = "wah-sm-cols">
                                 <div id = "wah-sm-col">
                                     <mat-label id = "label-text">Safety measures</mat-label>
@@ -333,7 +333,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf = "dt.permitType == 'Confined space (CS)'">
+                        <div *ngIf = "dt.permitType == 'Confined space permit (CSP)'">
                             <div class = "cs-sm-cols">
                                 <div id = "cs-sm-col">
                                     <mat-label id = "label-text">POTENTIAL HAZARDS</mat-label>
@@ -570,7 +570,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf = "dt.permitType == 'Hot work (HW)'">
+                        <div *ngIf = "dt.permitType == 'Hot work permit (HWP)'">
                             <div class = "hw-sm-cols">
                                 <div id = "hw-sm-col">
                                     <mat-label id = "label-text">Safety measures</mat-label>
@@ -726,7 +726,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf = "dt.permitType == 'Cold work (CW)'">
+                        <div *ngIf = "dt.permitType == 'Cold work permit (CWP)'">
                             <div class = "cw-sm-cols">
                                 <div id = "cw-sm-col">
                                     <mat-label id = "label-text">Safety measures</mat-label>
@@ -860,7 +860,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf = "dt.permitType == 'Electrical (E)'">
+                        <div *ngIf = "dt.permitType == 'Electrical permit (EP)'">
                             <div class = "e-sm-cols">
                                 <div id = "e-sm-col">
                                     <mat-label id = "label-text">Safety measures</mat-label>
@@ -1023,7 +1023,7 @@
                             </div>
                         </div>
                         <mat-divider></mat-divider>
-                        <div *ngIf = "dt.permitType == 'Work at height (WAH)'">
+                        <div *ngIf = "dt.permitType == 'Work at height permit (WAHP)'">
                             <div class = "wah-eval-cols">
                                 <div id = "wah-eval-col">
                                     <mat-label id = "label-text">ASSESSMENT OF CONTROL MEASURES</mat-label>
@@ -1161,7 +1161,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf = "dt.permitType == 'Confined space (CS)'">
+                        <div *ngIf = "dt.permitType == 'Confined space permit (CSP)'">
                             <div class = "cs-eval-cols">
                                 <div id = "cs-eval-col">
                                     <mat-label id = "label-text">GAS MONITORING RESULTS</mat-label>
@@ -1230,7 +1230,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf = "dt.permitType == 'Hot work (HW)'">
+                        <div *ngIf = "dt.permitType == 'Hot work permit (HWP)'">
                             <div class = "hw-eval-cols">
                                 <div id = "hw-eval-col">
                                     <mat-label id = "label-text">EVALUATION OF CONTROL MEASURES</mat-label>
@@ -1265,7 +1265,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf = "dt.permitType == 'Cold work (CW)'">
+                        <div *ngIf = "dt.permitType == 'Cold work permit (CWP)'">
                             <div class = "cw-eval-cols">
                                 <div id = "cw-eval-col">
                                     <mat-label id = "label-text">EVALUATION OF CONTROL MEASURES</mat-label>
@@ -1300,7 +1300,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf = "dt.permitType == 'Electrical (E)'">
+                        <div *ngIf = "dt.permitType == 'Electrical permit (EP)'">
                             <div class = "e-eval-cols">
                                 <div id = "e-eval-col">
                                     <mat-label id = "label-text">EVALUATION OF CONTROL MEASURES</mat-label>
@@ -1364,7 +1364,7 @@
                             </div>
                         </div>
                         <mat-divider></mat-divider>
-                        <div *ngIf = "dt.permitType == 'Work at height (WAH)'">
+                        <div *ngIf = "dt.permitType == 'Work at height permit (WAHP)'">
                             <div class = "wah-am-cols">
                                 <div id = "wah-am-col">
                                     <mat-label id = "label-text">REVIEW OF PERMIT</mat-label>
@@ -1432,7 +1432,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf = "dt.permitType == 'Confined space (CS)'">
+                        <div *ngIf = "dt.permitType == 'Confined space permit (CSP)'">
                             <div class = "cs-am-cols-header">
                                 <div id = "cs-am-col-header">
                                     <mat-label id = "label-text">REVIEW OF PERMIT</mat-label>
@@ -1485,7 +1485,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf = "dt.permitType == 'Hot work (HW)'">
+                        <div *ngIf = "dt.permitType == 'Hot work permit (HWP)'">
                             <div class = "hw-am-cols">
                                 <div id = "hw-am-col">
                                     <mat-label id = "label-text">REVIEW OF PERMIT</mat-label>
@@ -1553,7 +1553,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf = "dt.permitType == 'Cold work (CW)'">
+                        <div *ngIf = "dt.permitType == 'Cold work permit (CWP)'">
                             <div class = "cw-am-cols">
                                 <div id = "cw-am-col">
                                     <mat-label id = "label-text">REVIEW OF PERMIT</mat-label>
@@ -1621,7 +1621,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf = "dt.permitType == 'Electrical (E)'">
+                        <div *ngIf = "dt.permitType == 'Electrical permit (EP)'">
                             <div class = "e-am-cols">
                                 <div id = "e-am-col">
                                     <mat-label id = "label-text">REVIEW OF PERMIT</mat-label>
