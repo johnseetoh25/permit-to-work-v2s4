@@ -1739,8 +1739,7 @@ export class PtwRequestComponent implements OnInit {
       },
       dailyEndorsement: { },
       ptwStatus: {
-        permitStatus: PermitStatus.STATUS_INVALID,
-        taskStatus: TaskStatus.STATUS_NOT_STARTED,
+        permitStatus: PermitStatus.STATUS_PROCESSING,
         remarks: DefaultValues.VALUE_NONE,
         checked: false,
         supervisorName: DefaultValues.VALUE_NONE,
@@ -1756,7 +1755,6 @@ export class PtwRequestComponent implements OnInit {
         name: DefaultValues.VALUE_NONE,
         timestamp: DefaultValues.VALUE_NONE
       },
-      checked: this.applicantDeclarationChecked,
       requestStatus: RequestStatus.REQUEST_PENDING,
       statusRemarks: DefaultValues.VALUE_NONE,
       timestamp: DefaultValues.VALUE_NONE

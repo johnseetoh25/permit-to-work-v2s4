@@ -1,5 +1,5 @@
 <div class = "dialog-box">
-    <h2 mat-dialog-title>Safety Assessor Evaluation</h2>
+    <h2 mat-dialog-title>Evaluate Request</h2>
     <br>
     <div *ngFor = "let dt of this.fetched.ptw">
         <div mat-dialog-content *ngIf = "dt.permitType == 'Work at height permit (WAHP)'">
@@ -156,15 +156,13 @@
                 <br><br>
                 <mat-divider></mat-divider>
                 <br>
-                <mat-label id = "label-text">DECLARATION</mat-label>
+                <mat-label id = "label-text">FINAL EVALUATION</mat-label>
                 <br><br>
                 <div>
-                    <mat-checkbox [(ngModel)] = "this.safetyAssessorEvaluationPassed">
-                        <mat-label>
-                            I have evaluated the application and am satisfied that all reasonably practicable measures
-                            <br>have been taken effectively.
-                        </mat-label>
-                    </mat-checkbox>
+                    <mat-slide-toggle [(ngModel)] = "this.safetyAssessorEvaluationPassed">
+                        <mat-label id = "label-text" *ngIf = "this.safetyAssessorEvaluationPassed">&emsp;Pass</mat-label>
+                        <mat-label id = "label-text" *ngIf = "!this.safetyAssessorEvaluationPassed">&emsp;Not Pass</mat-label>
+                    </mat-slide-toggle>
                 </div>
             </div>
         </div>
@@ -228,15 +226,13 @@
                 <br>
                 <mat-divider></mat-divider>
                 <br>
-                <mat-label id = "label-text">DECLARATION</mat-label>
+                <mat-label id = "label-text">FINAL EVALUATION</mat-label>
                 <br><br>
                 <div>
-                    <mat-checkbox [(ngModel)] = "this.safetyAssessorEvaluationPassed">
-                        <mat-label>
-                            I have evaluated the application and am satisfied that all reasonably practicable measures
-                            <br>have been taken effectively.
-                        </mat-label>
-                    </mat-checkbox>
+                    <mat-slide-toggle [(ngModel)] = "this.safetyAssessorEvaluationPassed">
+                        <mat-label id = "label-text" *ngIf = "this.safetyAssessorEvaluationPassed">&emsp;Pass</mat-label>
+                        <mat-label id = "label-text" *ngIf = "!this.safetyAssessorEvaluationPassed">&emsp;Not Pass</mat-label>
+                    </mat-slide-toggle>
                 </div>
             </div>
         </div>
@@ -270,15 +266,13 @@
                 </div>
                 <mat-divider></mat-divider>
                 <br>
-                <mat-label id = "label-text">DECLARATION</mat-label>
+                <mat-label id = "label-text">FINAL EVALUATION</mat-label>
                 <br><br>
                 <div>
-                    <mat-checkbox [(ngModel)] = "this.safetyAssessorEvaluationPassed">
-                        <mat-label>
-                            I have evaluated the application and am satisfied that all reasonably practicable measures
-                            <br>have been taken effectively.
-                        </mat-label>
-                    </mat-checkbox>
+                    <mat-slide-toggle [(ngModel)] = "this.safetyAssessorEvaluationPassed">
+                        <mat-label id = "label-text" *ngIf = "this.safetyAssessorEvaluationPassed">&emsp;Pass</mat-label>
+                        <mat-label id = "label-text" *ngIf = "!this.safetyAssessorEvaluationPassed">&emsp;Not Pass</mat-label>
+                    </mat-slide-toggle>
                 </div>
             </div>
         </div>
@@ -312,15 +306,13 @@
                 </div>
                 <mat-divider></mat-divider>
                 <br>
-                <mat-label id = "label-text">DECLARATION</mat-label>
+                <mat-label id = "label-text">FINAL EVALUATION</mat-label>
                 <br><br>
                 <div>
-                    <mat-checkbox [(ngModel)] = "this.safetyAssessorEvaluationPassed">
-                        <mat-label>
-                            I have evaluated the application and am satisfied that all reasonably practicable measures
-                            <br>have been taken effectively.
-                        </mat-label>
-                    </mat-checkbox>
+                    <mat-slide-toggle [(ngModel)] = "this.safetyAssessorEvaluationPassed">
+                        <mat-label id = "label-text" *ngIf = "this.safetyAssessorEvaluationPassed">&emsp;Pass</mat-label>
+                        <mat-label id = "label-text" *ngIf = "!this.safetyAssessorEvaluationPassed">&emsp;Not Pass</mat-label>
+                    </mat-slide-toggle>
                 </div>
             </div>
         </div>
@@ -354,15 +346,13 @@
                 </div>
                 <mat-divider></mat-divider>
                 <br>
-                <mat-label id = "label-text">DECLARATION</mat-label>
+                <mat-label id = "label-text">FINAL EVALUATION</mat-label>
                 <br><br>
                 <div>
-                    <mat-checkbox [(ngModel)] = "this.safetyAssessorEvaluationPassed">
-                        <mat-label>
-                            I have evaluated the application and am satisfied that all reasonably practicable measures
-                            <br>have been taken effectively.
-                        </mat-label>
-                    </mat-checkbox>
+                    <mat-slide-toggle [(ngModel)] = "this.safetyAssessorEvaluationPassed">
+                        <mat-label id = "label-text" *ngIf = "this.safetyAssessorEvaluationPassed">&emsp;Pass</mat-label>
+                        <mat-label id = "label-text" *ngIf = "!this.safetyAssessorEvaluationPassed">&emsp;Not Pass</mat-label>
+                    </mat-slide-toggle>
                 </div>
             </div>
         </div>
@@ -376,8 +366,7 @@
                         this.wah_s2_ssfs_q01_choiceInput == '' ||
                         this.wah_s2_ssfs_q02_choiceInput == '' ||
                         this.wah_s2_mloed_q01_choiceInput == '' ||
-                        this.wah_s2_mloed_q02_choiceInput == '' ||
-                        !this.safetyAssessorEvaluationPassed
+                        this.wah_s2_mloed_q02_choiceInput == ''
                     "
                     (click) = "this.evaluatePtw()">
                     SUBMIT EVALUATION</button>
@@ -389,8 +378,7 @@
                         this.cs_s2_gmr_oxygenLevelInput == null ||
                         this.cs_s2_gmr_flammableGasLevelInput == null ||
                         this.cs_s2_gmr_toxicGasLevelInput == null ||
-                        this.cs_s2_gmr_fitForEntryInput == null ||
-                        !this.safetyAssessorEvaluationPassed
+                        this.cs_s2_gmr_fitForEntryInput == null
                     "
                     (click) = "this.evaluatePtw()">
                     SUBMIT EVALUATION</button>
@@ -399,8 +387,7 @@
                 <button 
                     mat-button 
                     [disabled] = "
-                        this.hw_s2_a_q01_choiceInput == '' ||
-                        !this.safetyAssessorEvaluationPassed
+                        this.hw_s2_a_q01_choiceInput == ''
                     "
                     (click) = "this.evaluatePtw()">
                     SUBMIT EVALUATION</button>
@@ -409,8 +396,7 @@
                 <button 
                     mat-button 
                     [disabled] = "
-                        this.cw_s2_a_q01_choiceInput == '' ||
-                        !this.safetyAssessorEvaluationPassed
+                        this.cw_s2_a_q01_choiceInput == ''
                     "
                     (click) = "this.evaluatePtw()">
                     SUBMIT EVALUATION</button>
@@ -419,8 +405,7 @@
                 <button 
                     mat-button 
                     [disabled] = "
-                        this.e_s2_a_q01_choiceInput == '' ||
-                        !this.safetyAssessorEvaluationPassed
+                        this.e_s2_a_q01_choiceInput == ''
                     "
                     (click) = "this.evaluatePtw()">
                     SUBMIT EVALUATION</button>

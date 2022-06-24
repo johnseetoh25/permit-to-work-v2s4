@@ -290,7 +290,6 @@ export class TerminateDialogComponent implements OnInit {
       toTerminate?.applicantDets?.email,
 
       toTerminate?.ptwStatus?.permitStatus,
-      toTerminate?.ptwStatus?.taskStatus,
       toTerminate?.ptwStatus?.remarks,
       toTerminate?.ptwStatus?.checked,
       toTerminate?.ptwStatus?.supervisorName,
@@ -304,7 +303,6 @@ export class TerminateDialogComponent implements OnInit {
       toTerminate?.authorisedManagerApproval?.name,
       toTerminate?.authorisedManagerApproval?.timestamp,
 
-      toTerminate?.checked,
       toTerminate?.requestStatus,
       toTerminate?.statusRemarks,
       toTerminate?.timestamp

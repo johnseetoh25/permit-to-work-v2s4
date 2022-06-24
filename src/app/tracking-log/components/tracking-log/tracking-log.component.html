@@ -2,7 +2,7 @@
     <p>
         <mat-toolbar class = "applicant-toolbar">
             <mat-toolbar-row>
-                <mat-icon style = "color: rgb(25, 25, 25)">book</mat-icon><span id = "toolbar-title">&emsp;PTW TRACKING LOG (APPLICANT MODE)</span>
+                <mat-icon style = "color: rgb(25, 25, 25)">book</mat-icon><span id = "toolbar-title">&emsp;PTW TRACKING LOG</span>
                 <span class = "spacer"></span>
                 <button mat-icon-button class = "toolbar-menu-button" [matMenuTriggerFor] = "applicantMenu" aria-label = "Applicant toolbar menu">
                     <mat-icon>menu</mat-icon>
@@ -95,7 +95,7 @@
                 <th mat-sort-header = "permitStatus" mat-header-cell *matHeaderCellDef>Permit Status</th>
                 <td mat-cell *matCellDef = "let colElems" 
                     [ngStyle] = "
-                        colElems.ptwStatus?.permitStatus == 'Invalid' ? { color: 'gray' } : 
+                        colElems.ptwStatus?.permitStatus == '---' ? { color: 'gray' } : 
                         colElems.ptwStatus?.permitStatus == 'Valid' ? { color: 'green' } : 
                         colElems.ptwStatus?.permitStatus == 'Expired' ? { color: 'maroon' } :
                         colElems.ptwStatus?.permitStatus == 'Terminated' ? { color: 'maroon' } : 

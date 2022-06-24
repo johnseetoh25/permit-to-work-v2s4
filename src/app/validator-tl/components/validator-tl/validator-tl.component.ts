@@ -120,7 +120,7 @@ export class ValidatorTlComponent implements OnInit {
         case 'requestStatus':
           return this.compare(a.requestStatus, b.requestStatus, isAsc);
         case 'permitStatus':
-          return this.compare(a.ptwStatus?.taskStatus, b.ptwStatus?.taskStatus, isAsc);
+          return this.compare(a.ptwStatus?.permitStatus, b.ptwStatus?.permitStatus, isAsc);
         default:
           return 0;
       }

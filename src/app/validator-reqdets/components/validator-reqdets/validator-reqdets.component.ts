@@ -5,8 +5,7 @@ import { IPermitToWork } from 'src/app/interfaces/IPermitToWork';
 import { SaDialogComponent } from 'src/app/sa-dialog/components/sa-dialog/sa-dialog.component';
 import { AmDialogComponent } from 'src/app/am-dialog/components/am-dialog/am-dialog.component';
 import { DbService } from 'src/app/services/db.service';
-import { DbSaDialogComponent } from 'src/app/db-sa-dialog/components/db-sa-dialog/db-sa-dialog.component';
-import { DbAmDialogComponent } from 'src/app/db-am-dialog/components/db-am-dialog/db-am-dialog.component';
+import { TerminateDialogComponent } from 'src/app/terminate-dialog/components/terminate-dialog/terminate-dialog.component';
 
 @Component({
   selector: 'app-validator-reqdets',
@@ -26,8 +25,7 @@ export class ValidatorReqdetsComponent implements OnInit {
     private dialog: MatDialog,
     private dialogRefSa: MatDialogRef<SaDialogComponent>,
     private dialogRefAm: MatDialogRef<AmDialogComponent>,
-    private dialogRefDbSa: MatDialogRef<DbSaDialogComponent>,
-    private dialogRefDbAm: MatDialogRef<DbAmDialogComponent>,
+    private dialogRefTerminate: MatDialogRef<TerminateDialogComponent>,
     private db: DbService
   ) {
     this.db.fetchWith(this.fetched.id).subscribe((data: IPermitToWork[]) => {
@@ -47,37 +45,27 @@ export class ValidatorReqdetsComponent implements OnInit {
 
   public ngOnInit(): void { }
 
-  public openSafetyAssessorDialog(type: string): void {
+  public openSafetyAssessorDialog(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
       ptw: this.targetPtw,
       userName: this.fetched.userName
     }
-
-    switch (type) {
-      case "dashboard":
-        this.dialogRefDbSa = this.dialog.open(DbSaDialogComponent, dialogConfig);
-        break;
-      case "tl":
-        this.dialogRefSa = this.dialog.open(SaDialogComponent, dialogConfig);
-        break;
-    }
+    this.dialogRefSa = this.dialog.open(SaDialogComponent, dialogConfig);
   }
 
-  public openAuthorisedManagerDialog(type: string): void {
+  public openAuthorisedManagerDialog(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
       ptw: this.targetPtw,
       userName: this.fetched.userName
     }
+    this.dialogRefAm = this.dialog.open(AmDialogComponent, dialogConfig);
+  }
 
-    switch (type) {
-      case "dashboard":
-        this.dialogRefDbAm = this.dialog.open(DbAmDialogComponent, dialogConfig);
-        break;
-      case "tl":
-        this.dialogRefAm = this.dialog.open(AmDialogComponent, dialogConfig);
-        break;
-    }
+  public openTerminateDialog(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = this.targetPtw;
+    this.dialogRefTerminate = this.dialog.open(TerminateDialogComponent, dialogConfig);
   }
 }

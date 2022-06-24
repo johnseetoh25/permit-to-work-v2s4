@@ -1,5 +1,5 @@
 <div class = "dialog-box">
-    <h2 mat-dialog-title>Authorised Manager Approval</h2>
+    <h2 mat-dialog-title>Approve/Reject Request</h2>
     <br>
     <div *ngFor = "let dt of this.fetched.ptw">
         <div mat-dialog-content *ngIf = "dt.permitType == 'Work at height permit (WAHP)'">
@@ -101,14 +101,13 @@
             <br><br>
             <mat-divider></mat-divider>
             <br>
-            <mat-label id = "label-text">DECLARATION</mat-label>
+            <mat-label id = "label-text">FINAL DECISION</mat-label>
             <br><br>
             <div>
-                <mat-checkbox [(ngModel)] = "this.authorisedManagerReviewPassed">
-                    <mat-label>
-                        I authorise the work at heights to the conditions and duration stated in this permit.
-                    </mat-label>
-                </mat-checkbox>
+                <mat-slide-toggle [(ngModel)] = "this.authorisedManagerReviewPassed">
+                    <mat-label id = "label-text" *ngIf = "this.authorisedManagerReviewPassed">&emsp;Pass</mat-label>
+                    <mat-label id = "label-text" *ngIf = "!this.authorisedManagerReviewPassed">&emsp;Not Pass</mat-label>
+                </mat-slide-toggle>
             </div>
         </div>
         <div mat-dialog-content *ngIf = "dt.permitType == 'Confined space permit (CSP)'">
@@ -186,14 +185,13 @@
             <br>
             <mat-divider></mat-divider>
             <br>
-            <mat-label id = "label-text">DECLARATION</mat-label>
+            <mat-label id = "label-text">FINAL DECISION</mat-label>
             <br><br>
             <div>
-                <mat-checkbox [(ngModel)] = "this.authorisedManagerReviewPassed">
-                    <mat-label>
-                        I authorise the confined space to the conditions and duration stated in this permit.
-                    </mat-label>
-                </mat-checkbox>
+                <mat-slide-toggle [(ngModel)] = "this.authorisedManagerReviewPassed">
+                    <mat-label id = "label-text" *ngIf = "this.authorisedManagerReviewPassed">&emsp;Pass</mat-label>
+                    <mat-label id = "label-text" *ngIf = "!this.authorisedManagerReviewPassed">&emsp;Not Pass</mat-label>
+                </mat-slide-toggle>
             </div>
         </div>
         <div mat-dialog-content *ngIf = "dt.permitType == 'Hot work permit (HWP)'">
@@ -291,14 +289,13 @@
             </div>
             <mat-divider></mat-divider>
             <br>
-            <mat-label id = "label-text">DECLARATION</mat-label>
+            <mat-label id = "label-text">FINAL DECISION</mat-label>
             <br><br>
             <div>
-                <mat-checkbox [(ngModel)] = "this.authorisedManagerReviewPassed">
-                    <mat-label>
-                        I authorise the hot work to the conditions and duration stated in this permit.
-                    </mat-label>
-                </mat-checkbox>
+                <mat-slide-toggle [(ngModel)] = "this.authorisedManagerReviewPassed">
+                    <mat-label id = "label-text" *ngIf = "this.authorisedManagerReviewPassed">&emsp;Pass</mat-label>
+                    <mat-label id = "label-text" *ngIf = "!this.authorisedManagerReviewPassed">&emsp;Not Pass</mat-label>
+                </mat-slide-toggle>
             </div>
         </div>
         <div mat-dialog-content *ngIf = "dt.permitType == 'Cold work permit (CWP)'">
@@ -396,14 +393,13 @@
             </div>
             <mat-divider></mat-divider>
             <br>
-            <mat-label id = "label-text">DECLARATION</mat-label>
+            <mat-label id = "label-text">FINAL DECISION</mat-label>
             <br><br>
             <div>
-                <mat-checkbox [(ngModel)] = "this.authorisedManagerReviewPassed">
-                    <mat-label>
-                        I authorise the cold work to the conditions and duration stated in this permit.
-                    </mat-label>
-                </mat-checkbox>
+                <mat-slide-toggle [(ngModel)] = "this.authorisedManagerReviewPassed">
+                    <mat-label id = "label-text" *ngIf = "this.authorisedManagerReviewPassed">&emsp;Pass</mat-label>
+                    <mat-label id = "label-text" *ngIf = "!this.authorisedManagerReviewPassed">&emsp;Not Pass</mat-label>
+                </mat-slide-toggle>
             </div>
         </div>
         <div mat-dialog-content *ngIf = "dt.permitType == 'Electrical permit (EP)'">
@@ -501,14 +497,13 @@
             </div>
             <mat-divider></mat-divider>
             <br>
-            <mat-label id = "label-text">DECLARATION</mat-label>
+            <mat-label id = "label-text">FINAL DECISION</mat-label>
             <br><br>
             <div>
-                <mat-checkbox [(ngModel)] = "this.authorisedManagerReviewPassed">
-                    <mat-label>
-                        I authorise the electrical risks to the conditions and duration stated in this permit.
-                    </mat-label>
-                </mat-checkbox>
+                <mat-slide-toggle [(ngModel)] = "this.authorisedManagerReviewPassed">
+                    <mat-label id = "label-text" *ngIf = "this.authorisedManagerReviewPassed">&emsp;Pass</mat-label>
+                    <mat-label id = "label-text" *ngIf = "!this.authorisedManagerReviewPassed">&emsp;Not Pass</mat-label>
+                </mat-slide-toggle>
             </div>
         </div>
     </div>

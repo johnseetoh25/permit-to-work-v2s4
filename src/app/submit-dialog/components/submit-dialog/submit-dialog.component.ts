@@ -255,7 +255,6 @@ export class SubmitDialogComponent implements OnInit {
           data?.applicantDets?.email,
 
           data?.ptwStatus?.permitStatus,
-          data?.ptwStatus?.taskStatus,
           data?.ptwStatus?.remarks,
           data?.ptwStatus?.checked,
           data?.ptwStatus?.supervisorName,
@@ -269,7 +268,6 @@ export class SubmitDialogComponent implements OnInit {
           data?.authorisedManagerApproval?.name,
           data?.authorisedManagerApproval?.timestamp,
 
-          data?.checked,
           data?.requestStatus,
           data?.statusRemarks,
           data?.timestamp

@@ -33,8 +33,8 @@ export class DbService {
     return this.http.get<IPermitToWork[]>(this.ptwUrl + "?id=" + id.toString());
   }
 
-  public returnInvalidPermits(): Observable<IPermitToWork[]> {
-    return this.http.get<IPermitToWork[]>(this.ptwUrl + "?ptwStatus.permitStatus=" + PermitStatus.STATUS_INVALID);
+  public returnProcessingPermits(): Observable<IPermitToWork[]> {
+    return this.http.get<IPermitToWork[]>(this.ptwUrl + "?ptwStatus.permitStatus=" + PermitStatus.STATUS_PROCESSING);
   }
 
   public returnValidPermits(): Observable<IPermitToWork[]> {
@@ -279,7 +279,6 @@ export class DbService {
     ad_email: string,
 
     ptwStatus_permitStatus: string,
-    ptwStatus_taskStatus: string,
     ptwStatus_remarks: string,
     ptwStatus_checked: boolean,
     ptwStatus_supervisorName: string,
@@ -293,7 +292,6 @@ export class DbService {
     amApproval_name: string,
     amApproval_timestamp: string,
 
-    checked: boolean,
     reqStatus: string,
     statusRemarks: string,
     timestamp: string
@@ -743,7 +741,6 @@ export class DbService {
         dailyEndorsement: { },
         ptwStatus: {
           permitStatus: ptwStatus_permitStatus,
-          taskStatus: ptwStatus_taskStatus,
           remarks: ptwStatus_remarks,
           checked: ptwStatus_checked,
           supervisorName: ptwStatus_supervisorName,
@@ -759,7 +756,6 @@ export class DbService {
           name: amApproval_name,
           timestamp: amApproval_timestamp
         },
-        checked: checked,
         requestStatus: reqStatus,
         statusRemarks: statusRemarks,
         timestamp: timestamp

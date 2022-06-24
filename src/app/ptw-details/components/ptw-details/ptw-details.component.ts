@@ -3,7 +3,6 @@ import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from "@angu
 import { DefaultValues } from 'src/app/constants/DefaultValues';
 import { IPermitToWork } from 'src/app/interfaces/IPermitToWork';
 import { DbService } from 'src/app/services/db.service';
-import { TerminateDialogComponent } from 'src/app/terminate-dialog/components/terminate-dialog/terminate-dialog.component';
 
 @Component({
   selector: 'app-ptw-details',
@@ -20,8 +19,6 @@ export class PtwDetailsComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public fetchedId: any,
-    private dialog: MatDialog,
-    private dialogRefTerminate: MatDialogRef<TerminateDialogComponent>,
     private db: DbService,
   ) { 
     this.db.fetchWith(this.fetchedId).subscribe((data: IPermitToWork[]) => {
@@ -40,10 +37,4 @@ export class PtwDetailsComponent implements OnInit {
   }
 
   public ngOnInit(): void { }
-
-  public openTerminateDialog(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = this.targetPtw;
-    this.dialogRefTerminate = this.dialog.open(TerminateDialogComponent, dialogConfig);
-  }
 }

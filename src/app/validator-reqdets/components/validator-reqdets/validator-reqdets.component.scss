@@ -1,5 +1,5 @@
 .ptw-request-details-dialog {
-    width: 1000px;
+    width: 1200px;
     height: 50%;
 }
 
@@ -29,7 +29,7 @@
 }
 
 .status-cols {
-    width: 965px;
+    width: 1165px;
     height: 45px;
     overflow: hidden;
     background-color: whitesmoke;
@@ -40,6 +40,11 @@
 #status-col {
     float: left;
     width: 225px;
+}
+
+#status-col-ep {
+    float: left;
+    width: 350px;
 }
 
 .req-cancel-cols {

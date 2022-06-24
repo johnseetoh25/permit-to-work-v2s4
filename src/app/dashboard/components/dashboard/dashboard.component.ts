@@ -26,7 +26,7 @@ import { TaskStatus } from 'src/app/constants/TaskStatus';
 export class DashboardComponent implements OnInit {
   public userNameDisplay: string = "";
 
-  public invalidPermitNo: number = 0;
+  public processingPermitNo: number = 0;
   public validPermitNo: number = 0;
   public expiredPermitNo: number = 0;
   public terminatedPermitNo: number = 0;
@@ -51,8 +51,8 @@ export class DashboardComponent implements OnInit {
   }
 
   public allocatePermitQueryRes(): void {
-    this.db.returnInvalidPermits().subscribe((resp: IPermitToWork[]) => {
-      this.invalidPermitNo = resp.length;
+    this.db.returnProcessingPermits().subscribe((resp: IPermitToWork[]) => {
+      this.processingPermitNo = resp.length;
     });
 
     this.db.returnValidPermits().subscribe((resp: IPermitToWork[]) => {

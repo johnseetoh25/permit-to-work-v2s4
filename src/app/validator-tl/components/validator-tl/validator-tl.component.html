@@ -101,7 +101,7 @@
                 <th mat-sort-header = "permitStatus" mat-header-cell *matHeaderCellDef>Permit Status</th>
                 <td mat-cell *matCellDef = "let colElems" 
                     [ngStyle] = "
-                        colElems.ptwStatus?.permitStatus == 'Invalid' ? { color: 'gray' } : 
+                        colElems.ptwStatus?.permitStatus == '---' ? { color: 'gray' } : 
                         colElems.ptwStatus?.permitStatus == 'Valid' ? { color: 'green' } : 
                         colElems.ptwStatus?.permitStatus == 'Expired' ? { color: 'maroon' } :
                         colElems.ptwStatus?.permitStatus == 'Terminated' ? { color: 'maroon' } : 

@@ -352,7 +352,6 @@ export class SaDialogComponent implements OnInit {
       toEvaluate?.applicantDets?.email,
 
       toEvaluate?.ptwStatus?.permitStatus,
-      toEvaluate?.ptwStatus?.taskStatus,
       toEvaluate?.ptwStatus?.remarks,
       toEvaluate?.ptwStatus?.checked,
       toEvaluate?.ptwStatus?.supervisorName,
@@ -366,7 +365,6 @@ export class SaDialogComponent implements OnInit {
       toEvaluate?.authorisedManagerApproval?.name,
       toEvaluate?.authorisedManagerApproval?.timestamp,
 
-      toEvaluate?.checked,
       toEvaluate?.requestStatus,
       toEvaluate?.statusRemarks,
       toEvaluate?.timestamp
@@ -375,7 +373,7 @@ export class SaDialogComponent implements OnInit {
     this.dialogRefSelf.close();
     this.dialogRefVldReqDets.close();
     this.dialogRefSelf.afterClosed().subscribe(() => {
-      this.navigateTo("validator-tl");
+      //this.navigateTo("validator-tl");
       this.openSnackBar("The permit has been evaluated.", "");
     });
     this.dialogRefVldReqDets.afterClosed().subscribe(() => {
