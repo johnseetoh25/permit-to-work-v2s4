@@ -32,7 +32,7 @@
                 <div>
                     <mat-label>
                         <h3 [ngStyle] = "
-                        dt.ptwStatus?.permitStatus == '---' ? { color: 'grey' } :
+                        dt.ptwStatus?.permitStatus == 'Processing' ? { color: 'grey' } :
                         dt.ptwStatus?.permitStatus == 'Valid' ? { color: 'green' } : 
                         dt.ptwStatus?.permitStatus == 'Terminated' ? { color: 'maroon' } : 
                         dt.ptwStatus?.permitStatus == 'Expired' ? { color: 'maroon' } : 
@@ -48,7 +48,7 @@
                 </div>
                 <div>
                     <mat-label>
-                        <h3>{{ dt.startWorkingDateTime | date: "short" }} ► {{ dt.endWorkingDateTime | date: "short" }}</h3>
+                        <h3 id = "label-text">{{ dt.startWorkingDateTime | date: "short" }} ► {{ dt.endWorkingDateTime | date: "short" }}</h3>
                     </mat-label>
                 </div>
             </div>
@@ -94,9 +94,10 @@
                     border-radius: 5px;
                 "
                 *ngIf = "
-                    dt.ptwStatus.permitStatus == 'Closed' || 
+                    dt.ptwStatus.permitStatus == 'Invalid' ||
+                    dt.ptwStatus.permitStatus == 'Expired' || 
                     dt.ptwStatus.permitStatus == 'Terminated' || 
-                    dt.ptwStatus.permitStatus == 'Expired'
+                    dt.ptwStatus.permitStatus == 'Closed'
                 ">
                 <mat-label>Closed on </mat-label>
                 <mat-label id = "label-text">{{ this.cancellationTimestampDisplay | date: "medium" }}</mat-label>
@@ -1347,7 +1348,7 @@
                                         <mat-icon style = "color: darkgreen; vertical-align: middle;">done_all</mat-icon><mat-label style = "color: darkgreen; font-weight: 450;">APPROVED&emsp;<mat-label>{{ this.authorisedTimestampDisplay | date: "short" }}</mat-label></mat-label>
                                     </div>
                                     <div *ngIf = "dt.authorisedManagerApproval?.name != 'None' && !dt.authorisedManagerApproval?.passed">
-                                        <mat-icon style = "color: crimson; vertical-align: middle;">clear</mat-icon><mat-label style = "color: crimson; font-weight: 450;">REJECTED&emsp;<mat-label>{{ this.authorisedTimestampDisplay | date: "short" }}</mat-label></mat-label>
+                                        <mat-icon style = "color: maroon; vertical-align: middle;">clear</mat-icon><mat-label style = "color: maroon; font-weight: 450;">REJECTED&emsp;<mat-label>{{ this.authorisedTimestampDisplay | date: "short" }}</mat-label></mat-label>
                                     </div>
                                     <div *ngIf = "dt.authorisedManagerApproval?.name == 'None' && !dt.authorisedManagerApproval?.passed">
                                         <mat-icon style = "color: grey; vertical-align: middle;">priority_high</mat-icon><mat-label style = "color: grey; font-weight: 450;">NOT YET APPROVED/REJECTED</mat-label>
@@ -1701,7 +1702,16 @@
                 dt.authorisedManagerApproval.name != 'None'
             "
             (click) = "this.openAuthorisedManagerDialog()">Approve/Reject</button>
-            <button 
+        <button 
+            mat-button 
+            color = "warn"
+            [disabled] = "
+                (dt.requestStatus != 'Pending' &&
+                dt.ptwStatus.permitStatus != 'Processing') ||
+                dt.ptwStatus.checked
+            "
+            >Cancel Request</button>
+        <button 
             mat-button 
             color = "warn"
             [disabled] = "

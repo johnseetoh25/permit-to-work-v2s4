@@ -1737,7 +1737,6 @@ export class PtwRequestComponent implements OnInit {
         contactNo: this.applicantContactNoInput,
         email: this.applicantEmailInput
       },
-      dailyEndorsement: { },
       ptwStatus: {
         permitStatus: PermitStatus.STATUS_PROCESSING,
         remarks: DefaultValues.VALUE_NONE,
@@ -1756,7 +1755,6 @@ export class PtwRequestComponent implements OnInit {
         timestamp: DefaultValues.VALUE_NONE
       },
       requestStatus: RequestStatus.REQUEST_PENDING,
-      statusRemarks: DefaultValues.VALUE_NONE,
       timestamp: DefaultValues.VALUE_NONE
     };
 

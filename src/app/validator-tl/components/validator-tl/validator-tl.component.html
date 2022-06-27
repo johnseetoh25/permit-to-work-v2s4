@@ -33,81 +33,87 @@
     </div>
     <br>
     <div class = "tracking-log-table">
-        <table mat-table *ngIf = "this.activePageSortedData.length > 0" [dataSource] = "this.activePageSortedData" class = "tracking-log-table" matSort (matSortChange) = "this.sort($event)">
-            <ng-container matColumnDef = "id">
-                <th mat-sort-header = "id" mat-header-cell *matHeaderCellDef>No.</th>
-                <td mat-cell *matCellDef = "let colElems">{{ colElems.id }}</td>
-            </ng-container>
-        
+        <table mat-table *ngIf = "this.activePageSortedData.length > 0" [dataSource] = "this.activePageSortedData" class = "tracking-log-table" matSort (matSortChange) = "this.sort($event)"> 
             <ng-container matColumnDef = "ptwId">
                 <th mat-sort-header = "ptwId" mat-header-cell *matHeaderCellDef>Permit ID</th>
-                <td mat-cell *matCellDef = "let colElems">{{ colElems.ptwId }}</td>
+                <td mat-cell *matCellDef = "let colElems">
+                    <mat-label id = "ptw-id-text" >
+                        {{ colElems.ptwId }}
+                    </mat-label>
+                </td>
             </ng-container>
         
             <ng-container matColumnDef = "locationOfWork">
-                <th mat-sort-header = "locationOfWork" mat-header-cell *matHeaderCellDef>Location of Work</th>
-                <td mat-cell *matCellDef = "let colElems">{{ colElems.locationOfWork?.main }}</td>
-            </ng-container>
-    
-            <ng-container matColumnDef = "subsectorLocation">
-                <th mat-sort-header = "subsectorLocation" mat-header-cell *matHeaderCellDef>Subsector</th>
-                <td mat-cell *matCellDef = "let colElems">{{ colElems.locationOfWork?.sub }}</td>
+                <th mat-sort-header = "locationOfWork" mat-header-cell *matHeaderCellDef>Location of work</th>
+                <td mat-cell *matCellDef = "let colElems">{{ colElems.locationOfWork?.main }} ⬦ {{ colElems.locationOfWork?.sub }}</td>
             </ng-container>
     
             <ng-container matColumnDef = "permitType">
-                <th mat-sort-header = "permitType" mat-header-cell *matHeaderCellDef>Permit Type</th>
+                <th mat-sort-header = "permitType" mat-header-cell *matHeaderCellDef>Permit type</th>
                 <td mat-cell *matCellDef = "let colElems">
                     <mat-icon *ngIf = "colElems.permitType == 'Hot work permit (HWP)'" style = "color: brown; vertical-align: middle;">whatshot</mat-icon>
                     <mat-icon *ngIf = "colElems.permitType == 'Cold work permit (CWP)'" style = "color: darkslateblue; vertical-align: middle;">ac_unit</mat-icon>
                     <mat-icon *ngIf = "colElems.permitType == 'Electrical permit (EP)'" style = "color: khaki; vertical-align: middle;">flash_on</mat-icon>
                     <mat-icon *ngIf = "colElems.permitType == 'Work at height permit (WAHP)'" style = "color: darkslategrey; vertical-align: middle;">location_city</mat-icon>
-                    <mat-icon *ngIf = "colElems.permitType == 'Confined space permit (CSP)'" style = "color: forestgreen; vertical-align: middle;">zoom_out_map</mat-icon>&emsp;{{ colElems.permitType }}
+                    <mat-icon *ngIf = "colElems.permitType == 'Confined space permit (CSP)'" style = "color: forestgreen; vertical-align: middle;">zoom_out_map</mat-icon>
+                    <mat-label id = "ptw-type-text" *ngIf = "colElems.permitType == 'Hot work permit (HWP)'">&emsp;HWP</mat-label>
+                    <mat-label id = "ptw-type-text" *ngIf = "colElems.permitType == 'Cold work permit (CWP)'">&emsp;CWP</mat-label>
+                    <mat-label id = "ptw-type-text" *ngIf = "colElems.permitType == 'Electrical permit (EP)'">&emsp;EP</mat-label>
+                    <mat-label id = "ptw-type-text" *ngIf = "colElems.permitType == 'Work at height permit (WAHP)'">&emsp;WAHP</mat-label>
+                    <mat-label id = "ptw-type-text" *ngIf = "colElems.permitType == 'Confined space permit (CSP)'">&emsp;CSP</mat-label>
                 </td>
             </ng-container>
         
-            <ng-container matColumnDef = "startWorkingDateTime">
-                <th mat-sort-header = "startWorkingDateTime" mat-header-cell *matHeaderCellDef>Start Date</th>
-                <td mat-cell *matCellDef = "let colElems">{{ colElems.startWorkingDateTime | date: 'mediumDate' }}</td>
-            </ng-container>
-        
-            <ng-container matColumnDef = "endWorkingDateTime">
-                <th mat-sort-header = "endWorkingDateTime" mat-header-cell *matHeaderCellDef>End Date</th>
-                <td mat-cell *matCellDef = "let colElems">{{ colElems.endWorkingDateTime | date: 'mediumDate' }}</td>
+            <ng-container matColumnDef = "effectivePeriod">
+                <th mat-sort-header = "effectivePeriod" mat-header-cell *matHeaderCellDef>Effective period</th>
+                <td mat-cell *matCellDef = "let colElems">
+                    <mat-label>
+                        {{ colElems.startWorkingDateTime | date: 'short' }} ► {{ colElems.endWorkingDateTime | date: 'short' }}
+                    </mat-label>
+                </td>
             </ng-container>
         
             <ng-container matColumnDef = "applicantName">
-                <th mat-sort-header = "applicantName" mat-header-cell *matHeaderCellDef>Applicant Name</th>
+                <th mat-sort-header = "applicantName" mat-header-cell *matHeaderCellDef>Applicant name</th>
                 <td mat-cell *matCellDef = "let colElems">{{ colElems.applicantDets?.name }}</td>
             </ng-container>
         
             <ng-container matColumnDef = "submissionTimestamp">
-                <th mat-sort-header = "submissionTimestamp" mat-header-cell *matHeaderCellDef>Application Date</th>
-                <td mat-cell *matCellDef = "let colElems">{{ colElems.timestamp | date: 'mediumDate' }}</td>
+                <th mat-sort-header = "submissionTimestamp" mat-header-cell *matHeaderCellDef>Application date</th>
+                <td mat-cell *matCellDef = "let colElems">{{ colElems.timestamp | date: 'short' }}</td>
             </ng-container>
         
             <ng-container matColumnDef = "requestStatus">
-                <th mat-sort-header = "requestStatus" mat-header-cell *matHeaderCellDef>Request Status</th>
+                <th mat-sort-header = "requestStatus" mat-header-cell *matHeaderCellDef>Request status</th>
                 <td mat-cell *matCellDef = "let colElems" 
                     [ngStyle] = " 
-                        colElems.requestStatus == 'Approved' ? { color: 'green' } : 
+                        colElems.requestStatus == 'Approved' ? { color: 'forestgreen' } : 
                         colElems.requestStatus == 'Rejected' ? { color: 'maroon' } : 
                         colElems.requestStatus == 'Pending' ? { color: 'gray' } : 
                         { color: '' }">
-                    <strong>{{ colElems.requestStatus }}</strong>
+                    <mat-label id = "status-text">{{ colElems.requestStatus }}</mat-label>
                 </td>
             </ng-container>
     
             <ng-container matColumnDef = "permitStatus">
-                <th mat-sort-header = "permitStatus" mat-header-cell *matHeaderCellDef>Permit Status</th>
+                <th mat-sort-header = "permitStatus" mat-header-cell *matHeaderCellDef>Permit status</th>
                 <td mat-cell *matCellDef = "let colElems" 
                     [ngStyle] = "
-                        colElems.ptwStatus?.permitStatus == '---' ? { color: 'gray' } : 
-                        colElems.ptwStatus?.permitStatus == 'Valid' ? { color: 'green' } : 
-                        colElems.ptwStatus?.permitStatus == 'Expired' ? { color: 'maroon' } :
+                        colElems.ptwStatus?.permitStatus == 'Processing' ? { color: 'royalblue' } : 
+                        colElems.ptwStatus?.permitStatus == 'Valid' ? { color: 'forestgreen' } : 
+                        colElems.ptwStatus?.permitStatus == 'Expired' ? { color: 'goldenrod' } :
                         colElems.ptwStatus?.permitStatus == 'Terminated' ? { color: 'maroon' } : 
-                        colElems.ptwStatus?.permitStatus == 'Closed' ? { color: 'firebrick' } :
+                        colElems.ptwStatus?.permitStatus == 'Closed' ? { color: 'rgb(103, 58, 183)' } :
                         { color: '' }">
-                    <strong>{{ colElems.ptwStatus?.permitStatus }}</strong>
+                    <mat-label id = "status-text">{{ colElems.ptwStatus?.permitStatus }}</mat-label>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef = "processingStatus">
+                <th mat-header = "processingStatus" mat-header-cell *matHeaderCellDef>Eval. | Appr.</th>
+                <td mat-cell *matCellDef = "let colElems">
+                    <mat-checkbox disabled [checked] = "colElems.safetyAssessorEvaluation?.passed"></mat-checkbox>
+                    <mat-checkbox style = "padding-left: 8px;" disabled [checked] = "colElems.authorisedManagerApproval?.passed"></mat-checkbox>
                 </td>
             </ng-container>
     

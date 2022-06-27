@@ -1,11 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { IPermitToWork } from 'src/app/interfaces/IPermitToWork';
 import { DbService } from 'src/app/services/db.service';
 import { DefaultValues } from 'src/app/constants/DefaultValues';
 import { MessageService } from 'src/app/services/message.service';
 import { Router } from '@angular/router';
 import { ValidatorReqdetsComponent } from 'src/app/validator-reqdets/components/validator-reqdets/validator-reqdets.component';
+import { CompShareService } from 'src/app/services/comp-share.service';
 
 @Component({
   selector: 'app-sa-dialog',
@@ -60,11 +61,13 @@ export class SaDialogComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public fetched: any,
+    private dialog: MatDialog,
     private dialogRefSelf: MatDialogRef<SaDialogComponent>,
     private dialogRefVldReqDets: MatDialogRef<ValidatorReqdetsComponent>,
     private db: DbService,
     private msg: MessageService,
-    private router: Router
+    private router: Router,
+    private compShare: CompShareService
   ) { }
 
   public ngOnInit(): void { }
@@ -366,18 +369,17 @@ export class SaDialogComponent implements OnInit {
       toEvaluate?.authorisedManagerApproval?.timestamp,
 
       toEvaluate?.requestStatus,
-      toEvaluate?.statusRemarks,
       toEvaluate?.timestamp
     );
 
     this.dialogRefSelf.close();
     this.dialogRefVldReqDets.close();
+    // this.dialog.closeAll();
     this.dialogRefSelf.afterClosed().subscribe(() => {
-      //this.navigateTo("validator-tl");
-      this.openSnackBar("The permit has been evaluated.", "");
+      this.openSnackBar("The permit has been evaluated. Please proceed to approval/rejection.", "");
     });
     this.dialogRefVldReqDets.afterClosed().subscribe(() => {
-      window.location.reload();
+      this.compShare.sendClickEvent();
     });
   }
 

@@ -41,6 +41,10 @@ export class DbService {
     return this.http.get<IPermitToWork[]>(this.ptwUrl + "?ptwStatus.permitStatus=" + PermitStatus.STATUS_VALID);
   }
 
+  public returnInvalidPermits(): Observable<IPermitToWork[]> {
+    return this.http.get<IPermitToWork[]>(this.ptwUrl + "?ptwStatus.permitStatus=" + PermitStatus.STATUS_INVALID);
+  }
+
   public returnExpiredPermits(): Observable<IPermitToWork[]> {
     return this.http.get<IPermitToWork[]>(this.ptwUrl + "?ptwStatus.permitStatus=" + PermitStatus.STATUS_EXPIRED);
   }
@@ -293,7 +297,6 @@ export class DbService {
     amApproval_timestamp: string,
 
     reqStatus: string,
-    statusRemarks: string,
     timestamp: string
   ): void {
     const headers = { 
@@ -738,7 +741,6 @@ export class DbService {
           contactNo: ad_contactNo,
           email: ad_email
         },
-        dailyEndorsement: { },
         ptwStatus: {
           permitStatus: ptwStatus_permitStatus,
           remarks: ptwStatus_remarks,
@@ -757,7 +759,6 @@ export class DbService {
           timestamp: amApproval_timestamp
         },
         requestStatus: reqStatus,
-        statusRemarks: statusRemarks,
         timestamp: timestamp
       }, { "headers": headers }).subscribe(resp => {
         console.log(resp);

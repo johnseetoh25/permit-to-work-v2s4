@@ -436,7 +436,6 @@ export interface IPermitToWork {
 		contactNo: string,
 		email: string
 	},
-	dailyEndorsement: {},
 	ptwStatus: {
 		permitStatus: string,
 		remarks: string,
@@ -455,6 +454,5 @@ export interface IPermitToWork {
 		timestamp: string
 	},
 	requestStatus: string,
-	statusRemarks: string,
 	timestamp: string
 }

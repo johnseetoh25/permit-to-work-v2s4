@@ -6,6 +6,8 @@ import { Sort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { MessageService } from 'src/app/services/message.service';
 import { PtwDetailsComponent } from 'src/app/ptw-details/components/ptw-details/ptw-details.component';
+import { CompShareService } from 'src/app/services/comp-share.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tracking-log',
@@ -20,17 +22,15 @@ import { PtwDetailsComponent } from 'src/app/ptw-details/components/ptw-details/
 })
 export class TrackingLogComponent implements OnInit {
   public displayedHeaderColumns: string[] = [
-    'id',
     'ptwId',
     'locationOfWork',
-    'subsectorLocation',
     'permitType',
-    'startWorkingDateTime',
-    'endWorkingDateTime',
+    'effectivePeriod',
     'applicantName',
     'submissionTimestamp',
     'requestStatus',
     'permitStatus',
+    'processingStatus',
     'action'
   ];
 
@@ -43,13 +43,20 @@ export class TrackingLogComponent implements OnInit {
 
   public isRefreshing: boolean = false;
 
+  private clickEventSub: Subscription;
+
   constructor(
     private db: DbService,
     public dialog: MatDialog, 
     public dialogRefPtwDets: MatDialogRef<PtwDetailsComponent>,
     private router: Router,
-    private msg: MessageService
-  ) { }
+    private msg: MessageService,
+    private compShare: CompShareService
+  ) {
+    this.clickEventSub = this.compShare.getClickEvent().subscribe(() => {
+      this.refresh();
+    });
+  }
 
   public ngOnInit(): void { 
     this.refresh();
@@ -60,7 +67,7 @@ export class TrackingLogComponent implements OnInit {
     this.db.fetch()
       .subscribe((data: IPermitToWork[]) => {
         console.log(data);
-        this.db.openSnackBar("Loading / refreshing complete.", "");
+        //this.db.openSnackBar("Loading / refreshing complete.", "");
         this.isRefreshing = false;
         this.sortedData = data;
         this.activePageSortedData = this.sortedData.slice(0, this.pageSize);
@@ -78,20 +85,14 @@ export class TrackingLogComponent implements OnInit {
     this.activePageSortedData = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
-        case 'id':
-          return this.compare(a.id, b.id, isAsc);
         case 'ptwId':
           return this.compare(a.ptwId, b.ptwId, isAsc);
         case 'locationOfWork':
           return this.compare(a.locationOfWork?.main, b.locationOfWork?.main, isAsc);
-        case 'subsectorLocation':
-          return this.compare(a.locationOfWork?.sub, b.locationOfWork?.sub, isAsc);
         case 'permitType':
           return this.compare(a.permitType, b.permitType, isAsc);
-        case 'startWorkingDateTime':
+        case 'effectivePeriod':
           return this.compare(a.startWorkingDateTime, b.startWorkingDateTime, isAsc);
-        case 'endWorkingDateTime':
-          return this.compare(a.endWorkingDateTime, b.endWorkingDateTime, isAsc);
         case 'applicantName':
           return this.compare(a.applicantDets?.name, b.applicantDets?.name, isAsc);
         case 'submissionTimestamp':

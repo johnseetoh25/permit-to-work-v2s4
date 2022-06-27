@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { IPermitToWork } from 'src/app/interfaces/IPermitToWork';
 import { DbService } from 'src/app/services/db.service';
 import { DefaultValues } from 'src/app/constants/DefaultValues';
@@ -7,8 +7,8 @@ import { MessageService } from 'src/app/services/message.service';
 import { Router } from '@angular/router';
 import { ValidatorReqdetsComponent } from 'src/app/validator-reqdets/components/validator-reqdets/validator-reqdets.component';
 import { PermitStatus } from 'src/app/constants/PermitStatus';
-import { TaskStatus } from 'src/app/constants/TaskStatus';
 import { RequestStatus } from 'src/app/constants/RequestStatus';
+import { CompShareService } from 'src/app/services/comp-share.service';
 
 @Component({
   selector: 'app-am-dialog',
@@ -75,11 +75,13 @@ export class AmDialogComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public fetched: any,
+    private dialog: MatDialog,
     private dialogRefSelf: MatDialogRef<AmDialogComponent>,
     private dialogRefVldReqDets: MatDialogRef<ValidatorReqdetsComponent>,
     private db: DbService,
     private msg: MessageService,
-    private router: Router
+    private router: Router,
+    private compShare: CompShareService
   ) { }
 
   public ngOnInit(): void { }
@@ -173,11 +175,17 @@ export class AmDialogComponent implements OnInit {
 
     this.fetched.ptw[0].authorisedManagerApproval.timestamp = new Date().toISOString();
 
-    this.fetched.ptw[0].requestStatus = RequestStatus.REQUEST_APPROVED;
+    this.fetched.ptw[0].ptwStatus.timestamp = new Date().toISOString();
 
-    this.fetched.ptw[0].ptwStatus.permitStatus = PermitStatus.STATUS_VALID;
+    if (this.fetched.ptw[0].authorisedManagerApproval.passed) { 
+      this.fetched.ptw[0].requestStatus = RequestStatus.REQUEST_APPROVED;
+      this.fetched.ptw[0].ptwStatus.permitStatus = PermitStatus.STATUS_VALID;
+    } else {
+      this.fetched.ptw[0].requestStatus = RequestStatus.REQUEST_REJECTED;
+      this.fetched.ptw[0].ptwStatus.permitStatus = PermitStatus.STATUS_INVALID;
+    }
 
-    this.fetched.ptw[0].ptwStatus.taskStatus = TaskStatus.STATUS_IN_PROGRESS;
+    //this.fetched.ptw[0].ptwStatus.taskStatus = TaskStatus.STATUS_IN_PROGRESS;
 
     this.ptwToAuthorise = this.fetched.ptw[0];
 
@@ -419,18 +427,17 @@ export class AmDialogComponent implements OnInit {
       toEvaluate?.authorisedManagerApproval?.timestamp,
 
       toEvaluate?.requestStatus,
-      toEvaluate?.statusRemarks,
       toEvaluate?.timestamp
     );
 
-    this.dialogRefSelf.close();
-    this.dialogRefVldReqDets.close();
+    // this.dialogRefSelf.close();
+    // this.dialogRefVldReqDets.close();
+    this.dialog.closeAll();
     this.dialogRefSelf.afterClosed().subscribe(() => {
-      //this.navigateTo("validator-tl");
-      this.openSnackBar("The permit has been evaluated.", "");
+      this.openSnackBar("The permit has been " + toEvaluate.requestStatus.toLowerCase() + ".", "");
     });
     this.dialogRefVldReqDets.afterClosed().subscribe(() => {
-      window.location.reload();
+      this.compShare.sendClickEvent();
     });
   }
 

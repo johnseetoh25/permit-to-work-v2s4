@@ -19,14 +19,12 @@
                     [value] = "reason"
                     (change) = "this.determineNewPermitStatus(reason); this.typeToConfirmInput = ''">
                     <mat-label *ngIf = "reason == 'Completed'">Job is completed</mat-label>
-                    <mat-label *ngIf = "reason == 'Overtime'">Job is overtime / expired</mat-label>
-                    <mat-label *ngIf = "reason == 'Condition Changed'">Change in condition</mat-label>
+                    <mat-label *ngIf = "reason == 'Cond. Changed'">Change in condition</mat-label>
                 </mat-radio-button>
             </mat-radio-group>
         </div>
     </div>
-    <br>
-    <div *ngIf = "this.selectedReason == 'Condition Changed'" class = "status-remarks">
+    <div *ngIf = "this.selectedReason == 'Cond. Changed'" class = "status-remarks">
         <mat-label>What is the specific condition that has led to the suspension?</mat-label>
         <br><br>
         <mat-label class = "required-label">* Required field</mat-label>
@@ -40,13 +38,12 @@
     <div class = "status-res" *ngIf = "this.selectedReason != ''">
         <mat-label style = "font-weight: 450"><mat-icon>warning</mat-icon>&emsp;WARNING</mat-label>
         <br><br>
-        <mat-label><u>Task status</u> will become <mat-label style = "font-weight: 450;">{{ this.selectedReason | uppercase }}</mat-label></mat-label>
-        <mat-label> ⯁ </mat-label>
-        <mat-label><u>Permit status</u> will be deemed </mat-label>
-        <mat-label style = "font-weight: 450;" *ngIf = "this.selectedReason == 'Completed' || this.selectedReason == 'Condition Changed'">TERMINATED</mat-label>
-        <mat-label style = "font-weight: 450;" *ngIf = "this.selectedReason == 'Overtime'">EXPIRED</mat-label>
+        <mat-label>⯁ <u>Permit status</u> will be deemed </mat-label>
+        <mat-label style = "font-weight: 450;" *ngIf = "this.selectedReason == 'Cond. Changed'">TERMINATED</mat-label>
+        <mat-label style = "font-weight: 450;" *ngIf = "this.selectedReason == 'Completed'">CLOSED</mat-label>
+        <mat-label>.</mat-label>
         <br>
-        <mat-label>⬦ This action <mat-label style = "font-weight: 450;">CANNOT</mat-label> be undone once <mat-label style = "font-weight: 450;" *ngIf = "this.selectedReason == 'Completed'">CLOSE THIS PERMIT</mat-label><mat-label style = "font-weight: 450;" *ngIf = "this.selectedReason == 'Overtime' || this.selectedReason == 'Condition Changed'">TERMINATE THIS PERMIT</mat-label> is pressed.</mat-label>
+        <mat-label>⬦ This action <mat-label style = "font-weight: 450;">CANNOT</mat-label> be undone once <mat-label style = "font-weight: 450;" *ngIf = "this.selectedReason == 'Completed'">CLOSE THIS PERMIT</mat-label><mat-label style = "font-weight: 450;" *ngIf = "this.selectedReason == 'Overtime' || this.selectedReason == 'Cond. Changed'">TERMINATE THIS PERMIT</mat-label> is pressed.</mat-label>
         <br>
         <mat-label>⬦ You will have to request for a new permit to re-validate.</mat-label>
     </div>
@@ -63,12 +60,12 @@
     <div mat-dialog-actions>
         <button mat-button color = "warn" [disabled] = "
             (this.selectedReason == '' || this.typeToConfirmInput != 'terminate') ||
-            (this.selectedReason == 'Condition Changed' && this.taskStatusRemarksInput == '' || this.typeToConfirmInput != 'terminate')
+            (this.selectedReason == 'Cond. Changed' && this.taskStatusRemarksInput == '' || this.typeToConfirmInput != 'terminate')
         "
         (click) = "this.terminatePtw(this.selectedReason, this.newPermitStatus)">
             <mat-label *ngIf = "this.selectedReason == ''">PLEASE SELECT A REASON</mat-label>
             <mat-label *ngIf = "this.selectedReason == 'Completed'">CLOSE THIS PERMIT</mat-label>
-            <mat-label *ngIf = "this.selectedReason == 'Overtime' || this.selectedReason == 'Condition Changed'">TERMINATE THIS PERMIT</mat-label>
+            <mat-label *ngIf = "this.selectedReason == 'Cond. Changed'">TERMINATE THIS PERMIT</mat-label>
         </button>
         <button mat-button mat-dialog-close>Cancel</button>
     </div>

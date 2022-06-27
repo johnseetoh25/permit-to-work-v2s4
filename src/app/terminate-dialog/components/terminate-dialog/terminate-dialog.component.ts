@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { IPermitToWork } from 'src/app/interfaces/IPermitToWork';
 import { DbService } from 'src/app/services/db.service';
 import { TaskStatus } from 'src/app/constants/TaskStatus';
@@ -8,6 +8,8 @@ import { PermitStatus } from 'src/app/constants/PermitStatus';
 import { MessageService } from 'src/app/services/message.service';
 import { Router } from '@angular/router';
 import { PtwDetailsComponent } from 'src/app/ptw-details/components/ptw-details/ptw-details.component';
+import { CompShareService } from 'src/app/services/comp-share.service';
+import { RequestStatus } from 'src/app/constants/RequestStatus';
 
 @Component({
   selector: 'app-terminate-dialog',
@@ -19,7 +21,6 @@ export class TerminateDialogComponent implements OnInit {
 
   public reasonsForTermination: string[] = [
     TaskStatus.STATUS_COMPLETED,
-    TaskStatus.STATUS_OVERTIME,
     TaskStatus.STATUS_CONDITION_CHANGED
   ];
 
@@ -30,11 +31,13 @@ export class TerminateDialogComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public targetPtw: any,
+    private dialog: MatDialog,
     private dialogRefSelf: MatDialogRef<TerminateDialogComponent>,
     private dialogRefPtwDets: MatDialogRef<PtwDetailsComponent>,
     private db: DbService,
     private msg: MessageService,
-    private router: Router
+    private router: Router,
+    private compShare: CompShareService
   ) { }
 
   public ngOnInit(): void { }
@@ -44,9 +47,6 @@ export class TerminateDialogComponent implements OnInit {
       case TaskStatus.STATUS_COMPLETED:
         this.newPermitStatus = PermitStatus.STATUS_CLOSED;
         break;
-      case TaskStatus.STATUS_OVERTIME:
-        this.newPermitStatus = PermitStatus.STATUS_EXPIRED;
-        break;
       case TaskStatus.STATUS_CONDITION_CHANGED:
         this.newPermitStatus = PermitStatus.STATUS_TERMINATED;
         break;
@@ -54,6 +54,7 @@ export class TerminateDialogComponent implements OnInit {
   }
 
   public terminatePtw(reason: string, newPermitStatus: string): void {
+    this.targetPtw[0].requestStatus = RequestStatus.REQUEST_NULLED;
     this.targetPtw[0].ptwStatus.checked = true;
     this.targetPtw[0].ptwStatus.taskStatus = reason;
     this.targetPtw[0].ptwStatus.permitStatus = newPermitStatus;
@@ -304,18 +305,17 @@ export class TerminateDialogComponent implements OnInit {
       toTerminate?.authorisedManagerApproval?.timestamp,
 
       toTerminate?.requestStatus,
-      toTerminate?.statusRemarks,
       toTerminate?.timestamp
     );
 
-    this.dialogRefSelf.close();
-    this.dialogRefPtwDets.close();
+    // this.dialogRefSelf.close();
+    // this.dialogRefPtwDets.close();
+    this.dialog.closeAll();
     this.dialogRefSelf.afterClosed().subscribe(() => {
-      this.navigateTo("tracking-log");
-      this.openSnackBar("The permit has been closed / terminated!", "");
+      this.openSnackBar("The permit has been " + toTerminate.ptwStatus.permitStatus.toLowerCase() + ".", "");
     });
     this.dialogRefPtwDets.afterClosed().subscribe(() => {
-      window.location.reload();
+      this.compShare.sendClickEvent();
     });
   }
 

@@ -515,11 +515,33 @@
                         this.wah_s3_pr_q01_choiceInput == '' ||
                         this.wah_s3_pr_q02_choiceInput == '' ||
                         this.wah_s3_pr_q03_choiceInput == '' ||
-                        this.wah_s3_pr_q04_choiceInput == '' ||
-                        !this.authorisedManagerReviewPassed
+                        this.wah_s3_pr_q04_choiceInput == ''
                     "
                     (click) = "this.authorisePtw()">
-                    SUBMIT EVALUATION</button>
+                    <mat-label 
+                        *ngIf = "
+                                this.wah_s3_pr_q01_choiceInput == '' ||
+                                this.wah_s3_pr_q02_choiceInput == '' ||
+                                this.wah_s3_pr_q03_choiceInput == '' ||
+                                this.wah_s3_pr_q04_choiceInput == ''
+                            ">COMPLETE ALL FIELDS</mat-label>
+                    <mat-label 
+                        *ngIf = "
+                            this.wah_s3_pr_q01_choiceInput != '' &&
+                            this.wah_s3_pr_q02_choiceInput != '' &&
+                            this.wah_s3_pr_q03_choiceInput != '' &&
+                            this.wah_s3_pr_q04_choiceInput != '' &&
+                            this.authorisedManagerReviewPassed
+                        ">APPROVE</mat-label>
+                    <mat-label 
+                        *ngIf = "
+                            this.wah_s3_pr_q01_choiceInput != '' &&
+                            this.wah_s3_pr_q02_choiceInput != '' &&
+                            this.wah_s3_pr_q03_choiceInput != '' &&
+                            this.wah_s3_pr_q04_choiceInput != '' &&
+                            !this.authorisedManagerReviewPassed
+                        ">REJECT</mat-label>
+            </button>
         </div>
         <div *ngIf = "dt.permitType == 'Confined space permit (CSP)'">
             <button 
@@ -528,11 +550,33 @@
                         this.cs_s3_pr_q01_choiceInput == '' ||
                         this.cs_s3_pr_q02_choiceInput == '' ||
                         this.cs_s3_pr_q03_choiceInput == '' ||
-                        this.cs_s3_pr_q04_choiceInput == '' ||
-                        !this.authorisedManagerReviewPassed
+                        this.cs_s3_pr_q04_choiceInput == ''
                     "
                     (click) = "this.authorisePtw()">
-                    SUBMIT EVALUATION</button>
+                    <mat-label 
+                        *ngIf = "
+                                this.cs_s3_pr_q01_choiceInput == '' ||
+                                this.cs_s3_pr_q02_choiceInput == '' ||
+                                this.cs_s3_pr_q03_choiceInput == '' ||
+                                this.cs_s3_pr_q04_choiceInput == ''
+                            ">COMPLETE ALL FIELDS</mat-label>
+                    <mat-label 
+                        *ngIf = "
+                            this.cs_s3_pr_q01_choiceInput != '' &&
+                            this.cs_s3_pr_q02_choiceInput != '' &&
+                            this.cs_s3_pr_q03_choiceInput != '' &&
+                            this.cs_s3_pr_q04_choiceInput != '' &&
+                            this.authorisedManagerReviewPassed
+                        ">APPROVE</mat-label>
+                    <mat-label 
+                        *ngIf = "
+                            this.cs_s3_pr_q01_choiceInput != '' &&
+                            this.cs_s3_pr_q02_choiceInput != '' &&
+                            this.cs_s3_pr_q03_choiceInput != '' &&
+                            this.cs_s3_pr_q04_choiceInput != '' &&
+                            !this.authorisedManagerReviewPassed
+                        ">REJECT</mat-label>
+            </button>
         </div>
         <div *ngIf = "dt.permitType == 'Hot work permit (HWP)'">
             <button 
@@ -541,11 +585,33 @@
                         this.hw_s3_pr_q01_choiceInput == '' ||
                         this.hw_s3_pr_q02_choiceInput == '' ||
                         this.hw_s3_pr_q03_choiceInput == '' ||
-                        this.hw_s3_pr_q04_choiceInput == '' ||
-                        !this.authorisedManagerReviewPassed
+                        this.hw_s3_pr_q04_choiceInput == ''
                     "
                     (click) = "this.authorisePtw()">
-                    SUBMIT EVALUATION</button>
+                    <mat-label 
+                        *ngIf = "
+                                this.hw_s3_pr_q01_choiceInput == '' ||
+                                this.hw_s3_pr_q02_choiceInput == '' ||
+                                this.hw_s3_pr_q03_choiceInput == '' ||
+                                this.hw_s3_pr_q04_choiceInput == ''
+                            ">COMPLETE ALL FIELDS</mat-label>
+                    <mat-label 
+                        *ngIf = "
+                            this.hw_s3_pr_q01_choiceInput != '' &&
+                            this.hw_s3_pr_q02_choiceInput != '' &&
+                            this.hw_s3_pr_q03_choiceInput != '' &&
+                            this.hw_s3_pr_q04_choiceInput != '' &&
+                            this.authorisedManagerReviewPassed
+                        ">APPROVE</mat-label>
+                    <mat-label 
+                        *ngIf = "
+                            this.hw_s3_pr_q01_choiceInput != '' &&
+                            this.hw_s3_pr_q02_choiceInput != '' &&
+                            this.hw_s3_pr_q03_choiceInput != '' &&
+                            this.hw_s3_pr_q04_choiceInput != '' &&
+                            !this.authorisedManagerReviewPassed
+                        ">REJECT</mat-label>
+            </button>
         </div>
         <div *ngIf = "dt.permitType == 'Cold work permit (CWP)'">
             <button 
@@ -554,11 +620,33 @@
                         this.cw_s3_pr_q01_choiceInput == '' ||
                         this.cw_s3_pr_q02_choiceInput == '' ||
                         this.cw_s3_pr_q03_choiceInput == '' ||
-                        this.cw_s3_pr_q04_choiceInput == '' ||
-                        !this.authorisedManagerReviewPassed
+                        this.cw_s3_pr_q04_choiceInput == ''
                     "
                     (click) = "this.authorisePtw()">
-                    SUBMIT EVALUATION</button>
+                    <mat-label 
+                        *ngIf = "
+                            this.cw_s3_pr_q01_choiceInput == '' ||
+                            this.cw_s3_pr_q02_choiceInput == '' ||
+                            this.cw_s3_pr_q03_choiceInput == '' ||
+                            this.cw_s3_pr_q04_choiceInput == ''
+                        ">COMPLETE ALL FIELDS</mat-label>
+                    <mat-label 
+                        *ngIf = "
+                            this.cw_s3_pr_q01_choiceInput != '' &&
+                            this.cw_s3_pr_q02_choiceInput != '' &&
+                            this.cw_s3_pr_q03_choiceInput != '' &&
+                            this.cw_s3_pr_q04_choiceInput != '' &&
+                            this.authorisedManagerReviewPassed
+                        ">APPROVE</mat-label>
+                    <mat-label 
+                        *ngIf = "
+                            this.cw_s3_pr_q01_choiceInput != '' &&
+                            this.cw_s3_pr_q02_choiceInput != '' &&
+                            this.cw_s3_pr_q03_choiceInput != '' &&
+                            this.cw_s3_pr_q04_choiceInput != '' &&
+                            !this.authorisedManagerReviewPassed
+                        ">REJECT</mat-label>
+            </button>
         </div>
         <div *ngIf = "dt.permitType == 'Electrical permit (EP)'">
             <button 
@@ -567,11 +655,33 @@
                         this.e_s3_pr_q01_choiceInput == '' ||
                         this.e_s3_pr_q02_choiceInput == '' ||
                         this.e_s3_pr_q03_choiceInput == '' ||
-                        this.e_s3_pr_q04_choiceInput == '' ||
-                        !this.authorisedManagerReviewPassed
+                        this.e_s3_pr_q04_choiceInput == ''
                     "
                     (click) = "this.authorisePtw()">
-                    SUBMIT EVALUATION</button>
+                    <mat-label 
+                        *ngIf = "
+                                this.e_s3_pr_q01_choiceInput == '' ||
+                                this.e_s3_pr_q02_choiceInput == '' ||
+                                this.e_s3_pr_q03_choiceInput == '' ||
+                                this.e_s3_pr_q04_choiceInput == ''
+                            ">COMPLETE ALL FIELDS</mat-label>
+                    <mat-label 
+                        *ngIf = "
+                            this.e_s3_pr_q01_choiceInput != '' &&
+                            this.e_s3_pr_q02_choiceInput != '' &&
+                            this.e_s3_pr_q03_choiceInput != '' &&
+                            this.e_s3_pr_q04_choiceInput != '' &&
+                            this.authorisedManagerReviewPassed
+                        ">APPROVE</mat-label>
+                    <mat-label 
+                        *ngIf = "
+                            this.e_s3_pr_q01_choiceInput != '' &&
+                            this.e_s3_pr_q02_choiceInput != '' &&
+                            this.e_s3_pr_q03_choiceInput != '' &&
+                            this.e_s3_pr_q04_choiceInput != '' &&
+                            !this.authorisedManagerReviewPassed
+                        ">REJECT</mat-label>
+            </button>
         </div>
         <button mat-button mat-dialog-close>Cancel</button>
     </div>

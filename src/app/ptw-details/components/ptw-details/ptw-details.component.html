@@ -32,7 +32,7 @@
                 <div>
                     <mat-label>
                         <h3 [ngStyle] = "
-                        dt.ptwStatus?.permitStatus == '---' ? { color: 'grey' } :
+                        dt.ptwStatus?.permitStatus == 'Processing' ? { color: 'grey' } :
                         dt.ptwStatus?.permitStatus == 'Valid' ? { color: 'green' } : 
                         dt.ptwStatus?.permitStatus == 'Terminated' ? { color: 'maroon' } : 
                         dt.ptwStatus?.permitStatus == 'Expired' ? { color: 'maroon' } : 
@@ -48,7 +48,7 @@
                 </div>
                 <div>
                     <mat-label>
-                        <h3>{{ dt.startWorkingDateTime | date: "short" }} ► {{ dt.endWorkingDateTime | date: "short" }}</h3>
+                        <h3 id = "label-text">{{ dt.startWorkingDateTime | date: "short" }} ► {{ dt.endWorkingDateTime | date: "short" }}</h3>
                     </mat-label>
                 </div>
             </div>

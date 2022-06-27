@@ -16,7 +16,7 @@
                 <mat-menu #applicantMenu = "matMenu">
                     <button mat-menu-item (click) = "this.navigateTo('validator-tl')">
                         <mat-icon>book</mat-icon>
-                        <span>Tracking Log (Manage Requests)</span>
+                        <span>Tracking Log</span>
                     </button>
                     <button mat-menu-item (click) = "this.openSignOutDialog()">
                         <mat-icon>exit_to_app</mat-icon>
@@ -35,27 +35,34 @@
                     <mat-card-title>Permits Overview</mat-card-title>
                     <mat-card-subtitle>All recent permit statuses at a glance</mat-card-subtitle>
                 </mat-card-header>
-                <mat-card-content>
+                <mat-card-content id = "permit-status-statistics-content">
                     <mat-list class = "permit-status-statistics">
-                        <mat-list-item id = "pss-item" style = "background-color: grey;">
-                            <mat-label id = "label-text">{{ this.processingPermitNo }}&emsp;</mat-label>
-                            <mat-label style = "font-size: 13px"><mat-icon style = "vertical-align: middle; font-size: 22px;">autorenew</mat-icon> Processing</mat-label>
-                        </mat-list-item>
+                        <mat-list-item><mat-label style = "font-weight: 425;">REQUEST PENDING</mat-label></mat-list-item>
                         <mat-list-item id = "pss-item" style = "background-color: royalblue;">
+                            <mat-label id = "label-text">{{ this.processingPermitNo }}&emsp;</mat-label>
+                            <mat-label style = "font-size: 16px"><mat-icon style = "vertical-align: middle; font-size: 22px;">autorenew</mat-icon>&emsp;Processing</mat-label>
+                        </mat-list-item>
+                        <mat-list-item><mat-label style = "font-weight: 425;">PROCESSED REQUEST</mat-label></mat-list-item>
+                        <mat-list-item id = "pss-item" style = "background-color: forestgreen;">
                             <mat-label id = "label-text">{{ this.validPermitNo }}&emsp;</mat-label>
-                            <mat-label style = "font-size: 13px"><mat-icon style = "vertical-align: middle; font-size: 22px;">done_outline</mat-icon> Valid</mat-label>
+                            <mat-label style = "font-size: 16px"><mat-icon style = "vertical-align: middle; font-size: 22px;">done_outline</mat-icon>&emsp;Valid&emsp;(Approved)</mat-label>
                         </mat-list-item>
                         <mat-list-item id = "pss-item" style = "background-color: rgb(25, 25, 25);">
-                            <mat-label id = "label-text">{{ this.expiredPermitNo }}&emsp;</mat-label>
-                            <mat-label style = "font-size: 13px"><mat-icon style = "vertical-align: middle; font-size: 22px;">not_interested</mat-icon> Expired</mat-label>
+                            <mat-label id = "label-text">{{ this.invalidPermitNo }}&emsp;</mat-label>
+                            <mat-label style = "font-size: 16px"><mat-icon style = "vertical-align: middle; font-size: 22px;">report_problem</mat-icon>&emsp;Invalid&emsp;(Rejected/Cancelled)</mat-label>
+                        </mat-list-item>
+                        <mat-list-item><mat-label style = "font-weight: 425;">POST-APPROVAL</mat-label></mat-list-item>
+                        <mat-list-item id = "pss-item" style = "background-color: rgb(103, 58, 183);">
+                            <mat-label id = "label-text">{{ this.closedPermitNo }}&emsp;</mat-label>
+                            <mat-label style = "font-size: 16px"><mat-icon style = "vertical-align: middle; font-size: 22px;">block</mat-icon>&emsp;Closed</mat-label>
                         </mat-list-item>
                         <mat-list-item id = "pss-item" style = "background-color: firebrick;">
                             <mat-label id = "label-text">{{ this.terminatedPermitNo }}&emsp;</mat-label>
-                            <mat-label style = "font-size: 13px"><mat-icon style = "vertical-align: middle; font-size: 22px;">clear</mat-icon> Terminated</mat-label>
+                            <mat-label style = "font-size: 16px"><mat-icon style = "vertical-align: middle; font-size: 22px;">clear</mat-icon>&emsp;Terminated</mat-label>
                         </mat-list-item>
-                        <mat-list-item id = "pss-item" style = "background-color: rgb(103, 58, 183);">
-                            <mat-label id = "label-text">{{ this.closedPermitNo }}&emsp;</mat-label>
-                            <mat-label style = "font-size: 13px"><mat-icon style = "vertical-align: middle; font-size: 22px;">block</mat-icon> Closed</mat-label>
+                        <mat-list-item id = "pss-item" style = "background-color: goldenrod;">
+                            <mat-label id = "label-text">{{ this.expiredPermitNo }}&emsp;</mat-label>
+                            <mat-label style = "font-size: 16px"><mat-icon style = "vertical-align: middle; font-size: 22px;">not_interested</mat-icon>&emsp;Expired</mat-label>
                         </mat-list-item>
                     </mat-list>
                 </mat-card-content>
@@ -67,14 +74,20 @@
                 </mat-card-actions>
             </div>
         </mat-card>
-        <br>
+    </div>
+    <div id = "right-content-container">
         <mat-card>
-            <div id = "left-content">
+            <div id = "right-content">
                 <mat-card-header>
                     <mat-card-title>Pending Requests ({{ this.pendingReqList.length }})</mat-card-title>
                     <mat-card-subtitle>Select one to view and process</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content id = "pending-reqs-content">
+                    <div *ngIf = "this.pendingReqList.length === 0" id = "no-data-container">
+                        <mat-label>No pending requests at the moment</mat-label>
+                        <br><br>
+                        <mat-icon>report_problem</mat-icon>
+                    </div>
                     <mat-list class = "pending-reqs-list" *ngFor = "let pending of this.pendingReqList">
                         <br><br><br><br><br>
                         <mat-list-item>
@@ -110,7 +123,7 @@
                                                 <mat-icon style = "color: darkgreen; vertical-align: middle;">done_all</mat-icon><mat-label style = "color: darkgreen; font-weight: 450; font-size: 14px;">EVAL PASSED&emsp;<mat-label>{{ pending.safetyAssessorEvaluation?.timestamp | date: "short" }}&emsp;</mat-label></mat-label>
                                             </div>
                                             <div *ngIf = "pending.safetyAssessorEvaluation?.name != 'None' && !pending.safetyAssessorEvaluation?.passed">
-                                                <mat-icon style = "color: crimson; vertical-align: middle;">clear</mat-icon><mat-label style = "color: crimson; font-weight: 450; font-size: 14px;">EVAL NOT PASSED&emsp;<mat-label>{{ pending.safetyAssessorEvaluation?.timestamp | date: "short" }}&emsp;</mat-label></mat-label>
+                                                <mat-icon style = "color: maroon; vertical-align: middle;">clear</mat-icon><mat-label style = "color: maroon; font-weight: 450; font-size: 14px;">EVAL NOT PASSED&emsp;<mat-label>{{ pending.safetyAssessorEvaluation?.timestamp | date: "short" }}&emsp;</mat-label></mat-label>
                                             </div>
                                             <div *ngIf = "pending.safetyAssessorEvaluation?.name == 'None' && !pending.safetyAssessorEvaluation?.passed">
                                                 <mat-icon style = "color: grey; vertical-align: middle;">priority_high</mat-icon><mat-label style = "color: grey; font-weight: 450; font-size: 14px;">NOT YET EVALUATED&emsp;</mat-label>
@@ -121,7 +134,7 @@
                                                 <mat-icon style = "color: darkgreen; vertical-align: middle;">done_all</mat-icon><mat-label style = "color: darkgreen; font-weight: 450; font-size: 14px;">APPROVED&emsp;<mat-label>{{ pending.authorisedManagerApproval?.timestamp | date: "short" }}&emsp;</mat-label></mat-label>
                                             </div>
                                             <div *ngIf = "pending.authorisedManagerApproval?.name != 'None' && !pending.authorisedManagerApproval?.passed">
-                                                <mat-icon style = "color: crimson; vertical-align: middle;">clear</mat-icon><mat-label style = "color: crimson; font-weight: 450; font-size: 14px;">REJECTED&emsp;<mat-label>{{ pending.authorisedManagerApproval?.timestamp | date: "short" }}&emsp;</mat-label></mat-label>
+                                                <mat-icon style = "color: maroon; vertical-align: middle;">clear</mat-icon><mat-label style = "color: maroon; font-weight: 450; font-size: 14px;">REJECTED&emsp;<mat-label>{{ pending.authorisedManagerApproval?.timestamp | date: "short" }}&emsp;</mat-label></mat-label>
                                             </div>
                                             <div *ngIf = "pending.authorisedManagerApproval?.name == 'None' && !pending.authorisedManagerApproval?.passed">
                                                 <mat-icon style = "color: grey; vertical-align: middle;">priority_high</mat-icon><mat-label style = "color: grey; font-weight: 450; font-size: 14px;">NOT YET APPROVED/REJECTED&emsp;</mat-label>
@@ -131,30 +144,14 @@
                                             <button 
                                             mat-stroked-button
                                             appearance = "accent"
-                                            (click) = "this.expandSelectedPtw(pending.id.toString())">VIEW & MANAGE</button>
+                                            (click) = "this.expandSelectedPtw(pending.id.toString())">VIEW & PROCESS</button>
                                         </div>
-                                        
                                     </mat-card-actions>
                                 </mat-card>
                             </div>
                         </mat-list-item>
                         <br><br><br><br><br>
                     </mat-list>
-                </mat-card-content>
-            </div>
-        </mat-card>
-    </div>
-    <div id = "right-content-container">
-        <mat-card>
-            <div id = "right-content">
-                <mat-card-header>
-                    <mat-card-title>Tasks History</mat-card-title>
-                    <mat-card-subtitle>Graphical overview of task statuses per monthly basis</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                    <div echarts
-                     style = "height: 700px"
-                     [options] = "this.ptwHistGraphOptions"></div> 
                 </mat-card-content>
             </div>
         </mat-card>

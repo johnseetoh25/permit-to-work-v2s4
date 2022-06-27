@@ -269,7 +269,6 @@ export class SubmitDialogComponent implements OnInit {
           data?.authorisedManagerApproval?.timestamp,
 
           data?.requestStatus,
-          data?.statusRemarks,
           data?.timestamp
         );
 

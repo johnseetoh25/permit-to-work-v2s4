@@ -22,6 +22,9 @@ mat-grid-tile {
 
 #label-text {
     font-weight: 425;
+    font-size: 24px;
+    padding-left: 16px;
+    padding-right: 16px;
 }
 
 .spacer {
@@ -39,7 +42,7 @@ mat-grid-tile {
 }
 
 #left-content-container {
-    width: 50%;
+    width: 30%;
     float: left;
 }
 
@@ -51,30 +54,47 @@ mat-grid-tile {
     padding: 8px;
 }
 
+#left-content {
+    height: 730px;
+}
+
 #right-content {
-    height: 750px;
+    height: 730px;
+}
+
+#permit-status-statistics-content {
+    height: 600px;
 }
 
 #pending-reqs-content {
     padding: 16px;
-    height: 373.5px;
+    height: 625px;
     overflow-y: scroll;
     background-color: rgb(250, 250, 250);
 }
 
 .permit-status-statistics {
-    display: flex;
+    display: inline;
 }
 
 #pss-item {
     background-color: dimgray;
     border-radius: 5px;
     color: whitesmoke;
-    margin-right: 2.5px;
-    margin-left: 2.5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 8px;
 }
 
 #right-content-container {
     float: right;
-    width: 48.75%;
+    width: 68.5%;
+}
+
+#no-data-container {
+    padding: 50px;
+    text-align: center;
+    font-size: medium;
+    color: grey;
+    font-weight: 425;
 }
