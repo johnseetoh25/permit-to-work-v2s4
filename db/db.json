@@ -11,7 +11,7 @@
       "userId": "SPV002",
       "userPw": "test2",
       "userName": "Arnoldo Nielsen",
-      "inSession": true,
+      "inSession": false,
       "id": 2
     },
     {
@@ -32,7 +32,7 @@
       "userId": "SPV005",
       "userPw": "test5",
       "userName": "Esmond Dickinson",
-      "inSession": false,
+      "inSession": true,
       "id": 5
     }
   ],
