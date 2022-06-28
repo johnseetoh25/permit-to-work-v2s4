@@ -438,11 +438,13 @@ export interface IPermitToWork {
 	},
 	ptwStatus: {
 		permitStatus: string,
+		taskStatus: string,
 		remarks: string,
 		checked: boolean,
 		supervisorName: string,
 		wantToTerminate: boolean,
 		reqTermTimestamp: string,
+		terminatedTimestamp: string,
 		timestamp: string
 	},
 	safetyAssessorEvaluation: {

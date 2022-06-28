@@ -1,9 +1,9 @@
 .dialog-box {
-    width: 650px;
+    width: 600px;
 }
 
 .mat-dialog-content {
-    height: 100px;
+    height: 165px;
 }
 
 .mat-dialog-actions {
@@ -22,29 +22,10 @@ mat-radio-group {
     width: 100%;
 }
 
-.status-res {
-    padding: 12px;
-    color: white;
-    background-color: indianred;
-    border-radius: 0.5em;
-}
-
 .required-label {
     color: crimson;
 }
 
 .mat-icon {
     vertical-align: middle;
-}
-
-.type-to-confirm {
-    text-align: right;
-}
-
-.type-to-confirm-input {
-    font-size: 12px;
-}
-
-#label-text {
-    font-weight: 450;
 }

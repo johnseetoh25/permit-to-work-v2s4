@@ -255,11 +255,13 @@ export class SubmitDialogComponent implements OnInit {
           data?.applicantDets?.email,
 
           data?.ptwStatus?.permitStatus,
+          data?.ptwStatus?.taskStatus,
           data?.ptwStatus?.remarks,
           data?.ptwStatus?.checked,
           data?.ptwStatus?.supervisorName,
           data?.ptwStatus?.wantToTerminate,
           data?.ptwStatus?.reqTermTimestamp,
+          data?.ptwStatus?.terminatedTimestamp,
           data?.ptwStatus?.timestamp,
 
           data?.safetyAssessorEvaluation?.passed,

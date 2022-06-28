@@ -3,7 +3,10 @@ import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from "@angu
 import { DefaultValues } from 'src/app/constants/DefaultValues';
 import { IPermitToWork } from 'src/app/interfaces/IPermitToWork';
 import { ReqcancDialogComponent } from 'src/app/reqcanc-dialog/components/reqcanc-dialog/reqcanc-dialog.component';
+import { ReqtermDialogComponent } from 'src/app/reqterm-dialog/components/reqterm-dialog/reqterm-dialog.component';
 import { DbService } from 'src/app/services/db.service';
+import { Subscription } from 'rxjs';
+import { CompShareService } from 'src/app/services/comp-share.service';
 
 @Component({
   selector: 'app-ptw-details',
@@ -21,17 +24,28 @@ export class PtwDetailsComponent implements OnInit {
   public evaluatedTimestampDisplay: Date = new Date();
   public authorisedTimestampDisplay: Date = new Date();
 
+  private clickEventSub: Subscription;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public fetchedId: any,
     private dialog: MatDialog,
     private dialogRefReqCanc: MatDialogRef<ReqcancDialogComponent>,
+    private dialogRefReqTerm: MatDialogRef<ReqtermDialogComponent>,
     private db: DbService,
+    private compShare: CompShareService
   ) { 
+    this.refresh();
+    this.clickEventSub = this.compShare.getClickEvent().subscribe(() => {
+      this.refresh();
+    });
+  }
+
+  public refresh(): void {
     this.db.fetchWith(this.fetchedId).subscribe((data: IPermitToWork[]) => {
       this.targetPtw = data;
       this.submissionTimestampDisplay = new Date(this.targetPtw[0].timestamp);
-      if (this.targetPtw[0].ptwStatus.timestamp != DefaultValues.VALUE_NONE) {
-        this.closedTimestampDisplay = new Date(this.targetPtw[0].ptwStatus.timestamp);
+      if (this.targetPtw[0].ptwStatus.terminatedTimestamp != DefaultValues.VALUE_NONE) {
+        this.closedTimestampDisplay = new Date(this.targetPtw[0].ptwStatus.terminatedTimestamp);
       }
       if (this.targetPtw[0].reqCancTimestamp != DefaultValues.VALUE_NONE) {
         this.cancelReqTimestampDisplay = new Date(this.targetPtw[0].reqCancTimestamp);
@@ -62,5 +76,12 @@ export class PtwDetailsComponent implements OnInit {
     this.dialogRefReqCanc = this.dialog.open(ReqcancDialogComponent, dialogConfig);
   }
 
-  public openRequestTerminateDialog(): void { }
+  public openRequestTerminateDialog(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      ptw: this.targetPtw,
+      userName: this.fetchedId.userName
+    }
+    this.dialogRefReqTerm = this.dialog.open(ReqtermDialogComponent, dialogConfig)
+  }
 }

@@ -1,0 +1,46 @@
+<div class = "dialog-box">
+    <h2 mat-dialog-title>Request for Closure/Termination</h2>
+    <br>
+    <div mat-dialog-content>
+        <div id = "dialog-content-desc">
+            <mat-label>What is the reason for requesting the closure / termination of this permit?</mat-label>
+        </div>
+        <br>
+        <div>
+            <mat-radio-group 
+                required 
+                class = "rft-options"
+                aria-label = "Select an option"
+                aria-labelledby = "rft-options"
+                [(ngModel)] = "this.selectedReason">
+                <mat-radio-button 
+                    class = "rft-option" 
+                    *ngFor = "let reason of this.reasonsForTermination" 
+                    [value] = "reason">
+                    <mat-label *ngIf = "reason == 'Completed'">Job is completed</mat-label>
+                    <mat-label *ngIf = "reason == 'Cond. Changed'">Change in condition</mat-label>
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+    </div>
+    <div *ngIf = "this.selectedReason == 'Cond. Changed'" class = "status-remarks">
+        <mat-label>What is the specific condition that has led to this request?</mat-label>
+        <br><br>
+        <mat-label class = "required-label">* Required field</mat-label>
+        <br>
+        <mat-form-field class = "status-remarks-input" appearance = "fill">
+            <mat-label>Specify details</mat-label>
+            <input required style = "height: 15px" matInput [(ngModel)] = "this.taskStatusRemarksInput">
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button color = "primary" [disabled] = "
+            (this.selectedReason == '') ||
+            (this.selectedReason == 'Cond. Changed' && this.taskStatusRemarksInput == '')
+        "
+        (click) = "this.requestForTermination()">
+            <mat-label>CREATE REQUEST</mat-label>
+        </button>
+        <button mat-button mat-dialog-close>Cancel</button>
+    </div>
+</div>

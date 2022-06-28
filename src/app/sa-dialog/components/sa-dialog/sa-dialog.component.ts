@@ -355,11 +355,13 @@ export class SaDialogComponent implements OnInit {
       toEvaluate?.applicantDets?.email,
 
       toEvaluate?.ptwStatus?.permitStatus,
+      toEvaluate?.ptwStatus?.taskStatus,
       toEvaluate?.ptwStatus?.remarks,
       toEvaluate?.ptwStatus?.checked,
       toEvaluate?.ptwStatus?.supervisorName,
       toEvaluate?.ptwStatus?.wantToTerminate,
       toEvaluate?.ptwStatus?.reqTermTimestamp,
+      toEvaluate?.ptwStatus?.terminatedTimestamp,
       toEvaluate?.ptwStatus?.timestamp,
 
       toEvaluate?.safetyAssessorEvaluation?.passed,

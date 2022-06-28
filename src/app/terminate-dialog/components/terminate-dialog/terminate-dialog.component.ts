@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { IPermitToWork } from 'src/app/interfaces/IPermitToWork';
 import { DbService } from 'src/app/services/db.service';
 import { TaskStatus } from 'src/app/constants/TaskStatus';
@@ -7,7 +7,6 @@ import { DefaultValues } from 'src/app/constants/DefaultValues';
 import { PermitStatus } from 'src/app/constants/PermitStatus';
 import { MessageService } from 'src/app/services/message.service';
 import { Router } from '@angular/router';
-import { PtwDetailsComponent } from 'src/app/ptw-details/components/ptw-details/ptw-details.component';
 import { CompShareService } from 'src/app/services/comp-share.service';
 import { RequestStatus } from 'src/app/constants/RequestStatus';
 
@@ -23,22 +22,21 @@ export class TerminateDialogComponent implements OnInit {
     TaskStatus.STATUS_COMPLETED,
     TaskStatus.STATUS_CONDITION_CHANGED
   ];
-
-  public selectedReason: string = "";
+  
   public newPermitStatus: string = "";
   public taskStatusRemarksInput: string = "";
   public typeToConfirmInput: string = "";
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public targetPtw: any,
-    private dialog: MatDialog,
     private dialogRefSelf: MatDialogRef<TerminateDialogComponent>,
-    private dialogRefPtwDets: MatDialogRef<PtwDetailsComponent>,
     private db: DbService,
     private msg: MessageService,
     private router: Router,
     private compShare: CompShareService
-  ) { }
+  ) {
+    this.taskStatusRemarksInput = this.targetPtw[0].ptwStatus.remarks;
+  }
 
   public ngOnInit(): void { }
 
@@ -58,12 +56,9 @@ export class TerminateDialogComponent implements OnInit {
     this.targetPtw[0].ptwStatus.checked = true;
     this.targetPtw[0].ptwStatus.taskStatus = reason;
     this.targetPtw[0].ptwStatus.permitStatus = newPermitStatus;
-    if (this.taskStatusRemarksInput == "") {
-      this.taskStatusRemarksInput = DefaultValues.VALUE_NONE;
-    }
     this.targetPtw[0].ptwStatus.remarks = this.taskStatusRemarksInput;
     this.targetPtw[0].ptwStatus.supervisorName = this.targetPtw[0].applicantDets.name;
-    this.targetPtw[0].ptwStatus.timestamp = new Date().toISOString();
+    this.targetPtw[0].ptwStatus.terminatedTimestamp = new Date().toISOString();
 
     this.ptwToCloseOrTerminate = this.targetPtw[0];
     
@@ -291,11 +286,13 @@ export class TerminateDialogComponent implements OnInit {
       toTerminate?.applicantDets?.email,
 
       toTerminate?.ptwStatus?.permitStatus,
+      toTerminate?.ptwStatus?.taskStatus,
       toTerminate?.ptwStatus?.remarks,
       toTerminate?.ptwStatus?.checked,
       toTerminate?.ptwStatus?.supervisorName,
       toTerminate?.ptwStatus?.wantToTerminate,
       toTerminate?.ptwStatus?.reqTermTimestamp,
+      toTerminate?.ptwStatus?.terminatedTimestamp,
       toTerminate?.ptwStatus?.timestamp,
 
       toTerminate?.safetyAssessorEvaluation?.passed,

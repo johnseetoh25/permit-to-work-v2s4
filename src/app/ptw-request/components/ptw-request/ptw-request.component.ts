@@ -1739,11 +1739,13 @@ export class PtwRequestComponent implements OnInit {
       },
       ptwStatus: {
         permitStatus: PermitStatus.STATUS_PROCESSING,
+        taskStatus: TaskStatus.STATUS_NOT_STARTED,
         remarks: DefaultValues.VALUE_NONE,
         checked: false,
         supervisorName: DefaultValues.VALUE_NONE,
         wantToTerminate: false,
         reqTermTimestamp: DefaultValues.VALUE_NONE,
+        terminatedTimestamp: DefaultValues.VALUE_NONE,
         timestamp: DefaultValues.VALUE_NONE
       },
       safetyAssessorEvaluation: {

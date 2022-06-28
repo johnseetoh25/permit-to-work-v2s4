@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { IPermitToWork } from 'src/app/interfaces/IPermitToWork';
 import { DbService } from 'src/app/services/db.service';
 import { MessageService } from 'src/app/services/message.service';
@@ -16,7 +16,6 @@ export class ReqcancDialogComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public fetched: any,
-    private dialog: MatDialog,
     private dialogRefSelf: MatDialogRef<ReqcancDialogComponent>,
     private db: DbService,
     private msg: MessageService,
@@ -256,11 +255,13 @@ export class ReqcancDialogComponent implements OnInit {
       toReqCanc?.applicantDets?.email,
 
       toReqCanc?.ptwStatus?.permitStatus,
+      toReqCanc?.ptwStatus?.taskStatus,
       toReqCanc?.ptwStatus?.remarks,
       toReqCanc?.ptwStatus?.checked,
       toReqCanc?.ptwStatus?.supervisorName,
       toReqCanc?.ptwStatus?.wantToTerminate,
       toReqCanc?.ptwStatus?.reqTermTimestamp,
+      toReqCanc?.ptwStatus?.terminatedTimestamp,
       toReqCanc?.ptwStatus?.timestamp,
 
       toReqCanc?.safetyAssessorEvaluation?.passed,

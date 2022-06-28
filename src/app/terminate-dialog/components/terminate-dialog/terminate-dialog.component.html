@@ -1,71 +1,50 @@
-<div class = "dialog-box">
+<div class = "dialog-box" *ngFor = "let toTerminate of this.targetPtw">
     <h2 mat-dialog-title>Permit Closure / Termination</h2>
     <br>
     <div mat-dialog-content>
         <div id = "dialog-content-desc">
-            <mat-label>What is the reason for the closure / termination of this permit? (To be completed by the representative supervisor)</mat-label>
+            <div>
+                <mat-label id = "label-text">Given reason:&emsp;</mat-label><mat-label>{{ toTerminate.ptwStatus.taskStatus }}</mat-label>
+            </div>
+            <div>
+                <mat-label id = "label-text">Remarks:&emsp;</mat-label><mat-label>{{ toTerminate.ptwStatus.remarks }}</mat-label>
+            </div>
         </div>
-        <br>
-        <div>
-            <mat-radio-group 
-                required 
-                class = "rft-options"
-                aria-label = "Select an option"
-                aria-labelledby = "rft-options"
-                [(ngModel)] = "this.selectedReason">
-                <mat-radio-button 
-                    class = "rft-option" 
-                    *ngFor = "let reason of this.reasonsForTermination" 
-                    [value] = "reason"
-                    (change) = "this.determineNewPermitStatus(reason); this.typeToConfirmInput = ''">
-                    <mat-label *ngIf = "reason == 'Completed'">Job is completed</mat-label>
-                    <mat-label *ngIf = "reason == 'Cond. Changed'">Change in condition</mat-label>
-                </mat-radio-button>
-            </mat-radio-group>
-        </div>
-    </div>
-    <div *ngIf = "this.selectedReason == 'Cond. Changed'" class = "status-remarks">
-        <mat-label>What is the specific condition that has led to the suspension?</mat-label>
-        <br><br>
-        <mat-label class = "required-label">* Required field</mat-label>
-        <br>
-        <mat-form-field class = "status-remarks-input" appearance = "fill">
-            <mat-label>Specify details</mat-label>
-            <input required style = "height: 15px" matInput [(ngModel)] = "this.taskStatusRemarksInput">
-        </mat-form-field>
     </div>
     <br>
-    <div class = "status-res" *ngIf = "this.selectedReason != ''">
+    <div class = "status-res" *ngIf = "toTerminate.ptwStatus.taskStatus != ''">
         <mat-label style = "font-weight: 450"><mat-icon>warning</mat-icon>&emsp;WARNING</mat-label>
         <br><br>
         <mat-label>⯁ <u>Permit status</u> will be deemed </mat-label>
-        <mat-label style = "font-weight: 450;" *ngIf = "this.selectedReason == 'Cond. Changed'">TERMINATED</mat-label>
-        <mat-label style = "font-weight: 450;" *ngIf = "this.selectedReason == 'Completed'">CLOSED</mat-label>
+        <mat-label style = "font-weight: 450;" *ngIf = "toTerminate.ptwStatus.taskStatus == 'Cond. Changed'">TERMINATED</mat-label>
+        <mat-label style = "font-weight: 450;" *ngIf = "toTerminate.ptwStatus.taskStatus == 'Completed'">CLOSED</mat-label>
         <mat-label>.</mat-label>
         <br>
-        <mat-label>⬦ This action <mat-label style = "font-weight: 450;">CANNOT</mat-label> be undone once <mat-label style = "font-weight: 450;" *ngIf = "this.selectedReason == 'Completed'">CLOSE THIS PERMIT</mat-label><mat-label style = "font-weight: 450;" *ngIf = "this.selectedReason == 'Overtime' || this.selectedReason == 'Cond. Changed'">TERMINATE THIS PERMIT</mat-label> is pressed.</mat-label>
+        <mat-label>⬦ This action <mat-label style = "font-weight: 450;">CANNOT</mat-label> be undone once <mat-label style = "font-weight: 450;" *ngIf = "toTerminate.ptwStatus.taskStatus == 'Completed'">CLOSE THIS PERMIT</mat-label>
+        <mat-label style = "font-weight: 450;" *ngIf = "toTerminate.ptwStatus.taskStatus == 'Overtime' || toTerminate.ptwStatus.taskStatus == 'Cond. Changed'">TERMINATE THIS PERMIT</mat-label> is pressed.</mat-label>
         <br>
         <mat-label>⬦ You will have to request for a new permit to re-validate.</mat-label>
     </div>
     <br>
-    <div *ngIf = "
-        this.selectedReason != '' ||
-        (this.selectedReason != '' && this.taskStatusRemarksInput != '')
-        " class = "type-to-confirm">
+    <div class = "type-to-confirm" *ngIf = "toTerminate.ptwStatus.taskStatus == 'Completed'">
+        <mat-label style = "color: brown">Type <i>close</i> to continue*&emsp;</mat-label>
+        <mat-form-field class = "type-to-confirm-input" appearance = "outline" floatLabel = "never">
+            <input required matInput [(ngModel)] = "this.typeToConfirmInput">
+        </mat-form-field>
+    </div>
+    <div class = "type-to-confirm" *ngIf = "toTerminate.ptwStatus.taskStatus == 'Cond. Changed'">
         <mat-label style = "color: brown">Type <i>terminate</i> to continue*&emsp;</mat-label>
         <mat-form-field class = "type-to-confirm-input" appearance = "outline" floatLabel = "never">
             <input required matInput [(ngModel)] = "this.typeToConfirmInput">
         </mat-form-field>
     </div>
     <div mat-dialog-actions>
-        <button mat-button color = "warn" [disabled] = "
-            (this.selectedReason == '' || this.typeToConfirmInput != 'terminate') ||
-            (this.selectedReason == 'Cond. Changed' && this.taskStatusRemarksInput == '' || this.typeToConfirmInput != 'terminate')
-        "
-        (click) = "this.terminatePtw(this.selectedReason, this.newPermitStatus)">
-            <mat-label *ngIf = "this.selectedReason == ''">PLEASE SELECT A REASON</mat-label>
-            <mat-label *ngIf = "this.selectedReason == 'Completed'">CLOSE THIS PERMIT</mat-label>
-            <mat-label *ngIf = "this.selectedReason == 'Cond. Changed'">TERMINATE THIS PERMIT</mat-label>
+        <button 
+            mat-button color = "warn" 
+            [disabled] = "this.typeToConfirmInput != 'close' && this.typeToConfirmInput != 'terminate'"
+            (click) = "this.determineNewPermitStatus(toTerminate.ptwStatus.taskStatus); this.terminatePtw(toTerminate.ptwStatus.taskStatus, this.newPermitStatus);">
+            <mat-label *ngIf = "toTerminate.ptwStatus.taskStatus == 'Completed'">CLOSE THIS PERMIT</mat-label>
+            <mat-label *ngIf = "toTerminate.ptwStatus.taskStatus == 'Cond. Changed'">TERMINATE THIS PERMIT</mat-label>
         </button>
         <button mat-button mat-dialog-close>Cancel</button>
     </div>

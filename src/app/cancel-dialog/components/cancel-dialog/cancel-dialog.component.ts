@@ -261,11 +261,13 @@ export class CancelDialogComponent implements OnInit {
       toCancel?.applicantDets?.email,
 
       toCancel?.ptwStatus?.permitStatus,
+      toCancel?.ptwStatus?.taskStatus,
       toCancel?.ptwStatus?.remarks,
       toCancel?.ptwStatus?.checked,
       toCancel?.ptwStatus?.supervisorName,
       toCancel?.ptwStatus?.wantToTerminate,
       toCancel?.ptwStatus?.reqTermTimestamp,
+      toCancel?.ptwStatus?.terminatedTimestamp,
       toCancel?.ptwStatus?.timestamp,
 
       toCancel?.safetyAssessorEvaluation?.passed,

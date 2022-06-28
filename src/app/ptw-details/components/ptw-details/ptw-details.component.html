@@ -98,6 +98,34 @@
                 <mat-label id = "label-text">{{ this.cancelReqTimestampDisplay | date: "short" }}</mat-label>
             </div>
             <div 
+                id = "req-state-col"
+                style = "
+                    padding: 1px; 
+                    background-color: forestgreen; 
+                    color: white; 
+                    text-align: center;
+                    border-width: 2.5px;
+                    border-radius: 5px;
+                "
+                *ngIf = "dt.authorisedManagerApproval.passed && dt.authorisedManagerApproval.name != 'None'">
+                <mat-label>Approved: </mat-label>
+                <mat-label id = "label-text">{{ this.authorisedTimestampDisplay | date: "short" }}</mat-label>
+            </div>
+            <div 
+                id = "req-state-col"
+                style = "
+                    padding: 1px; 
+                    background-color: firebrick; 
+                    color: white; 
+                    text-align: center;
+                    border-width: 2.5px;
+                    border-radius: 5px;
+                "
+                *ngIf = "!dt.authorisedManagerApproval.passed && dt.authorisedManagerApproval.name != 'None'">
+                <mat-label>Rejected: </mat-label>
+                <mat-label id = "label-text">{{ this.authorisedTimestampDisplay | date: "short" }}</mat-label>
+            </div>
+            <div 
                 id = "req-state-col" 
                 style = "
                     padding: 1px; 
@@ -122,7 +150,7 @@
                     border-radius: 5px;
                 "
                 *ngIf = "
-                    dt.ptwStatus.permitStatus == '---'
+                    dt.ptwStatus.permitStatus == '---' && dt.requestStatus != 'Rejected'
                 ">
                 <mat-label>Cancelled: </mat-label>
                 <mat-label id = "label-text">{{ this.cancelledTimestampDisplay | date: "short" }}</mat-label>
@@ -149,7 +177,7 @@
         <div style = "color: brown;" *ngIf = "dt.ptwStatus?.permitStatus == 'Terminated' || dt.ptwStatus?.permitStatus == 'Closed'">
             <br>
             <mat-label id = "label-text">Reason for closure/termination:&emsp;</mat-label>
-            <mat-label>{{ dt.ptwStatus?.remarks }}</mat-label>
+            <mat-label>{{ dt.ptwStatus?.taskStatus }} ⬦ {{ dt.ptwStatus?.remarks }}</mat-label>
         </div>
         <br>
         <mat-divider></mat-divider>
@@ -1751,7 +1779,7 @@
                 dt.ptwStatus.wantToTerminate ||
                 dt.ptwStatus.checked
             "
-            >Request for Closure/Termination</button>
+            (click) = "this.openRequestTerminateDialog()">Request for Closure/Termination</button>
         <button mat-button mat-dialog-close>Close</button>
     </div>
 </div>

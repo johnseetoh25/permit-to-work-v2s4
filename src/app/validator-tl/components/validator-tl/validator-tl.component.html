@@ -91,7 +91,7 @@
                         colElems.requestStatus == 'Rejected' ? { color: 'maroon' } : 
                         colElems.requestStatus == 'Pending' ? { color: 'gray' } : 
                         { color: '' }">
-                    <mat-label id = "status-text">{{ colElems.requestStatus }}</mat-label>
+                    <mat-label id = "status-text">{{ colElems.requestStatus | uppercase }}</mat-label>
                 </td>
             </ng-container>
     
@@ -105,7 +105,7 @@
                         colElems.ptwStatus?.permitStatus == 'Terminated' ? { color: 'maroon' } : 
                         colElems.ptwStatus?.permitStatus == 'Closed' ? { color: 'rgb(103, 58, 183)' } :
                         { color: '' }">
-                    <mat-label id = "status-text">{{ colElems.ptwStatus?.permitStatus }}</mat-label>
+                    <mat-label id = "status-text">{{ colElems.ptwStatus?.permitStatus | uppercase }}</mat-label>
                 </td>
             </ng-container>
 
