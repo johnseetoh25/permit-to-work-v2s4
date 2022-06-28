@@ -5,15 +5,15 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class CompShareService {
-  private subject = new Subject<any>();
+  private clickSubject = new Subject<any>();
 
   constructor() { }
 
   public sendClickEvent(): void {
-    this.subject.next();
+    this.clickSubject.next();
   }
   
-  public getClickEvent(): Observable<any>{ 
-    return this.subject.asObservable();
+  public getClickEvent(): Observable<any> { 
+    return this.clickSubject.asObservable();
   }
 }

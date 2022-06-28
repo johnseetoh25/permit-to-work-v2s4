@@ -33,9 +33,9 @@
                     <mat-label>
                         <h3 [ngStyle] = "
                         dt.ptwStatus?.permitStatus == 'Processing' ? { color: 'grey' } :
-                        dt.ptwStatus?.permitStatus == 'Valid' ? { color: 'green' } : 
+                        dt.ptwStatus?.permitStatus == 'Valid' ? { color: 'forestgreen' } : 
                         dt.ptwStatus?.permitStatus == 'Terminated' ? { color: 'maroon' } : 
-                        dt.ptwStatus?.permitStatus == 'Expired' ? { color: 'maroon' } : 
+                        dt.ptwStatus?.permitStatus == 'Expired' ? { color: 'goldenrod' } : 
                         dt.ptwStatus?.permitStatus == 'Closed' ? { color: 'firebrick' } : 
                         { color: '' }
                         ">{{ dt.ptwStatus?.permitStatus | uppercase }}</h3>
@@ -69,6 +69,7 @@
             </div>
         </div>
         <br>
+        <div style = "margin-bottom: 10px"><mat-label id = "label-text">Activity tracker</mat-label></div>
         <div class = "req-state-cols">
             <div 
                 id = "req-state-col"
@@ -154,6 +155,21 @@
                 ">
                 <mat-label>Cancelled: </mat-label>
                 <mat-label id = "label-text">{{ this.cancelledTimestampDisplay | date: "short" }}</mat-label>
+            </div>
+            <div 
+                id = "req-state-col" 
+                style = "
+                    padding: 1px; 
+                    background-color: goldenrod; 
+                    color: white; 
+                    text-align: center;
+                    border-width: 2.5px;
+                    border-radius: 5px;
+                "
+                *ngIf = "
+                    dt.ptwStatus.permitStatus == 'Expired'
+                ">
+                <mat-label id = "label-text">Permit has expired</mat-label>
             </div>
             <div 
                 id = "req-state-col" 
@@ -1763,7 +1779,11 @@
         <button 
             mat-button 
             color = "primary"
-            [disabled] = "dt.safetyAssessorEvaluation.name != 'None' || dt.requestStatus == 'Cancelled'"
+            [disabled] = "
+                dt.safetyAssessorEvaluation.name != 'None' || 
+                dt.requestStatus == 'Cancelled' ||
+                dt.ptwStatus.permitStatus == 'Expired'
+            "
             (click) = "this.openSafetyAssessorDialog()">Evaluate</button>
         <button 
             mat-button 
@@ -1771,7 +1791,8 @@
             [disabled] = "
                 dt.requestStatus == 'Cancelled' ||
                 dt.safetyAssessorEvaluation.timestamp == 'None' ||
-                dt.authorisedManagerApproval.name != 'None'
+                dt.authorisedManagerApproval.name != 'None' ||
+                dt.ptwStatus.permitStatus == 'Expired'
             "
             (click) = "this.openAuthorisedManagerDialog()">Approve/Reject</button>
         <button 
