@@ -81,8 +81,8 @@ mat-grid-tile {
     background-color: dimgray;
     border-radius: 5px;
     color: whitesmoke;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 1.5px;
+    padding-bottom: 1.5px;
     margin-bottom: 8px;
 }
 
@@ -113,4 +113,24 @@ mat-grid-tile {
 #req-state-text {
     font-weight: 450;
     font-size: 14px;
+}
+
+.canc-term-reqs-states {
+    overflow: hidden;
+    margin-top: 75px;
+    margin-left: 25px;
+    margin-right: 25px;
+    width: 100%;
+}
+
+#canc-term-reqs-state {
+    text-align: center;
+    color: white;
+    border-radius: 2.5px;
+    float: left;
+    width: 175px;
+    padding: 5px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
 }

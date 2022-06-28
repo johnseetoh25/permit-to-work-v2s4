@@ -32,6 +32,8 @@ export class DashboardComponent implements OnInit {
   public expiredPermitNo: number = 0;
   public terminatedPermitNo: number = 0;
   public closedPermitNo: number = 0;
+  public cancReqsNo: number = 0;
+  public termReqsNo: number = 0;
 
   public pendingReqList: IPermitToWork[] = [];
 
@@ -86,6 +88,14 @@ export class DashboardComponent implements OnInit {
 
     this.db.returnPendingReqs().subscribe((resp: IPermitToWork[]) => {
       this.pendingReqList = resp;
+    });
+
+    this.db.returnCancReqs().subscribe((resp: IPermitToWork[]) => {
+      this.cancReqsNo = resp.length;
+    });
+
+    this.db.returnTermReqs().subscribe((resp: IPermitToWork[]) => {
+      this.termReqsNo = resp.length;
     });
   }
 

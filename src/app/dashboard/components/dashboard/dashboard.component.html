@@ -37,17 +37,17 @@
                 </mat-card-header>
                 <mat-card-content id = "permit-status-statistics-content">
                     <mat-list class = "permit-status-statistics">
-                        <mat-list-item><mat-label style = "font-weight: 425;">REQUEST PENDING</mat-label></mat-list-item>
+                        <mat-list-item><mat-label style = "font-weight: 425;">Request Pending</mat-label></mat-list-item>
                         <mat-list-item id = "pss-item" style = "background-color: royalblue;">
                             <mat-label id = "label-text">{{ this.processingPermitNo }}&emsp;</mat-label>
                             <mat-label style = "font-size: 16px"><mat-icon style = "vertical-align: middle; font-size: 22px;">autorenew</mat-icon>&emsp;Processing</mat-label>
                         </mat-list-item>
-                        <mat-list-item><mat-label style = "font-weight: 425;">REQUEST REJECTED/CANCELLED</mat-label></mat-list-item>
+                        <mat-list-item><mat-label style = "font-weight: 425;">Request Rejected/Cancelled</mat-label></mat-list-item>
                         <mat-list-item id = "pss-item" style = "background-color: rgb(25, 25, 25);">
                             <mat-label id = "label-text">{{ this.invalidPermitNo }}&emsp;</mat-label>
                             <mat-label style = "font-size: 16px"><mat-icon style = "vertical-align: middle; font-size: 22px;">report_problem</mat-icon>&emsp;Invalid</mat-label>
                         </mat-list-item>
-                        <mat-list-item><mat-label style = "font-weight: 425;">POST-APPROVAL</mat-label></mat-list-item>
+                        <mat-list-item><mat-label style = "font-weight: 425;">Post-Approval</mat-label></mat-list-item>
                         <mat-list-item id = "pss-item" style = "background-color: forestgreen;">
                             <mat-label id = "label-text">{{ this.validPermitNo }}&emsp;</mat-label>
                             <mat-label style = "font-size: 16px"><mat-icon style = "vertical-align: middle; font-size: 22px;">done_outline</mat-icon>&emsp;Valid</mat-label>
@@ -63,6 +63,21 @@
                         <mat-list-item id = "pss-item" style = "background-color: goldenrod;">
                             <mat-label id = "label-text">{{ this.expiredPermitNo }}&emsp;</mat-label>
                             <mat-label style = "font-size: 16px"><mat-icon style = "vertical-align: middle; font-size: 22px;">not_interested</mat-icon>&emsp;Expired</mat-label>
+                        </mat-list-item>
+                        <mat-divider style = "margin-top: 5px; margin-bottom: 5px;"></mat-divider>
+                        <mat-list-item>
+                            <div class = "canc-term-reqs-states">
+                                <div id = "canc-term-reqs-state" style = "background-color: grey;">
+                                    <mat-label id = "req-state-text">Cancellation Requests</mat-label>
+                                    <br><br>
+                                    <mat-label id = "label-text">{{ this.cancReqsNo }}</mat-label>
+                                </div>
+                                <div id = "canc-term-reqs-state" style = "background-color: rgb(25, 25, 25);">
+                                    <mat-label id = "req-state-text">Termination Requests</mat-label>
+                                    <br><br>
+                                    <mat-label id = "label-text">{{ this.termReqsNo }}</mat-label>
+                                </div>
+                            </div>
                         </mat-list-item>
                     </mat-list>
                 </mat-card-content>

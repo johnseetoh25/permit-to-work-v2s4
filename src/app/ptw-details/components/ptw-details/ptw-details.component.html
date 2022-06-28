@@ -32,7 +32,7 @@
                 <div>
                     <mat-label>
                         <h3 [ngStyle] = "
-                        dt.ptwStatus?.permitStatus == 'Processing' ? { color: 'grey' } :
+                        dt.ptwStatus?.permitStatus == 'Processing' ? { color: 'royalblue' } :
                         dt.ptwStatus?.permitStatus == 'Valid' ? { color: 'forestgreen' } : 
                         dt.ptwStatus?.permitStatus == 'Terminated' ? { color: 'maroon' } : 
                         dt.ptwStatus?.permitStatus == 'Expired' ? { color: 'goldenrod' } : 
@@ -1785,7 +1785,7 @@
                 dt.wantToCancel ||
                 dt.ptwStatus.checked
             "
-            (click) = "this.openRequestCancelDialog()">Request for Cancellation</button>
+            (click) = "this.openRequestCancelDialog()">Request Cancellation</button>
         <button 
             mat-button 
             color = "warn"
@@ -1795,7 +1795,7 @@
                 dt.ptwStatus.wantToTerminate ||
                 dt.ptwStatus.checked
             "
-            (click) = "this.openRequestTerminateDialog()">Request for Closure/Termination</button>
+            (click) = "this.openRequestTerminateDialog()">Request Closure/Termination</button>
         <button mat-button mat-dialog-close>Close</button>
     </div>
 </div>

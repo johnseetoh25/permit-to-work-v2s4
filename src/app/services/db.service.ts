@@ -61,6 +61,14 @@ export class DbService {
     return this.http.get<IPermitToWork[]>(this.ptwUrl + "?requestStatus=" + RequestStatus.REQUEST_PENDING);
   }
 
+  public returnCancReqs(): Observable<IPermitToWork[]> {
+    return this.http.get<IPermitToWork[]>(this.ptwUrl + "?wantToCancel=true");
+  }
+
+  public returnTermReqs(): Observable<IPermitToWork[]> {
+    return this.http.get<IPermitToWork[]>(this.ptwUrl + "?ptwStatus.wantToTerminate=true");
+  }
+
   public update(
     id: number,
     ptwId: string,
