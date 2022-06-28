@@ -1,0 +1,12 @@
+<div class = "dialog-box">
+    <h2 mat-dialog-title>Confirm Cancel Request?</h2>
+    <br>
+    <div mat-dialog-content>
+        <mat-label>Are you sure? This action cannot be undone.</mat-label>
+    </div>
+    <br>
+    <div mat-dialog-actions>
+        <button mat-button (click) = "this.cancelPtw()">Yes</button>
+        <button mat-button mat-dialog-close>Cancel</button>
+    </div>
+</div>

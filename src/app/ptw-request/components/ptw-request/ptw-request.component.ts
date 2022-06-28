@@ -1742,6 +1742,8 @@ export class PtwRequestComponent implements OnInit {
         remarks: DefaultValues.VALUE_NONE,
         checked: false,
         supervisorName: DefaultValues.VALUE_NONE,
+        wantToTerminate: false,
+        reqTermTimestamp: DefaultValues.VALUE_NONE,
         timestamp: DefaultValues.VALUE_NONE
       },
       safetyAssessorEvaluation: {
@@ -1755,6 +1757,9 @@ export class PtwRequestComponent implements OnInit {
         timestamp: DefaultValues.VALUE_NONE
       },
       requestStatus: RequestStatus.REQUEST_PENDING,
+      wantToCancel: false,
+      reqCancTimestamp: DefaultValues.VALUE_NONE,
+      cancelledTimestamp: DefaultValues.VALUE_NONE,
       timestamp: DefaultValues.VALUE_NONE
     };
 

@@ -294,6 +294,8 @@ export class TerminateDialogComponent implements OnInit {
       toTerminate?.ptwStatus?.remarks,
       toTerminate?.ptwStatus?.checked,
       toTerminate?.ptwStatus?.supervisorName,
+      toTerminate?.ptwStatus?.wantToTerminate,
+      toTerminate?.ptwStatus?.reqTermTimestamp,
       toTerminate?.ptwStatus?.timestamp,
 
       toTerminate?.safetyAssessorEvaluation?.passed,
@@ -305,16 +307,15 @@ export class TerminateDialogComponent implements OnInit {
       toTerminate?.authorisedManagerApproval?.timestamp,
 
       toTerminate?.requestStatus,
+      toTerminate?.wantToCancel,
+      toTerminate?.reqCancTimestamp,
+      toTerminate?.cancelledTimestamp,
       toTerminate?.timestamp
     );
 
-    // this.dialogRefSelf.close();
-    // this.dialogRefPtwDets.close();
-    this.dialog.closeAll();
+    this.dialogRefSelf.close();
     this.dialogRefSelf.afterClosed().subscribe(() => {
       this.openSnackBar("The permit has been " + toTerminate.ptwStatus.permitStatus.toLowerCase() + ".", "");
-    });
-    this.dialogRefPtwDets.afterClosed().subscribe(() => {
       this.compShare.sendClickEvent();
     });
   }

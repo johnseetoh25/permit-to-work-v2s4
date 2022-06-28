@@ -98,3 +98,19 @@ mat-grid-tile {
     color: grey;
     font-weight: 425;
 }
+
+.req-state-cols {
+    overflow: hidden;
+    padding-left: 15px;
+}
+
+#req-state-col {
+    float: left;
+    width: 200px;
+    margin-right: 5px;
+}
+
+#req-state-text {
+    font-weight: 450;
+    font-size: 14px;
+}

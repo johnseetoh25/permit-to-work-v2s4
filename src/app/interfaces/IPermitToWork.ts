@@ -441,6 +441,8 @@ export interface IPermitToWork {
 		remarks: string,
 		checked: boolean,
 		supervisorName: string,
+		wantToTerminate: boolean,
+		reqTermTimestamp: string,
 		timestamp: string
 	},
 	safetyAssessorEvaluation: {
@@ -454,5 +456,8 @@ export interface IPermitToWork {
 		timestamp: string
 	},
 	requestStatus: string,
+	wantToCancel: boolean,
+	reqCancTimestamp: string,
+	cancelledTimestamp: string,
 	timestamp: string
 }

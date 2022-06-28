@@ -47,13 +47,14 @@
     width: 350px;
 }
 
-.req-cancel-cols {
+.req-state-cols {
     overflow: hidden;
 }
 
-#req-cancel-col {
+#req-state-col {
     float: left;
-    width: 300px;
+    width: 240px;
+    margin-right: 5px;
 }
 
 .apl-dets-cols {

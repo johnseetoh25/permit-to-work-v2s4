@@ -5,12 +5,16 @@ import { ValidatorReqdetsRoutingModule } from './validator-reqdets-routing.modul
 import { ValidatorReqdetsComponent } from './components/validator-reqdets/validator-reqdets.component';
 import { SaDialogComponent } from '../sa-dialog/components/sa-dialog/sa-dialog.component';
 import { AmDialogComponent } from '../am-dialog/components/am-dialog/am-dialog.component';
+import { CancelDialogComponent } from '../cancel-dialog/components/cancel-dialog/cancel-dialog.component';
+import { TerminateDialogComponent } from '../terminate-dialog/components/terminate-dialog/terminate-dialog.component';
 
 @NgModule({
   declarations: [
     ValidatorReqdetsComponent,
     SaDialogComponent,
-    AmDialogComponent
+    AmDialogComponent,
+    TerminateDialogComponent,
+    CancelDialogComponent
   ],
   imports: [
     CommonModule,

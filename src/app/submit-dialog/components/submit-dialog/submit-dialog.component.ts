@@ -258,6 +258,8 @@ export class SubmitDialogComponent implements OnInit {
           data?.ptwStatus?.remarks,
           data?.ptwStatus?.checked,
           data?.ptwStatus?.supervisorName,
+          data?.ptwStatus?.wantToTerminate,
+          data?.ptwStatus?.reqTermTimestamp,
           data?.ptwStatus?.timestamp,
 
           data?.safetyAssessorEvaluation?.passed,
@@ -269,6 +271,9 @@ export class SubmitDialogComponent implements OnInit {
           data?.authorisedManagerApproval?.timestamp,
 
           data?.requestStatus,
+          data?.wantToCancel,
+          data?.reqCancTimestamp,
+          data?.cancelledTimestamp,
           data?.timestamp
         );
 

@@ -69,9 +69,9 @@
             </div>
         </div>
         <br>
-        <div class = "req-cancel-cols">
+        <div class = "req-state-cols">
             <div 
-                id = "req-cancel-col"
+                id = "req-state-col"
                 style = "
                     padding: 1px; 
                     background-color: cornflowerblue; 
@@ -80,11 +80,55 @@
                     border-width: 2.5px;
                     border-radius: 5px;
                 ">
-                <mat-label>Requested on </mat-label>
-                <mat-label id = "label-text">{{ this.submissionTimestampDisplay | date: "medium" }}</mat-label>
+                <mat-label>Req.: </mat-label>
+                <mat-label id = "label-text">{{ this.submissionTimestampDisplay | date: "short" }}</mat-label>
             </div>
             <div 
-                id = "req-cancel-col" 
+                id = "req-state-col" 
+                style = "
+                    padding: 1px; 
+                    background-color: grey; 
+                    color: white; 
+                    text-align: center;
+                    border-width: 2.5px;
+                    border-radius: 5px;
+                "
+                *ngIf = "dt.wantToCancel">
+                <mat-label>Canc. req.: </mat-label>
+                <mat-label id = "label-text">{{ this.cancelReqTimestampDisplay | date: "short" }}</mat-label>
+            </div>
+            <div 
+                id = "req-state-col" 
+                style = "
+                    padding: 1px; 
+                    background-color: rgb(25, 25, 25); 
+                    color: white; 
+                    text-align: center;
+                    border-width: 2.5px;
+                    border-radius: 5px;
+                "
+                *ngIf = "dt.ptwStatus.wantToTerminate">
+                <mat-label>Term. req.: </mat-label>
+                <mat-label id = "label-text">{{ this.termReqTimestampDisplay | date: "short" }}</mat-label>
+            </div>
+            <div 
+                id = "req-state-col" 
+                style = "
+                    padding: 1px; 
+                    background-color: firebrick; 
+                    color: white; 
+                    text-align: center;
+                    border-width: 2.5px;
+                    border-radius: 5px;
+                "
+                *ngIf = "
+                    dt.ptwStatus.permitStatus == '---'
+                ">
+                <mat-label>Cancelled: </mat-label>
+                <mat-label id = "label-text">{{ this.cancelledTimestampDisplay | date: "short" }}</mat-label>
+            </div>
+            <div 
+                id = "req-state-col" 
                 style = "
                     padding: 1px; 
                     background-color: brown; 
@@ -94,12 +138,12 @@
                     border-radius: 5px;
                 "
                 *ngIf = "
-                    dt.ptwStatus.permitStatus == 'Closed' || 
+                    dt.ptwStatus.permitStatus == 'Expired' || 
                     dt.ptwStatus.permitStatus == 'Terminated' || 
-                    dt.ptwStatus.permitStatus == 'Expired'
+                    dt.ptwStatus.permitStatus == 'Closed'
                 ">
-                <mat-label>Closed on </mat-label>
-                <mat-label id = "label-text">{{ this.cancellationTimestampDisplay | date: "medium" }}</mat-label>
+                <mat-label>Closed: </mat-label>
+                <mat-label id = "label-text">{{ this.closedTimestampDisplay | date: "short" }}</mat-label>
             </div>
         </div>
         <div style = "color: brown;" *ngIf = "dt.ptwStatus?.permitStatus == 'Terminated' || dt.ptwStatus?.permitStatus == 'Closed'">
@@ -1688,6 +1732,26 @@
         </div>
     </div>
     <div mat-dialog-actions>
-        <!-- -->
+        <button 
+            mat-button 
+            color = "warn"
+            [disabled] = "
+                (dt.requestStatus != 'Pending' &&
+                dt.ptwStatus.permitStatus != 'Processing') ||
+                dt.wantToCancel ||
+                dt.ptwStatus.checked
+            "
+            (click) = "this.openRequestCancelDialog()">Request for Cancellation</button>
+        <button 
+            mat-button 
+            color = "warn"
+            [disabled] = "
+                (dt.requestStatus != 'Approved' &&
+                dt.ptwStatus.permitStatus != 'Valid') ||
+                dt.ptwStatus.wantToTerminate ||
+                dt.ptwStatus.checked
+            "
+            >Request for Closure/Termination</button>
+        <button mat-button mat-dialog-close>Close</button>
     </div>
 </div>

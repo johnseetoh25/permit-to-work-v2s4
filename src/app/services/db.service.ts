@@ -286,6 +286,8 @@ export class DbService {
     ptwStatus_remarks: string,
     ptwStatus_checked: boolean,
     ptwStatus_supervisorName: string,
+    ptwStatus_wantToTerminate: boolean,
+    ptwStatus_reqTermTimestamp: string,
     ptwStatus_timestamp: string,
 
     saEval_passed: boolean,
@@ -297,6 +299,9 @@ export class DbService {
     amApproval_timestamp: string,
 
     reqStatus: string,
+    wantToCanc: boolean,
+    reqCancTimestamp: string,
+    cancTimestamp: string,
     timestamp: string
   ): void {
     const headers = { 
@@ -746,6 +751,8 @@ export class DbService {
           remarks: ptwStatus_remarks,
           checked: ptwStatus_checked,
           supervisorName: ptwStatus_supervisorName,
+          wantToTerminate: ptwStatus_wantToTerminate,
+          reqTermTimestamp: ptwStatus_reqTermTimestamp,
           timestamp: ptwStatus_timestamp
         },
         safetyAssessorEvaluation: {
@@ -759,6 +766,9 @@ export class DbService {
           timestamp: amApproval_timestamp
         },
         requestStatus: reqStatus,
+        wantToCancel: wantToCanc,
+        reqCancTimestamp: reqCancTimestamp,
+        cancelledTimestamp: cancTimestamp,
         timestamp: timestamp
       }, { "headers": headers }).subscribe(resp => {
         console.log(resp);

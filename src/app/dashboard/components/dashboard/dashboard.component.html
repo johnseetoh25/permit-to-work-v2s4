@@ -42,16 +42,16 @@
                             <mat-label id = "label-text">{{ this.processingPermitNo }}&emsp;</mat-label>
                             <mat-label style = "font-size: 16px"><mat-icon style = "vertical-align: middle; font-size: 22px;">autorenew</mat-icon>&emsp;Processing</mat-label>
                         </mat-list-item>
-                        <mat-list-item><mat-label style = "font-weight: 425;">PROCESSED REQUEST</mat-label></mat-list-item>
-                        <mat-list-item id = "pss-item" style = "background-color: forestgreen;">
-                            <mat-label id = "label-text">{{ this.validPermitNo }}&emsp;</mat-label>
-                            <mat-label style = "font-size: 16px"><mat-icon style = "vertical-align: middle; font-size: 22px;">done_outline</mat-icon>&emsp;Valid&emsp;(Approved)</mat-label>
-                        </mat-list-item>
+                        <mat-list-item><mat-label style = "font-weight: 425;">REQUEST REJECTED/CANCELLED</mat-label></mat-list-item>
                         <mat-list-item id = "pss-item" style = "background-color: rgb(25, 25, 25);">
                             <mat-label id = "label-text">{{ this.invalidPermitNo }}&emsp;</mat-label>
-                            <mat-label style = "font-size: 16px"><mat-icon style = "vertical-align: middle; font-size: 22px;">report_problem</mat-icon>&emsp;Invalid&emsp;(Rejected/Cancelled)</mat-label>
+                            <mat-label style = "font-size: 16px"><mat-icon style = "vertical-align: middle; font-size: 22px;">report_problem</mat-icon>&emsp;Invalid</mat-label>
                         </mat-list-item>
                         <mat-list-item><mat-label style = "font-weight: 425;">POST-APPROVAL</mat-label></mat-list-item>
+                        <mat-list-item id = "pss-item" style = "background-color: forestgreen;">
+                            <mat-label id = "label-text">{{ this.validPermitNo }}&emsp;</mat-label>
+                            <mat-label style = "font-size: 16px"><mat-icon style = "vertical-align: middle; font-size: 22px;">done_outline</mat-icon>&emsp;Valid</mat-label>
+                        </mat-list-item>
                         <mat-list-item id = "pss-item" style = "background-color: rgb(103, 58, 183);">
                             <mat-label id = "label-text">{{ this.closedPermitNo }}&emsp;</mat-label>
                             <mat-label style = "font-size: 16px"><mat-icon style = "vertical-align: middle; font-size: 22px;">block</mat-icon>&emsp;Closed</mat-label>
@@ -89,7 +89,7 @@
                         <mat-icon>report_problem</mat-icon>
                     </div>
                     <mat-list class = "pending-reqs-list" *ngFor = "let pending of this.pendingReqList">
-                        <br><br><br><br><br>
+                        <br><br><br><br><br><br>
                         <mat-list-item>
                             <div id = "pending-req-item">
                                 <mat-card>
@@ -109,37 +109,50 @@
                                             </mat-card-subtitle>
                                     </mat-card-header>
                                     <mat-card-content>
-                                        <mat-label style = "font-weight: 425;">&emsp;{{ pending.locationOfWork.main }}&emsp;⯁&emsp;{{ pending.locationOfWork.sub }}</mat-label>
+                                        <mat-label style = "font-weight: 425;">&emsp;{{ pending.locationOfWork.main }} ⯁ {{ pending.locationOfWork.sub }}</mat-label>
                                         <br>
                                         <mat-label style = "font-weight: 425;">&emsp;Effective period:</mat-label>
-                                        <mat-label>&emsp;{{ pending.startWorkingDateTime | date: "medium" }} - {{ pending.endWorkingDateTime | date: "medium" }}</mat-label>
+                                        <mat-label>&emsp;{{ pending.startWorkingDateTime | date: "short" }} - {{ pending.endWorkingDateTime | date: "short" }}</mat-label>
+                                        <br>
+                                        <mat-label style = "font-weight: 425;">&emsp;Task:</mat-label><mat-label>&emsp;{{ pending.taskDescription }}</mat-label>
+                                        <br>
+                                        <mat-label style = "font-weight: 425;">&emsp;Applicant:</mat-label><mat-label>&emsp;{{ pending.applicantDets.name }}</mat-label>
                                         <br><br>
-                                        <mat-label style = "font-weight: 425;">&emsp;Task:</mat-label>
-                                        <mat-label>&emsp;{{ pending.taskDescription }}&emsp;❖&emsp;<mat-label style = "font-weight: 425;">Applied by:</mat-label>&emsp;{{ pending.applicantDets.name }} on <u>{{ pending.timestamp | date: "mediumDate" }}</u></mat-label>
+                                        <div class = "req-state-cols">
+                                            <div 
+                                                id = "req-state-col"
+                                                style = "
+                                                    background-color: cornflowerblue; 
+                                                    color: white; 
+                                                    text-align: center;
+                                                    border-width: 2.5px;
+                                                    border-radius: 5px;
+                                                ">
+                                                <mat-label>Req.: </mat-label>
+                                                <mat-label id = "req-state-text">{{ pending.timestamp | date: "short" }}</mat-label>
+                                            </div>
+                                            <div 
+                                                id = "req-state-col" 
+                                                style = "
+                                                    background-color: rgb(25, 25, 25); 
+                                                    color: white; 
+                                                    text-align: center;
+                                                    border-width: 2.5px;
+                                                    border-radius: 5px;
+                                                "
+                                                *ngIf = "pending.wantToCancel">
+                                                <mat-label>Canc. req.: </mat-label>
+                                                <mat-label id = "req-state-text">{{ pending.reqCancTimestamp | date: "short" }}</mat-label>
+                                            </div>
+                                        </div>
                                     </mat-card-content>
                                     <mat-card-actions align = "end">
-                                        <div *ngIf = "pending.safetyAssessorEvaluation?.passed || !pending.safetyAssessorEvaluation?.passed">
-                                            <div *ngIf = "pending.safetyAssessorEvaluation?.name != 'None' && pending.safetyAssessorEvaluation?.passed">
-                                                <mat-icon style = "color: darkgreen; vertical-align: middle;">done_all</mat-icon><mat-label style = "color: darkgreen; font-weight: 450; font-size: 14px;">EVAL PASSED&emsp;<mat-label>{{ pending.safetyAssessorEvaluation?.timestamp | date: "short" }}&emsp;</mat-label></mat-label>
-                                            </div>
-                                            <div *ngIf = "pending.safetyAssessorEvaluation?.name != 'None' && !pending.safetyAssessorEvaluation?.passed">
-                                                <mat-icon style = "color: maroon; vertical-align: middle;">clear</mat-icon><mat-label style = "color: maroon; font-weight: 450; font-size: 14px;">EVAL NOT PASSED&emsp;<mat-label>{{ pending.safetyAssessorEvaluation?.timestamp | date: "short" }}&emsp;</mat-label></mat-label>
-                                            </div>
-                                            <div *ngIf = "pending.safetyAssessorEvaluation?.name == 'None' && !pending.safetyAssessorEvaluation?.passed">
-                                                <mat-icon style = "color: grey; vertical-align: middle;">priority_high</mat-icon><mat-label style = "color: grey; font-weight: 450; font-size: 14px;">NOT YET EVALUATED&emsp;</mat-label>
-                                            </div>
-                                        </div>
-                                        <div *ngIf = "pending.authorisedManagerApproval?.passed || !pending.authorisedManagerApproval?.passed">
-                                            <div *ngIf = "pending.authorisedManagerApproval?.name != 'None' && pending.authorisedManagerApproval?.passed">
-                                                <mat-icon style = "color: darkgreen; vertical-align: middle;">done_all</mat-icon><mat-label style = "color: darkgreen; font-weight: 450; font-size: 14px;">APPROVED&emsp;<mat-label>{{ pending.authorisedManagerApproval?.timestamp | date: "short" }}&emsp;</mat-label></mat-label>
-                                            </div>
-                                            <div *ngIf = "pending.authorisedManagerApproval?.name != 'None' && !pending.authorisedManagerApproval?.passed">
-                                                <mat-icon style = "color: maroon; vertical-align: middle;">clear</mat-icon><mat-label style = "color: maroon; font-weight: 450; font-size: 14px;">REJECTED&emsp;<mat-label>{{ pending.authorisedManagerApproval?.timestamp | date: "short" }}&emsp;</mat-label></mat-label>
-                                            </div>
-                                            <div *ngIf = "pending.authorisedManagerApproval?.name == 'None' && !pending.authorisedManagerApproval?.passed">
-                                                <mat-icon style = "color: grey; vertical-align: middle;">priority_high</mat-icon><mat-label style = "color: grey; font-weight: 450; font-size: 14px;">NOT YET APPROVED/REJECTED&emsp;</mat-label>
-                                            </div>
-                                        </div>
+                                        <mat-checkbox disabled style = "padding-top: 5px; padding-right: 16px;" [checked] = "pending.safetyAssessorEvaluation.passed">
+                                            <mat-label id = "req-state-text"> Evaluated</mat-label>
+                                        </mat-checkbox>
+                                        <mat-checkbox disabled style = "padding-top: 5px; padding-right: 16px;" [checked] = "pending.authorisedManagerApproval.passed">
+                                            <mat-label id = "req-state-text"> Approved/Rejected</mat-label>
+                                        </mat-checkbox>
                                         <div style = "margin-right: 15px;">
                                             <button 
                                             mat-stroked-button
@@ -150,7 +163,7 @@
                                 </mat-card>
                             </div>
                         </mat-list-item>
-                        <br><br><br><br><br>
+                        <br><br><br><br><br><br>
                     </mat-list>
                 </mat-card-content>
             </div>

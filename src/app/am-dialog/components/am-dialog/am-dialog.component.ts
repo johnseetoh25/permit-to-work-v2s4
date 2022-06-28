@@ -416,6 +416,8 @@ export class AmDialogComponent implements OnInit {
       toEvaluate?.ptwStatus?.remarks,
       toEvaluate?.ptwStatus?.checked,
       toEvaluate?.ptwStatus?.supervisorName,
+      toEvaluate?.ptwStatus?.wantToTerminate,
+      toEvaluate?.ptwStatus?.reqTermTimestamp,
       toEvaluate?.ptwStatus?.timestamp,
 
       toEvaluate?.safetyAssessorEvaluation?.passed,
@@ -427,11 +429,11 @@ export class AmDialogComponent implements OnInit {
       toEvaluate?.authorisedManagerApproval?.timestamp,
 
       toEvaluate?.requestStatus,
+      toEvaluate?.wantToCancel,
+      toEvaluate?.reqCancTimestamp,
+      toEvaluate?.cancelledTimestamp,
       toEvaluate?.timestamp
     );
-
-    // this.dialogRefSelf.close();
-    // this.dialogRefVldReqDets.close();
     this.dialog.closeAll();
     this.dialogRefSelf.afterClosed().subscribe(() => {
       this.openSnackBar("The permit has been " + toEvaluate.requestStatus.toLowerCase() + ".", "");
