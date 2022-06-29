@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { IPermitToWork } from 'src/app/interfaces/IPermitToWork';
 import { DbService } from 'src/app/services/db.service';
 import { MessageService } from 'src/app/services/message.service';
+import { MailService } from 'src/app/services/mail.service';
 
 @Component({
   selector: 'app-submit-dialog',
@@ -18,7 +19,8 @@ export class SubmitDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public injectedPartiallyCompletedPTWForm: IPermitToWork,
     private db: DbService,
     private msg: MessageService,
-    private router: Router
+    private router: Router,
+    private mail: MailService
   ) { }
 
   public ngOnInit(): void { }
@@ -282,6 +284,9 @@ export class SubmitDialogComponent implements OnInit {
         this.dialogRefSelf.close();
         this.dialogRefSelf.afterClosed().subscribe(() => {
           this.navigateTo("");
+          this.db.fetchWith(data.id).subscribe((resp: IPermitToWork[]) => {
+            this.mail.send(resp[0], resp[0].permitType);
+          });
           this.openSnackBar("A new PTW request has been made! An email statement will be sent to you shortly.", "");
         });
     });

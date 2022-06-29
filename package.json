@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "@emailjs/browser": "^3.6.2",
     "@ngneat/input-mask": "^4.1.1",
     "echarts": "^5.3.3",
     "inputmask": "5.0.5",
