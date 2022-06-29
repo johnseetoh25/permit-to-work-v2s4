@@ -84,6 +84,9 @@
                 <mat-label>Req.: </mat-label>
                 <mat-label id = "label-text">{{ this.submissionTimestampDisplay | date: "short" }}</mat-label>
             </div>
+            <div id = "req-state-arrow-col" style = "color: rgb(25, 25, 25)" *ngIf = "dt.wantToCancel">
+                <mat-icon>play_arrow</mat-icon>
+            </div>
             <div 
                 id = "req-state-col" 
                 style = "
@@ -97,6 +100,9 @@
                 *ngIf = "dt.wantToCancel">
                 <mat-label>Canc. req.: </mat-label>
                 <mat-label id = "label-text">{{ this.cancelReqTimestampDisplay | date: "short" }}</mat-label>
+            </div>
+            <div id = "req-state-arrow-col" style = "color: rgb(25, 25, 25)" *ngIf = "dt.authorisedManagerApproval.passed && dt.authorisedManagerApproval.name != 'None'">
+                <mat-icon>play_arrow</mat-icon>
             </div>
             <div 
                 id = "req-state-col"
@@ -112,6 +118,9 @@
                 <mat-label>Approved: </mat-label>
                 <mat-label id = "label-text">{{ this.authorisedTimestampDisplay | date: "short" }}</mat-label>
             </div>
+            <div id = "req-state-arrow-col" style = "color: rgb(25, 25, 25)" *ngIf = "!dt.authorisedManagerApproval.passed && dt.authorisedManagerApproval.name != 'None'">
+                <mat-icon>play_arrow</mat-icon>
+            </div>
             <div 
                 id = "req-state-col"
                 style = "
@@ -125,6 +134,9 @@
                 *ngIf = "!dt.authorisedManagerApproval.passed && dt.authorisedManagerApproval.name != 'None'">
                 <mat-label>Rejected: </mat-label>
                 <mat-label id = "label-text">{{ this.authorisedTimestampDisplay | date: "short" }}</mat-label>
+            </div>
+            <div id = "req-state-arrow-col" style = "color: rgb(25, 25, 25)" *ngIf = "dt.ptwStatus.wantToTerminate">
+                <mat-icon>play_arrow</mat-icon>
             </div>
             <div 
                 id = "req-state-col" 
@@ -140,6 +152,9 @@
                 <mat-label>Term. req.: </mat-label>
                 <mat-label id = "label-text">{{ this.termReqTimestampDisplay | date: "short" }}</mat-label>
             </div>
+            <div id = "req-state-arrow-col" style = "color: rgb(25, 25, 25)" *ngIf = "dt.ptwStatus.permitStatus == '---' && dt.requestStatus != 'Rejected'">
+                <mat-icon>play_arrow</mat-icon>
+            </div>
             <div 
                 id = "req-state-col" 
                 style = "
@@ -150,11 +165,12 @@
                     border-width: 2.5px;
                     border-radius: 5px;
                 "
-                *ngIf = "
-                    dt.ptwStatus.permitStatus == '---' && dt.requestStatus != 'Rejected'
-                ">
+                *ngIf = "dt.ptwStatus.permitStatus == '---' && dt.requestStatus != 'Rejected'">
                 <mat-label>Cancelled: </mat-label>
                 <mat-label id = "label-text">{{ this.cancelledTimestampDisplay | date: "short" }}</mat-label>
+            </div>
+            <div id = "req-state-arrow-col" style = "color: rgb(25, 25, 25)" *ngIf = "dt.ptwStatus.permitStatus == 'Expired'">
+                <mat-icon>play_arrow</mat-icon>
             </div>
             <div 
                 id = "req-state-col" 
@@ -166,10 +182,18 @@
                     border-width: 2.5px;
                     border-radius: 5px;
                 "
-                *ngIf = "
-                    dt.ptwStatus.permitStatus == 'Expired'
-                ">
+                *ngIf = "dt.ptwStatus.permitStatus == 'Expired'">
                 <mat-label id = "label-text">Permit has expired</mat-label>
+            </div>
+            <div 
+                id = "req-state-arrow-col" 
+                style = "color: rgb(25, 25, 25)" 
+                *ngIf = "
+                    dt.ptwStatus.permitStatus == 'Expired' || 
+                    dt.ptwStatus.permitStatus == 'Terminated' || 
+                    dt.ptwStatus.permitStatus == 'Closed'
+                ">
+                <mat-icon>play_arrow</mat-icon>
             </div>
             <div 
                 id = "req-state-col" 

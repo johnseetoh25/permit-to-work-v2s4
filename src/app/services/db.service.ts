@@ -62,11 +62,11 @@ export class DbService {
   }
 
   public returnCancReqs(): Observable<IPermitToWork[]> {
-    return this.http.get<IPermitToWork[]>(this.ptwUrl + "?wantToCancel=true");
+    return this.http.get<IPermitToWork[]>(this.ptwUrl + "?wantToCancel=true&cancelledTimestamp=None");
   }
 
   public returnTermReqs(): Observable<IPermitToWork[]> {
-    return this.http.get<IPermitToWork[]>(this.ptwUrl + "?ptwStatus.wantToTerminate=true");
+    return this.http.get<IPermitToWork[]>(this.ptwUrl + "?ptwStatus.permitStatus=Valid&terminatedTimestamp=None");
   }
 
   public update(
