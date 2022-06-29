@@ -54,6 +54,14 @@ mat-grid-tile {
     width: 100%;
 }
 
+#pending-req-item .mat-card {
+    height: 250px;
+}
+
+#pending-req-item .mat-card-actions {
+    padding-bottom: 12.5px;
+}
+
 #left-content, #right-content, #pending-reqs-content {
     padding: 8px;
 }
