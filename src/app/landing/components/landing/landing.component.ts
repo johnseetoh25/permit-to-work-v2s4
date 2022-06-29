@@ -11,15 +11,7 @@ import { User } from 'src/app/interfaces/User';
 export class LandingComponent implements OnInit {
   constructor(private router: Router, private auth: AuthService) { }
 
-  public ngOnInit(): void { 
-    this.auth.checkSession(true).subscribe((resp: User[]) => { 
-      if (resp[0]?.userId != null) {
-        console.log("Currently signed in validator:", resp[0].userId);
-      } else {
-        console.log("Currently signed in validator: None");
-      }
-    }); 
-  }
+  public ngOnInit(): void { }
 
   public navigateTo(url: string): void {
     this.router.navigate(["/" + url], { replaceUrl: true });

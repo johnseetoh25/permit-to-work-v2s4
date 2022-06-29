@@ -15,15 +15,28 @@
 }
 
 .landing-title {
-    margin: auto;
-    padding: 16px;
+    border-radius: 10px;
+    margin-top: 35px;
+    margin-left: 35%;
+    margin-right: 35%;
+    padding-top: 25px;
+    padding-bottom: 25px;
     text-align: center;
-    background-color: rgb(233, 243, 252);
+    background-color: rgba(255, 255, 255, 0.882);
 }
 
 .sign-in-body, .sign-in-form {
     display: grid;
 	place-items: center;
+}
+
+.sign-in-body {
+    background-color: rgba(233, 243, 252, 0.784);
+    border-radius: 10px;
+    margin-top: 24px;
+    margin-left: 35%;
+    margin-right: 35%;
+    padding-bottom: 50px;
 }
 
 .user-email-input, .user-pw-input {

@@ -268,17 +268,14 @@ export class PtwRequestComponent implements OnInit {
 
     public setNoOfWorkers(value: any) {
       this.noOfWorkersInput = value;
-      console.log("New no. of workers: ", this.noOfWorkersInput);
     }
 
     public setNoOfSupervisors(value: any) {
       this.noOfSupervisorsInput = value;
-      console.log("New no. of supervisors: ", this.noOfSupervisorsInput);
     }
 
     public calcNoOfTableRowDisplayed(): number {
       var total: number = Math.abs(this.noOfWorkersInput + (this.noOfSupervisorsInput - 1));
-      console.log("Total number of row: ", total);
       return total;
     }
 
@@ -1040,8 +1037,6 @@ export class PtwRequestComponent implements OnInit {
   public toggleAttendantDetsTableRowValidator(total: number): void {
     switch (total) {
       case 1:
-        console.log("ONE");
-
         this.sectionOneCFormGroup.get('ad1_name')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
         this.sectionOneCFormGroup.get('ad1_contactNo')?.setValidators([Validators.required]);
@@ -1065,8 +1060,6 @@ export class PtwRequestComponent implements OnInit {
         break;
 
       case 2:
-        console.log("TWO");
-
         this.sectionOneCFormGroup.get('ad1_name')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
         this.sectionOneCFormGroup.get('ad1_contactNo')?.setValidators([Validators.required]);
@@ -1090,8 +1083,6 @@ export class PtwRequestComponent implements OnInit {
         break;
       
       case 3:
-        console.log("THREE");
-
         this.sectionOneCFormGroup.get('ad1_name')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
         this.sectionOneCFormGroup.get('ad1_contactNo')?.setValidators([Validators.required]);
@@ -1115,8 +1106,6 @@ export class PtwRequestComponent implements OnInit {
         break;
 
       case 4:
-        console.log("FOUR");
-
         this.sectionOneCFormGroup.get('ad1_name')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
         this.sectionOneCFormGroup.get('ad1_contactNo')?.setValidators([Validators.required]);
@@ -1140,8 +1129,6 @@ export class PtwRequestComponent implements OnInit {
         break;
 
       case 5:
-        console.log("FIVE");
-
         this.sectionOneCFormGroup.get('ad1_name')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
         this.sectionOneCFormGroup.get('ad1_contactNo')?.setValidators([Validators.required]);

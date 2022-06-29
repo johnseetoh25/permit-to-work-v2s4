@@ -66,7 +66,7 @@ export class DbService {
   }
 
   public returnTermReqs(): Observable<IPermitToWork[]> {
-    return this.http.get<IPermitToWork[]>(this.ptwUrl + "?ptwStatus.permitStatus=Valid&terminatedTimestamp=None");
+    return this.http.get<IPermitToWork[]>(this.ptwUrl + "?ptwStatus.wantToTerminate=true&terminatedTimestamp=None");
   }
 
   public update(

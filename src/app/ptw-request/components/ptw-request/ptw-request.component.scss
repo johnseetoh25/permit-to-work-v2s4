@@ -1,5 +1,6 @@
 .content-body {
     padding-top: 8px;
+    padding-bottom: 16px;
     margin: 16px;
 }
 
@@ -13,6 +14,11 @@
 
 .toolbar-spacer {
     flex: 1 1 auto;
+}
+
+#ptw-req-stp {
+    background-color: rgba(255, 255, 255, 0.882);
+    border-radius: 10px;
 }
 
 .common-section-form, .section-one-form {
@@ -58,7 +64,7 @@
 .apl-contact-no-input, 
 .apl-email-input,
 #apl-dcl-checkbox {
-    width: 525px;
+    width: 512.5px;
 }
 
 mat-grid-list {
@@ -94,31 +100,52 @@ mat-grid-list mat-grid-tile {
     border-radius: 0.5em;
     padding-right: 32px;
     background-color: rgb(207, 218, 228);
+    border-width: 1.5px;
+    border-style: solid;
+    border-color: gray;
 }
 
 .cwp-info-container {
     background-color: gainsboro;
+    border-width: 1.5px;
+    border-style: solid;
+    border-color: gray;
 }
 
 .hwp-info-container {
     background-color: beige;
+    border-width: 1.5px;
+    border-style: solid;
+    border-color: gray;
 }
 
 .cwp-info-container {
     background-color: azure;
+    border-width: 1.5px;
+    border-style: solid;
+    border-color: gray;
 }
 
 .ep-info-container {
     background-color: dodgerblue;
     color: white;
+    border-width: 1.5px;
+    border-style: solid;
+    border-color: gray;
 }
 
 .wahp-info-container {
     background-color: whitesmoke;
+    border-width: 1.5px;
+    border-style: solid;
+    border-color: gray;
 }
 
 .csp-info-container {
     background-color: lightcyan;
+    border-width: 1.5px;
+    border-style: solid;
+    border-color: gray;
 }
 
 .start-date-picker, 
@@ -130,10 +157,8 @@ mat-grid-list mat-grid-tile {
     width: 245px;
 }
 
-.start-time-picker, 
-.end-time-picker, 
 .no-of-spvs-input {
-    padding-left: 35px;
+    padding-left: 22.5px;
 }
 
 #cmi-left-col, 

@@ -22,7 +22,7 @@
     </p>
 </header>
 <div class = "content-body">
-    <mat-stepper #stepper linear = "true">
+    <mat-stepper #stepper id = "ptw-req-stp" linear = "true">
         <mat-step [stepControl] = "this.sectionOneAFormGroup" [errorMessage] = "this.errorMessage">
             <form class = "common-section-form" [formGroup] = "this.sectionOneAFormGroup">
                 <ng-template matStepLabel>Section I (A): Basic Information</ng-template>
@@ -45,7 +45,6 @@
                 <mat-form-field class = "location-of-work-options" appearance = "fill">
                     <mat-label>Select location of work</mat-label>
                     <mat-select required formControlName = "locationOfWork" [(value)] = "this.selectedLocationOfWork">
-                        <!-- <mat-option>None</mat-option> -->
                         <mat-option value = "Biodiesel production sector">Biodiesel production sector</mat-option>
                         <mat-option value = "Wastewater treatment sector">Wastewater treatment sector</mat-option>
                         <mat-option value = "Work at height training platform">Work at height training platform</mat-option>
@@ -56,7 +55,6 @@
                 <mat-form-field class = "loc-sector-options" appearance = "fill">
                     <mat-label>Select location sector</mat-label>
                     <mat-select required formControlName = "locationSector" [(value)] = "this.selectedLocationSector">
-                        <!-- <mat-option>None</mat-option> -->
                         <div *ngIf = "this.selectedLocationOfWork == 'Work at height training platform' || 
                             this.selectedLocationOfWork == 'Confined space training room'
                         ">
@@ -78,7 +76,6 @@
                 <mat-form-field class = "permit-type-options" appearance = "fill">
                     <mat-label>Select permit type</mat-label>
                     <mat-select required formControlName = "permitType" [(value)] = "this.selectedPermitType" (selectionChange) = "this.togglePTWFormValidators($event.value)">
-                        <!-- <mat-option>None</mat-option> -->
                         <mat-option 
                             *ngIf = "
                                 this.selectedLocationOfWork == 'Biodiesel production sector' ||
@@ -204,6 +201,7 @@
                     <mat-datepicker-toggle matSuffix [for] = "startDatePicker"></mat-datepicker-toggle>
                     <mat-datepicker #startDatePicker></mat-datepicker>
                 </mat-form-field>
+                <mat-icon style = "color: gray">link</mat-icon>
                 <mat-form-field class = "start-time-picker" appearance = "fill">
                     <mat-label>Select start time</mat-label>
                     <input 
@@ -230,6 +228,7 @@
                     <mat-datepicker-toggle matSuffix [for] = "endDatePicker"></mat-datepicker-toggle>
                     <mat-datepicker #endDatePicker></mat-datepicker>
                 </mat-form-field>
+                <mat-icon style = "color: gray">link</mat-icon>
                 <mat-form-field class = "end-time-picker" appearance = "fill">
                     <mat-label>Select end time</mat-label>
                     <input 
@@ -1801,7 +1800,6 @@
                 <mat-form-field class = "apl-org-type-options" appearance = "fill">
                     <mat-label>Organisation type</mat-label>
                     <mat-select required formControlName = "aplOrgType" [(value)] = "this.selectedApplicantOrganisationType" (selectionChange) = "this.toggleApplicantOrgNameValidator($event.value)">
-                        <!-- <mat-option>None</mat-option> -->
                         <mat-option value = "Internal">Internal</mat-option>
                         <mat-option value = "External">External</mat-option>
                     </mat-select>

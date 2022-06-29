@@ -41,6 +41,10 @@ mat-grid-tile {
     border-radius: 0.5em;
 }
 
+.mat-card {
+    background-color: rgba(255, 255, 255, 0.882);
+}
+
 #left-content-container {
     width: 30%;
     float: left;
@@ -70,7 +74,8 @@ mat-grid-tile {
     padding: 16px;
     height: 625px;
     overflow-y: scroll;
-    background-color: rgb(250, 250, 250);
+    background-color: rgb(25, 25, 25, 0.15);
+    border-radius: 5px;
 }
 
 .permit-status-statistics {
@@ -83,7 +88,8 @@ mat-grid-tile {
     color: whitesmoke;
     padding-top: 1.5px;
     padding-bottom: 1.5px;
-    margin-bottom: 8px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 #right-content-container {
@@ -117,7 +123,7 @@ mat-grid-tile {
 
 .canc-term-reqs-states {
     overflow: hidden;
-    margin-top: 75px;
+    margin-top: 85px;
     margin-left: 25px;
     margin-right: 25px;
     width: 100%;
@@ -126,7 +132,7 @@ mat-grid-tile {
 #canc-term-reqs-state {
     text-align: center;
     color: white;
-    border-radius: 2.5px;
+    border-radius: 5px;
     float: left;
     width: 175px;
     padding: 5px;

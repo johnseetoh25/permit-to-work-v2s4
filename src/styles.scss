@@ -8,6 +8,10 @@ body {
     margin: 0em; 
     font-family: Roboto, "Helvetica Neue", sans-serif;
     background-color: aliceblue;
+    background-image: url('assets/images/bg.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -36,5 +36,2796 @@
       "id": 5
     }
   ],
-  "ptw": []
+  "ptw": [
+    {
+      "ptwId": "PTW-001",
+      "locationOfWork": {
+        "main": "Work at height training platform",
+        "sub": "Non-applicable"
+      },
+      "permitType": "Work at height permit (WAHP)",
+      "startWorkingDateTime": "2022-07-18T00:00:00.000Z",
+      "endWorkingDateTime": "2022-07-22T00:30:00.000Z",
+      "taskDescription": "abc",
+      "noOfWorkers": 1,
+      "noOfSupervisors": 1,
+      "workAtHeight": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q10": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q11": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessmentOfControlMeasures": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "siteSurveyFromSupervisor": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "multiLocOrExtentedDuration": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "confinedSpace": {
+        "sectionOne": {
+          "potentialHazards": {
+            "atmo": "None",
+            "nonAtmo": "None"
+          },
+          "controlMeasuresImplemented": {
+            "preEntryReqs": {
+              "q01": "None",
+              "q02": "None",
+              "q03": "None",
+              "q04": "None",
+              "q05": "None",
+              "q06": "None",
+              "q07": "None",
+              "q08": "None"
+            },
+            "ppe": {
+              "q01": "None",
+              "q02": "None",
+              "q03": "None",
+              "q04": "None",
+              "q05": "None",
+              "q06": "None",
+              "q07": {
+                "specify": "None"
+              }
+            }
+          }
+        },
+        "sectionTwo": {
+          "gasMonitoringRes": {
+            "oxygenLevel": 0,
+            "flammableGasLevel": 0,
+            "toxicGasLevel": 0,
+            "fitForEntry": false
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": "None",
+            "q02": "None",
+            "q03": "None",
+            "q04": "None"
+          }
+        }
+      },
+      "hotWork": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q10": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q11": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q12": {
+              "specify": "None"
+            },
+            "q13": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessment": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "coldWork": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q10": {
+              "specify": "None"
+            },
+            "q11": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessment": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "electrical": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q10": {
+              "specify": "None"
+            },
+            "q11": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessment": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "attendantDets": [
+        {
+          "id": 1,
+          "name": "dasdas",
+          "nricOrFinNo": "D1312313Q",
+          "contactNo": 1514131
+        },
+        {
+          "id": 2,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        },
+        {
+          "id": 3,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        },
+        {
+          "id": 4,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        },
+        {
+          "id": 5,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        }
+      ],
+      "applicantDets": {
+        "name": "adsd1231",
+        "nricOrFinNo": "D3231313Q",
+        "orgType": "Internal",
+        "orgName": "None",
+        "depName": "adasd",
+        "contactNo": 551413,
+        "email": "dasda@asd.sada"
+      },
+      "ptwStatus": {
+        "permitStatus": "Processing",
+        "taskStatus": "Not Started",
+        "remarks": "None",
+        "checked": false,
+        "supervisorName": "None",
+        "wantToTerminate": false,
+        "reqTermTimestamp": "None",
+        "terminatedTimestamp": "None",
+        "timestamp": "None"
+      },
+      "safetyAssessorEvaluation": {
+        "passed": false,
+        "name": "None",
+        "timestamp": "None"
+      },
+      "authorisedManagerApproval": {
+        "passed": false,
+        "name": "None",
+        "timestamp": "None"
+      },
+      "requestStatus": "Pending",
+      "wantToCancel": false,
+      "reqCancTimestamp": "None",
+      "cancelledTimestamp": "None",
+      "timestamp": "2022-06-29T01:14:29.059Z",
+      "id": 1
+    },
+    {
+      "ptwId": "PTW-002",
+      "locationOfWork": {
+        "main": "Confined space training room",
+        "sub": "Non-applicable"
+      },
+      "permitType": "Confined space permit (CSP)",
+      "startWorkingDateTime": "2022-07-18T00:00:00.000Z",
+      "endWorkingDateTime": "2022-07-22T00:00:00.000Z",
+      "taskDescription": "abc",
+      "noOfWorkers": 4,
+      "noOfSupervisors": 1,
+      "workAtHeight": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q10": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q11": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessmentOfControlMeasures": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "siteSurveyFromSupervisor": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "multiLocOrExtentedDuration": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "confinedSpace": {
+        "sectionOne": {
+          "potentialHazards": {
+            "atmo": "dasdsda",
+            "nonAtmo": "asdasd"
+          },
+          "controlMeasuresImplemented": {
+            "preEntryReqs": {
+              "q01": "Yes",
+              "q02": "No",
+              "q03": "Yes",
+              "q04": "Yes",
+              "q05": "Yes",
+              "q06": "Yes",
+              "q07": "Yes",
+              "q08": "No"
+            },
+            "ppe": {
+              "q01": "Yes",
+              "q02": "Yes",
+              "q03": "Yes",
+              "q04": "No",
+              "q05": "Yes",
+              "q06": "Yes",
+              "q07": {
+                "specify": "dsadasd"
+              }
+            }
+          }
+        },
+        "sectionTwo": {
+          "gasMonitoringRes": {
+            "oxygenLevel": 0,
+            "flammableGasLevel": 0,
+            "toxicGasLevel": 0,
+            "fitForEntry": false
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": "None",
+            "q02": "None",
+            "q03": "None",
+            "q04": "None"
+          }
+        }
+      },
+      "hotWork": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q10": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q11": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q12": {
+              "specify": "None"
+            },
+            "q13": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessment": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "coldWork": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q10": {
+              "specify": "None"
+            },
+            "q11": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessment": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "electrical": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q10": {
+              "specify": "None"
+            },
+            "q11": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessment": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "attendantDets": [
+        {
+          "id": 1,
+          "name": "a1",
+          "nricOrFinNo": "D2131313Q",
+          "contactNo": 411341
+        },
+        {
+          "id": 2,
+          "name": "a2",
+          "nricOrFinNo": "D3131232G",
+          "contactNo": 14112
+        },
+        {
+          "id": 3,
+          "name": "a3",
+          "nricOrFinNo": "D1233131Q",
+          "contactNo": 141414
+        },
+        {
+          "id": 4,
+          "name": "a4",
+          "nricOrFinNo": "G2132131Q",
+          "contactNo": 156341
+        },
+        {
+          "id": 5,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        }
+      ],
+      "applicantDets": {
+        "name": "dsasda",
+        "nricOrFinNo": "D2131241H",
+        "orgType": "External",
+        "orgName": "dsada",
+        "depName": "dsada",
+        "contactNo": 1251123,
+        "email": "adsa@asda.ads"
+      },
+      "ptwStatus": {
+        "permitStatus": "Processing",
+        "taskStatus": "Not Started",
+        "remarks": "None",
+        "checked": false,
+        "supervisorName": "None",
+        "wantToTerminate": false,
+        "reqTermTimestamp": "None",
+        "terminatedTimestamp": "None",
+        "timestamp": "None"
+      },
+      "safetyAssessorEvaluation": {
+        "passed": false,
+        "name": "None",
+        "timestamp": "None"
+      },
+      "authorisedManagerApproval": {
+        "passed": false,
+        "name": "None",
+        "timestamp": "None"
+      },
+      "requestStatus": "Pending",
+      "wantToCancel": false,
+      "reqCancTimestamp": "None",
+      "cancelledTimestamp": "None",
+      "timestamp": "2022-06-29T01:16:00.228Z",
+      "id": 2
+    },
+    {
+      "ptwId": "PTW-003",
+      "locationOfWork": {
+        "main": "Wastewater treatment sector",
+        "sub": "Primary treatment"
+      },
+      "permitType": "Hot work permit (HWP)",
+      "startWorkingDateTime": "2022-07-18T00:00:00.000Z",
+      "endWorkingDateTime": "2022-07-22T00:00:00.000Z",
+      "taskDescription": "dsaa",
+      "noOfWorkers": 1,
+      "noOfSupervisors": 1,
+      "workAtHeight": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q10": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q11": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessmentOfControlMeasures": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "siteSurveyFromSupervisor": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "multiLocOrExtentedDuration": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "confinedSpace": {
+        "sectionOne": {
+          "potentialHazards": {
+            "atmo": "None",
+            "nonAtmo": "None"
+          },
+          "controlMeasuresImplemented": {
+            "preEntryReqs": {
+              "q01": "None",
+              "q02": "None",
+              "q03": "None",
+              "q04": "None",
+              "q05": "None",
+              "q06": "None",
+              "q07": "None",
+              "q08": "None"
+            },
+            "ppe": {
+              "q01": "None",
+              "q02": "None",
+              "q03": "None",
+              "q04": "None",
+              "q05": "None",
+              "q06": "None",
+              "q07": {
+                "specify": "None"
+              }
+            }
+          }
+        },
+        "sectionTwo": {
+          "gasMonitoringRes": {
+            "oxygenLevel": 0,
+            "flammableGasLevel": 0,
+            "toxicGasLevel": 0,
+            "fitForEntry": false
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": "None",
+            "q02": "None",
+            "q03": "None",
+            "q04": "None"
+          }
+        }
+      },
+      "hotWork": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q10": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q11": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q12": {
+              "specify": "None"
+            },
+            "q13": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessment": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "coldWork": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q10": {
+              "specify": "None"
+            },
+            "q11": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessment": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "electrical": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q10": {
+              "specify": "None"
+            },
+            "q11": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessment": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "attendantDets": [
+        {
+          "id": 1,
+          "name": "dasd",
+          "nricOrFinNo": "D3212131E",
+          "contactNo": 3124143
+        },
+        {
+          "id": 2,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        },
+        {
+          "id": 3,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        },
+        {
+          "id": 4,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        },
+        {
+          "id": 5,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        }
+      ],
+      "applicantDets": {
+        "name": "dsa",
+        "nricOrFinNo": "G3231231Q",
+        "orgType": "External",
+        "orgName": "dadsa",
+        "depName": "ger",
+        "contactNo": 321312,
+        "email": "gsad@as.dasg"
+      },
+      "ptwStatus": {
+        "permitStatus": "Processing",
+        "taskStatus": "Not Started",
+        "remarks": "None",
+        "checked": false,
+        "supervisorName": "None",
+        "wantToTerminate": false,
+        "reqTermTimestamp": "None",
+        "terminatedTimestamp": "None",
+        "timestamp": "None"
+      },
+      "safetyAssessorEvaluation": {
+        "passed": false,
+        "name": "None",
+        "timestamp": "None"
+      },
+      "authorisedManagerApproval": {
+        "passed": false,
+        "name": "None",
+        "timestamp": "None"
+      },
+      "requestStatus": "Pending",
+      "wantToCancel": false,
+      "reqCancTimestamp": "None",
+      "cancelledTimestamp": "None",
+      "timestamp": "2022-06-29T01:17:00.685Z",
+      "id": 3
+    },
+    {
+      "ptwId": "PTW-004",
+      "locationOfWork": {
+        "main": "Biodiesel production sector",
+        "sub": "Biodiesel production"
+      },
+      "permitType": "Cold work permit (CWP)",
+      "startWorkingDateTime": "2022-07-11T00:00:00.000Z",
+      "endWorkingDateTime": "2022-07-15T00:30:00.000Z",
+      "taskDescription": "dasda",
+      "noOfWorkers": 1,
+      "noOfSupervisors": 1,
+      "workAtHeight": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q10": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q11": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessmentOfControlMeasures": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "siteSurveyFromSupervisor": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "multiLocOrExtentedDuration": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "confinedSpace": {
+        "sectionOne": {
+          "potentialHazards": {
+            "atmo": "None",
+            "nonAtmo": "None"
+          },
+          "controlMeasuresImplemented": {
+            "preEntryReqs": {
+              "q01": "None",
+              "q02": "None",
+              "q03": "None",
+              "q04": "None",
+              "q05": "None",
+              "q06": "None",
+              "q07": "None",
+              "q08": "None"
+            },
+            "ppe": {
+              "q01": "None",
+              "q02": "None",
+              "q03": "None",
+              "q04": "None",
+              "q05": "None",
+              "q06": "None",
+              "q07": {
+                "specify": "None"
+              }
+            }
+          }
+        },
+        "sectionTwo": {
+          "gasMonitoringRes": {
+            "oxygenLevel": 0,
+            "flammableGasLevel": 0,
+            "toxicGasLevel": 0,
+            "fitForEntry": false
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": "None",
+            "q02": "None",
+            "q03": "None",
+            "q04": "None"
+          }
+        }
+      },
+      "hotWork": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q10": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q11": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q12": {
+              "specify": "None"
+            },
+            "q13": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessment": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "coldWork": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q10": {
+              "specify": "None"
+            },
+            "q11": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessment": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "electrical": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q10": {
+              "specify": "None"
+            },
+            "q11": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessment": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "attendantDets": [
+        {
+          "id": 1,
+          "name": "sdadsa",
+          "nricOrFinNo": "D3213123Q",
+          "contactNo": 4314124
+        },
+        {
+          "id": 2,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        },
+        {
+          "id": 3,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        },
+        {
+          "id": 4,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        },
+        {
+          "id": 5,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        }
+      ],
+      "applicantDets": {
+        "name": "dasdas",
+        "nricOrFinNo": "H1321231Q",
+        "orgType": "Internal",
+        "orgName": "None",
+        "depName": "dada",
+        "contactNo": 2312412,
+        "email": "dsa@ad.ada"
+      },
+      "ptwStatus": {
+        "permitStatus": "Processing",
+        "taskStatus": "Not Started",
+        "remarks": "None",
+        "checked": false,
+        "supervisorName": "None",
+        "wantToTerminate": false,
+        "reqTermTimestamp": "None",
+        "terminatedTimestamp": "None",
+        "timestamp": "None"
+      },
+      "safetyAssessorEvaluation": {
+        "passed": false,
+        "name": "None",
+        "timestamp": "None"
+      },
+      "authorisedManagerApproval": {
+        "passed": false,
+        "name": "None",
+        "timestamp": "None"
+      },
+      "requestStatus": "Pending",
+      "wantToCancel": false,
+      "reqCancTimestamp": "None",
+      "cancelledTimestamp": "None",
+      "timestamp": "2022-06-29T01:17:46.422Z",
+      "id": 4
+    },
+    {
+      "ptwId": "PTW-005",
+      "locationOfWork": {
+        "main": "Wastewater treatment sector",
+        "sub": "Ternary treatment"
+      },
+      "permitType": "Electrical permit (EP)",
+      "startWorkingDateTime": "2022-07-24T22:00:00.000Z",
+      "endWorkingDateTime": "2022-07-29T09:30:00.000Z",
+      "taskDescription": "abc",
+      "noOfWorkers": 4,
+      "noOfSupervisors": 2,
+      "workAtHeight": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q10": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q11": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessmentOfControlMeasures": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "siteSurveyFromSupervisor": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "multiLocOrExtentedDuration": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "confinedSpace": {
+        "sectionOne": {
+          "potentialHazards": {
+            "atmo": "None",
+            "nonAtmo": "None"
+          },
+          "controlMeasuresImplemented": {
+            "preEntryReqs": {
+              "q01": "None",
+              "q02": "None",
+              "q03": "None",
+              "q04": "None",
+              "q05": "None",
+              "q06": "None",
+              "q07": "None",
+              "q08": "None"
+            },
+            "ppe": {
+              "q01": "None",
+              "q02": "None",
+              "q03": "None",
+              "q04": "None",
+              "q05": "None",
+              "q06": "None",
+              "q07": {
+                "specify": "None"
+              }
+            }
+          }
+        },
+        "sectionTwo": {
+          "gasMonitoringRes": {
+            "oxygenLevel": 0,
+            "flammableGasLevel": 0,
+            "toxicGasLevel": 0,
+            "fitForEntry": false
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": "None",
+            "q02": "None",
+            "q03": "None",
+            "q04": "None"
+          }
+        }
+      },
+      "hotWork": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q10": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q11": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q12": {
+              "specify": "None"
+            },
+            "q13": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessment": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "coldWork": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q10": {
+              "specify": "None"
+            },
+            "q11": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessment": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "electrical": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "Yes",
+              "remarks": "None"
+            },
+            "q10": {
+              "specify": "None"
+            },
+            "q11": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessment": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "attendantDets": [
+        {
+          "id": 1,
+          "name": "dasd",
+          "nricOrFinNo": "D1231231Q",
+          "contactNo": 2362451241
+        },
+        {
+          "id": 2,
+          "name": "geqwf",
+          "nricOrFinNo": "H2321413D",
+          "contactNo": 23536512534
+        },
+        {
+          "id": 3,
+          "name": "e2e1wdwasd",
+          "nricOrFinNo": "F1312313Q",
+          "contactNo": 76453241151
+        },
+        {
+          "id": 4,
+          "name": "1233dasd",
+          "nricOrFinNo": "F3121313G",
+          "contactNo": 6156346235242
+        },
+        {
+          "id": 5,
+          "name": "asdas",
+          "nricOrFinNo": "H3123313Q",
+          "contactNo": 6462352465325243
+        }
+      ],
+      "applicantDets": {
+        "name": "fsdfds",
+        "nricOrFinNo": "H3141412T",
+        "orgType": "External",
+        "orgName": "adas",
+        "depName": "asy23r",
+        "contactNo": 232141,
+        "email": "asd@ad.ag321"
+      },
+      "ptwStatus": {
+        "permitStatus": "Processing",
+        "taskStatus": "Not Started",
+        "remarks": "None",
+        "checked": false,
+        "supervisorName": "None",
+        "wantToTerminate": false,
+        "reqTermTimestamp": "None",
+        "terminatedTimestamp": "None",
+        "timestamp": "None"
+      },
+      "safetyAssessorEvaluation": {
+        "passed": false,
+        "name": "None",
+        "timestamp": "None"
+      },
+      "authorisedManagerApproval": {
+        "passed": false,
+        "name": "None",
+        "timestamp": "None"
+      },
+      "requestStatus": "Pending",
+      "wantToCancel": false,
+      "reqCancTimestamp": "None",
+      "cancelledTimestamp": "None",
+      "timestamp": "2022-06-29T01:19:22.983Z",
+      "id": 5
+    },
+    {
+      "ptwId": "PTW-006",
+      "locationOfWork": {
+        "main": "Confined space training room",
+        "sub": "Non-applicable"
+      },
+      "permitType": "Confined space permit (CSP)",
+      "startWorkingDateTime": "2022-07-24T16:00:00.000Z",
+      "endWorkingDateTime": "2022-07-25T16:00:00.000Z",
+      "taskDescription": "asddsa",
+      "noOfWorkers": 1,
+      "noOfSupervisors": 1,
+      "workAtHeight": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q10": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q11": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessmentOfControlMeasures": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "siteSurveyFromSupervisor": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          },
+          "multiLocOrExtentedDuration": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "confinedSpace": {
+        "sectionOne": {
+          "potentialHazards": {
+            "atmo": "dasdsa",
+            "nonAtmo": "dasasd"
+          },
+          "controlMeasuresImplemented": {
+            "preEntryReqs": {
+              "q01": "Yes",
+              "q02": "Yes",
+              "q03": "Yes",
+              "q04": "Yes",
+              "q05": "Yes",
+              "q06": "Yes",
+              "q07": "Yes",
+              "q08": "Yes"
+            },
+            "ppe": {
+              "q01": "Yes",
+              "q02": "Yes",
+              "q03": "Yes",
+              "q04": "Yes",
+              "q05": "Yes",
+              "q06": "Yes",
+              "q07": {
+                "specify": "dsadsaasd"
+              }
+            }
+          }
+        },
+        "sectionTwo": {
+          "gasMonitoringRes": {
+            "oxygenLevel": 0,
+            "flammableGasLevel": 0,
+            "toxicGasLevel": 0,
+            "fitForEntry": true
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": "Yes",
+            "q02": "Yes",
+            "q03": "Yes",
+            "q04": "Yes"
+          }
+        }
+      },
+      "hotWork": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q10": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q11": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q12": {
+              "specify": "None"
+            },
+            "q13": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessment": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "coldWork": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q10": {
+              "specify": "None"
+            },
+            "q11": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessment": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "electrical": {
+        "sectionOne": {
+          "controlMeasuresImplemented": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q05": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q06": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q07": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q08": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q09": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q10": {
+              "specify": "None"
+            },
+            "q11": {
+              "specify": "None"
+            }
+          }
+        },
+        "sectionTwo": {
+          "assessment": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        },
+        "sectionThree": {
+          "permitReview": {
+            "q01": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q02": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q03": {
+              "choice": "None",
+              "remarks": "None"
+            },
+            "q04": {
+              "choice": "None",
+              "remarks": "None"
+            }
+          }
+        }
+      },
+      "attendantDets": [
+        {
+          "id": 1,
+          "name": "dsaas",
+          "nricOrFinNo": "D1232131Q",
+          "contactNo": 31231232
+        },
+        {
+          "id": 2,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        },
+        {
+          "id": 3,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        },
+        {
+          "id": 4,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        },
+        {
+          "id": 5,
+          "name": "",
+          "nricOrFinNo": "",
+          "contactNo": ""
+        }
+      ],
+      "applicantDets": {
+        "name": "dasda",
+        "nricOrFinNo": "D1312312Q",
+        "orgType": "External",
+        "orgName": "dsad",
+        "depName": "dads",
+        "contactNo": 4141312,
+        "email": "das@ads.asdas"
+      },
+      "ptwStatus": {
+        "permitStatus": "Valid",
+        "taskStatus": "Not Started",
+        "remarks": "None",
+        "checked": false,
+        "supervisorName": "None",
+        "wantToTerminate": false,
+        "reqTermTimestamp": "None",
+        "terminatedTimestamp": "None",
+        "timestamp": "2022-06-29T03:45:30.644Z"
+      },
+      "safetyAssessorEvaluation": {
+        "passed": true,
+        "name": "Arnoldo Nielsen (SPV002)",
+        "timestamp": "2022-06-29T03:45:24.162Z"
+      },
+      "authorisedManagerApproval": {
+        "passed": true,
+        "name": "Arnoldo Nielsen (SPV002)",
+        "timestamp": "2022-06-29T03:45:30.644Z"
+      },
+      "requestStatus": "Approved",
+      "wantToCancel": false,
+      "reqCancTimestamp": "None",
+      "cancelledTimestamp": "None",
+      "timestamp": "2022-06-29T02:13:09.306Z",
+      "id": 6
+    }
+  ]
 }

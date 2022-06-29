@@ -23,7 +23,7 @@
 </header>
 <div class = "content-body">
     <div class = "landing-title">
-        <h2>Permit-to-Work (PTW)</h2>
+        <h2>Permit to Work (PTW)</h2>
         <h3>E-Management System</h3>
     </div>
     <div class = "sign-in-body">
@@ -31,12 +31,12 @@
         <p>Please enter user ID and password to sign-in</p>
         <br>
         <form class = "sign-in-form" [formGroup] = "validatorSignInFormGroup" (ngSubmit) = "onSubmit()">
-            <mat-form-field class = "user-email-input" appearance = "fill">
+            <mat-form-field class = "user-email-input" appearance = "fill" color = "primary">
                 <mat-label>User ID</mat-label>
                 <input matInput required formControlName = "userId" placeholder = "Enter user ID" (change) = "this.userIdInput = this.validatorSignInFormGroup.get('userId')?.value;">
             </mat-form-field>
             <br>
-            <mat-form-field class = "user-pw-input" appearance = "fill">
+            <mat-form-field class = "user-pw-input" appearance = "fill" color = "primary">
                 <mat-label>Password</mat-label>
                 <input matInput required type = "password" formControlName = "userPw" placeholder = "Enter password" (change) = "this.userPwInput = this.validatorSignInFormGroup.get('userPw')?.value;">
             </mat-form-field>
