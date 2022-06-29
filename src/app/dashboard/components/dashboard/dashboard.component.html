@@ -146,6 +146,9 @@
                                                 <mat-label>Req.: </mat-label>
                                                 <mat-label id = "req-state-text">{{ pending.timestamp | date: "short" }}</mat-label>
                                             </div>
+                                            <div id = "req-state-arrow-col" style = "color: rgb(25, 25, 25)" *ngIf = "pending.wantToCancel">
+                                                <mat-icon>play_arrow</mat-icon>
+                                            </div>
                                             <div 
                                                 id = "req-state-col" 
                                                 style = "

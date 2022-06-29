@@ -496,8 +496,8 @@
         "timestamp": "None"
       },
       "requestStatus": "Pending",
-      "wantToCancel": false,
-      "reqCancTimestamp": "None",
+      "wantToCancel": true,
+      "reqCancTimestamp": "2022-06-29T05:47:11.249Z",
       "cancelledTimestamp": "None",
       "timestamp": "2022-06-29T01:14:29.059Z",
       "id": 1
