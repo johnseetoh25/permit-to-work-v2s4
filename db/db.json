@@ -11,7 +11,7 @@
       "userId": "SPV002",
       "userPw": "test2",
       "userName": "Arnoldo Nielsen",
-      "inSession": false,
+      "inSession": true,
       "id": 2
     },
     {

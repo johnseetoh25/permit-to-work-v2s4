@@ -13,6 +13,7 @@ import { PermitStatus } from 'src/app/constants/PermitStatus';
 import { TaskStatus } from 'src/app/constants/TaskStatus';
 import { PermitTypes } from 'src/app/constants/PermitTypes';
 
+
 @Component({
   selector: 'app-ptw-request',
   templateUrl: './ptw-request.component.html',
@@ -29,6 +30,8 @@ import { PermitTypes } from 'src/app/constants/PermitTypes';
   ]
 })
 export class PtwRequestComponent implements OnInit {
+
+
   public partiallyCompletedPTWData!: IPermitToWork;
 
   public errorMessage: string = "Please complete all the required fields.";
@@ -266,19 +269,6 @@ export class PtwRequestComponent implements OnInit {
       }
     ];
 
-    public setNoOfWorkers(value: any) {
-      this.noOfWorkersInput = value;
-    }
-
-    public setNoOfSupervisors(value: any) {
-      this.noOfSupervisorsInput = value;
-    }
-
-    public calcNoOfTableRowDisplayed(): number {
-      var total: number = Math.abs(this.noOfWorkersInput + (this.noOfSupervisorsInput - 1));
-      return total;
-    }
-
     public applicantNameInput: string = "";
     public applicantNricOrFinNoInput: string = "";
       
@@ -291,12 +281,14 @@ export class PtwRequestComponent implements OnInit {
     public applicantEmailInputMask = createMask({ alias: "email" });
     public applicantDeclarationChecked: boolean = false;
 
+    
   constructor(
     private formBuilder: FormBuilder,
     public dialog: MatDialog, 
     public submitDialogRef: MatDialogRef<SubmitDialogComponent>,
     private router: Router
   ) { }
+
 
   public ngOnInit(): void {
     this.setNoOfWorkers(this.noOfSupervisorsEventValue);
@@ -432,17 +424,36 @@ export class PtwRequestComponent implements OnInit {
     this.toggleAttendantDetsTableRowValidator(this.totalNoOfAttendants);
   }
 
+
+  public setNoOfWorkers(value: any) {
+    this.noOfWorkersInput = value;
+  }
+
+
+  public setNoOfSupervisors(value: any) {
+    this.noOfSupervisorsInput = value;
+  }
+
+
+  public calcNoOfTableRowDisplayed(): number {
+    var total: number = Math.abs(this.noOfWorkersInput + (this.noOfSupervisorsInput - 1));
+    return total;
+  }
+
+
   public concatStartDateTime(date: Date, time: Date): string {
     let tempDate = new Date(date.toDateString().concat(", ", time.toString()));
     let tempDateString = tempDate.toISOString();
     return tempDateString;
   }
 
+
   public concatEndDateTime(date: Date, time: Date): string {
     let tempDate = new Date(date.toDateString().concat(", ", time.toString()));
     let tempDateString = tempDate.toISOString();
     return tempDateString;
   }
+
 
   public togglePTWFormValidators(value: string): void {
     switch (value) {
@@ -546,6 +557,7 @@ export class PtwRequestComponent implements OnInit {
 
     console.log(value, " has been chosen.");
   }
+
 
   private clearFieldsOf(value: string): void {
     switch (value) {
@@ -776,6 +788,7 @@ export class PtwRequestComponent implements OnInit {
     console.log(value, " fields have been cleared.");
   }
 
+
   private updateAllValidators(): void {
     // ==============================================================================
     this.sectionOneBFormGroup.get('wah_s1_cmi_q01_choice')?.updateValueAndValidity();
@@ -850,6 +863,7 @@ export class PtwRequestComponent implements OnInit {
     // ==============================================================================
   }
 
+
   private setRequiredAllWahValidators(): void {
     this.sectionOneBFormGroup.get('wah_s1_cmi_q01_choice')?.setValidators(Validators.required);
     this.sectionOneBFormGroup.get('wah_s1_cmi_q02_choice')?.setValidators(Validators.required);
@@ -863,6 +877,7 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('wah_s1_cmi_q10_choice')?.setValidators(Validators.required);
   }
 
+
   private clearAllWahValidators(): void {
     this.sectionOneBFormGroup.get('wah_s1_cmi_q01_choice')?.clearValidators();
     this.sectionOneBFormGroup.get('wah_s1_cmi_q02_choice')?.clearValidators();
@@ -875,6 +890,7 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('wah_s1_cmi_q09_choice')?.clearValidators();
     this.sectionOneBFormGroup.get('wah_s1_cmi_q10_choice')?.clearValidators();
   }
+
 
   private setRequiredAllCsValidators(): void {
     this.sectionOneBFormGroup.get('cs_s1_ph_atmo')?.setValidators(Validators.required);
@@ -897,6 +913,7 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q06_checked')?.setValidators(Validators.required);
   }
 
+
   private clearAllCsValidators(): void {
     this.sectionOneBFormGroup.get('cs_s1_ph_atmo')?.clearValidators();
     this.sectionOneBFormGroup.get('cs_s1_ph_nonAtmo')?.clearValidators();
@@ -918,6 +935,7 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q06_checked')?.clearValidators();
   }
 
+
   private setRequiredAllHwValidators(): void {
     this.sectionOneBFormGroup.get('hw_s1_cmi_q01_choice')?.setValidators(Validators.required);
     this.sectionOneBFormGroup.get('hw_s1_cmi_q02_choice')?.setValidators(Validators.required);
@@ -931,6 +949,7 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('hw_s1_cmi_q10_choice')?.setValidators(Validators.required);
     this.sectionOneBFormGroup.get('hw_s1_cmi_q11_choice')?.setValidators(Validators.required);
   }
+
 
   private clearAllHwValidators(): void {
     this.sectionOneBFormGroup.get('hw_s1_cmi_q01_choice')?.clearValidators();
@@ -946,6 +965,7 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('hw_s1_cmi_q11_choice')?.clearValidators();
   }
 
+
   private setRequiredAllCwValidators(): void {
     this.sectionOneBFormGroup.get('cw_s1_cmi_q01_choice')?.setValidators(Validators.required);
     this.sectionOneBFormGroup.get('cw_s1_cmi_q02_choice')?.setValidators(Validators.required);
@@ -957,6 +977,7 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('cw_s1_cmi_q08_choice')?.setValidators(Validators.required);
     this.sectionOneBFormGroup.get('cw_s1_cmi_q09_choice')?.setValidators(Validators.required);
   }
+
 
   private clearAllCwValidators(): void {
     this.sectionOneBFormGroup.get('cw_s1_cmi_q01_choice')?.clearValidators();
@@ -970,6 +991,7 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('cw_s1_cmi_q09_choice')?.clearValidators();
   }
 
+
   private setRequiredAllElecValidators(): void {
     this.sectionOneBFormGroup.get('e_s1_cmi_q01_choice')?.setValidators(Validators.required);
     this.sectionOneBFormGroup.get('e_s1_cmi_q02_choice')?.setValidators(Validators.required);
@@ -981,6 +1003,7 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('e_s1_cmi_q08_choice')?.setValidators(Validators.required);
     this.sectionOneBFormGroup.get('e_s1_cmi_q09_choice')?.setValidators(Validators.required);
   }
+
 
   private clearAllElecValidators(): void {
     this.sectionOneBFormGroup.get('e_s1_cmi_q01_choice')?.clearValidators();
@@ -994,6 +1017,7 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('e_s1_cmi_q09_choice')?.clearValidators();
   }
 
+
   public toggleApplicantOrgNameValidator(value : string) : void {
     switch (value) {
       case 'Internal':
@@ -1006,6 +1030,7 @@ export class PtwRequestComponent implements OnInit {
 
     this.sectionOneCFormGroup.get('aplOrgName')?.updateValueAndValidity();
   }
+
 
   public toggleArdOrgNameValidator(permitType: string, orgType : string) : void {
     switch (permitType) {
@@ -1033,6 +1058,7 @@ export class PtwRequestComponent implements OnInit {
         break;
     }
   }
+
 
   public toggleAttendantDetsTableRowValidator(total: number): void {
     switch (total) {
@@ -1172,6 +1198,7 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.updateValueAndValidity();
     this.sectionOneCFormGroup.get('ad5_contactNo')?.updateValueAndValidity();
   }
+
 
   public allocateFormData(dataSource: IPermitToWork): IPermitToWork {
     this.startDateTimeConcat = this.concatStartDateTime(this.startDateInput, this.startTimeInput);
@@ -1775,13 +1802,17 @@ export class PtwRequestComponent implements OnInit {
     return dataSource;
   }
 
+
   public openSubmitDialogue(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = this.allocateFormData(this.partiallyCompletedPTWData);
     this.submitDialogRef = this.dialog.open(SubmitDialogComponent, dialogConfig);
   }
 
+
   public navigateTo(url: string): void {
     this.router.navigate(["/" + url], { replaceUrl: true });
   }
+
+
 }
