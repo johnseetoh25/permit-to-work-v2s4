@@ -8,7 +8,6 @@ import { DbService } from 'src/app/services/db.service';
 import { MessageService } from 'src/app/services/message.service';
 import { IPermitToWork } from 'src/app/interfaces/IPermitToWork';
 import { ValidatorReqdetsComponent } from 'src/app/validator-reqdets/components/validator-reqdets/validator-reqdets.component';
-import { EChartsOption } from 'echarts';
 import { CompShareService } from 'src/app/services/comp-share.service';
 import { Subscription } from 'rxjs';
 
@@ -36,8 +35,6 @@ export class DashboardComponent implements OnInit {
   public termReqsNo: number = 0;
 
   public pendingReqList: IPermitToWork[] = [];
-
-  public ptwHistGraphOptions : EChartsOption = {};
 
   private clickEventSub: Subscription;
 
@@ -109,6 +106,7 @@ export class DashboardComponent implements OnInit {
         console.log("Currently signed in validator:", resp[0].userId);
         this.auth.signIn(resp[0].userId, resp[0].userPw);
         this.userNameDisplay = resp[0].userName + " (" + resp[0].userId + ")";
+        this.compShare.sendHomeTitleAsSignOutEvent();
       } else {
         console.log("Currently signed in validator: None");
         this.router.navigate(['validator-sign-in'], { replaceUrl: true });

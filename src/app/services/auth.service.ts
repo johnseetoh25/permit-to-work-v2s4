@@ -82,7 +82,6 @@ export class AuthService {
               this.openSnackBar("Signed in successfully as validator.", "", 3000);
               this.router.navigate(['dashboard'], { queryParams: { userId: res[0].userId }, replaceUrl: true });
             } else {
-              //this.openSnackBar("Auto sign-in enabled!", "", 3500);
               this.router.navigate([], { queryParams: { userId: res[0].userId }, replaceUrl: true });
             }
             this.signingIn = false;

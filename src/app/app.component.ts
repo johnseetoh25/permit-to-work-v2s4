@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
-import { AuthService } from './services/auth.service';
 import { SignoutDialogComponent } from './signout-dialog/components/signout-dialog/signout-dialog.component';
+import { CompShareService } from 'src/app/services/comp-share.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -22,12 +23,23 @@ export class AppComponent {
 
   public homeTitleAsSignOut: boolean = false;
 
+  private homeTitleAsSignOutSub: Subscription;
+  private homeTitleAsNavSub: Subscription;
+
   constructor(
     public router: Router,
-    private auth: AuthService,
     public dialog : MatDialog, 
-    public dialogRefSignOut : MatDialogRef<SignoutDialogComponent>
-    ) { }
+    public dialogRefSignOut : MatDialogRef<SignoutDialogComponent>,
+    private compShare: CompShareService
+    ) {
+      this.homeTitleAsSignOutSub = this.compShare.getHomeTitleAsSignOutEvent().subscribe(() => {
+        this.homeTitleAsSignOut = true;
+      });
+      
+      this.homeTitleAsNavSub = this.compShare.getHomeTitleAsNavEvent().subscribe(() => {
+        this.homeTitleAsSignOut = false;
+      });
+    }
 
   public openSignOutDialog(): void {
     const dialogConfig = new MatDialogConfig();

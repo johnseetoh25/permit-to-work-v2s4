@@ -92,6 +92,8 @@ mat-grid-tile {
 
 #pss-item {
     background-color: dimgray;
+    border-width: 1.25px;
+    border-style: solid;
     border-radius: 5px;
     color: whitesmoke;
     padding-top: 1.5px;
@@ -145,6 +147,8 @@ mat-grid-tile {
 
 #canc-term-reqs-state {
     text-align: center;
+    border-width: 1.25px;
+    border-style: solid;
     color: white;
     border-radius: 5px;
     float: left;
