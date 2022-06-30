@@ -1284,6 +1284,26 @@ export class PtwRequestComponent implements OnInit {
     if (this.e_s1_cmi_q10_specifyInput == "") { this.e_s1_cmi_q10_specifyInput = DefaultValues.VALUE_NONE; }
     if (this.e_s1_cmi_q11_specifyInput == "") { this.e_s1_cmi_q11_specifyInput = DefaultValues.VALUE_NONE; }
 
+    if (this.attendantDetsData[0].name == "") { this.attendantDetsData[0].name = DefaultValues.VALUE_NONE; }
+    if (this.attendantDetsData[0].nricOrFinNo == "") { this.attendantDetsData[0].nricOrFinNo = DefaultValues.VALUE_NONE; }
+    if (this.attendantDetsData[0].contactNo == "") { this.attendantDetsData[0].contactNo = DefaultValues.VALUE_NONE; }
+
+    if (this.attendantDetsData[1].name == "") { this.attendantDetsData[1].name = DefaultValues.VALUE_NONE; }
+    if (this.attendantDetsData[1].nricOrFinNo == "") { this.attendantDetsData[1].nricOrFinNo = DefaultValues.VALUE_NONE; }
+    if (this.attendantDetsData[1].contactNo == "") { this.attendantDetsData[1].contactNo = DefaultValues.VALUE_NONE; }
+
+    if (this.attendantDetsData[2].name == "") { this.attendantDetsData[2].name = DefaultValues.VALUE_NONE; }
+    if (this.attendantDetsData[2].nricOrFinNo == "") { this.attendantDetsData[2].nricOrFinNo = DefaultValues.VALUE_NONE; }
+    if (this.attendantDetsData[2].contactNo == "") { this.attendantDetsData[2].contactNo = DefaultValues.VALUE_NONE; }
+
+    if (this.attendantDetsData[3].name == "") { this.attendantDetsData[3].name = DefaultValues.VALUE_NONE; }
+    if (this.attendantDetsData[3].nricOrFinNo == "") { this.attendantDetsData[3].nricOrFinNo = DefaultValues.VALUE_NONE; }
+    if (this.attendantDetsData[3].contactNo == "") { this.attendantDetsData[3].contactNo = DefaultValues.VALUE_NONE; }
+
+    if (this.attendantDetsData[4].name == "") { this.attendantDetsData[4].name = DefaultValues.VALUE_NONE; }
+    if (this.attendantDetsData[4].nricOrFinNo == "") { this.attendantDetsData[4].nricOrFinNo = DefaultValues.VALUE_NONE; }
+    if (this.attendantDetsData[4].contactNo == "") { this.attendantDetsData[4].contactNo = DefaultValues.VALUE_NONE; }
+
     if (this.applicantOrganisationNameInput == "") { this.applicantOrganisationNameInput = DefaultValues.VALUE_NONE; }
 
     dataSource = {
