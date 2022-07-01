@@ -69,6 +69,7 @@ export class TerminateDialogComponent implements OnInit {
     this.db.update(
       toTerminate?.id,
       toTerminate?.ptwId,
+      toTerminate?.ptwYear,
       toTerminate?.permitType,
       toTerminate?.locationOfWork?.main,
       toTerminate?.locationOfWork?.sub,
@@ -276,6 +277,10 @@ export class TerminateDialogComponent implements OnInit {
       toTerminate?.attendantDets?.[4].name,
       toTerminate?.attendantDets?.[4].nricOrFinNo,
       toTerminate?.attendantDets?.[4].contactNo,
+
+      toTerminate?.attendantDets?.[5].name,
+      toTerminate?.attendantDets?.[5].nricOrFinNo,
+      toTerminate?.attendantDets?.[5].contactNo,
 
       toTerminate?.applicantDets?.name,
       toTerminate?.applicantDets?.nricOrFinNo,

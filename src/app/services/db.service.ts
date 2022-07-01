@@ -72,6 +72,7 @@ export class DbService {
   public update(
     id: number,
     ptwId: string,
+    ptwYear: string,
     permitType: string,
     selectedLocationOfWork: string,
     selectedLocationSector: string,
@@ -280,6 +281,10 @@ export class DbService {
     ad5_nricOrFinNo: string,
     ad5_contactNo: string,
 
+    ad6_name: string,
+    ad6_nricOrFinNo: string,
+    ad6_contactNo: string,
+
     ad_name: string,
     ad_nricOrFinNo: string,
     ad_orgType: string,
@@ -319,6 +324,7 @@ export class DbService {
     this.http.put(this.ptwUrl + "/" + id, 
       {
         ptwId: ptwId,
+        ptwYear: ptwYear,
         locationOfWork: {
           main: selectedLocationOfWork,
           sub: selectedLocationSector
@@ -743,6 +749,12 @@ export class DbService {
             name: ad5_name,
             nricOrFinNo: ad5_nricOrFinNo,
             contactNo: ad5_contactNo
+          },
+          {
+            id: 6,
+            name: ad6_name,
+            nricOrFinNo: ad6_nricOrFinNo,
+            contactNo: ad6_contactNo
           },
         ],
         applicantDets: {

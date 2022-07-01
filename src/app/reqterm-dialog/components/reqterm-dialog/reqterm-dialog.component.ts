@@ -63,6 +63,7 @@ export class ReqtermDialogComponent implements OnInit {
     this.db.update(
       toReqTerm?.id,
       toReqTerm?.ptwId,
+      toReqTerm?.ptwYear,
       toReqTerm?.permitType,
       toReqTerm?.locationOfWork?.main,
       toReqTerm?.locationOfWork?.sub,
@@ -270,6 +271,10 @@ export class ReqtermDialogComponent implements OnInit {
       toReqTerm?.attendantDets?.[4].name,
       toReqTerm?.attendantDets?.[4].nricOrFinNo,
       toReqTerm?.attendantDets?.[4].contactNo,
+
+      toReqTerm?.attendantDets?.[5].name,
+      toReqTerm?.attendantDets?.[5].nricOrFinNo,
+      toReqTerm?.attendantDets?.[5].contactNo,
 
       toReqTerm?.applicantDets?.name,
       toReqTerm?.applicantDets?.nricOrFinNo,

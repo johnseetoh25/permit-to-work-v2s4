@@ -27,7 +27,7 @@ export class TrackingLogComponent implements OnInit {
     'ptwId',
     'locationOfWork',
     'permitType',
-    'effectivePeriod',
+    'permitValidity',
     'applicantName',
     'submissionTimestamp',
     'requestStatus',
@@ -152,6 +152,7 @@ export class TrackingLogComponent implements OnInit {
     this.db.update(
       toExpire?.id,
       toExpire?.ptwId,
+      toExpire?.ptwYear,
       toExpire?.permitType,
       toExpire?.locationOfWork?.main,
       toExpire?.locationOfWork?.sub,
@@ -359,6 +360,10 @@ export class TrackingLogComponent implements OnInit {
       toExpire?.attendantDets?.[4].name,
       toExpire?.attendantDets?.[4].nricOrFinNo,
       toExpire?.attendantDets?.[4].contactNo,
+
+      toExpire?.attendantDets?.[5].name,
+      toExpire?.attendantDets?.[5].nricOrFinNo,
+      toExpire?.attendantDets?.[5].contactNo,
 
       toExpire?.applicantDets?.name,
       toExpire?.applicantDets?.nricOrFinNo,

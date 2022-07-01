@@ -266,6 +266,12 @@ export class PtwRequestComponent implements OnInit {
         name: "",
         nricOrFinNo: "",
         contactNo: ""
+      },
+      {
+        id: 6,
+        name: "",
+        nricOrFinNo: "",
+        contactNo: ""
       }
     ];
 
@@ -409,6 +415,10 @@ export class PtwRequestComponent implements OnInit {
       ad5_nricOrFinNo: ["", [ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]],
       ad5_contactNo: ["", Validators.required],
 
+      ad6_name: ["", Validators.required],
+      ad6_nricOrFinNo: ["", [ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]],
+      ad6_contactNo: ["", Validators.required],
+
 
       // Applicant / supervisor details
       aplName: ["", Validators.required],
@@ -436,7 +446,7 @@ export class PtwRequestComponent implements OnInit {
 
 
   public calcNoOfTableRowDisplayed(): number {
-    var total: number = Math.abs(this.noOfWorkersInput + (this.noOfSupervisorsInput - 1));
+    var total: number = Math.abs(this.noOfWorkersInput + this.noOfSupervisorsInput);
     return total;
   }
 
@@ -1083,6 +1093,10 @@ export class PtwRequestComponent implements OnInit {
         this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.clearValidators();
         this.sectionOneCFormGroup.get('ad5_contactNo')?.clearValidators();
 
+        this.sectionOneCFormGroup.get('ad6_name')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad6_nricOrFinNo')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad6_contactNo')?.clearValidators();
+
         break;
 
       case 2:
@@ -1105,6 +1119,10 @@ export class PtwRequestComponent implements OnInit {
         this.sectionOneCFormGroup.get('ad5_name')?.clearValidators();
         this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.clearValidators();
         this.sectionOneCFormGroup.get('ad5_contactNo')?.clearValidators();
+
+        this.sectionOneCFormGroup.get('ad6_name')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad6_nricOrFinNo')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad6_contactNo')?.clearValidators();
 
         break;
       
@@ -1129,6 +1147,10 @@ export class PtwRequestComponent implements OnInit {
         this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.clearValidators();
         this.sectionOneCFormGroup.get('ad5_contactNo')?.clearValidators();
 
+        this.sectionOneCFormGroup.get('ad6_name')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad6_nricOrFinNo')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad6_contactNo')?.clearValidators();
+
         break;
 
       case 4:
@@ -1152,6 +1174,10 @@ export class PtwRequestComponent implements OnInit {
         this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.clearValidators();
         this.sectionOneCFormGroup.get('ad5_contactNo')?.clearValidators();
 
+        this.sectionOneCFormGroup.get('ad6_name')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad6_nricOrFinNo')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad6_contactNo')?.clearValidators();
+
         break;
 
       case 5:
@@ -1174,8 +1200,39 @@ export class PtwRequestComponent implements OnInit {
         this.sectionOneCFormGroup.get('ad5_name')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
         this.sectionOneCFormGroup.get('ad5_contactNo')?.setValidators([Validators.required]);
+
+        this.sectionOneCFormGroup.get('ad6_name')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad6_nricOrFinNo')?.clearValidators();
+        this.sectionOneCFormGroup.get('ad6_contactNo')?.clearValidators();
     
         break;
+
+        case 5:
+          this.sectionOneCFormGroup.get('ad1_name')?.setValidators(Validators.required);
+          this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+          this.sectionOneCFormGroup.get('ad1_contactNo')?.setValidators([Validators.required]);
+  
+          this.sectionOneCFormGroup.get('ad2_name')?.setValidators(Validators.required);
+          this.sectionOneCFormGroup.get('ad2_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+          this.sectionOneCFormGroup.get('ad2_contactNo')?.setValidators([Validators.required]);
+  
+          this.sectionOneCFormGroup.get('ad3_name')?.setValidators(Validators.required);
+          this.sectionOneCFormGroup.get('ad3_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+          this.sectionOneCFormGroup.get('ad3_contactNo')?.setValidators([Validators.required]);
+  
+          this.sectionOneCFormGroup.get('ad4_name')?.setValidators(Validators.required);
+          this.sectionOneCFormGroup.get('ad4_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+          this.sectionOneCFormGroup.get('ad4_contactNo')?.setValidators([Validators.required]);
+  
+          this.sectionOneCFormGroup.get('ad5_name')?.setValidators(Validators.required);
+          this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+          this.sectionOneCFormGroup.get('ad5_contactNo')?.setValidators([Validators.required]);
+  
+          this.sectionOneCFormGroup.get('ad6_name')?.setValidators(Validators.required);
+          this.sectionOneCFormGroup.get('ad6_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+          this.sectionOneCFormGroup.get('ad6_contactNo')?.setValidators([Validators.required]);
+      
+          break;
       }
 
     this.sectionOneCFormGroup.get('ad1_name')?.updateValueAndValidity();
@@ -1197,6 +1254,10 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneCFormGroup.get('ad5_name')?.updateValueAndValidity();
     this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.updateValueAndValidity();
     this.sectionOneCFormGroup.get('ad5_contactNo')?.updateValueAndValidity();
+
+    this.sectionOneCFormGroup.get('ad6_name')?.updateValueAndValidity();
+    this.sectionOneCFormGroup.get('ad6_nricOrFinNo')?.updateValueAndValidity();
+    this.sectionOneCFormGroup.get('ad6_contactNo')?.updateValueAndValidity();
   }
 
 
@@ -1331,11 +1392,16 @@ export class PtwRequestComponent implements OnInit {
     if (this.attendantDetsData[4].nricOrFinNo == "") { this.attendantDetsData[4].nricOrFinNo = DefaultValues.VALUE_NONE; }
     if (this.attendantDetsData[4].contactNo == "") { this.attendantDetsData[4].contactNo = DefaultValues.VALUE_NONE; }
 
+    if (this.attendantDetsData[5].name == "") { this.attendantDetsData[5].name = DefaultValues.VALUE_NONE; }
+    if (this.attendantDetsData[5].nricOrFinNo == "") { this.attendantDetsData[5].nricOrFinNo = DefaultValues.VALUE_NONE; }
+    if (this.attendantDetsData[5].contactNo == "") { this.attendantDetsData[5].contactNo = DefaultValues.VALUE_NONE; }
+
     if (this.applicantOrganisationNameInput == "") { this.applicantOrganisationNameInput = DefaultValues.VALUE_NONE; }
 
     dataSource = {
       id: 0,
       ptwId: DefaultValues.VALUE_NONE,
+      ptwYear: "",
       locationOfWork: {
         main: this.selectedLocationOfWork,
         sub: this.selectedLocationSector
@@ -1760,6 +1826,12 @@ export class PtwRequestComponent implements OnInit {
           name: this.attendantDetsData[4].name,
           nricOrFinNo: this.attendantDetsData[4].nricOrFinNo,
           contactNo: this.attendantDetsData[4].contactNo
+        },
+        {
+          id: this.attendantDetsData[5].id,
+          name: this.attendantDetsData[5].name,
+          nricOrFinNo: this.attendantDetsData[5].nricOrFinNo,
+          contactNo: this.attendantDetsData[5].contactNo
         },
       ],
       applicantDets: {

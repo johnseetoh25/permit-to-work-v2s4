@@ -22,19 +22,12 @@
     </p>
 </header>
 <div class = "content-body">
-    <mat-stepper #stepper id = "ptw-req-stp" linear = "true">
+    <mat-stepper #stepper id = "ptw-req-stp" linear = "false">
         <mat-step [stepControl] = "this.sectionOneAFormGroup" [errorMessage] = "this.errorMessage">
-            <form class = "common-section-form" [formGroup] = "this.sectionOneAFormGroup">
+            <form class = "basic-info-form" [formGroup] = "this.sectionOneAFormGroup">
                 <ng-template matStepLabel>Section I (A): Basic Information</ng-template>
-                <div style = "
-                    width: fit-content;
-                    padding: 8px; 
-                    padding-left: 10px;
-                    padding-right: 10px;
-                    background-color: rgb(103, 58, 183); 
-                    color: white; 
-                    border-radius: 5px;">
-                    <mat-label class = "section-title">
+                <div class = "section-title">
+                    <mat-label class = "section-title-desc">
                         <mat-icon style = "vertical-align: middle; font-size: 22px;">create</mat-icon> This section is to be completed by a <mat-label style = "font-weight: 425">representative supervisor</mat-label>
                     </mat-label>
                 </div>
@@ -118,129 +111,131 @@
                     </mat-select>
                 </mat-form-field>
                 <br>
-                <div *ngIf = "this.selectedPermitType == 'Hot work permit (HWP)'" class = "hwp-info-container">
-                    <mat-icon style = "color: brown; vertical-align: middle;">whatshot</mat-icon><mat-label style = "font-weight: 450;">HOT WORK PERMIT</mat-label>
-                    <br><br>
-                    <mat-label>A hot work permit is required for work involving the application of heat or the ignition sources to tanks, vessels, pipelines etc which may contain or have contained flammable vapour, or in areas where the flammable atmospheres may be present. Some examples include:</mat-label>
-                    <br><br>
-                    <mat-label>•&emsp;Electrical welding and use of welding machine,</mat-label>
-                    <br>
-                    <mat-label>•&emsp;Flame cutting,</mat-label>
-                    <br>
-                    <mat-label>•&emsp;Grinding (producing sparks)</mat-label>
+                <div class = "permit-type-info-container">
+                    <div *ngIf = "this.selectedPermitType == 'Hot work permit (HWP)'" class = "hwp-info-container">
+                        <mat-icon style = "color: brown; vertical-align: middle;">whatshot</mat-icon><mat-label style = "font-weight: 450;">HOT WORK PERMIT</mat-label>
+                        <br><br>
+                        <mat-label>A hot work permit is required for work involving the application of heat or the ignition sources to tanks, vessels, pipelines etc which may contain or have contained flammable vapour, or in areas where the flammable atmospheres may be present. Some examples include:</mat-label>
+                        <br><br>
+                        <mat-label>•&emsp;Electrical welding and use of welding machine,</mat-label>
+                        <br>
+                        <mat-label>•&emsp;Flame cutting,</mat-label>
+                        <br>
+                        <mat-label>•&emsp;Grinding (producing sparks)</mat-label>
+                    </div>
+                    <div *ngIf = "this.selectedPermitType == 'Cold work permit (CWP)'" class = "cwp-info-container">
+                        <mat-icon style = "color: darkslateblue; vertical-align: middle;">ac_unit</mat-icon><mat-label style = "font-weight: 450;">COLD WORK PERMIT</mat-label>
+                        <br><br>
+                        <mat-label>A cold work permit is required for potentially hazardous work not covered by other types of work permits. Some examples include:</mat-label>
+                        <br><br>
+                        <mat-label>•&emsp;Chemical cleaning or use of solvents,</mat-label>
+                        <br>
+                        <mat-label>•&emsp;Handling of hazardous substances (e.g.: toxic / corrosive chemicals, asbestos etc.),</mat-label>
+                        <br>
+                        <mat-label>•&emsp;Any non-routine and potentially hazardous activity,</mat-label>
+                        <br>
+                        <mat-label>•&emsp;Any activity requiring specific control measures to confirm safety</mat-label>
+                    </div>
+                    <div *ngIf = "this.selectedPermitType == 'Electrical permit (EP)'" class = "ep-info-container">
+                        <mat-icon style = "color: khaki; vertical-align: middle;">flash_on</mat-icon><mat-label style = "font-weight: 450;">ELECTRICAL PERMIT</mat-label>
+                        <br><br>
+                        <mat-label>An electrical permit is required for work on electrical systems where there is a possibility of contacting energised electrical conductors. It is also a statement that the circuit or the item of the equipment is safe to work on. A permit should not be issued on the equipment that is live. Some examples include:</mat-label>
+                        <br><br>
+                        <mat-label>•&emsp;Work involving the installation or repair of electrical conductors,</mat-label>
+                        <br>
+                        <mat-label>•&emsp;Connection or disconnection of electric motors,</mat-label>
+                        <br>
+                        <mat-label>•&emsp;Reaching into any panel, transformer or other electrical enclosure which may have energised circuits, capacitors, wiring etc.,</mat-label>
+                        <br>
+                        <mat-label>•&emsp;Work on instrumentation, instrument panels, or telecom equipment,</mat-label>
+                        <br>
+                        <mat-label>•&emsp;Where removal of a part of the circuit takes place outside normal operating conditions</mat-label>
+                        <br>
+                    </div>
+                    <div *ngIf = "this.selectedPermitType == 'Work at height permit (WAHP)'" class = "wahp-info-container">
+                        <mat-icon style = "color: darkslategrey; vertical-align: middle;">location_city</mat-icon><mat-label style = "font-weight: 450;">WORK AT HEIGHT PERMIT</mat-label>
+                        <br><br>
+                        <mat-label>A work at height permit is required for work in any place where, including a place at or below ground level, obtaining access to or egress from such place while at work, except by a staircase in permanent workplace, where, if measures required by the regulations were not taken, a person could fall a distance liable to cause personal injury. Some examples include:</mat-label>
+                        <br><br>
+                        <mat-label>•&emsp;Elevated place of work, e.g.: on a ladder or a flat roof,</mat-label>
+                        <br>
+                        <mat-label>•&emsp;Vicinity of an opening,</mat-label>
+                        <br>
+                        <mat-label>•&emsp;Vicinity of an edge,</mat-label>
+                        <br>
+                        <mat-label>•&emsp;Any other place (whether above or below ground), e.g.: fall through a fragile surface</mat-label>
+                        <br>
+                    </div>
+                    <div *ngIf = "this.selectedPermitType == 'Confined space permit (CSP)'" class = "csp-info-container">
+                        <mat-icon style = "color: forestgreen; vertical-align: middle;">zoom_out_map</mat-icon><mat-label style = "font-weight: 450;">CONFINED SPACE PERMIT</mat-label>
+                        <br><br>
+                        <mat-label>A confined space permit is required to allow personnel to enter a confined space such as a blade, trench, tank vessel, etc. Other criteria include:</mat-label>
+                        <br><br>
+                        <mat-label>•&emsp;Limited openings for entry and exit,</mat-label>
+                        <br>
+                        <mat-label>•&emsp;The space is not intended for continuous human occupancy,</mat-label>
+                        <br>
+                        <mat-label>•&emsp;The space is large enough for you to enter and conduct work</mat-label>
+                        <br>
+                    </div>
+                    <div *ngIf = "this.selectedPermitType == ''"></div>
                 </div>
-                <div *ngIf = "this.selectedPermitType == 'Cold work permit (CWP)'" class = "cwp-info-container">
-                    <mat-icon style = "color: darkslateblue; vertical-align: middle;">ac_unit</mat-icon><mat-label style = "font-weight: 450;">COLD WORK PERMIT</mat-label>
-                    <br><br>
-                    <mat-label>A cold work permit is required for potentially hazardous work not covered by other types of work permits. Some examples include:</mat-label>
-                    <br><br>
-                    <mat-label>•&emsp;Chemical cleaning or use of solvents,</mat-label>
-                    <br>
-                    <mat-label>•&emsp;Handling of hazardous substances (e.g.: toxic / corrosive chemicals, asbestos etc.),</mat-label>
-                    <br>
-                    <mat-label>•&emsp;Any non-routine and potentially hazardous activity,</mat-label>
-                    <br>
-                    <mat-label>•&emsp;Any activity requiring specific control measures to confirm safety</mat-label>
-                </div>
-                <div *ngIf = "this.selectedPermitType == 'Electrical permit (EP)'" class = "ep-info-container">
-                    <mat-icon style = "color: khaki; vertical-align: middle;">flash_on</mat-icon><mat-label style = "font-weight: 450;">ELECTRICAL PERMIT</mat-label>
-                    <br><br>
-                    <mat-label>An electrical permit is required for work on electrical systems where there is a possibility of contacting energised electrical conductors. It is also a statement that the circuit or the item of the equipment is safe to work on. A permit should not be issued on the equipment that is live. Some examples include:</mat-label>
-                    <br><br>
-                    <mat-label>•&emsp;Work involving the installation or repair of electrical conductors,</mat-label>
-                    <br>
-                    <mat-label>•&emsp;Connection or disconnection of electric motors,</mat-label>
-                    <br>
-                    <mat-label>•&emsp;Reaching into any panel, transformer or other electrical enclosure which may have energised circuits, capacitors, wiring etc.,</mat-label>
-                    <br>
-                    <mat-label>•&emsp;Work on instrumentation, instrument panels, or telecom equipment,</mat-label>
-                    <br>
-                    <mat-label>•&emsp;Where removal of a part of the circuit takes place outside normal operating conditions</mat-label>
-                    <br>
-                </div>
-                <div *ngIf = "this.selectedPermitType == 'Work at height permit (WAHP)'" class = "wahp-info-container">
-                    <mat-icon style = "color: darkslategrey; vertical-align: middle;">location_city</mat-icon><mat-label style = "font-weight: 450;">WORK AT HEIGHT PERMIT</mat-label>
-                    <br><br>
-                    <mat-label>A work at height permit is required for work in any place where, including a place at or below ground level, obtaining access to or egress from such place while at work, except by a staircase in permanent workplace, where, if measures required by the regulations were not taken, a person could fall a distance liable to cause personal injury. Some examples include:</mat-label>
-                    <br><br>
-                    <mat-label>•&emsp;Elevated place of work, e.g.: on a ladder or a flat roof,</mat-label>
-                    <br>
-                    <mat-label>•&emsp;Vicinity of an opening,</mat-label>
-                    <br>
-                    <mat-label>•&emsp;Vicinity of an edge,</mat-label>
-                    <br>
-                    <mat-label>•&emsp;Any other place (whether above or below ground), e.g.: fall through a fragile surface</mat-label>
-                    <br>
-                </div>
-                <div *ngIf = "this.selectedPermitType == 'Confined space permit (CSP)'" class = "csp-info-container">
-                    <mat-icon style = "color: forestgreen; vertical-align: middle;">zoom_out_map</mat-icon><mat-label style = "font-weight: 450;">CONFINED SPACE PERMIT</mat-label>
-                    <br><br>
-                    <mat-label>A confined space permit is required to allow personnel to enter a confined space such as a blade, trench, tank vessel, etc. Other criteria include:</mat-label>
-                    <br><br>
-                    <mat-label>•&emsp;Limited openings for entry and exit,</mat-label>
-                    <br>
-                    <mat-label>•&emsp;The space is not intended for continuous human occupancy,</mat-label>
-                    <br>
-                    <mat-label>•&emsp;The space is large enough for you to enter and conduct work</mat-label>
-                    <br>
-                </div>
-                <div *ngIf = "this.selectedPermitType == ''"></div>
                 <br>
                 <mat-divider></mat-divider>
                 <br><br>
-                <mat-form-field class = "start-date-picker" appearance = "fill">
-                    <mat-label>Select start date</mat-label>
-                    <input 
-                        matInput 
-                        required
-                        formControlName = "startDate" 
-                        placeholder = "Start date"
-                        [matDatepicker] = "startDatePicker"
-                        (dateChange) = "this.startDateInput = this.sectionOneAFormGroup.get('startDate')?.value;">
-                    <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matSuffix [for] = "startDatePicker"></mat-datepicker-toggle>
-                    <mat-datepicker #startDatePicker></mat-datepicker>
-                </mat-form-field>
-                <mat-icon style = "color: gray">link</mat-icon>
-                <mat-form-field class = "start-time-picker" appearance = "fill">
-                    <mat-label>Select start time</mat-label>
-                    <input 
-                        matInput 
-                        required
-                        formControlName = "startTime" 
-                        placeholder = "Start time"
-                        [ngxTimepicker] = "startTimePicker" 
-                        (ngModelChange) = "this.startTimeInput = this.sectionOneAFormGroup.get('startTime')?.value;">
-                    <ngx-material-timepicker-toggle matSuffix [for] = "startTimePicker"></ngx-material-timepicker-toggle>
-                    <ngx-material-timepicker #startTimePicker></ngx-material-timepicker>
-                </mat-form-field>
-                <br><br>
-                <mat-form-field class = "end-date-picker" appearance = "fill">
-                    <mat-label>Select end date</mat-label>
-                    <input 
-                        matInput 
-                        required
-                        formControlName = "endDate" 
-                        placeholder = "End date" 
-                        [matDatepicker] = "endDatePicker"
-                        (dateChange) = "this.endDateInput = this.sectionOneAFormGroup.get('endDate')?.value;">
-                    <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matSuffix [for] = "endDatePicker"></mat-datepicker-toggle>
-                    <mat-datepicker #endDatePicker></mat-datepicker>
-                </mat-form-field>
-                <mat-icon style = "color: gray">link</mat-icon>
-                <mat-form-field class = "end-time-picker" appearance = "fill">
-                    <mat-label>Select end time</mat-label>
-                    <input 
-                        matInput 
-                        required 
-                        formControlName = "endTime" 
-                        placeholder = "End time" 
-                        [ngxTimepicker] = "endTimePicker" 
-                        (ngModelChange) = "this.endTimeInput = this.sectionOneAFormGroup.get('endTime')?.value;">
-                    <ngx-material-timepicker-toggle matSuffix [for] = "endTimePicker"></ngx-material-timepicker-toggle>
-                    <ngx-material-timepicker #endTimePicker></ngx-material-timepicker>
-                </mat-form-field>
+                <div class = "start-end-dates-container">
+                    <mat-form-field class = "start-date-picker" appearance = "fill">
+                        <mat-label>Select start date</mat-label>
+                        <input 
+                            matInput 
+                            required
+                            formControlName = "startDate" 
+                            placeholder = "Start date"
+                            [matDatepicker] = "startDatePicker"
+                            (dateChange) = "this.startDateInput = this.sectionOneAFormGroup.get('startDate')?.value;">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matSuffix [for] = "startDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #startDatePicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field class = "start-time-picker" appearance = "fill">
+                        <mat-label>Select start time</mat-label>
+                        <input 
+                            matInput 
+                            required
+                            formControlName = "startTime" 
+                            placeholder = "Start time"
+                            [ngxTimepicker] = "startTimePicker" 
+                            (ngModelChange) = "this.startTimeInput = this.sectionOneAFormGroup.get('startTime')?.value;">
+                        <ngx-material-timepicker-toggle matSuffix [for] = "startTimePicker"></ngx-material-timepicker-toggle>
+                        <ngx-material-timepicker #startTimePicker></ngx-material-timepicker>
+                    </mat-form-field>
+                    <br><br>
+                    <mat-form-field class = "end-date-picker" appearance = "fill">
+                        <mat-label>Select end date</mat-label>
+                        <input 
+                            matInput 
+                            required
+                            formControlName = "endDate" 
+                            placeholder = "End date" 
+                            [matDatepicker] = "endDatePicker"
+                            (dateChange) = "this.endDateInput = this.sectionOneAFormGroup.get('endDate')?.value;">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matSuffix [for] = "endDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #endDatePicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field class = "end-time-picker" appearance = "fill">
+                        <mat-label>Select end time</mat-label>
+                        <input 
+                            matInput 
+                            required 
+                            formControlName = "endTime" 
+                            placeholder = "End time" 
+                            [ngxTimepicker] = "endTimePicker" 
+                            (ngModelChange) = "this.endTimeInput = this.sectionOneAFormGroup.get('endTime')?.value;">
+                        <ngx-material-timepicker-toggle matSuffix [for] = "endTimePicker"></ngx-material-timepicker-toggle>
+                        <ngx-material-timepicker #endTimePicker></ngx-material-timepicker>
+                    </mat-form-field>
+                </div>
                 <br><br> 
                 <mat-form-field class = "task-desc-input" appearance = "fill">
                     <mat-label>Task description</mat-label>
@@ -290,18 +285,11 @@
             </form>
         </mat-step>
         <mat-step [stepControl] = "this.sectionOneBFormGroup" [errorMessage] = "this.errorMessage">
-            <form class = "section-one-form" [formGroup] = "this.sectionOneBFormGroup">
+            <form class = "safety-measures-form" [formGroup] = "this.sectionOneBFormGroup">
                 <ng-template matStepLabel>Section I (B): Safety Measures</ng-template>
                 <div *ngIf = "this.selectedPermitType == 'Work at height permit (WAHP)'">
-                    <div style = "
-                        width: fit-content;
-                        padding: 8px; 
-                        padding-left: 10px;
-                        padding-right: 10px;
-                        background-color: rgb(103, 58, 183); 
-                        color: white; 
-                        border-radius: 5px;">
-                        <mat-label class = "section-title">
+                    <div class = "section-title">
+                        <mat-label class = "section-title-desc">
                             <mat-icon style = "vertical-align: middle; font-size: 22px;">create</mat-icon> This section is to be completed by a <mat-label style = "font-weight: 425">representative supervisor</mat-label>
                         </mat-label>
                     </div>
@@ -546,15 +534,8 @@
                     <br>
                 </div>
                 <div *ngIf = "this.selectedPermitType == 'Confined space permit (CSP)'">
-                    <div style = "
-                        width: fit-content;
-                        padding: 8px; 
-                        padding-left: 10px;
-                        padding-right: 10px;
-                        background-color: rgb(103, 58, 183); 
-                        color: white; 
-                        border-radius: 5px;">
-                        <mat-label class = "section-title">
+                    <div class = "section-title">
+                        <mat-label class = "section-title-desc">
                             <mat-icon style = "vertical-align: middle; font-size: 22px;">create</mat-icon> This section is to be completed by a <mat-label style = "font-weight: 425">representative supervisor</mat-label>
                         </mat-label>
                     </div>
@@ -811,15 +792,8 @@
                     <br>
                 </div>
                 <div *ngIf = "this.selectedPermitType == 'Hot work permit (HWP)'">
-                    <div style = "
-                        width: fit-content;
-                        padding: 8px; 
-                        padding-left: 10px;
-                        padding-right: 10px;
-                        background-color: rgb(103, 58, 183); 
-                        color: white; 
-                        border-radius: 5px;">
-                        <mat-label class = "section-title">
+                    <div class = "section-title">
+                        <mat-label class = "section-title-desc">
                             <mat-icon style = "vertical-align: middle; font-size: 22px;">create</mat-icon> This section is to be completed by a <mat-label style = "font-weight: 425">representative supervisor</mat-label>
                         </mat-label>
                     </div>
@@ -1099,15 +1073,8 @@
                     <br>
                 </div>
                 <div *ngIf = "this.selectedPermitType == 'Cold work permit (CWP)'">
-                    <div style = "
-                        width: fit-content;
-                        padding: 8px; 
-                        padding-left: 10px;
-                        padding-right: 10px;
-                        background-color: rgb(103, 58, 183); 
-                        color: white; 
-                        border-radius: 5px;">
-                        <mat-label class = "section-title">
+                    <div class = "section-title">
+                        <mat-label class = "section-title-desc">
                             <mat-icon style = "vertical-align: middle; font-size: 22px;">create</mat-icon> This section is to be completed by a <mat-label style = "font-weight: 425">representative supervisor</mat-label>
                         </mat-label>
                     </div>
@@ -1343,15 +1310,8 @@
                     <br>
                 </div>
                 <div *ngIf = "this.selectedPermitType == 'Electrical permit (EP)'">
-                    <div style = "
-                        width: fit-content;
-                        padding: 8px; 
-                        padding-left: 10px;
-                        padding-right: 10px;
-                        background-color: rgb(103, 58, 183); 
-                        color: white; 
-                        border-radius: 5px;">
-                        <mat-label class = "section-title">
+                    <div class = "section-title">
+                        <mat-label class = "section-title-desc">
                             <mat-icon style = "vertical-align: middle; font-size: 22px;">create</mat-icon> This section is to be completed by a <mat-label style = "font-weight: 425">representative supervisor</mat-label>
                         </mat-label>
                     </div>
@@ -1593,25 +1553,18 @@
             </form>
         </mat-step>
         <mat-step [stepControl] = "this.sectionOneCFormGroup" [errorMessage] = "this.errorMessage">
-            <form class = "section-one-form" [formGroup] = "this.sectionOneCFormGroup">
+            <form class = "personnel-dets-form" [formGroup] = "this.sectionOneCFormGroup">
                 <ng-template matStepLabel>Section I (C): Personnel Details</ng-template>
-                <div style = "
-                    width: fit-content;
-                    padding: 8px; 
-                    padding-left: 10px;
-                    padding-right: 10px;
-                    background-color: rgb(103, 58, 183); 
-                    color: white; 
-                    border-radius: 5px;">
-                    <mat-label class = "section-title">
+                <div class = "section-title">
+                    <mat-label class = "section-title-desc">
                         <mat-icon style = "vertical-align: middle; font-size: 22px;">create</mat-icon> This section is to be completed by a <mat-label style = "font-weight: 425">representative supervisor</mat-label>
                     </mat-label>
                 </div>
                 <br>
-                <h2>Worker(s) and/or Additional Supervisor(s) Details</h2>
+                <h2>Personnel Details</h2>
                 <mat-label>The number of fillable rows depends on the <mat-label style = "font-weight: 425">total number of workers and supervisors</mat-label> specified in Section I (A),
                 <br>
-                <mat-label style = "font-weight: 425">excluding the representative supervisor (applicant of this request)</mat-label>.</mat-label>
+                <mat-label style = "font-weight: 425">including the representative supervisor (applicant of this request)</mat-label>.</mat-label>
                 <br><br>
                 <mat-label class = "required-label">* Required field</mat-label>
                 <br><br>
@@ -1772,17 +1725,47 @@
                                 </mat-form-field>
                             </mat-grid-tile>
                         </div>
+
+                        <div *ngIf = "this.totalNoOfAttendants >= 6">
+                            <mat-grid-tile>
+                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <input 
+                                        matInput
+                                        [placeholder] = "'Worker / supervisor ' + this.attendantDetsData[5].id"
+                                        [(ngModel)] = "this.attendantDetsData[5].name"
+                                        formControlName = "ad6_name">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <input
+                                        matInput
+                                        [inputMask] = "this.nricOrFinNoInputMask"
+                                        [(ngModel)] = "this.attendantDetsData[5].nricOrFinNo"
+                                        formControlName = "ad6_nricOrFinNo">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <input
+                                        matInput
+                                        type = "number"
+                                        [(ngModel)] = "this.attendantDetsData[5].contactNo"
+                                        formControlName = "ad6_contactNo">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                        </div>
                         
                     </mat-grid-list>
                 </div>
                 <br><br>
                 <mat-divider></mat-divider>
                 <br>
-                <h2>Representative Supervisor Details</h2>
+                <h2>Applicant Details</h2>
                 <mat-label class = "required-label">* Required field</mat-label>
                 <br><br>
                 <mat-form-field class = "apl-name-input" appearance = "fill">
-                    <mat-label>Rep. supervisor name</mat-label>
+                    <mat-label>Name</mat-label>
                     <input matInput required [(ngModel)] = "this.applicantNameInput" formControlName = "aplName">
                 </mat-form-field>
                 <br>
@@ -1828,7 +1811,7 @@
                 </mat-form-field>
                 <br>
                 <mat-form-field class = "apl-email-input" appearance = "fill">
-                    <mat-label>Rep. supervisor email</mat-label>
+                    <mat-label>Email address</mat-label>
                     <input 
                         matInput 
                         required

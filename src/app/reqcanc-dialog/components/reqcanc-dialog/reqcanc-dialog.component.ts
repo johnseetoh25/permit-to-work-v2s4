@@ -38,6 +38,7 @@ export class ReqcancDialogComponent implements OnInit {
     this.db.update(
       toReqCanc?.id,
       toReqCanc?.ptwId,
+      toReqCanc?.ptwYear,
       toReqCanc?.permitType,
       toReqCanc?.locationOfWork?.main,
       toReqCanc?.locationOfWork?.sub,
@@ -245,6 +246,10 @@ export class ReqcancDialogComponent implements OnInit {
       toReqCanc?.attendantDets?.[4].name,
       toReqCanc?.attendantDets?.[4].nricOrFinNo,
       toReqCanc?.attendantDets?.[4].contactNo,
+
+      toReqCanc?.attendantDets?.[5].name,
+      toReqCanc?.attendantDets?.[5].nricOrFinNo,
+      toReqCanc?.attendantDets?.[5].contactNo,
 
       toReqCanc?.applicantDets?.name,
       toReqCanc?.applicantDets?.nricOrFinNo,

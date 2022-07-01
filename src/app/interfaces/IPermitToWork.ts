@@ -1,6 +1,7 @@
 export interface IPermitToWork {
 	id: number,
 	ptwId: string,
+	ptwYear: string,
     locationOfWork: {
 		main: string,
 		sub: string
@@ -396,6 +397,12 @@ export interface IPermitToWork {
 		}
 	},
 	attendantDets: [
+		{
+			id: number,
+			name: string,
+			nricOrFinNo: string,
+			contactNo: string
+		},
 		{
 			id: number,
 			name: string,

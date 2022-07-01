@@ -44,7 +44,7 @@
             </div>
             <div id = "status-col-ep">
                 <div>
-                    <mat-label>Effective period</mat-label>
+                    <mat-label>Permit validity</mat-label>
                 </div>
                 <div>
                     <mat-label>
@@ -271,30 +271,35 @@
                                     <mat-grid-tile>NRIC/FIN No.</mat-grid-tile>
                                     <mat-grid-tile>Contact No.</mat-grid-tile>
                                 </mat-grid-tile-header>
-                                <div *ngIf = "(dt.noOfWorkers! + dt.noOfSupervisors!) - 1 >= 1">
+                                <div *ngIf = "(dt.noOfWorkers! + dt.noOfSupervisors!) >= 1">
                                     <mat-grid-tile>{{ dt.attendantDets?.[0]?.name }}</mat-grid-tile>
                                     <mat-grid-tile>{{ dt.attendantDets?.[0]?.nricOrFinNo }}</mat-grid-tile>
                                     <mat-grid-tile>{{ dt.attendantDets?.[0]?.contactNo }}</mat-grid-tile>
                                 </div>
-                                <div *ngIf = "(dt.noOfWorkers! + dt.noOfSupervisors!) - 1 >= 2">
+                                <div *ngIf = "(dt.noOfWorkers! + dt.noOfSupervisors!) >= 2">
                                     <mat-grid-tile>{{ dt.attendantDets?.[1]?.name }}</mat-grid-tile>
                                     <mat-grid-tile>{{ dt.attendantDets?.[1]?.nricOrFinNo }}</mat-grid-tile>
                                     <mat-grid-tile>{{ dt.attendantDets?.[1]?.contactNo }}</mat-grid-tile>
                                 </div>
-                                <div *ngIf = "(dt.noOfWorkers! + dt.noOfSupervisors!) - 1 >= 3">
+                                <div *ngIf = "(dt.noOfWorkers! + dt.noOfSupervisors!) >= 3">
                                     <mat-grid-tile>{{ dt.attendantDets?.[2]?.name }}</mat-grid-tile>
                                     <mat-grid-tile>{{ dt.attendantDets?.[2]?.nricOrFinNo }}</mat-grid-tile>
                                     <mat-grid-tile>{{ dt.attendantDets?.[2]?.contactNo }}</mat-grid-tile>
                                 </div>
-                                <div *ngIf = "(dt.noOfWorkers! + dt.noOfSupervisors!) - 1 >= 4">
+                                <div *ngIf = "(dt.noOfWorkers! + dt.noOfSupervisors!) >= 4">
                                     <mat-grid-tile>{{ dt.attendantDets?.[3]?.name }}</mat-grid-tile>
                                     <mat-grid-tile>{{ dt.attendantDets?.[3]?.nricOrFinNo }}</mat-grid-tile>
                                     <mat-grid-tile>{{ dt.attendantDets?.[3]?.contactNo }}</mat-grid-tile>
                                 </div>
-                                <div *ngIf = "(dt.noOfWorkers! + dt.noOfSupervisors!) - 1 >= 5">
+                                <div *ngIf = "(dt.noOfWorkers! + dt.noOfSupervisors!) >= 5">
                                     <mat-grid-tile>{{ dt.attendantDets?.[4]?.name }}</mat-grid-tile>
                                     <mat-grid-tile>{{ dt.attendantDets?.[4]?.nricOrFinNo }}</mat-grid-tile>
                                     <mat-grid-tile>{{ dt.attendantDets?.[4]?.contactNo }}</mat-grid-tile>
+                                </div>
+                                <div *ngIf = "(dt.noOfWorkers! + dt.noOfSupervisors!) >= 6">
+                                    <mat-grid-tile>{{ dt.attendantDets?.[5]?.name }}</mat-grid-tile>
+                                    <mat-grid-tile>{{ dt.attendantDets?.[5]?.nricOrFinNo }}</mat-grid-tile>
+                                    <mat-grid-tile>{{ dt.attendantDets?.[5]?.contactNo }}</mat-grid-tile>
                                 </div>
                             </mat-grid-list>
                         </div>

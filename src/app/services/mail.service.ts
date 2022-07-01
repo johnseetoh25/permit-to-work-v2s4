@@ -100,6 +100,11 @@ export class MailService {
           adets_five_name: data.attendantDets[4].name,
           adets_five_nric_or_fin_no: data.attendantDets[4].nricOrFinNo,
           adets_five_contact_no: data.attendantDets[4].contactNo,
+
+          adets_six_id: data.attendantDets[5].id,
+          adets_six_name: data.attendantDets[5].name,
+          adets_six_nric_or_fin_no: data.attendantDets[5].nricOrFinNo,
+          adets_six_contact_no: data.attendantDets[5].contactNo,
           
           to_email: data.applicantDets.email
         };
@@ -172,6 +177,11 @@ export class MailService {
           adets_five_name: data.attendantDets[4].name,
           adets_five_nric_or_fin_no: data.attendantDets[4].nricOrFinNo,
           adets_five_contact_no: data.attendantDets[4].contactNo,
+
+          adets_six_id: data.attendantDets[5].id,
+          adets_six_name: data.attendantDets[5].name,
+          adets_six_nric_or_fin_no: data.attendantDets[5].nricOrFinNo,
+          adets_six_contact_no: data.attendantDets[5].contactNo,
     
           to_email: data.applicantDets.email
         };

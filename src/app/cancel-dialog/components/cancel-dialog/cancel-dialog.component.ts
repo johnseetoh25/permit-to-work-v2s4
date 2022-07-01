@@ -44,6 +44,7 @@ export class CancelDialogComponent implements OnInit {
     this.db.update(
       toCancel?.id,
       toCancel?.ptwId,
+      toCancel?.ptwYear,
       toCancel?.permitType,
       toCancel?.locationOfWork?.main,
       toCancel?.locationOfWork?.sub,
@@ -251,6 +252,10 @@ export class CancelDialogComponent implements OnInit {
       toCancel?.attendantDets?.[4].name,
       toCancel?.attendantDets?.[4].nricOrFinNo,
       toCancel?.attendantDets?.[4].contactNo,
+
+      toCancel?.attendantDets?.[5].name,
+      toCancel?.attendantDets?.[5].nricOrFinNo,
+      toCancel?.attendantDets?.[5].contactNo,
 
       toCancel?.applicantDets?.name,
       toCancel?.applicantDets?.nricOrFinNo,

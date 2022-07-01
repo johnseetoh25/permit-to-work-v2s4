@@ -138,6 +138,7 @@ export class SaDialogComponent implements OnInit {
     this.db.update(
       toEvaluate?.id,
       toEvaluate?.ptwId,
+      toEvaluate?.ptwYear,
       toEvaluate?.permitType,
       toEvaluate?.locationOfWork?.main,
       toEvaluate?.locationOfWork?.sub,
@@ -345,6 +346,10 @@ export class SaDialogComponent implements OnInit {
       toEvaluate?.attendantDets?.[4].name,
       toEvaluate?.attendantDets?.[4].nricOrFinNo,
       toEvaluate?.attendantDets?.[4].contactNo,
+
+      toEvaluate?.attendantDets?.[5].name,
+      toEvaluate?.attendantDets?.[5].nricOrFinNo,
+      toEvaluate?.attendantDets?.[5].contactNo,
 
       toEvaluate?.applicantDets?.name,
       toEvaluate?.applicantDets?.nricOrFinNo,

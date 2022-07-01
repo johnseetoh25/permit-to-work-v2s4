@@ -26,7 +26,8 @@ export class SubmitDialogComponent implements OnInit {
   public ngOnInit(): void { }
 
   public submitApplication(): void {
-    this.injectedPartiallyCompletedPTWForm!.timestamp = new Date().toISOString();
+    this.injectedPartiallyCompletedPTWForm.timestamp = new Date().toISOString();
+    this.injectedPartiallyCompletedPTWForm.ptwYear = this.injectedPartiallyCompletedPTWForm.timestamp.substring(0, 4);
 
     this.ptwReqToSubmit = this.injectedPartiallyCompletedPTWForm;
     this.postPtwReq(this.ptwReqToSubmit);
@@ -40,6 +41,7 @@ export class SubmitDialogComponent implements OnInit {
         this.db.update(
           data?.id,
           generatedPtwId,
+          data?.ptwYear,
           data?.permitType,
           data?.locationOfWork?.main,
           data?.locationOfWork?.sub,
@@ -247,6 +249,10 @@ export class SubmitDialogComponent implements OnInit {
           data?.attendantDets?.[4].name,
           data?.attendantDets?.[4].nricOrFinNo,
           data?.attendantDets?.[4].contactNo,
+
+          data?.attendantDets?.[5].name,
+          data?.attendantDets?.[5].nricOrFinNo,
+          data?.attendantDets?.[5].contactNo,
 
           data?.applicantDets?.name,
           data?.applicantDets?.nricOrFinNo,

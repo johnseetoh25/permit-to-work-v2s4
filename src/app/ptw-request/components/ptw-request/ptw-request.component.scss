@@ -21,11 +21,26 @@
     border-radius: 10px;
 }
 
-.common-section-form, .section-one-form {
+.basic-info-form, 
+.safety-measures-form,
+.personnel-dets-form {
     margin: 16px;
 }
 
+.basic-info-form {
+    padding-left: 10.5%;
+    padding-right: 10.5%;
+}
+
 .section-title {
+    width: 100%;
+    padding: 8px;
+    background-color: rgb(103, 58, 183); 
+    color: white; 
+    border-radius: 5px;
+}
+
+.section-title-desc {
     font-size: medium;
     font-weight: lighter;
 }
@@ -64,7 +79,8 @@
 .apl-contact-no-input, 
 .apl-email-input,
 #apl-dcl-checkbox {
-    width: 512.5px;
+    //width: 512.5px;
+    width: 100%;
 }
 
 mat-grid-list {
@@ -105,11 +121,17 @@ mat-grid-list mat-grid-tile {
     border-color: gray;
 }
 
-.cwp-info-container {
-    background-color: gainsboro;
-    border-width: 1.5px;
-    border-style: solid;
-    border-color: gray;
+.permit-type-info-container {
+    display: flex;
+    align-items: center;
+}
+
+.hwp-info-container,
+.cwp-info-container,
+.ep-info-container,
+.wahp-info-container,
+.csp-info-container {
+    width: 100%;
 }
 
 .hwp-info-container {
@@ -148,17 +170,33 @@ mat-grid-list mat-grid-tile {
     border-color: gray;
 }
 
-.start-date-picker, 
-.start-time-picker, 
-.end-date-picker, 
-.end-time-picker, 
-.no-of-workers-input, 
-.no-of-spvs-input {
-    width: 245px;
+.start-end-dates-container {
+    display: inline;
+    align-items: center;
 }
 
+.start-date-picker, 
+.end-date-picker {
+    margin-right: 2.5%;
+}
+
+.no-of-workers-input {
+    margin-right: 2.5%;
+}
+
+.start-time-picker,
+.end-time-picker {
+    width: 40%;
+}
+
+.start-date-picker, 
+.end-date-picker {
+    width: 57.5%;
+}
+
+.no-of-workers-input, 
 .no-of-spvs-input {
-    padding-left: 22.5px;
+    width: 48.75%;
 }
 
 #cmi-left-col, 
