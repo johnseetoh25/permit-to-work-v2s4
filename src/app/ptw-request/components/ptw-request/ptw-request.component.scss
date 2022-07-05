@@ -204,55 +204,62 @@ mat-grid-list mat-grid-tile {
     width: 48.75%;
 }
 
-#cmi-per-left-col, 
-#cmi-per-mid-col, 
-#cmi-per-right-col {
-    width: 100%;
-}
+// ------------------------------WAH, HW, CW, E------------------------------
 
-// ------------------------------WAH------------------------------
-
-.wah-cmi-col {
+.cmi-col {
     overflow: hidden;
     width: 100%;
     margin-bottom: 35px;
 }
 
-#wah-cmi-left-col,
-#wah-cmi-mid-col, 
-#wah-cmi-right-col {
+.cmi-specify-col {
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+#cmi-left-col,
+#cmi-mid-col, 
+#cmi-right-col,
+#cmi-specify-mid-col {
     float: left;
 }
 
-#wah-cmi-left-col {
+#cmi-left-col {
     width: 100%;
     height: fit-content;
     margin-bottom: 5px;
 }
 
-#wah-cmi-mid-col {
+#cmi-mid-col {
     width: 225px;
     padding-left: 10px;
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
-#wah-cmi-right-col {
+#cmi-right-col {
     width: fit-content;
     height: 50px;
     padding-bottom: 10px;
 }
 
-.wah-s1-cmi-remarks-input {
+#cmi-specify-mid-col {
+    width: 225px;
+    padding-left: 10px;
+    padding-top: 20px;
+}
+
+.s1-cmi-remarks-input {
     width: 525px;
 }
 
-.wah-s1-cmi-specify-input {
+.s1-cmi-specify-input {
     width: 760px;
 }
 
-// ---------------------------------------------------------------
-// ------------------------------CS-------------------------------
+// --------------------------------------------------------------------------
+// ----------------------------------CS--------------------------------------
 
 .cs-cmi {
     overflow: hidden;
@@ -316,7 +323,7 @@ mat-grid-list mat-grid-tile {
     width: 100%;
 }
 
-// ---------------------------------------------------------------
+// --------------------------------------------------------------------------
 
 .mat-radio-button ~ .mat-radio-button {
     margin-left: 12.5px;
