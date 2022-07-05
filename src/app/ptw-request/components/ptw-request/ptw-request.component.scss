@@ -32,6 +32,11 @@
     padding-right: 10.5%;
 }
 
+.safety-measures-form {
+    padding-left: 10.5%;
+    padding-right: 10.5%;
+}
+
 .section-title {
     width: 100%;
     padding: 8px;
@@ -199,43 +204,126 @@ mat-grid-list mat-grid-tile {
     width: 48.75%;
 }
 
-#cmi-left-col, 
-#cmi-mid-col, 
-#cmi-right-col,
 #cmi-per-left-col, 
 #cmi-per-mid-col, 
 #cmi-per-right-col {
     width: 100%;
 }
 
-#cmi-mid-col {
-    text-align: center;
-}
+// ------------------------------WAH------------------------------
 
-#cmi-col {
-    width: 100%;
+.wah-cmi-col {
     overflow: hidden;
+    width: 100%;
+    margin-bottom: 35px;
 }
 
-#cmi-per-col {
-    width: 50%;
+#wah-cmi-left-col,
+#wah-cmi-mid-col, 
+#wah-cmi-right-col {
     float: left;
 }
 
-#cmi-ppe-col {
-    margin-left: 600px;
+#wah-cmi-left-col {
+    width: 100%;
+    height: fit-content;
+    margin-bottom: 5px;
 }
 
-.mat-radio-button ~ .mat-radio-button {
-    margin-left: 16px;
-    margin-bottom: 8px;
+#wah-cmi-mid-col {
+    width: 225px;
+    padding-left: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
-.wah-s1-cmi-remarks-input, .hw-s1-cmi-remarks-input, 
-.cw-s1-cmi-remarks-input, .e-s1-cmi-remarks-input {
-    width: 85%;
+#wah-cmi-right-col {
+    width: fit-content;
+    height: 50px;
+    padding-bottom: 10px;
+}
+
+.wah-s1-cmi-remarks-input {
+    width: 525px;
+}
+
+.wah-s1-cmi-specify-input {
+    width: 760px;
+}
+
+// ---------------------------------------------------------------
+// ------------------------------CS-------------------------------
+
+.cs-cmi {
+    overflow: hidden;
+    width: fit-content;
+}
+
+.cs-cmi-per,
+.cs-cmi-ppe {
+    float: left;
+    width: fit-content;
+    margin-bottom: 25px;
+}
+
+#cs-cmi-per-title,
+#cs-cmi-ppe-title {
+    margin-bottom: 20px;
+}
+
+.cs-cmi-per {
+    margin-right: 0px;
+}
+
+.cs-cmi-per-col,
+.cs-cmi-ppe-col {
+    overflow: hidden;
+    width: 100%;
+}
+
+#cs-cmi-per-left-col,
+#cs-cmi-per-right-col,
+#cs-cmi-ppe-left-col,
+#cs-cmi-ppe-right-col,
+#cs-cmi-ppe-col {
+    float: left;
+    margin-bottom: 10px;
+    padding-top: 8px;
+}
+
+#cs-cmi-per-left-col,
+#cs-cmi-per-right-col,
+#cs-cmi-ppe-left-col,
+#cs-cmi-ppe-right-col {
+    height: 25px;
+}
+
+#cs-cmi-per-left-col,
+#cs-cmi-ppe-left-col {
+    width: 400px;
+}
+
+#cs-cmi-per-right-col,
+#cs-cmi-ppe-right-col {
+    width: 200px;
+}
+
+#cs-cmi-ppe-col {
+    width: 50%;
 }
 
 .cs-s1-cmi-ppe-specify-input {
-    width: 600px;
+    width: 100%;
+}
+
+// ---------------------------------------------------------------
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 12.5px;
+}
+
+.hw-s1-cmi-remarks-input, 
+.cw-s1-cmi-remarks-input, 
+.e-s1-cmi-remarks-input {
+    width: 85%;
 }
