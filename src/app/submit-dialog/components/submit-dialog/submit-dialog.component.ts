@@ -37,7 +37,7 @@ export class SubmitDialogComponent implements OnInit {
     this.db.post(toSubmit)
       .subscribe((data : IPermitToWork) => {
 
-        var generatedPtwId: string = "PTW-" + data?.id?.toString().padStart(3, "0");
+        var generatedPtwId: string = "PTW" + data?.ptwYear?.substring(2, 4) + data?.id?.toString().padStart(4, "0");
         this.db.update(
           data?.id,
           generatedPtwId,

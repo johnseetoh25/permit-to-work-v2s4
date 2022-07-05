@@ -434,13 +434,16 @@ export class PtwRequestComponent implements OnInit {
     this.toggleAttendantDetsTableRowValidator(this.totalNoOfAttendants);
   }
 
+  
   public sectionOneAFormGroupError = (controlName: string, errorName: string) => {
     return this.sectionOneAFormGroup.controls[controlName].hasError(errorName);
   }
 
+
   public sectionOneBFormGroupError = (controlName: string, errorName: string) => {
     return this.sectionOneBFormGroup.controls[controlName].hasError(errorName);
   }
+
 
   public sectionOneCFormGroupError = (controlName: string, errorName: string) => {
     return this.sectionOneCFormGroup.controls[controlName].hasError(errorName);
