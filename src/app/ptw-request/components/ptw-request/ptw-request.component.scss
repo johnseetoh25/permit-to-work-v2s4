@@ -27,12 +27,9 @@
     margin: 16px;
 }
 
-.basic-info-form {
-    padding-left: 10.5%;
-    padding-right: 10.5%;
-}
-
-.safety-measures-form {
+.basic-info-form,
+.safety-measures-form,
+.personnel-dets-form {
     padding-left: 10.5%;
     padding-right: 10.5%;
 }
@@ -82,10 +79,9 @@
 .apl-org-name-options, 
 .apl-dep-name-input, 
 .apl-contact-no-input, 
-.apl-email-input,
-#apl-dcl-checkbox {
-    //width: 512.5px;
+.apl-email-input {
     width: 100%;
+    margin-bottom: 5px;
 }
 
 mat-grid-list {
@@ -109,63 +105,54 @@ mat-grid-list mat-grid-tile {
 .cwp-info-container,
 .ep-info-container,
 .wahp-info-container,
-.csp-info-container {
-    width: 475px;
-    padding: 24px;
-    border-radius: 0.5em;
-}
-
+.csp-info-container,
 .apl-dcl-container {
-    width: 625px;
+    width: 95%;
     padding: 24px;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
     border-radius: 0.5em;
-    padding-right: 32px;
-    background-color: rgb(207, 218, 228);
     border-width: 1.5px;
     border-style: solid;
-    border-color: gray;
 }
 
-.permit-type-info-container {
+.permit-type-info-container, .apl-dcl {
     display: flex;
     align-items: center;
 }
 
-.hwp-info-container,
-.cwp-info-container,
-.ep-info-container,
-.wahp-info-container,
-.csp-info-container {
-    width: 100%;
-}
-
 .hwp-info-container {
     background-color: beige;
-    border-width: 1.5px;
-    border-style: solid;
     border-color: gray;
 }
 
 .cwp-info-container {
     background-color: azure;
-    border-width: 1.5px;
-    border-style: solid;
     border-color: gray;
 }
 
 .ep-info-container {
     background-color: dodgerblue;
     color: white;
-    border-width: 1.5px;
-    border-style: solid;
     border-color: gray;
 }
 
 .wahp-info-container {
     background-color: whitesmoke;
-    border-width: 1.5px;
-    border-style: solid;
     border-color: gray;
+}
+
+.apl-dcl-container {
+    background-color: rgb(207, 218, 228);
+    border-color: gray;
+}
+
+#apl-dcl-checkbox {
+    white-space: normal;
+}
+
+.mat-checkbox.mat-accent .mat-checkbox-inner-container {
+    margin: 2px 8px auto 0;
 }
 
 .csp-info-container {
@@ -295,14 +282,14 @@ mat-grid-list mat-grid-tile {
 #cs-cmi-ppe-col {
     float: left;
     margin-bottom: 10px;
-    padding-top: 8px;
+    padding-top: 15px;
 }
 
 #cs-cmi-per-left-col,
 #cs-cmi-per-right-col,
 #cs-cmi-ppe-left-col,
 #cs-cmi-ppe-right-col {
-    height: 25px;
+    height: 30px;
 }
 
 #cs-cmi-per-left-col,
@@ -313,6 +300,7 @@ mat-grid-list mat-grid-tile {
 #cs-cmi-per-right-col,
 #cs-cmi-ppe-right-col {
     width: 200px;
+    padding-left: 10px;
 }
 
 #cs-cmi-ppe-col {
@@ -327,10 +315,4 @@ mat-grid-list mat-grid-tile {
 
 .mat-radio-button ~ .mat-radio-button {
     margin-left: 12.5px;
-}
-
-.hw-s1-cmi-remarks-input, 
-.cw-s1-cmi-remarks-input, 
-.e-s1-cmi-remarks-input {
-    width: 85%;
 }

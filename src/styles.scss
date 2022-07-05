@@ -13,5 +13,28 @@ body {
     background-attachment: fixed;
     background-size: cover;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html, body { 
+    height: 100%; 
+}
+
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+.mat-checkbox.mat-accent {
+    .mat-checkbox-inner-container {
+       margin: 2px 8px auto 0;
+    }
+}
+
+#contact-no-input-arrow-removed mat-form-field input::-webkit-outer-spin-button,
+#contact-no-input-arrow-removed mat-form-field input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#contact-no-input-arrow-removed mat-form-field input[type=number] {
+  -moz-appearance: textfield;
+}

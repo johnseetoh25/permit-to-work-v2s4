@@ -33,8 +33,6 @@
                 </div>
                 <br>
                 <h2>Application Form</h2>
-                <mat-label class = "required-label">* Required field</mat-label>
-                <br><br>
                 <mat-form-field class = "location-of-work-options" appearance = "fill">
                     <mat-label>Select location of work</mat-label>
                     <mat-select required formControlName = "locationOfWork" [(value)] = "this.selectedLocationOfWork">
@@ -43,6 +41,7 @@
                         <mat-option value = "Work at height training platform">Work at height training platform</mat-option>
                         <mat-option value = "Confined space training room">Confined space training room</mat-option>
                     </mat-select>
+                    <mat-error *ngIf = "this.sectionOneAFormGroupError('locationOfWork', 'required');">Location of work is required.</mat-error>
                 </mat-form-field>
                 <br>
                 <mat-form-field class = "loc-sector-options" appearance = "fill">
@@ -64,6 +63,7 @@
                             <mat-option value = "Ternary treatment">Ternary treatment</mat-option>
                         </div>
                     </mat-select>
+                    <mat-error *ngIf = "this.sectionOneAFormGroupError('locationSector', 'required');">Location sector is required.</mat-error>
                 </mat-form-field>
                 <br>
                 <mat-form-field class = "permit-type-options" appearance = "fill">
@@ -109,6 +109,7 @@
                             Confined space permit (CSP)
                         </mat-option>
                     </mat-select>
+                    <mat-error *ngIf = "this.sectionOneAFormGroupError('permitType', 'required');">Permit type is required.</mat-error>
                 </mat-form-field>
                 <br>
                 <div class = "permit-type-info-container">
@@ -196,6 +197,7 @@
                         <mat-hint>MM/DD/YYYY</mat-hint>
                         <mat-datepicker-toggle matSuffix [for] = "startDatePicker"></mat-datepicker-toggle>
                         <mat-datepicker #startDatePicker></mat-datepicker>
+                        <mat-error *ngIf = "this.sectionOneAFormGroupError('startDate', 'required');">Start date is required.</mat-error>
                     </mat-form-field>
                     <mat-form-field class = "start-time-picker" appearance = "fill">
                         <mat-label>Select start time</mat-label>
@@ -208,6 +210,7 @@
                             (ngModelChange) = "this.startTimeInput = this.sectionOneAFormGroup.get('startTime')?.value;">
                         <ngx-material-timepicker-toggle matSuffix [for] = "startTimePicker"></ngx-material-timepicker-toggle>
                         <ngx-material-timepicker #startTimePicker></ngx-material-timepicker>
+                        <mat-error *ngIf = "this.sectionOneAFormGroupError('startTime', 'required');">Start time is required.</mat-error>
                     </mat-form-field>
                     <br><br>
                     <mat-form-field class = "end-date-picker" appearance = "fill">
@@ -222,6 +225,7 @@
                         <mat-hint>MM/DD/YYYY</mat-hint>
                         <mat-datepicker-toggle matSuffix [for] = "endDatePicker"></mat-datepicker-toggle>
                         <mat-datepicker #endDatePicker></mat-datepicker>
+                        <mat-error *ngIf = "this.sectionOneAFormGroupError('endDate', 'required');">End date is required.</mat-error>
                     </mat-form-field>
                     <mat-form-field class = "end-time-picker" appearance = "fill">
                         <mat-label>Select end time</mat-label>
@@ -234,12 +238,14 @@
                             (ngModelChange) = "this.endTimeInput = this.sectionOneAFormGroup.get('endTime')?.value;">
                         <ngx-material-timepicker-toggle matSuffix [for] = "endTimePicker"></ngx-material-timepicker-toggle>
                         <ngx-material-timepicker #endTimePicker></ngx-material-timepicker>
+                        <mat-error *ngIf = "this.sectionOneAFormGroupError('endTime', 'required');">End time is required.</mat-error>
                     </mat-form-field>
                 </div>
                 <br><br> 
                 <mat-form-field class = "task-desc-input" appearance = "fill">
                     <mat-label>Task description</mat-label>
                     <textarea matInput required [(ngModel)] = "this.taskDescriptionInput" formControlName = "taskDesc"></textarea>
+                    <mat-error *ngIf = "this.sectionOneAFormGroupError('taskDesc', 'required');">Task description is required.</mat-error>
                 </mat-form-field>
                 <br>
                 <mat-form-field class = "no-of-workers-input" appearance = "fill">
@@ -295,11 +301,18 @@
                     </div>
                     <br>
                     <h2>Work at Height (WAH) Control Measures Implemented</h2>
-                    <mat-label class = "required-label">* Please fill out all the check boxes below</mat-label>
+                    <mat-label class = "required-label">* Please ensure all the checkboxes are checked, i.e.: from <mat-label style = "font-weight: 450;">(*)</mat-label> to <mat-label style = "color: forestgreen; font-weight: 450;">(✔)</mat-label></mat-label>
                     <br><br>
                     <div class = "cmi-col">
                         <div id = "cmi-left-col">
-                            <mat-label>1.&emsp;Due consideration given to eliminate work at heights tasks.</mat-label>
+                            <mat-label>1.&emsp;Due consideration given to eliminate work at heights tasks.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('wah_s1_cmi_q01_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('wah_s1_cmi_q01_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
                         </div>
                         <div id = "cmi-mid-col">
                             <mat-radio-group 
@@ -320,7 +333,15 @@
                     </div>
                     <div class = "cmi-col">
                         <div id = "cmi-left-col">
-                            <mat-label>2.&emsp;Safe means of access or egress provided.</mat-label>
+                            <mat-label>
+                                2.&emsp;Safe means of access or egress provided.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('wah_s1_cmi_q02_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('wah_s1_cmi_q02_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
                         </div>
                         <div id = "cmi-mid-col">
                             <mat-radio-group 
@@ -341,7 +362,15 @@
                     </div>
                     <div class = "cmi-col">
                         <div id = "cmi-left-col">
-                            <mat-label>3.&emsp;Edge protection provided wherever there is falling risks.</mat-label>
+                            <mat-label>
+                                3.&emsp;Edge protection provided wherever there is falling risks.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('wah_s1_cmi_q03_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('wah_s1_cmi_q03_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
                         </div>
                         <div id = "cmi-mid-col">
                             <mat-radio-group 
@@ -362,7 +391,15 @@
                     </div>
                     <div class = "cmi-col">
                         <div id = "cmi-left-col">
-                            <mat-label>4.&emsp;Fall prevention equipment used to provide access or work platform.</mat-label>
+                            <mat-label>
+                                4.&emsp;Fall prevention equipment used to provide access or work platform.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('wah_s1_cmi_q04_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('wah_s1_cmi_q04_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
                         </div>
                         <div id = "cmi-mid-col">
                             <mat-radio-group 
@@ -383,7 +420,15 @@
                     </div>
                     <div class = "cmi-col">
                         <div id = "cmi-left-col">
-                            <mat-label>5.&emsp;Fall prevention equipment are adequate and in good condition.</mat-label>
+                            <mat-label>
+                                5.&emsp;Fall prevention equipment are adequate and in good condition.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('wah_s1_cmi_q05_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('wah_s1_cmi_q05_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
                         </div>
                         <div id = "cmi-mid-col">
                             <mat-radio-group 
@@ -404,7 +449,15 @@
                     </div>
                     <div class = "cmi-col">
                         <div id = "cmi-left-col">
-                            <mat-label>6.&emsp;Anchorage/ lifeline installed and inspected by competent person.</mat-label>
+                            <mat-label>
+                                6.&emsp;Anchorage/ lifeline installed and inspected by competent person.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('wah_s1_cmi_q06_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('wah_s1_cmi_q06_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
                         </div>
                         <div id = "cmi-mid-col">
                             <mat-radio-group 
@@ -425,7 +478,15 @@
                     </div>
                     <div class = "cmi-col">
                         <div id = "cmi-left-col">
-                            <mat-label>7.&emsp;Travel restraint system used to exclude persons from falling risks.</mat-label>
+                            <mat-label>
+                                7.&emsp;Travel restraint system used to exclude persons from falling risks.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('wah_s1_cmi_q07_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('wah_s1_cmi_q07_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
                         </div>
                         <div id = "cmi-mid-col">
                             <mat-radio-group 
@@ -446,7 +507,15 @@
                     </div>
                     <div class = "cmi-col">
                         <div id = "cmi-left-col">
-                            <mat-label>8.&emsp;All persons subjected to falling risks are equipped with Personal Fall Arrest System (PFAS).</mat-label>
+                            <mat-label>
+                                8.&emsp;All persons subjected to falling risks are equipped with Personal Fall Arrest System (PFAS).
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('wah_s1_cmi_q08_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('wah_s1_cmi_q08_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
                         </div>
                         <div id = "cmi-mid-col">
                             <mat-radio-group 
@@ -467,7 +536,15 @@
                     </div>
                     <div class = "cmi-col">
                         <div id = "cmi-left-col">
-                            <mat-label>9.&emsp;All personnel are adequately trained to perform work at heights.</mat-label>
+                            <mat-label>
+                                9.&emsp;All personnel are adequately trained to perform work at heights.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('wah_s1_cmi_q09_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('wah_s1_cmi_q09_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
                         </div>
                         <div id = "cmi-mid-col">
                             <mat-radio-group 
@@ -488,7 +565,15 @@
                     </div>
                     <div class = "cmi-col">
                         <div id = "cmi-left-col">
-                            <mat-label>10.&emsp;Hazards and risk assessment are conducted and communicated.</mat-label>
+                            <mat-label>
+                                10.&emsp;Hazards and risk assessment are conducted and communicated.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('wah_s1_cmi_q10_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('wah_s1_cmi_q10_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
                         </div>
                         <div id = "cmi-mid-col">
                             <mat-radio-group 
@@ -527,22 +612,22 @@
                     </div>
                     <br>
                     <h2>Potential Confined Space (CS) Hazards</h2>
-                    <mat-label class = "required-label">* Required field</mat-label>
-                    <br><br>
                     <mat-form-field class = "cs-s1-ph-input" appearance = "fill">
                         <mat-label>Potential atmospheric hazards</mat-label>
                         <input required matInput [(ngModel)] = "this.cs_s1_ph_atmoInput" formControlName = "cs_s1_ph_atmo">
+                        <mat-error *ngIf = "this.sectionOneBFormGroupError('cs_s1_ph_atmo', 'required');">At least one atmospheric hazard is required.</mat-error>
                     </mat-form-field>
                     <br>
                     <mat-form-field class = "cs-s1-ph-input" appearance = "fill">
                         <mat-label>Potential non-atmospheric hazards</mat-label>
                         <input required matInput [(ngModel)] = "this.cs_s1_ph_nonAtmoInput" formControlName = "cs_s1_ph_nonAtmo">
+                        <mat-error *ngIf = "this.sectionOneBFormGroupError('cs_s1_ph_nonAtmo', 'required');">At least one non-atmospheric hazard is required.</mat-error>
                     </mat-form-field>
                     <br><br>
                     <mat-divider></mat-divider>
                     <br>
                     <h2>Confined Space (CS) Control Measures Implemented</h2>
-                    <mat-label class = "required-label">* Please fill out all the check boxes below</mat-label>
+                    <mat-label class = "required-label">* Please ensure all the checkboxes are checked, i.e.: from <mat-label style = "font-weight: 450;">(*)</mat-label> to <mat-label style = "color: forestgreen; font-weight: 450;">(✔)</mat-label></mat-label>
                     <br><br>
                     <div class = "cs-cmi">
                         <div class = "cs-cmi-per">
@@ -551,7 +636,15 @@
                             </div>
                             <div class = "cs-cmi-per-col">
                                 <div id = "cs-cmi-per-left-col">
-                                    <mat-label>1.&emsp;Ventilation</mat-label>
+                                    <mat-label>
+                                        1.&emsp;Ventilation
+                                        <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('cs_s1_cmi_per_q01_checked', 'required');">
+                                            (*)
+                                        </mat-label>
+                                        <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('cs_s1_cmi_per_q01_checked', 'required');">
+                                            (✔)
+                                        </mat-label>
+                                    </mat-label>
                                 </div>
                                 <div id = "cs-cmi-per-right-col">
                                     <mat-radio-group 
@@ -566,7 +659,15 @@
                             </div>
                             <div class = "cs-cmi-per-col">
                                 <div id = "cs-cmi-per-left-col">
-                                    <mat-label>2.&emsp;Lighting</mat-label>
+                                    <mat-label>
+                                        2.&emsp;Lighting
+                                        <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('cs_s1_cmi_per_q02_checked', 'required');">
+                                            (*)
+                                        </mat-label>
+                                        <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('cs_s1_cmi_per_q02_checked', 'required');">
+                                            (✔)
+                                        </mat-label>
+                                    </mat-label>
                                 </div>
                                 <div id = "cs-cmi-per-right-col">
                                     <mat-radio-group 
@@ -581,7 +682,15 @@
                             </div>
                             <div class = "cs-cmi-per-col">
                                 <div id = "cs-cmi-per-left-col">
-                                    <mat-label>3.&emsp;Barricades and signboards</mat-label>
+                                    <mat-label>
+                                        3.&emsp;Barricades and signboards
+                                        <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('cs_s1_cmi_per_q03_checked', 'required');">
+                                            (*)
+                                        </mat-label>
+                                        <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('cs_s1_cmi_per_q03_checked', 'required');">
+                                            (✔)
+                                        </mat-label>
+                                    </mat-label>
                                 </div>
                                 <div id = "cs-cmi-per-right-col">
                                     <mat-radio-group 
@@ -596,7 +705,15 @@
                             </div>
                             <div class = "cs-cmi-per-col">
                                 <div id = "cs-cmi-per-left-col">
-                                    <mat-label>4.&emsp;De-energisation/lockout-tag out (LOTO)</mat-label>
+                                    <mat-label>
+                                        4.&emsp;De-energisation/lockout-tag out (LOTO)
+                                        <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('cs_s1_cmi_per_q04_checked', 'required');">
+                                            (*)
+                                        </mat-label>
+                                        <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('cs_s1_cmi_per_q04_checked', 'required');">
+                                            (✔)
+                                        </mat-label>
+                                    </mat-label>
                                 </div>
                                 <div id = "cs-cmi-per-right-col">
                                     <mat-radio-group 
@@ -611,7 +728,15 @@
                             </div>
                             <div class = "cs-cmi-per-col">
                                 <div id = "cs-cmi-per-left-col">
-                                    <mat-label>5.&emsp;Blanking/bleeding of pipes</mat-label>
+                                    <mat-label>
+                                        5.&emsp;Blanking/bleeding of pipes
+                                        <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('cs_s1_cmi_per_q05_checked', 'required');">
+                                            (*)
+                                        </mat-label>
+                                        <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('cs_s1_cmi_per_q05_checked', 'required');">
+                                            (✔)
+                                        </mat-label>
+                                    </mat-label>
                                 </div>
                                 <div id = "cs-cmi-per-right-col">
                                     <mat-radio-group 
@@ -626,7 +751,15 @@
                             </div>
                             <div class = "cs-cmi-per-col">
                                 <div id = "cs-cmi-per-left-col">
-                                    <mat-label>6.&emsp;Personal gas detector</mat-label>
+                                    <mat-label>
+                                        6.&emsp;Personal gas detector
+                                        <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('cs_s1_cmi_per_q06_checked', 'required');">
+                                            (*)
+                                        </mat-label>
+                                        <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('cs_s1_cmi_per_q06_checked', 'required');">
+                                            (✔)
+                                        </mat-label>
+                                    </mat-label>
                                 </div>
                                 <div id = "cs-cmi-per-right-col">
                                     <mat-radio-group 
@@ -641,7 +774,15 @@
                             </div>
                             <div class = "cs-cmi-per-col">
                                 <div id = "cs-cmi-per-left-col">
-                                    <mat-label>7.&emsp;Torchlight</mat-label>
+                                    <mat-label>
+                                        7.&emsp;Torchlight
+                                        <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('cs_s1_cmi_per_q07_checked', 'required');">
+                                            (*)
+                                        </mat-label>
+                                        <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('cs_s1_cmi_per_q07_checked', 'required');">
+                                            (✔)
+                                        </mat-label>
+                                    </mat-label>
                                 </div>
                                 <div id = "cs-cmi-per-right-col">
                                     <mat-radio-group 
@@ -656,7 +797,15 @@
                             </div>
                             <div class = "cs-cmi-per-col">
                                 <div id = "cs-cmi-per-left-col">
-                                    <mat-label>8.&emsp;Flame-proof light</mat-label>
+                                    <mat-label>
+                                        8.&emsp;Flame-proof light
+                                        <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('cs_s1_cmi_per_q08_checked', 'required');">
+                                            (*)
+                                        </mat-label>
+                                        <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('cs_s1_cmi_per_q08_checked', 'required');">
+                                            (✔)
+                                        </mat-label>
+                                    </mat-label>
                                 </div>
                                 <div id = "cs-cmi-per-right-col">
                                     <mat-radio-group 
@@ -676,7 +825,15 @@
                             </div>
                             <div class = "cs-cmi-ppe-col">
                                 <div id = "cs-cmi-ppe-left-col">
-                                    <mat-label>1.&emsp;Safety helmet</mat-label>
+                                    <mat-label>
+                                        1.&emsp;Safety helmet
+                                        <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('cs_s1_cmi_ppe_q01_checked', 'required');">
+                                            (*)
+                                        </mat-label>
+                                        <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('cs_s1_cmi_ppe_q01_checked', 'required');">
+                                            (✔)
+                                        </mat-label>
+                                    </mat-label>
                                 </div>
                                 <div id = "cs-cmi-ppe-right-col">
                                     <mat-radio-group 
@@ -691,7 +848,15 @@
                             </div>
                             <div class = "cs-cmi-ppe-col">
                                 <div id = "cs-cmi-ppe-left-col">
-                                    <mat-label>2.&emsp;Eye protection</mat-label>
+                                    <mat-label>
+                                        2.&emsp;Eye protection
+                                        <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('cs_s1_cmi_ppe_q02_checked', 'required');">
+                                            (*)
+                                        </mat-label>
+                                        <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('cs_s1_cmi_ppe_q02_checked', 'required');">
+                                            (✔)
+                                        </mat-label>
+                                    </mat-label>
                                 </div>
                                 <div id = "cs-cmi-ppe-right-col">
                                     <mat-radio-group 
@@ -706,7 +871,15 @@
                             </div>
                             <div class = "cs-cmi-ppe-col">
                                 <div id = "cs-cmi-ppe-left-col">
-                                    <mat-label>3.&emsp;Hand protection</mat-label>
+                                    <mat-label>
+                                        3.&emsp;Hand protection
+                                        <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('cs_s1_cmi_ppe_q03_checked', 'required');">
+                                            (*)
+                                        </mat-label>
+                                        <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('cs_s1_cmi_ppe_q03_checked', 'required');">
+                                            (✔)
+                                        </mat-label>
+                                    </mat-label>
                                 </div>
                                 <div id = "cs-cmi-ppe-right-col">
                                     <mat-radio-group 
@@ -721,7 +894,15 @@
                             </div>
                             <div class = "cs-cmi-ppe-col">
                                 <div id = "cs-cmi-ppe-left-col">
-                                    <mat-label>4.&emsp;Safety harness/lifelines</mat-label>
+                                    <mat-label>
+                                        4.&emsp;Safety harness/lifelines
+                                        <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('cs_s1_cmi_ppe_q04_checked', 'required');">
+                                            (*)
+                                        </mat-label>
+                                        <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('cs_s1_cmi_ppe_q04_checked', 'required');">
+                                            (✔)
+                                        </mat-label>
+                                    </mat-label>
                                 </div>
                                 <div id = "cs-cmi-ppe-right-col">
                                     <mat-radio-group 
@@ -736,7 +917,15 @@
                             </div>
                             <div class = "cs-cmi-ppe-col">
                                 <div id = "cs-cmi-ppe-left-col">
-                                    <mat-label>5.&emsp;Respiratory protection</mat-label>
+                                    <mat-label>
+                                        5.&emsp;Respiratory protection
+                                        <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('cs_s1_cmi_ppe_q05_checked', 'required');">
+                                            (*)
+                                        </mat-label>
+                                        <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('cs_s1_cmi_ppe_q05_checked', 'required');">
+                                            (✔)
+                                        </mat-label>
+                                    </mat-label>
                                 </div>
                                 <div id = "cs-cmi-ppe-right-col">
                                     <mat-radio-group 
@@ -751,7 +940,15 @@
                             </div>
                             <div class = "cs-cmi-ppe-col">
                                 <div id = "cs-cmi-ppe-left-col">
-                                    <mat-label>6.&emsp;Name/identification badge</mat-label>
+                                    <mat-label>
+                                        6.&emsp;Name/identification badge
+                                        <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('cs_s1_cmi_ppe_q06_checked', 'required');">
+                                            (*)
+                                        </mat-label>
+                                        <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('cs_s1_cmi_ppe_q06_checked', 'required');">
+                                            (✔)
+                                        </mat-label>
+                                    </mat-label>
                                 </div>
                                 <div id = "cs-cmi-ppe-right-col">
                                     <mat-radio-group 
@@ -784,11 +981,19 @@
                     </div>
                     <br>
                     <h2>Hot Work (HW) Control Measures Implemented</h2>
-                    <mat-label class = "required-label">* Please fill out all the check boxes below</mat-label>
+                    <mat-label class = "required-label">* Please ensure all the checkboxes are checked, i.e.: from <mat-label style = "font-weight: 450;">(*)</mat-label> to <mat-label style = "color: forestgreen; font-weight: 450;">(✔)</mat-label></mat-label>
                     <br><br>
                     <div class = "cmi-col">
                         <div id = "cmi-left-col">
-                            <mat-label>1.&emsp;A risk assessment has been completed.</mat-label>
+                            <mat-label>
+                                1.&emsp;A risk assessment has been completed.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('hw_s1_cmi_q01_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('hw_s1_cmi_q01_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
                         </div>
                         <div id = "cmi-mid-col">
                             <mat-radio-group 
@@ -809,7 +1014,15 @@
                     </div>
                     <div class = "cmi-col">
                         <div id = "cmi-left-col">
-                            <mat-label>2.&emsp;The worker(s) are trained and competent to conduct hot work.</mat-label>
+                            <mat-label>
+                                2.&emsp;The worker(s) are trained and competent to conduct hot work.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('hw_s1_cmi_q02_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('hw_s1_cmi_q02_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
                         </div>
                         <div id = "cmi-mid-col">
                             <mat-radio-group 
@@ -830,7 +1043,15 @@
                     </div>
                     <div class = "cmi-col">
                         <div id = "cmi-left-col">
-                            <mat-label>3.&emsp;Combustible materials have been removed from the area of hot work.</mat-label>
+                            <mat-label>
+                                3.&emsp;Combustible materials have been removed from the area of hot work.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('hw_s1_cmi_q03_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('hw_s1_cmi_q03_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
                         </div>
                         <div id = "cmi-mid-col">
                             <mat-radio-group 
@@ -851,7 +1072,15 @@
                     </div>
                     <div class = "cmi-col">
                         <div id = "cmi-left-col">
-                            <mat-label>4.&emsp;Fire resistance sheeting has been used to protect the area of hot work.</mat-label>
+                            <mat-label>
+                                4.&emsp;Fire resistance sheeting has been used to protect the area of hot work.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('hw_s1_cmi_q04_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('hw_s1_cmi_q04_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
                         </div>
                         <div id = "cmi-mid-col">
                             <mat-radio-group 
@@ -872,7 +1101,15 @@
                     </div>
                     <div class = "cmi-col">
                         <div id = "cmi-left-col">
-                            <mat-label>5.&emsp;The potential of the presence of flammable vapor has been checked and LEL is < 3%.</mat-label>
+                            <mat-label>
+                                5.&emsp;The potential of the presence of flammable vapor has been checked and LEL is < 3%.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('hw_s1_cmi_q05_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('hw_s1_cmi_q05_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
                         </div>
                         <div id = "cmi-mid-col">
                             <mat-radio-group 
@@ -893,7 +1130,15 @@
                     </div>
                     <div class = "cmi-col">
                         <div id = "cmi-left-col">
-                            <mat-label>6.&emsp;Hot work equipment (e.g.: welding kit) has been inspected and is in a good condition.</mat-label>
+                            <mat-label>
+                                6.&emsp;Hot work equipment (e.g.: welding kit) has been inspected and is in a good condition.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('hw_s1_cmi_q06_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('hw_s1_cmi_q06_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
                         </div>
                         <div id = "cmi-mid-col">
                             <mat-radio-group 
@@ -914,7 +1159,15 @@
                     </div>
                     <div class = "cmi-col">
                         <div id = "cmi-left-col">
-                            <mat-label>7.&emsp;A second man or fire watch is in place for the hot work.</mat-label>
+                            <mat-label>
+                                7.&emsp;A second man or fire watch is in place for the hot work.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('hw_s1_cmi_q07_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('hw_s1_cmi_q07_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
                         </div>
                         <div id = "cmi-mid-col">
                             <mat-radio-group 
@@ -935,7 +1188,15 @@
                     </div>
                     <div class = "cmi-col">
                         <div id = "cmi-left-col">
-                            <mat-label>8.&emsp;Hot work workers are equipped with appropriate PPE (e.g.: welding mask, protective gloves etc.).</mat-label>
+                            <mat-label>
+                                8.&emsp;Hot work workers are equipped with appropriate PPE (e.g.: welding mask, protective gloves etc.).
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('hw_s1_cmi_q08_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('hw_s1_cmi_q08_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
                         </div>
                         <div id = "cmi-mid-col">
                             <mat-radio-group 
@@ -956,7 +1217,15 @@
                     </div>
                     <div class = "cmi-col">
                         <div id = "cmi-left-col">
-                            <mat-label>9.&emsp;Ventilation to remove hazardous welding fumes is in place.</mat-label>
+                            <mat-label>
+                                9.&emsp;Ventilation to remove hazardous welding fumes is in place.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('hw_s1_cmi_q09_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('hw_s1_cmi_q09_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
                         </div>
                         <div id = "cmi-mid-col">
                             <mat-radio-group 
@@ -977,7 +1246,15 @@
                     </div>
                     <div class = "cmi-col">
                         <div id = "cmi-left-col">
-                            <mat-label>10.&emsp;Fire extinguisher is in place near hot work.</mat-label>
+                            <mat-label>
+                                10.&emsp;Fire extinguisher is in place near hot work.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('hw_s1_cmi_q10_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('hw_s1_cmi_q10_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
                         </div>
                         <div id = "cmi-mid-col">
                             <mat-radio-group 
@@ -998,7 +1275,15 @@
                     </div>
                     <div class = "cmi-col">
                         <div id = "cmi-left-col">
-                            <mat-label>11.&emsp;First aid kit is in place near hot work in the event of burns.</mat-label>
+                            <mat-label>
+                                11.&emsp;First aid kit is in place near hot work in the event of burns.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('hw_s1_cmi_q11_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('hw_s1_cmi_q11_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
                         </div>
                         <div id = "cmi-mid-col">
                             <mat-radio-group 
@@ -1022,7 +1307,7 @@
                             <mat-label>12.&emsp;Other precautions required to undertake the work safely (please specify, if any):</mat-label>
                         </div>
                         <div id = "cmi-right-col">
-                            <mat-form-field class = "s1-cmi-remarks-input" appearance = "fill">
+                            <mat-form-field class = "s1-cmi-specify-input" appearance = "fill">
                                 <mat-label>Specify</mat-label>
                                 <input style = "height: 15px" matInput [(ngModel)] = "this.hw_s1_cmi_q12_specifyInput" [ngModelOptions] = "{ standalone: true }">
                             </mat-form-field>
@@ -1033,281 +1318,12 @@
                             <mat-label>13.&emsp;Other safety equipment required to undertake the work safely (please specify, if any):</mat-label>
                         </div>
                         <div id = "cmi-right-col">
-                            <mat-form-field class = "s1-cmi-remarks-input" appearance = "fill">
+                            <mat-form-field class = "s1-cmi-specify-input" appearance = "fill">
                                 <mat-label>Specify</mat-label>
                                 <input style = "height: 15px" matInput [(ngModel)] = "this.hw_s1_cmi_q13_specifyInput" [ngModelOptions] = "{ standalone: true }">
                             </mat-form-field>
                         </div>
                     </div>
-                    <!-- <mat-list>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>A risk assessment has been completed.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
-                                        required 
-                                        aria-label = "Select an option" 
-                                        [(ngModel)] = "this.hw_s1_cmi_q01_choiceInput" formControlName = "hw_s1_cmi_q01_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "hw-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.hw_s1_cmi_q01_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>The worker(s) are trained and competent to conduct hot work.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
-                                        required 
-                                        aria-label = "Select an option" 
-                                        [(ngModel)] = "this.hw_s1_cmi_q02_choiceInput" formControlName = "hw_s1_cmi_q02_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "hw-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.hw_s1_cmi_q02_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>Combustible materials have been removed from the area of hot work.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
-                                        required 
-                                        aria-label = "Select an option" 
-                                        [(ngModel)] = "this.hw_s1_cmi_q03_choiceInput" formControlName = "hw_s1_cmi_q03_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "hw-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.hw_s1_cmi_q03_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>Fire resistance sheeting has been used to protect the area of hot work.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
-                                        required 
-                                        aria-label = "Select an option" 
-                                        [(ngModel)] = "this.hw_s1_cmi_q04_choiceInput" formControlName = "hw_s1_cmi_q04_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "hw-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.hw_s1_cmi_q04_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>The potential of the presence of flammable vapor has been checked and LEL is < 3%.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
-                                        required 
-                                        aria-label = "Select an option" 
-                                        [(ngModel)] = "this.hw_s1_cmi_q05_choiceInput" formControlName = "hw_s1_cmi_q05_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "hw-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.hw_s1_cmi_q05_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>Hot work equipment (e.g.: welding kit) has been inspected and is in a good condition.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
-                                        required 
-                                        aria-label = "Select an option" 
-                                        [(ngModel)] = "this.hw_s1_cmi_q06_choiceInput" formControlName = "hw_s1_cmi_q06_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "hw-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.hw_s1_cmi_q06_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>A second man or fire watch is in place for the hot work.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
-                                        required 
-                                        aria-label = "Select an option" 
-                                        [(ngModel)] = "this.hw_s1_cmi_q07_choiceInput" formControlName = "hw_s1_cmi_q07_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "hw-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.hw_s1_cmi_q07_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>Hot work workers are equipped with appropriate PPE (e.g.: welding mask, protective gloves etc.).</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
-                                        required 
-                                        aria-label = "Select an option" 
-                                        [(ngModel)] = "this.hw_s1_cmi_q08_choiceInput" formControlName = "hw_s1_cmi_q08_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "hw-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.hw_s1_cmi_q08_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>Ventilation to remove hazardous welding fumes is in place.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
-                                        required 
-                                        aria-label = "Select an option" 
-                                        [(ngModel)] = "this.hw_s1_cmi_q09_choiceInput" formControlName = "hw_s1_cmi_q09_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "hw-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.hw_s1_cmi_q09_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>Fire extinguisher is in place near hot work.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
-                                        required 
-                                        aria-label = "Select an option" 
-                                        [(ngModel)] = "this.hw_s1_cmi_q10_choiceInput" formControlName = "hw_s1_cmi_q10_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "hw-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.hw_s1_cmi_q10_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>First aid kit is in place near hot work in the event of burns.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
-                                        required 
-                                        aria-label = "Select an option" 
-                                        [(ngModel)] = "this.hw_s1_cmi_q11_choiceInput" formControlName = "hw_s1_cmi_q11_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "hw-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.hw_s1_cmi_q11_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>Other precautions required to undertake the work safely (please specify, if any):</p>
-                            </div>
-                            <div id = "cmi-mid-col"></div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "hw-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Specify</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.hw_s1_cmi_q12_specifyInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>Other safety equipment required to undertake the work safely (please specify, if any):</p>
-                            </div>
-                            <div id = "cmi-mid-col"></div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "hw-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Specify</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.hw_s1_cmi_q13_specifyInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                    </mat-list> -->
                 </div>
                 <div *ngIf = "this.selectedPermitType == 'Cold work permit (CWP)'">
                     <div class = "section-title">
@@ -1319,232 +1335,289 @@
                     <h2>Cold Work (CW) Control Measures Implemented</h2>
                     <mat-label class = "required-label">* Please fill out all the check boxes below</mat-label>
                     <br><br>
-                    <mat-list>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>A risk assessment has been completed.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
+                    <div class = "cmi-col">
+                        <div id = "cmi-left-col">
+                            <mat-label>
+                                1.&emsp;A risk assessment has been completed.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('cw_s1_cmi_q01_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('cw_s1_cmi_q01_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
+                        </div>
+                        <div id = "cmi-mid-col">
+                            <mat-radio-group 
                                         required 
                                         aria-label = "Select an option" 
                                         [(ngModel)] = "this.cw_s1_cmi_q01_choiceInput" formControlName = "cw_s1_cmi_q01_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "cw-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.cw_s1_cmi_q01_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>The worker(s) are trained and competent to conduct the intended cold work.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
+                                <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                    {{ rads }}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div id = "cmi-right-col">
+                            <mat-form-field class = "s1-cmi-remarks-input" appearance = "fill">
+                                <mat-label>Remarks</mat-label>
+                                <input style = "height: 15px" matInput [(ngModel)] = "this.cw_s1_cmi_q01_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class = "cmi-col">
+                        <div id = "cmi-left-col">
+                            <mat-label>
+                                2.&emsp;The worker(s) are trained and competent to conduct the intended cold work.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('cw_s1_cmi_q02_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('cw_s1_cmi_q02_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
+                        </div>
+                        <div id = "cmi-mid-col">
+                            <mat-radio-group 
                                         required 
                                         aria-label = "Select an option" 
                                         [(ngModel)] = "this.cw_s1_cmi_q02_choiceInput" formControlName = "cw_s1_cmi_q02_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "cw-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.cw_s1_cmi_q02_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>Work environment is checked (e.g.: good ventilation, adequate lighting, and dry floor etc.).</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
+                                <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                    {{ rads }}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div id = "cmi-right-col">
+                            <mat-form-field class = "s1-cmi-remarks-input" appearance = "fill">
+                                <mat-label>Remarks</mat-label>
+                                <input style = "height: 15px" matInput [(ngModel)] = "this.cw_s1_cmi_q02_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class = "cmi-col">
+                        <div id = "cmi-left-col">
+                            <mat-label>
+                                3.&emsp;Work environment is checked (e.g.: good ventilation, adequate lighting, and dry floor etc.).
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('cw_s1_cmi_q03_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('cw_s1_cmi_q03_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
+                        </div>
+                        <div id = "cmi-mid-col">
+                            <mat-radio-group 
                                         required 
                                         aria-label = "Select an option" 
                                         [(ngModel)] = "this.cw_s1_cmi_q03_choiceInput" formControlName = "cw_s1_cmi_q03_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "cw-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.cw_s1_cmi_q03_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>Work equipment (e.g.: hand tool, power tool etc) has been inspected and is in a good condition.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
+                                <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                    {{ rads }}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div id = "cmi-right-col">
+                            <mat-form-field class = "s1-cmi-remarks-input" appearance = "fill">
+                                <mat-label>Remarks</mat-label>
+                                <input style = "height: 15px" matInput [(ngModel)] = "this.cw_s1_cmi_q03_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class = "cmi-col">
+                        <div id = "cmi-left-col">
+                            <mat-label>
+                                4.&emsp;Work equipment (e.g.: hand tool, power tool etc) has been inspected and is in a good condition.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('cw_s1_cmi_q04_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('cw_s1_cmi_q04_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
+                        </div>
+                        <div id = "cmi-mid-col">
+                            <mat-radio-group 
                                         required 
                                         aria-label = "Select an option" 
                                         [(ngModel)] = "this.cw_s1_cmi_q04_choiceInput" formControlName = "cw_s1_cmi_q04_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "cw-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.cw_s1_cmi_q04_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>Electrical and / or mechanical isolation has been undertaken.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
+                                <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                    {{ rads }}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div id = "cmi-right-col">
+                            <mat-form-field class = "s1-cmi-remarks-input" appearance = "fill">
+                                <mat-label>Remarks</mat-label>
+                                <input style = "height: 15px" matInput [(ngModel)] = "this.cw_s1_cmi_q04_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class = "cmi-col">
+                        <div id = "cmi-left-col">
+                            <mat-label>
+                                5.&emsp;Electrical and / or mechanical isolation has been undertaken.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('cw_s1_cmi_q05_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('cw_s1_cmi_q05_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
+                        </div>
+                        <div id = "cmi-mid-col">
+                            <mat-radio-group 
                                         required 
                                         aria-label = "Select an option" 
                                         [(ngModel)] = "this.cw_s1_cmi_q05_choiceInput" formControlName = "cw_s1_cmi_q05_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "cw-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.cw_s1_cmi_q05_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>No exposure to moving/ rotating machinery during cold work.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
+                                <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                    {{ rads }}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div id = "cmi-right-col">
+                            <mat-form-field class = "s1-cmi-remarks-input" appearance = "fill">
+                                <mat-label>Remarks</mat-label>
+                                <input style = "height: 15px" matInput [(ngModel)] = "this.cw_s1_cmi_q05_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class = "cmi-col">
+                        <div id = "cmi-left-col">
+                            <mat-label>
+                                6.&emsp;No exposure to moving/ rotating machinery during cold work.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('cw_s1_cmi_q06_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('cw_s1_cmi_q06_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
+                        </div>
+                        <div id = "cmi-mid-col">
+                            <mat-radio-group 
                                         required 
                                         aria-label = "Select an option" 
                                         [(ngModel)] = "this.cw_s1_cmi_q06_choiceInput" formControlName = "cw_s1_cmi_q06_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "cw-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.cw_s1_cmi_q06_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>A second man or standby is in place for the cold work.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
+                                <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                    {{ rads }}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div id = "cmi-right-col">
+                            <mat-form-field class = "s1-cmi-remarks-input" appearance = "fill">
+                                <mat-label>Remarks</mat-label>
+                                <input style = "height: 15px" matInput [(ngModel)] = "this.cw_s1_cmi_q06_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class = "cmi-col">
+                        <div id = "cmi-left-col">
+                            <mat-label>
+                                7.&emsp;A second man or standby is in place for the cold work.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('cw_s1_cmi_q07_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('cw_s1_cmi_q07_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
+                        </div>
+                        <div id = "cmi-mid-col">
+                            <mat-radio-group 
                                         required 
                                         aria-label = "Select an option" 
                                         [(ngModel)] = "this.cw_s1_cmi_q07_choiceInput" formControlName = "cw_s1_cmi_q07_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "cw-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.cw_s1_cmi_q07_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>Workers are equipped with appropriate PPE (e.g.: safety helmet, protective gloves etc.).</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
+                                <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                    {{ rads }}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div id = "cmi-right-col">
+                            <mat-form-field class = "s1-cmi-remarks-input" appearance = "fill">
+                                <mat-label>Remarks</mat-label>
+                                <input style = "height: 15px" matInput [(ngModel)] = "this.cw_s1_cmi_q07_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class = "cmi-col">
+                        <div id = "cmi-left-col">
+                            <mat-label>
+                                8.&emsp;Workers are equipped with appropriate PPE (e.g.: safety helmet, protective gloves etc.).
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('cw_s1_cmi_q08_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('cw_s1_cmi_q08_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
+                        </div>
+                        <div id = "cmi-mid-col">
+                            <mat-radio-group 
                                         required 
                                         aria-label = "Select an option" 
                                         [(ngModel)] = "this.cw_s1_cmi_q08_choiceInput" formControlName = "cw_s1_cmi_q08_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "cw-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.cw_s1_cmi_q08_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>First aid kit is in place near working area.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
+                                <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                    {{ rads }}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div id = "cmi-right-col">
+                            <mat-form-field class = "s1-cmi-remarks-input" appearance = "fill">
+                                <mat-label>Remarks</mat-label>
+                                <input style = "height: 15px" matInput [(ngModel)] = "this.cw_s1_cmi_q08_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class = "cmi-col">
+                        <div id = "cmi-left-col">
+                            <mat-label>
+                                9.&emsp;First aid kit is in place near working area.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('cw_s1_cmi_q09_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('cw_s1_cmi_q09_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
+                        </div>
+                        <div id = "cmi-mid-col">
+                            <mat-radio-group 
                                         required 
                                         aria-label = "Select an option" 
                                         [(ngModel)] = "this.cw_s1_cmi_q09_choiceInput" formControlName = "cw_s1_cmi_q09_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "cw-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.cw_s1_cmi_q09_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>Other precautions required to undertake the work safely (please specify, if any):</p>
-                            </div>
-                            <div id = "cmi-mid-col"></div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "cw-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Specify</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.cw_s1_cmi_q10_specifyInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>Other safety equipment required to undertake the work safely (please specify, if any):</p>
-                            </div>
-                            <div id = "cmi-mid-col"></div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "cw-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Specify</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.cw_s1_cmi_q11_specifyInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                    </mat-list>
-                    <br>
+                                <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                    {{ rads }}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div id = "cmi-right-col">
+                            <mat-form-field class = "s1-cmi-remarks-input" appearance = "fill">
+                                <mat-label>Remarks</mat-label>
+                                <input style = "height: 15px" matInput [(ngModel)] = "this.cw_s1_cmi_q09_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class = "cmi-specify-col">
+                        <div id = "cmi-left-col">
+                            <mat-label>10.&emsp;Other precautions required to undertake the work safely (please specify, if any):</mat-label>
+                        </div>
+                        <div id = "cmi-right-col">
+                            <mat-form-field class = "s1-cmi-specify-input" appearance = "fill">
+                                <mat-label>Specify</mat-label>
+                                <input style = "height: 15px" matInput [(ngModel)] = "this.cw_s1_cmi_q10_specifyInput" [ngModelOptions] = "{ standalone: true }">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class = "cmi-specify-col">
+                        <div id = "cmi-left-col">
+                            <mat-label>11.&emsp;Other safety equipment required to undertake the work safely (please specify, if any):</mat-label>
+                        </div>
+                        <div id = "cmi-right-col">
+                            <mat-form-field class = "s1-cmi-specify-input" appearance = "fill">
+                                <mat-label>Specify</mat-label>
+                                <input style = "height: 15px" matInput [(ngModel)] = "this.cw_s1_cmi_q11_specifyInput" [ngModelOptions] = "{ standalone: true }">
+                            </mat-form-field>
+                        </div>
+                    </div>
                 </div>
                 <div *ngIf = "this.selectedPermitType == 'Electrical permit (EP)'">
                     <div class = "section-title">
@@ -1556,232 +1629,289 @@
                     <h2>Electrical (E) Control Measures Implemented</h2>
                     <mat-label class = "required-label">* Please fill out all the check boxes below</mat-label>
                     <br><br>
-                    <mat-list>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>A risk assessment has been completed.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
+                    <div class = "cmi-col">
+                        <div id = "cmi-left-col">
+                            <mat-label>
+                                1.&emsp;A risk assessment has been completed.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('e_s1_cmi_q01_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('e_s1_cmi_q01_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
+                        </div>
+                        <div id = "cmi-mid-col">
+                            <mat-radio-group 
                                         required 
                                         aria-label = "Select an option" 
                                         [(ngModel)] = "this.e_s1_cmi_q01_choiceInput" formControlName = "e_s1_cmi_q01_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "e-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.e_s1_cmi_q01_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>The worker(s) are trained and competent to conduct electrical work.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
+                                <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                    {{ rads }}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div id = "cmi-right-col">
+                            <mat-form-field class = "s1-cmi-remarks-input" appearance = "fill">
+                                <mat-label>Remarks</mat-label>
+                                <input style = "height: 15px" matInput [(ngModel)] = "this.e_s1_cmi_q01_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class = "cmi-col">
+                        <div id = "cmi-left-col">
+                            <mat-label>
+                                2.&emsp;The worker(s) are trained and competent to conduct electrical work.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('e_s1_cmi_q02_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('e_s1_cmi_q02_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
+                        </div>
+                        <div id = "cmi-mid-col">
+                            <mat-radio-group 
                                         required 
                                         aria-label = "Select an option" 
                                         [(ngModel)] = "this.e_s1_cmi_q02_choiceInput" formControlName = "e_s1_cmi_q02_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "e-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.e_s1_cmi_q02_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>Electrical supply is turned off.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
+                                <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                    {{ rads }}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div id = "cmi-right-col">
+                            <mat-form-field class = "s1-cmi-remarks-input" appearance = "fill">
+                                <mat-label>Remarks</mat-label>
+                                <input style = "height: 15px" matInput [(ngModel)] = "this.e_s1_cmi_q02_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class = "cmi-col">
+                        <div id = "cmi-left-col">
+                            <mat-label>
+                                3.&emsp;Electrical supply is turned off.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('e_s1_cmi_q03_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('e_s1_cmi_q03_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
+                        </div>
+                        <div id = "cmi-mid-col">
+                            <mat-radio-group 
                                         required 
                                         aria-label = "Select an option" 
                                         [(ngModel)] = "this.e_s1_cmi_q03_choiceInput" formControlName = "e_s1_cmi_q03_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "e-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.e_s1_cmi_q03_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>"Test for Dead" on the isolated equipment has been conducted.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
+                                <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                    {{ rads }}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div id = "cmi-right-col">
+                            <mat-form-field class = "s1-cmi-remarks-input" appearance = "fill">
+                                <mat-label>Remarks</mat-label>
+                                <input style = "height: 15px" matInput [(ngModel)] = "this.e_s1_cmi_q03_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class = "cmi-col">
+                        <div id = "cmi-left-col">
+                            <mat-label>
+                                4.&emsp;"Test for Dead" on the isolated equipment has been conducted.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('e_s1_cmi_q04_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('e_s1_cmi_q04_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
+                        </div>
+                        <div id = "cmi-mid-col">
+                            <mat-radio-group 
                                         required 
                                         aria-label = "Select an option" 
                                         [(ngModel)] = "this.e_s1_cmi_q04_choiceInput" formControlName = "e_s1_cmi_q04_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "e-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.e_s1_cmi_q04_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>Flammable/ combustible substances are removed from the area.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
+                                <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                    {{ rads }}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div id = "cmi-right-col">
+                            <mat-form-field class = "s1-cmi-remarks-input" appearance = "fill">
+                                <mat-label>Remarks</mat-label>
+                                <input style = "height: 15px" matInput [(ngModel)] = "this.e_s1_cmi_q04_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class = "cmi-col">
+                        <div id = "cmi-left-col">
+                            <mat-label>
+                                5.&emsp;Flammable/ combustible substances are removed from the area.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('e_s1_cmi_q05_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('e_s1_cmi_q05_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
+                        </div>
+                        <div id = "cmi-mid-col">
+                            <mat-radio-group 
                                         required 
                                         aria-label = "Select an option" 
                                         [(ngModel)] = "this.e_s1_cmi_q05_choiceInput" formControlName = "e_s1_cmi_q05_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "e-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.e_s1_cmi_q05_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>Electrical work equipment (e.g.: multimeter) has been inspected and is in a good condition.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
+                                <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                    {{ rads }}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div id = "cmi-right-col">
+                            <mat-form-field class = "s1-cmi-remarks-input" appearance = "fill">
+                                <mat-label>Remarks</mat-label>
+                                <input style = "height: 15px" matInput [(ngModel)] = "this.e_s1_cmi_q05_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class = "cmi-col">
+                        <div id = "cmi-left-col">
+                            <mat-label>
+                                6.&emsp;Electrical work equipment (e.g.: multimeter) has been inspected and is in a good condition.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('e_s1_cmi_q06_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('e_s1_cmi_q06_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
+                        </div>
+                        <div id = "cmi-mid-col">
+                            <mat-radio-group 
                                         required 
                                         aria-label = "Select an option" 
                                         [(ngModel)] = "this.e_s1_cmi_q06_choiceInput" formControlName = "e_s1_cmi_q06_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "e-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.e_s1_cmi_q06_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>Electrical work workers are equipped with appropriate PPE (e.g.: insulating gloves, safety boots etc.).</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
+                                <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                    {{ rads }}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div id = "cmi-right-col">
+                            <mat-form-field class = "s1-cmi-remarks-input" appearance = "fill">
+                                <mat-label>Remarks</mat-label>
+                                <input style = "height: 15px" matInput [(ngModel)] = "this.e_s1_cmi_q06_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class = "cmi-col">
+                        <div id = "cmi-left-col">
+                            <mat-label>
+                                7.&emsp;Electrical work workers are equipped with appropriate PPE (e.g.: insulating gloves, safety boots etc.).
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('e_s1_cmi_q07_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('e_s1_cmi_q07_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
+                        </div>
+                        <div id = "cmi-mid-col">
+                            <mat-radio-group 
                                         required 
                                         aria-label = "Select an option" 
                                         [(ngModel)] = "this.e_s1_cmi_q07_choiceInput" formControlName = "e_s1_cmi_q07_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "e-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.e_s1_cmi_q07_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>A second man or standby person is in place during live electrical test work.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
+                                <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                    {{ rads }}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div id = "cmi-right-col">
+                            <mat-form-field class = "s1-cmi-remarks-input" appearance = "fill">
+                                <mat-label>Remarks</mat-label>
+                                <input style = "height: 15px" matInput [(ngModel)] = "this.e_s1_cmi_q07_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class = "cmi-col">
+                        <div id = "cmi-left-col">
+                            <mat-label>
+                                8.&emsp;A second man or standby person is in place during live electrical test work.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('e_s1_cmi_q08_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('e_s1_cmi_q08_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
+                        </div>
+                        <div id = "cmi-mid-col">
+                            <mat-radio-group 
                                         required 
                                         aria-label = "Select an option" 
                                         [(ngModel)] = "this.e_s1_cmi_q08_choiceInput" formControlName = "e_s1_cmi_q08_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "e-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.e_s1_cmi_q08_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>First aid kit is in place near electrical work in the event of electrical shock.</p>
-                            </div>
-                            <div id = "cmi-mid-col">
-                                <mat-radio-group 
+                                <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                    {{ rads }}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div id = "cmi-right-col">
+                            <mat-form-field class = "s1-cmi-remarks-input" appearance = "fill">
+                                <mat-label>Remarks</mat-label>
+                                <input style = "height: 15px" matInput [(ngModel)] = "this.e_s1_cmi_q08_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class = "cmi-col">
+                        <div id = "cmi-left-col">
+                            <mat-label>
+                                9.&emsp;First aid kit is in place near electrical work in the event of electrical shock.
+                                <mat-label class = "required-label" *ngIf = "this.sectionOneBFormGroupError('e_s1_cmi_q09_choice', 'required');">
+                                    (*)
+                                </mat-label>
+                                <mat-label style = "color: forestgreen;" *ngIf = "!this.sectionOneBFormGroupError('e_s1_cmi_q09_choice', 'required');">
+                                    (✔)
+                                </mat-label>
+                            </mat-label>
+                        </div>
+                        <div id = "cmi-mid-col">
+                            <mat-radio-group 
                                         required 
                                         aria-label = "Select an option" 
                                         [(ngModel)] = "this.e_s1_cmi_q09_choiceInput" formControlName = "e_s1_cmi_q09_choice">
-                                    <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
-                                        {{ rads }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "e-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Remarks</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.e_s1_cmi_q09_remarksInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>Other precautions required to undertake the work safely (please specify, if any):</p>
-                            </div>
-                            <div id = "cmi-mid-col"></div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "e-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Specify</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.e_s1_cmi_q10_specifyInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                        <br>
-                        <mat-list-item>
-                            <div id = "cmi-left-col">
-                                <p>Other safety equipment required to undertake the work safely (please specify, if any):</p>
-                            </div>
-                            <div id = "cmi-mid-col"></div>
-                            <div id = "cmi-right-col">
-                                <mat-form-field class = "e-s1-cmi-remarks-input" appearance = "fill">
-                                    <mat-label>Specify</mat-label>
-                                    <input style = "height: 15px" matInput [(ngModel)] = "this.e_s1_cmi_q11_specifyInput" [ngModelOptions] = "{ standalone: true }">
-                                </mat-form-field>
-                            </div>
-                        </mat-list-item>
-                    </mat-list>
-                    <br>
+                                <mat-radio-button *ngFor = "let rads of this.radioButtonGroup" [value] = "rads">
+                                    {{ rads }}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div id = "cmi-right-col">
+                            <mat-form-field class = "s1-cmi-remarks-input" appearance = "fill">
+                                <mat-label>Remarks</mat-label>
+                                <input style = "height: 15px" matInput [(ngModel)] = "this.e_s1_cmi_q09_remarksInput" [ngModelOptions] = "{ standalone: true }">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class = "cmi-specify-col">
+                        <div id = "cmi-left-col">
+                            <mat-label>10.&emsp;Other precautions required to undertake the work safely (please specify, if any):</mat-label>
+                        </div>
+                        <div id = "cmi-right-col">
+                            <mat-form-field class = "s1-cmi-specify-input" appearance = "fill">
+                                <mat-label>Specify</mat-label>
+                                <input style = "height: 15px" matInput [(ngModel)] = "this.e_s1_cmi_q10_specifyInput" [ngModelOptions] = "{ standalone: true }">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class = "cmi-specify-col">
+                        <div id = "cmi-left-col">
+                            <mat-label>10.&emsp;Other safety equipment required to undertake the work safely (please specify, if any):</mat-label>
+                        </div>
+                        <div id = "cmi-right-col">
+                            <mat-form-field class = "s1-cmi-specify-input" appearance = "fill">
+                                <mat-label>Specify</mat-label>
+                                <input style = "height: 15px" matInput [(ngModel)] = "this.e_s1_cmi_q11_specifyInput" [ngModelOptions] = "{ standalone: true }">
+                            </mat-form-field>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <button mat-stroked-button style = "margin-right: 25px;" matStepperPrevious>Back</button>
@@ -1833,13 +1963,15 @@
                                 </mat-form-field>
                             </mat-grid-tile>
                             <mat-grid-tile>
-                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
-                                    <input
-                                        matInput
-                                        type = "number"
-                                        [(ngModel)] = "this.attendantDetsData[0].contactNo"
-                                        formControlName = "ad1_contactNo">
-                                </mat-form-field>
+                                <div id = "contact-no-input-arrow-removed">
+                                    <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                        <input
+                                            matInput
+                                            type = "number"
+                                            [(ngModel)] = "this.attendantDetsData[0].contactNo"
+                                            formControlName = "ad1_contactNo">
+                                    </mat-form-field>
+                                </div>
                             </mat-grid-tile>
                         </div>
 
@@ -1863,13 +1995,15 @@
                                 </mat-form-field>
                             </mat-grid-tile>
                             <mat-grid-tile>
-                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
-                                    <input
-                                        matInput
-                                        type = "number"
-                                        [(ngModel)] = "this.attendantDetsData[1].contactNo"
-                                        formControlName = "ad2_contactNo">
-                                </mat-form-field>
+                                <div id = "contact-no-input-arrow-removed">
+                                    <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                        <input
+                                            matInput
+                                            type = "number"
+                                            [(ngModel)] = "this.attendantDetsData[1].contactNo"
+                                            formControlName = "ad2_contactNo">
+                                    </mat-form-field>
+                                </div>
                             </mat-grid-tile>
                         </div>
 
@@ -1893,13 +2027,15 @@
                                 </mat-form-field>
                             </mat-grid-tile>
                             <mat-grid-tile>
-                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
-                                    <input
-                                        matInput
-                                        type = "number"
-                                        [(ngModel)] = "this.attendantDetsData[2].contactNo"
-                                        formControlName = "ad3_contactNo">
-                                </mat-form-field>
+                                <div id = "contact-no-input-arrow-removed">
+                                    <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                        <input
+                                            matInput
+                                            type = "number"
+                                            [(ngModel)] = "this.attendantDetsData[2].contactNo"
+                                            formControlName = "ad3_contactNo">
+                                    </mat-form-field>
+                                </div>
                             </mat-grid-tile>
                         </div>
 
@@ -1923,13 +2059,15 @@
                                 </mat-form-field>
                             </mat-grid-tile>
                             <mat-grid-tile>
-                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
-                                    <input
-                                        matInput
-                                        type = "number"
-                                        [(ngModel)] = "this.attendantDetsData[3].contactNo"
-                                        formControlName = "ad4_contactNo">
-                                </mat-form-field>
+                                <div id = "contact-no-input-arrow-removed">
+                                    <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                        <input
+                                            matInput
+                                            type = "number"
+                                            [(ngModel)] = "this.attendantDetsData[3].contactNo"
+                                            formControlName = "ad4_contactNo">
+                                    </mat-form-field>
+                                </div>
                             </mat-grid-tile>
                         </div>
 
@@ -1953,13 +2091,15 @@
                                 </mat-form-field>
                             </mat-grid-tile>
                             <mat-grid-tile>
-                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
-                                    <input
-                                        matInput
-                                        type = "number"
-                                        [(ngModel)] = "this.attendantDetsData[4].contactNo"
-                                        formControlName = "ad5_contactNo">
-                                </mat-form-field>
+                                <div id = "contact-no-input-arrow-removed">
+                                    <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                        <input
+                                            matInput
+                                            type = "number"
+                                            [(ngModel)] = "this.attendantDetsData[4].contactNo"
+                                            formControlName = "ad5_contactNo">
+                                    </mat-form-field>
+                                </div>
                             </mat-grid-tile>
                         </div>
 
@@ -1983,13 +2123,15 @@
                                 </mat-form-field>
                             </mat-grid-tile>
                             <mat-grid-tile>
-                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
-                                    <input
-                                        matInput
-                                        type = "number"
-                                        [(ngModel)] = "this.attendantDetsData[5].contactNo"
-                                        formControlName = "ad6_contactNo">
-                                </mat-form-field>
+                                <div id = "contact-no-input-arrow-removed">
+                                    <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                        <input
+                                            matInput
+                                            type = "number"
+                                            [(ngModel)] = "this.attendantDetsData[5].contactNo"
+                                            formControlName = "ad6_contactNo">
+                                    </mat-form-field>
+                                </div>
                             </mat-grid-tile>
                         </div>
                         
@@ -2004,6 +2146,7 @@
                 <mat-form-field class = "apl-name-input" appearance = "fill">
                     <mat-label>Name</mat-label>
                     <input matInput required [(ngModel)] = "this.applicantNameInput" formControlName = "aplName">
+                    <mat-error *ngIf = "this.sectionOneCFormGroupError('aplName', 'required');">Name is required.</mat-error>
                 </mat-form-field>
                 <br>
                 <mat-form-field class = "apl-nric-or-fin-no-input" appearance = "fill">
@@ -2015,6 +2158,7 @@
                         [inputMask] = "this.nricOrFinNoInputMask"
                         [(ngModel)] = "this.applicantNricOrFinNoInput" 
                         formControlName = "aplNricOrFinNo">
+                    <mat-error *ngIf = "this.sectionOneCFormGroupError('aplNricOrFinNo', 'required');">NRIC/FIN no. is required.</mat-error>
                 </mat-form-field>
                 <br>
                 <mat-form-field class = "apl-org-type-options" appearance = "fill">
@@ -2023,30 +2167,35 @@
                         <mat-option value = "Internal">Internal</mat-option>
                         <mat-option value = "External">External</mat-option>
                     </mat-select>
+                    <mat-error *ngIf = "this.sectionOneCFormGroupError('aplOrgType', 'required');">Organisation type is required.</mat-error>
                 </mat-form-field>
                 <br>
                 <div *ngIf = "this.selectedApplicantOrganisationType == 'External'">
                     <mat-form-field class = "apl-org-name-options" appearance = "fill">
                         <mat-label>Organisation name</mat-label>
                         <input matInput required [(ngModel)] = "this.applicantOrganisationNameInput" formControlName = "aplOrgName">
+                        <mat-error *ngIf = "this.sectionOneCFormGroupError('aplOrgName', 'required');">Organisation name is required.</mat-error>
                     </mat-form-field>
                     <br>
                 </div>
                 <mat-form-field class = "apl-dep-name-input" appearance = "fill">
                     <mat-label>Department name</mat-label>
                     <input matInput required [(ngModel)] = "this.applicantDepartmentNameInput" formControlName = "aplDepName">
+                    <mat-error *ngIf = "this.sectionOneCFormGroupError('aplDepName', 'required');">Department name is required.</mat-error>
                 </mat-form-field>
                 <br>
-                <mat-form-field class = "apl-contact-no-input" appearance = "fill">
-                    <mat-label>Contact no.</mat-label>
-                    <input 
-                        matInput 
-                        required
-                        type = "number"
-                        [(ngModel)] = "this.applicantContactNoInput" 
-                        formControlName = "aplContactNo">
-                </mat-form-field>
-                <br>
+                <div id = "contact-no-input-arrow-removed">
+                    <mat-form-field class = "apl-contact-no-input" appearance = "fill">
+                        <mat-label>Contact no.</mat-label>
+                        <input 
+                            matInput 
+                            required
+                            type = "number"
+                            [(ngModel)] = "this.applicantContactNoInput" 
+                            formControlName = "aplContactNo">
+                        <mat-error *ngIf = "this.sectionOneCFormGroupError('aplContactNo', 'required');">Contact no. is required.</mat-error>
+                    </mat-form-field>
+                </div>
                 <mat-form-field class = "apl-email-input" appearance = "fill">
                     <mat-label>Email address</mat-label>
                     <input 
@@ -2056,24 +2205,25 @@
                         [inputMask] = "this.applicantEmailInputMask"
                         [(ngModel)] = "this.applicantEmailInput" 
                         formControlName = "aplEmail">
+                    <mat-error *ngIf = "this.sectionOneCFormGroupError('aplEmail', 'required');">Email address is required.</mat-error>
                 </mat-form-field>
                 <br><br>
                 <mat-divider></mat-divider>
                 <br><br>
-                <div class = "apl-dcl-container">
-                    <mat-label style = "font-weight: 450;">DECLARATION BEFORE SUBMISSION</mat-label>
-                    <ol>
-                        <li>
-                            <mat-label>The necessary safety measures must be complied with before the application is submitted to the validator for his / her evaluation, and eventual approval / rejection.</mat-label>
-                        </li>
+                <div class = "apl-dcl">
+                    <div class = "apl-dcl-container">
+                        <mat-label style = "font-weight: 450;">DECLARATION BEFORE SUBMISSION</mat-label>
+                        <ol>
+                            <li>
+                                <mat-label>The necessary safety measures must be complied with before the application is submitted to the validator for his / her evaluation, and eventual approval / rejection.</mat-label>
+                            </li>
+                            <br>
+                            <li>
+                                <mat-label>Upon submission and after approval from the validator, this permit shall be visible inside the E-PTW Management System tracking log for the duration of the approved task and will be closed / terminated only upon task completion or upon its expiry.</mat-label>
+                            </li>
+                        </ol>
+                        <mat-divider></mat-divider>
                         <br>
-                        <li>
-                            <mat-label>Upon submission and after approval from the validator, this permit shall be visible inside the E-PTW Management System tracking log for the duration of the approved task and will be closed / terminated only upon task completion or upon its expiry.</mat-label>
-                        </li>
-                    </ol>
-                    <mat-divider></mat-divider>
-                    <br>
-                    <div id = "apl-dcl-checkbox">
                         <mat-checkbox
                             [disabled] = "
                                 this.applicantNameInput == '' ||
@@ -2089,11 +2239,13 @@
                             " 
                             [(ngModel)] = "this.applicantDeclarationChecked" 
                             formControlName = "aplDclChecked">
-                            &emsp;I declare that the information provided is accurate and the control measures listed previously<br>have been effectively implemented, and agree with the above statements.
+                            <span id = "apl-dcl-checkbox">
+                                &emsp;I declare that the information provided is accurate and the control measures listed previously have been effectively implemented, and agree with the above statements.
+                            </span>
                         </mat-checkbox>
                     </div>
                 </div>
-                <br>
+                <br><br>
                 <div>
                     <button mat-stroked-button style = "margin-right: 25px;" matStepperPrevious>Back</button>
                     <button 
