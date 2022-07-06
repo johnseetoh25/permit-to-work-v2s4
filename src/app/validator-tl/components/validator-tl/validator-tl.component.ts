@@ -13,6 +13,7 @@ import { CompShareService } from 'src/app/services/comp-share.service';
 import { Subscription } from 'rxjs';
 import { PermitStatus } from 'src/app/constants/PermitStatus';
 import { RequestStatus } from 'src/app/constants/RequestStatus';
+import { MailService } from 'src/app/services/mail.service';
 
 @Component({
   selector: 'app-validator-tl',
@@ -60,7 +61,8 @@ export class ValidatorTlComponent implements OnInit {
     private router: Router,
     private auth: AuthService,
     private msg: MessageService,
-    private compShare: CompShareService
+    private compShare: CompShareService,
+    private mail: MailService
   ) {
     this.clickEventSub = this.compShare.getClickEvent().subscribe(() => {
       this.refresh();
@@ -423,6 +425,10 @@ export class ValidatorTlComponent implements OnInit {
       toExpire?.cancelledTimestamp,
       toExpire?.timestamp
     );
+
+    this.db.fetchWith(toExpire.id).subscribe((resp: IPermitToWork[]) => {
+      this.mail.send(resp[0], resp[0].permitType);
+    });
   }
 
   public navigateTo(url: string): void {

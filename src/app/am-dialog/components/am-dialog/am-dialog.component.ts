@@ -9,6 +9,7 @@ import { ValidatorReqdetsComponent } from 'src/app/validator-reqdets/components/
 import { PermitStatus } from 'src/app/constants/PermitStatus';
 import { RequestStatus } from 'src/app/constants/RequestStatus';
 import { CompShareService } from 'src/app/services/comp-share.service';
+import { MailService } from 'src/app/services/mail.service';
 
 @Component({
   selector: 'app-am-dialog',
@@ -81,7 +82,8 @@ export class AmDialogComponent implements OnInit {
     private db: DbService,
     private msg: MessageService,
     private router: Router,
-    private compShare: CompShareService
+    private compShare: CompShareService,
+    private mail: MailService
   ) { }
 
   public ngOnInit(): void { }
@@ -443,7 +445,10 @@ export class AmDialogComponent implements OnInit {
     );
     this.dialogRefSelf.close();
     this.dialogRefSelf.afterClosed().subscribe(() => {
-      this.openSnackBar("The permit has been " + toEvaluate.requestStatus.toLowerCase() + ".", "");
+      this.db.fetchWith(toEvaluate.id).subscribe((resp: IPermitToWork[]) => {
+        this.mail.send(resp[0], resp[0].permitType);
+      });
+      this.openSnackBar("The permit has been " + toEvaluate.requestStatus.toLowerCase() + ". An email notification will be sent to you shortly.", "");
     });
     this.dialogRefVldReqDets.afterClosed().subscribe(() => {
       this.compShare.sendClickEvent();

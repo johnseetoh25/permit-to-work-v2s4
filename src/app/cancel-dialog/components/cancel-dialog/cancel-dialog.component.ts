@@ -2,13 +2,12 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { IPermitToWork } from 'src/app/interfaces/IPermitToWork';
 import { DbService } from 'src/app/services/db.service';
-import { TaskStatus } from 'src/app/constants/TaskStatus';
-import { DefaultValues } from 'src/app/constants/DefaultValues';
 import { PermitStatus } from 'src/app/constants/PermitStatus';
 import { MessageService } from 'src/app/services/message.service';
 import { Router } from '@angular/router';
 import { CompShareService } from 'src/app/services/comp-share.service';
 import { RequestStatus } from 'src/app/constants/RequestStatus';
+import { MailService } from 'src/app/services/mail.service';
 
 @Component({
   selector: 'app-cancel-dialog',
@@ -25,7 +24,8 @@ export class CancelDialogComponent implements OnInit {
     private db: DbService,
     private msg: MessageService,
     private router: Router,
-    private compShare: CompShareService
+    private compShare: CompShareService,
+    private mail: MailService
   ) { }
 
   public ngOnInit(): void { }
@@ -292,7 +292,10 @@ export class CancelDialogComponent implements OnInit {
 
     this.dialogRefSelf.close();
     this.dialogRefSelf.afterClosed().subscribe(() => {
-      this.openSnackBar("The request has been " + toCancel.requestStatus.toLowerCase() + ".", "");
+      this.db.fetchWith(toCancel.id).subscribe((resp: IPermitToWork[]) => {
+        this.mail.send(resp[0], resp[0].permitType);
+      });
+      this.openSnackBar("The request has been " + toCancel.requestStatus.toLowerCase() + ". An email notification will be sent to you shortly.", "");
       this.compShare.sendClickEvent();
     });
   }

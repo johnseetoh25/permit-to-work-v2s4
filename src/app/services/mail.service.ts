@@ -7,6 +7,9 @@ import {
   MatSnackBarVerticalPosition
 } from '@angular/material/snack-bar';
 import { PermitTypes } from '../constants/PermitTypes';
+import { PermitStatus } from '../constants/PermitStatus';
+import { DefaultValues } from '../constants/DefaultValues';
+import { RequestStatus } from '../constants/RequestStatus';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +31,15 @@ export class MailService {
           from_name: "Temasek Polytechnic PTW E-Mng System",
 
           req_status: data.requestStatus.toUpperCase(),
+          canc_req: data.wantToCancel? "Yes" : "No",
+          canc_req_ts: data.wantToCancel? "(on " + new Date(data.reqCancTimestamp).toLocaleString() + ")" : "",
+          canc_ts: data.cancelledTimestamp == DefaultValues.VALUE_NONE? DefaultValues.VALUE_NONE : new Date(data.cancelledTimestamp).toLocaleString(),
+
           perm_status: data.ptwStatus.permitStatus.toUpperCase(),
+          cloterm_req: data.ptwStatus.wantToTerminate? "Yes" : "No",
+          cloterm_req_ts: data.ptwStatus.wantToTerminate? "(on " + new Date(data.ptwStatus.reqTermTimestamp).toLocaleString() + ")" : "",
+          cloterm_rs: data.ptwStatus.remarks,
+          cloterm_ts: data.ptwStatus.terminatedTimestamp == DefaultValues.VALUE_NONE? DefaultValues.VALUE_NONE : new Date(data.ptwStatus.terminatedTimestamp).toLocaleString(),
     
           ptw_id: data.ptwId,
           loc_main: data.locationOfWork.main,
@@ -88,7 +99,7 @@ export class MailService {
           `,
           eval_passed: data.safetyAssessorEvaluation.passed? "Yes" : "No",
           eval_name: data.safetyAssessorEvaluation.name,
-          eval_timestamp: new Date(data.safetyAssessorEvaluation.timestamp).toLocaleString() === "Invalid Date"? "None" : new Date(data.safetyAssessorEvaluation.timestamp).toLocaleString(),
+          eval_ts: new Date(data.safetyAssessorEvaluation.timestamp).toLocaleString() === "Invalid Date"? "None" : new Date(data.safetyAssessorEvaluation.timestamp).toLocaleString(),
           eval_dets: `
             <div>
               <span><p><b><u>Assessment of Control Measures</u></b></p></span>
@@ -128,7 +139,7 @@ export class MailService {
           `,
           apprej_passed: data.authorisedManagerApproval.passed? "Yes" : "No",
           apprej_name: data.authorisedManagerApproval.name,
-          apprej_timestamp: new Date(data.authorisedManagerApproval.timestamp).toLocaleString() === "Invalid Date"? "None" : new Date(data.authorisedManagerApproval.timestamp).toLocaleString(),
+          apprej_ts: new Date(data.authorisedManagerApproval.timestamp).toLocaleString() === "Invalid Date"? "None" : new Date(data.authorisedManagerApproval.timestamp).toLocaleString(),
           apprej_dets: `
             <div>
               <span><p><b><u>Review of Permit</u></b></p></span>
@@ -181,7 +192,14 @@ export class MailService {
           adets_six_nric_or_fin_no: data.attendantDets[5].nricOrFinNo,
           adets_six_contact_no: data.attendantDets[5].contactNo,
           
-          to_email: data.applicantDets.email
+          to_email: data.applicantDets.email,
+          bcc_to: "",
+          cc_to: data.wantToCancel || 
+                 data.ptwStatus.wantToTerminate || 
+                 data.requestStatus == RequestStatus.REQUEST_APPROVED ||
+                 data.requestStatus == RequestStatus.REQUEST_REJECTED || 
+                 data.requestStatus == RequestStatus.REQUEST_CANCELLED || 
+                 data.requestStatus == RequestStatus.REQUEST_NULLED? "temasek.polytechnic.ptwemsys@gmail.com" : ""
         };
 
         break;
@@ -192,7 +210,15 @@ export class MailService {
           from_name: "Temasek Polytechnic PTW E-Mng System",
 
           req_status: data.requestStatus.toUpperCase(),
+          canc_req: data.wantToCancel? "Yes" : "No",
+          canc_req_ts: data.wantToCancel? "(on " + new Date(data.reqCancTimestamp).toLocaleString() + ")" : "",
+          canc_ts: data.cancelledTimestamp == DefaultValues.VALUE_NONE? DefaultValues.VALUE_NONE : new Date(data.cancelledTimestamp).toLocaleString(),
+
           perm_status: data.ptwStatus.permitStatus.toUpperCase(),
+          cloterm_req: data.ptwStatus.wantToTerminate? "Yes" : "No",
+          cloterm_req_ts: data.ptwStatus.wantToTerminate? "(on " + new Date(data.ptwStatus.reqTermTimestamp).toLocaleString() + ")" : "",
+          cloterm_rs: data.ptwStatus.remarks,
+          cloterm_ts: data.ptwStatus.terminatedTimestamp == DefaultValues.VALUE_NONE? DefaultValues.VALUE_NONE : new Date(data.ptwStatus.terminatedTimestamp).toLocaleString(),
     
           ptw_id: data.ptwId,
           loc_main: data.locationOfWork.main,
@@ -284,7 +310,7 @@ export class MailService {
           `,
           eval_passed: data.safetyAssessorEvaluation.passed? "Yes" : "No",
           eval_name: data.safetyAssessorEvaluation.name,
-          eval_timestamp: new Date(data.safetyAssessorEvaluation.timestamp).toLocaleString() === "Invalid Date"? "None" : new Date(data.safetyAssessorEvaluation.timestamp).toLocaleString(),
+          eval_ts: new Date(data.safetyAssessorEvaluation.timestamp).toLocaleString() === "Invalid Date"? "None" : new Date(data.safetyAssessorEvaluation.timestamp).toLocaleString(),
           eval_dets: `
             <div>
               <span>
@@ -310,7 +336,7 @@ export class MailService {
           `,
           apprej_passed: data.authorisedManagerApproval.passed? "Yes" : "No",
           apprej_name: data.authorisedManagerApproval.name,
-          apprej_timestamp: new Date(data.authorisedManagerApproval.timestamp).toLocaleString() === "Invalid Date"? "None" : new Date(data.authorisedManagerApproval.timestamp).toLocaleString(),
+          apprej_ts: new Date(data.authorisedManagerApproval.timestamp).toLocaleString() === "Invalid Date"? "None" : new Date(data.authorisedManagerApproval.timestamp).toLocaleString(),
           apprej_dets: `
             <div>
               <span>
@@ -365,7 +391,14 @@ export class MailService {
           adets_six_nric_or_fin_no: data.attendantDets[5].nricOrFinNo,
           adets_six_contact_no: data.attendantDets[5].contactNo,
     
-          to_email: data.applicantDets.email
+          to_email: data.applicantDets.email,
+          bcc_to: "",
+          cc_to: data.wantToCancel || 
+                 data.ptwStatus.wantToTerminate || 
+                 data.requestStatus == RequestStatus.REQUEST_APPROVED ||
+                 data.requestStatus == RequestStatus.REQUEST_REJECTED || 
+                 data.requestStatus == RequestStatus.REQUEST_CANCELLED || 
+                 data.requestStatus == RequestStatus.REQUEST_NULLED? "temasek.polytechnic.ptwemsys@gmail.com" : ""
         };
       
         break;
@@ -376,7 +409,15 @@ export class MailService {
           from_name: "Temasek Polytechnic PTW E-Mng System",
 
           req_status: data.requestStatus.toUpperCase(),
+          canc_req: data.wantToCancel? "Yes" : "No",
+          canc_req_ts: data.wantToCancel? "(on " + new Date(data.reqCancTimestamp).toLocaleString() + ")" : "",
+          canc_ts: data.cancelledTimestamp == DefaultValues.VALUE_NONE? DefaultValues.VALUE_NONE : new Date(data.cancelledTimestamp).toLocaleString(),
+
           perm_status: data.ptwStatus.permitStatus.toUpperCase(),
+          cloterm_req: data.ptwStatus.wantToTerminate? "Yes" : "No",
+          cloterm_req_ts: data.ptwStatus.wantToTerminate? "(on " + new Date(data.ptwStatus.reqTermTimestamp).toLocaleString() + ")" : "",
+          cloterm_rs: data.ptwStatus.remarks,
+          cloterm_ts: data.ptwStatus.terminatedTimestamp == DefaultValues.VALUE_NONE? DefaultValues.VALUE_NONE : new Date(data.ptwStatus.terminatedTimestamp).toLocaleString(),
     
           ptw_id: data.ptwId,
           loc_main: data.locationOfWork.main,
@@ -442,7 +483,7 @@ export class MailService {
           `,
           eval_passed: data.safetyAssessorEvaluation.passed? "Yes" : "No",
           eval_name: data.safetyAssessorEvaluation.name,
-          eval_timestamp: new Date(data.safetyAssessorEvaluation.timestamp).toLocaleString() === "Invalid Date"? "None" : new Date(data.safetyAssessorEvaluation.timestamp).toLocaleString(),
+          eval_ts: new Date(data.safetyAssessorEvaluation.timestamp).toLocaleString() === "Invalid Date"? "None" : new Date(data.safetyAssessorEvaluation.timestamp).toLocaleString(),
           eval_dets: `
             <div>
               <span><p><b><u>Assessment of Control Measures</u></b></p></span>
@@ -457,7 +498,7 @@ export class MailService {
           `,
           apprej_passed: data.authorisedManagerApproval.passed? "Yes" : "No",
           apprej_name: data.authorisedManagerApproval.name,
-          apprej_timestamp: new Date(data.authorisedManagerApproval.timestamp).toLocaleString() === "Invalid Date"? "None" : new Date(data.authorisedManagerApproval.timestamp).toLocaleString(),
+          apprej_ts: new Date(data.authorisedManagerApproval.timestamp).toLocaleString() === "Invalid Date"? "None" : new Date(data.authorisedManagerApproval.timestamp).toLocaleString(),
           apprej_dets: `
             <div>
               <span><p><b><u>Review of Permit</u></b></p></span>
@@ -510,7 +551,14 @@ export class MailService {
           adets_six_nric_or_fin_no: data.attendantDets[5].nricOrFinNo,
           adets_six_contact_no: data.attendantDets[5].contactNo,
           
-          to_email: data.applicantDets.email
+          to_email: data.applicantDets.email,
+          bcc_to: "",
+          cc_to: data.wantToCancel || 
+                 data.ptwStatus.wantToTerminate || 
+                 data.requestStatus == RequestStatus.REQUEST_APPROVED ||
+                 data.requestStatus == RequestStatus.REQUEST_REJECTED || 
+                 data.requestStatus == RequestStatus.REQUEST_CANCELLED || 
+                 data.requestStatus == RequestStatus.REQUEST_NULLED? "temasek.polytechnic.ptwemsys@gmail.com" : ""
         };
 
         break;
@@ -521,7 +569,15 @@ export class MailService {
           from_name: "Temasek Polytechnic PTW E-Mng System",
 
           req_status: data.requestStatus.toUpperCase(),
+          canc_req: data.wantToCancel? "Yes" : "No",
+          canc_req_ts: data.wantToCancel? "(on " + new Date(data.reqCancTimestamp).toLocaleString() + ")" : "",
+          canc_ts: data.cancelledTimestamp == DefaultValues.VALUE_NONE? DefaultValues.VALUE_NONE : new Date(data.cancelledTimestamp).toLocaleString(),
+
           perm_status: data.ptwStatus.permitStatus.toUpperCase(),
+          cloterm_req: data.ptwStatus.wantToTerminate? "Yes" : "No",
+          cloterm_req_ts: data.ptwStatus.wantToTerminate? "(on " + new Date(data.ptwStatus.reqTermTimestamp).toLocaleString() + ")" : "",
+          cloterm_rs: data.ptwStatus.remarks,
+          cloterm_ts: data.ptwStatus.terminatedTimestamp == DefaultValues.VALUE_NONE? DefaultValues.VALUE_NONE : new Date(data.ptwStatus.terminatedTimestamp).toLocaleString(),
     
           ptw_id: data.ptwId,
           loc_main: data.locationOfWork.main,
@@ -581,7 +637,7 @@ export class MailService {
           `,
           eval_passed: data.safetyAssessorEvaluation.passed? "Yes" : "No",
           eval_name: data.safetyAssessorEvaluation.name,
-          eval_timestamp: new Date(data.safetyAssessorEvaluation.timestamp).toLocaleString() === "Invalid Date"? "None" : new Date(data.safetyAssessorEvaluation.timestamp).toLocaleString(),
+          eval_ts: new Date(data.safetyAssessorEvaluation.timestamp).toLocaleString() === "Invalid Date"? "None" : new Date(data.safetyAssessorEvaluation.timestamp).toLocaleString(),
           eval_dets: `
             <div>
               <span><p><b><u>Assessment of Control Measures</u></b></p></span>
@@ -596,7 +652,7 @@ export class MailService {
           `,
           apprej_passed: data.authorisedManagerApproval.passed? "Yes" : "No",
           apprej_name: data.authorisedManagerApproval.name,
-          apprej_timestamp: new Date(data.authorisedManagerApproval.timestamp).toLocaleString() === "Invalid Date"? "None" : new Date(data.authorisedManagerApproval.timestamp).toLocaleString(),
+          apprej_ts: new Date(data.authorisedManagerApproval.timestamp).toLocaleString() === "Invalid Date"? "None" : new Date(data.authorisedManagerApproval.timestamp).toLocaleString(),
           apprej_dets: `
             <div>
               <span><p><b><u>Review of Permit</u></b></p></span>
@@ -649,7 +705,14 @@ export class MailService {
           adets_six_nric_or_fin_no: data.attendantDets[5].nricOrFinNo,
           adets_six_contact_no: data.attendantDets[5].contactNo,
           
-          to_email: data.applicantDets.email
+          to_email: data.applicantDets.email,
+          bcc_to: "",
+          cc_to: data.wantToCancel || 
+                 data.ptwStatus.wantToTerminate || 
+                 data.requestStatus == RequestStatus.REQUEST_APPROVED ||
+                 data.requestStatus == RequestStatus.REQUEST_REJECTED || 
+                 data.requestStatus == RequestStatus.REQUEST_CANCELLED || 
+                 data.requestStatus == RequestStatus.REQUEST_NULLED? "temasek.polytechnic.ptwemsys@gmail.com" : ""
         };
 
         break;
@@ -660,7 +723,15 @@ export class MailService {
           from_name: "Temasek Polytechnic PTW E-Mng System",
 
           req_status: data.requestStatus.toUpperCase(),
+          canc_req: data.wantToCancel? "Yes" : "No",
+          canc_req_ts: data.wantToCancel? "(on " + new Date(data.reqCancTimestamp).toLocaleString() + ")" : "",
+          canc_ts: data.cancelledTimestamp == DefaultValues.VALUE_NONE? DefaultValues.VALUE_NONE : new Date(data.cancelledTimestamp).toLocaleString(),
+
           perm_status: data.ptwStatus.permitStatus.toUpperCase(),
+          cloterm_req: data.ptwStatus.wantToTerminate? "Yes" : "No",
+          cloterm_req_ts: data.ptwStatus.wantToTerminate? "(on " + new Date(data.ptwStatus.reqTermTimestamp).toLocaleString() + ")" : "",
+          cloterm_rs: data.ptwStatus.remarks,
+          cloterm_ts: data.ptwStatus.terminatedTimestamp == DefaultValues.VALUE_NONE? DefaultValues.VALUE_NONE : new Date(data.ptwStatus.terminatedTimestamp).toLocaleString(),
     
           ptw_id: data.ptwId,
           loc_main: data.locationOfWork.main,
@@ -720,7 +791,7 @@ export class MailService {
           `,
           eval_passed: data.safetyAssessorEvaluation.passed? "Yes" : "No",
           eval_name: data.safetyAssessorEvaluation.name,
-          eval_timestamp: new Date(data.safetyAssessorEvaluation.timestamp).toLocaleString() === "Invalid Date"? "None" : new Date(data.safetyAssessorEvaluation.timestamp).toLocaleString(),
+          eval_ts: new Date(data.safetyAssessorEvaluation.timestamp).toLocaleString() === "Invalid Date"? "None" : new Date(data.safetyAssessorEvaluation.timestamp).toLocaleString(),
           eval_dets: `
             <div>
               <span><p><b><u>Assessment of Control Measures</u></b></p></span>
@@ -735,7 +806,7 @@ export class MailService {
           `,
           apprej_passed: data.authorisedManagerApproval.passed? "Yes" : "No",
           apprej_name: data.authorisedManagerApproval.name,
-          apprej_timestamp: new Date(data.authorisedManagerApproval.timestamp).toLocaleString() === "Invalid Date"? "None" : new Date(data.authorisedManagerApproval.timestamp).toLocaleString(),
+          apprej_ts: new Date(data.authorisedManagerApproval.timestamp).toLocaleString() === "Invalid Date"? "None" : new Date(data.authorisedManagerApproval.timestamp).toLocaleString(),
           apprej_dets: `
             <div>
               <span><p><b><u>Review of Permit</u></b></p></span>
@@ -788,7 +859,14 @@ export class MailService {
           adets_six_nric_or_fin_no: data.attendantDets[5].nricOrFinNo,
           adets_six_contact_no: data.attendantDets[5].contactNo,
           
-          to_email: data.applicantDets.email
+          to_email: data.applicantDets.email,
+          bcc_to: "",
+          cc_to: data.wantToCancel || 
+                 data.ptwStatus.wantToTerminate || 
+                 data.requestStatus == RequestStatus.REQUEST_APPROVED ||
+                 data.requestStatus == RequestStatus.REQUEST_REJECTED || 
+                 data.requestStatus == RequestStatus.REQUEST_CANCELLED || 
+                 data.requestStatus == RequestStatus.REQUEST_NULLED? "temasek.polytechnic.ptwemsys@gmail.com" : ""
         };
 
         break;
@@ -796,11 +874,11 @@ export class MailService {
 
     emailjs.send("service_5huddur", templateId, templateParams, "hvO-T9Y0HlU-ELTjP")
     .then((resp: any) => {
-      console.log("Email statement has been successfully sent.", resp.status, resp.text);
-      this.openSnackBar("Email statement has been successfully sent.", "", 3000);
+      console.log("Email notification has been successfully sent.", resp.status, resp.text);
+      this.openSnackBar("Email notification has been successfully sent.", "", 3000);
     }, (err: any) => {
-      console.log("Failed to send email statement.", err);
-      this.openSnackBar("Failed to send email statement.", "", 3000);
+      console.log("Failed to send email notification.", err);
+      this.openSnackBar("Failed to send email notification.", "", 3000);
     });
   }
 
