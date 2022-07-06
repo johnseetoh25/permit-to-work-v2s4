@@ -22,7 +22,7 @@
     </p>
 </header>
 <div class = "content-body">
-    <mat-stepper #stepper id = "ptw-req-stp" linear = "false">
+    <mat-stepper #stepper id = "ptw-req-stp" linear = "true">
         <mat-step [stepControl] = "this.sectionOneAFormGroup" [errorMessage] = "this.errorMessage">
             <form class = "basic-info-form" [formGroup] = "this.sectionOneAFormGroup">
                 <ng-template matStepLabel>Section I (A): Basic Information</ng-template>
