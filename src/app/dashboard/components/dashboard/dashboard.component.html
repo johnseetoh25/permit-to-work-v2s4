@@ -64,23 +64,20 @@
                             <mat-label id = "label-text">{{ this.expiredPermitNo }}&emsp;</mat-label>
                             <mat-label style = "font-size: 16px"><mat-icon style = "vertical-align: middle; font-size: 22px;">not_interested</mat-icon>&emsp;Expired</mat-label>
                         </mat-list-item>
-                        <mat-divider style = "margin-top: 10px; margin-bottom: 5px;"></mat-divider>
-                        <mat-list-item>
-                            <div class = "canc-term-reqs-states">
-                                <div id = "canc-term-reqs-state" style = "background-color: rgb(128, 128, 128, 0.85); border-color: grey;">
-                                    <mat-label id = "req-state-text">Cancellation Requests</mat-label>
-                                    <br><br>
-                                    <mat-label id = "label-text">{{ this.cancReqsNo }}</mat-label>
-                                </div>
-                                <div id = "canc-term-reqs-state" style = "background-color: rgb(25, 25, 25, 0.85); border-color: rgb(25, 25, 25);">
-                                    <mat-label id = "req-state-text">Termination Requests</mat-label>
-                                    <br><br>
-                                    <mat-label id = "label-text">{{ this.termReqsNo }}</mat-label>
-                                </div>
+                        <mat-divider style = "margin-top: 12.5px;"></mat-divider>
+                        <div class = "canc-term-reqs-states">
+                            <div id = "canc-term-reqs-state" style = "background-color: rgb(128, 128, 128, 0.85); border-color: grey;">
+                                <p><mat-label id = "req-state-text" style = "margin-bottom: 10px;">Cancellation Requests</mat-label></p>
+                                <p><mat-label id = "label-text">{{ this.cancReqsNo }}</mat-label></p>
                             </div>
-                        </mat-list-item>
+                            <div id = "canc-term-reqs-state" style = "background-color: rgb(25, 25, 25, 0.85); border-color: rgb(25, 25, 25);">
+                                <p><mat-label id = "req-state-text" style = "margin-bottom: 10px;">Termination Requests</mat-label></p>
+                                <p><mat-label id = "label-text">{{ this.termReqsNo }}</mat-label></p>
+                            </div>
+                        </div>
                     </mat-list>
                 </mat-card-content>
+                <br>
                 <mat-card-actions align = "end" style = "margin-right: 10px;">
                     <button 
                         mat-stroked-button

@@ -85,6 +85,9 @@ export class DashboardComponent implements OnInit {
 
     this.db.returnPendingReqs().subscribe((resp: IPermitToWork[]) => {
       this.pendingReqList = resp;
+      this.pendingReqList.sort((a, b) => 
+        (a.ptwId.substring(3, 9).valueOf() > b.ptwId.substring(3, 9).valueOf())? -1 : 1
+      );
     });
 
     this.db.returnCancReqs().subscribe((resp: IPermitToWork[]) => {
