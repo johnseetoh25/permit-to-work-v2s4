@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --disable-host-check",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "db": "json-server db/db.json --routes db/routes.json --no-cors=true"
+    "db": "json-server db/db.json --routes db/routes.json --no-cors=true",
+    "localtunnel": "lt -p 8080 -h http://localtunnel.me"
   },
   "private": true,
   "dependencies": {
