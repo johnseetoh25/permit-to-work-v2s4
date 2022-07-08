@@ -34,18 +34,42 @@
     font-weight: 425;
 }
 
-.refresh-container {
-    text-align: end;
-}
-
-#ptw-id-text, #status-text, #ptw-type-text,#effective-period-text {
-    font-weight: 425;
-}
-
-.mat-paginator {
-    border-radius: 10px;
-    margin-top: 2.5px;
-    background-color: rgb(255, 255, 255, 0.9);
+.control-container {
+    height: 75px;
+    padding: 8px 16px 8px 16px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    background-color: rgb(255, 255, 255, 0.9);
+    border-radius: 10px;
+    margin-bottom: 8px;
+}
+
+.sort-by-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+#sort-by-option {
+    margin-right: 16px;
+}
+
+.sort-by-container #sort-by-option mat-form-field {
+    height: 50px;
+    width: 300px;
+}
+
+.sort-by-container #sort-by-year-option mat-form-field {
+    height: 50px;
+    width: 125px;
+}
+
+.refresh-container button {
+    width: fit-content;
+    height: 50px;
+}
+
+#ptw-id-text, #status-text, #ptw-type-text, #effective-period-text {
+    font-weight: 425;
 }

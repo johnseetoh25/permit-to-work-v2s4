@@ -32,9 +32,9 @@
         <button mat-raised-button color = "accent" [disabled] = "this.isRefreshing" (click) = "this.refresh()"><mat-icon>refresh</mat-icon>&emsp;REFRESH</button>
     </div>
     <br>
-    <table mat-table *ngIf = "this.activePageSortedData.length > 0" [dataSource] = "this.activePageSortedData" class = "tracking-log-table" matSort (matSortChange) = "this.sort($event)"> 
+    <table mat-table *ngIf = "this.activeData.length > 0" [dataSource] = "this.activeData" class = "tracking-log-table"> 
         <ng-container matColumnDef = "ptwId">
-            <th mat-sort-header = "ptwId" mat-header-cell *matHeaderCellDef>Permit ID</th>
+            <th mat-header = "ptwId" mat-header-cell *matHeaderCellDef>Permit ID</th>
             <td mat-cell *matCellDef = "let colElems">
                 <mat-label id = "ptw-id-text" >
                     {{ colElems.ptwId }}
@@ -43,12 +43,12 @@
         </ng-container>
     
         <ng-container matColumnDef = "locationOfWork">
-            <th mat-sort-header = "locationOfWork" mat-header-cell *matHeaderCellDef>Location of work</th>
+            <th mat-header = "locationOfWork" mat-header-cell *matHeaderCellDef>Location of work</th>
             <td mat-cell *matCellDef = "let colElems">{{ colElems.locationOfWork?.main }} ⬦ {{ colElems.locationOfWork?.sub }}</td>
         </ng-container>
 
         <ng-container matColumnDef = "permitType">
-            <th mat-sort-header = "permitType" mat-header-cell *matHeaderCellDef>Permit type</th>
+            <th mat-header = "permitType" mat-header-cell *matHeaderCellDef>Permit type</th>
             <td mat-cell *matCellDef = "let colElems">
                 <mat-icon *ngIf = "colElems.permitType == 'Hot work permit (HWP)'" style = "color: brown; vertical-align: middle;">whatshot</mat-icon>
                 <mat-icon *ngIf = "colElems.permitType == 'Cold work permit (CWP)'" style = "color: darkslateblue; vertical-align: middle;">ac_unit</mat-icon>
@@ -64,26 +64,26 @@
         </ng-container>
     
         <ng-container matColumnDef = "permitValidity">
-            <th mat-sort-header = "permitValidity" mat-header-cell *matHeaderCellDef>Permit validity</th>
+            <th mat-header = "permitValidity" mat-header-cell *matHeaderCellDef>Permit validity</th>
             <td mat-cell *matCellDef = "let colElems">
                 <mat-label>
-                    {{ colElems.startWorkingDateTime | date: 'short' }} ► {{ colElems.endWorkingDateTime | date: 'short' }}
+                    {{ colElems.startWorkingDateTime | date: 'short' }} ➡ {{ colElems.endWorkingDateTime | date: 'short' }}
                 </mat-label>
             </td>
         </ng-container>
     
         <ng-container matColumnDef = "applicantName">
-            <th mat-sort-header = "applicantName" mat-header-cell *matHeaderCellDef>Applicant name</th>
+            <th mat-header = "applicantName" mat-header-cell *matHeaderCellDef>Applicant name</th>
             <td mat-cell *matCellDef = "let colElems">{{ colElems.applicantDets?.name }}</td>
         </ng-container>
     
         <ng-container matColumnDef = "submissionTimestamp">
-            <th mat-sort-header = "submissionTimestamp" mat-header-cell *matHeaderCellDef>Application date</th>
+            <th mat-header = "submissionTimestamp" mat-header-cell *matHeaderCellDef>Application date</th>
             <td mat-cell *matCellDef = "let colElems">{{ colElems.timestamp | date: 'short' }}</td>
         </ng-container>
     
         <ng-container matColumnDef = "requestStatus">
-            <th mat-sort-header = "requestStatus" mat-header-cell *matHeaderCellDef>Request status</th>
+            <th mat-header = "requestStatus" mat-header-cell *matHeaderCellDef>Request status</th>
             <td mat-cell *matCellDef = "let colElems" 
                 [ngStyle] = " 
                     colElems.requestStatus == 'Approved' ? { color: 'forestgreen' } : 
@@ -95,7 +95,7 @@
         </ng-container>
 
         <ng-container matColumnDef = "permitStatus">
-            <th mat-sort-header = "permitStatus" mat-header-cell *matHeaderCellDef>Permit status</th>
+            <th mat-header = "permitStatus" mat-header-cell *matHeaderCellDef>Permit status</th>
             <td mat-cell *matCellDef = "let colElems" 
                 [ngStyle] = "
                     colElems.ptwStatus?.permitStatus == 'Processing' ? { color: 'royalblue' } : 
@@ -126,13 +126,7 @@
         <tr mat-header-row *matHeaderRowDef = "this.displayedHeaderColumns"></tr>
         <tr mat-row *matRowDef = "let row; columns: this.displayedHeaderColumns;"></tr>
     </table>
-    <mat-paginator [length] = "pageLength"
-                    *ngIf = "this.activePageSortedData.length > 0"
-                   [pageSize] = "pageSize"
-                   [pageSizeOptions] = "pageSizeOptions"
-                   (page) = "onPageChanged($event)"
-                   aria-label = "Select page"></mat-paginator>
-    <div *ngIf = "this.activePageSortedData.length === 0" id = "no-data-container">
+    <div *ngIf = "this.activeData.length === 0" id = "no-data-container">
         <mat-label>No PTW data currently available</mat-label>
         <br><br>
         <mat-icon>report_problem</mat-icon>
