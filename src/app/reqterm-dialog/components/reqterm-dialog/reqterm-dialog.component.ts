@@ -313,7 +313,7 @@ export class ReqtermDialogComponent implements OnInit {
     this.dialogRefSelf.close();
     this.dialogRefSelf.afterClosed().subscribe(() => {
       this.db.fetchWith(toReqTerm.id).subscribe((resp: IPermitToWork[]) => {
-        this.mail.send(resp[0], resp[0].permitType);
+        //this.mail.send(resp[0], resp[0].permitType);
       });
       this.openSnackBar("A closure/termination request has been sent. An email notification will be sent to you shortly.", "");
       this.compShare.sendClickEvent();

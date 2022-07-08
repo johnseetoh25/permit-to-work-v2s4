@@ -401,7 +401,7 @@ export class TrackingLogComponent implements OnInit {
     );
 
     this.db.fetchWith(toExpire.id).subscribe((resp: IPermitToWork[]) => {
-      this.mail.send(resp[0], resp[0].permitType);
+      //this.mail.send(resp[0], resp[0].permitType);
     });
   }
 

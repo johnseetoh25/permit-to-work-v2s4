@@ -319,7 +319,7 @@ export class TerminateDialogComponent implements OnInit {
     this.dialogRefSelf.close();
     this.dialogRefSelf.afterClosed().subscribe(() => {
       this.db.fetchWith(toTerminate.id).subscribe((resp: IPermitToWork[]) => {
-        this.mail.send(resp[0], resp[0].permitType);
+        //this.mail.send(resp[0], resp[0].permitType);
       });
       this.openSnackBar("The permit has been " + toTerminate.ptwStatus.permitStatus.toLowerCase() + ". An email notification will be sent to you shortly.", "");
       this.compShare.sendClickEvent();

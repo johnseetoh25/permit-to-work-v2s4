@@ -43,7 +43,6 @@ export class PtwDetailsComponent implements OnInit {
   public refresh(): void {
     this.db.fetchWith(this.fetchedId).subscribe((data: IPermitToWork[]) => {
       this.targetPtw = data;
-      console.log(JSON.stringify(this.targetPtw[0]));
       this.submissionTimestampDisplay = new Date(this.targetPtw[0].timestamp);
       if (this.targetPtw[0].ptwStatus.terminatedTimestamp != DefaultValues.VALUE_NONE) {
         this.closedTimestampDisplay = new Date(this.targetPtw[0].ptwStatus.terminatedTimestamp);
