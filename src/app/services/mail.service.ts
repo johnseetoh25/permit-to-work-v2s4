@@ -35,7 +35,7 @@ export class MailService {
           canc_req_ts: data.wantToCancel? "(on " + new Date(data.reqCancTimestamp).toLocaleString() + ")" : "",
           canc_ts: data.cancelledTimestamp == DefaultValues.VALUE_NONE? DefaultValues.VALUE_NONE : new Date(data.cancelledTimestamp).toLocaleString(),
 
-          perm_status: data.ptwStatus.permitStatus.toUpperCase(),
+          perm_status: data.ptwStatus.permitStatus == PermitStatus.STATUS_INVALID? "INVALID" : data.ptwStatus.permitStatus.toUpperCase(),
           cloterm_req: data.ptwStatus.wantToTerminate? "Yes" : "No",
           cloterm_req_ts: data.ptwStatus.wantToTerminate? "(on " + new Date(data.ptwStatus.reqTermTimestamp).toLocaleString() + ")" : "",
           cloterm_rs: data.ptwStatus.remarks,
@@ -194,12 +194,7 @@ export class MailService {
           
           to_email: data.applicantDets.email,
           bcc_to: "",
-          cc_to: data.wantToCancel || 
-                 data.ptwStatus.wantToTerminate || 
-                 data.requestStatus == RequestStatus.REQUEST_APPROVED ||
-                 data.requestStatus == RequestStatus.REQUEST_REJECTED || 
-                 data.requestStatus == RequestStatus.REQUEST_CANCELLED || 
-                 data.requestStatus == RequestStatus.REQUEST_NULLED? "temasek.polytechnic.ptwemsys@gmail.com" : ""
+          cc_to: "temasek.polytechnic.ptwemsys@gmail.com"
         };
 
         break;
@@ -214,7 +209,7 @@ export class MailService {
           canc_req_ts: data.wantToCancel? "(on " + new Date(data.reqCancTimestamp).toLocaleString() + ")" : "",
           canc_ts: data.cancelledTimestamp == DefaultValues.VALUE_NONE? DefaultValues.VALUE_NONE : new Date(data.cancelledTimestamp).toLocaleString(),
 
-          perm_status: data.ptwStatus.permitStatus.toUpperCase(),
+          perm_status: data.ptwStatus.permitStatus == PermitStatus.STATUS_INVALID? "INVALID" : data.ptwStatus.permitStatus.toUpperCase(),
           cloterm_req: data.ptwStatus.wantToTerminate? "Yes" : "No",
           cloterm_req_ts: data.ptwStatus.wantToTerminate? "(on " + new Date(data.ptwStatus.reqTermTimestamp).toLocaleString() + ")" : "",
           cloterm_rs: data.ptwStatus.remarks,
@@ -393,12 +388,7 @@ export class MailService {
     
           to_email: data.applicantDets.email,
           bcc_to: "",
-          cc_to: data.wantToCancel || 
-                 data.ptwStatus.wantToTerminate || 
-                 data.requestStatus == RequestStatus.REQUEST_APPROVED ||
-                 data.requestStatus == RequestStatus.REQUEST_REJECTED || 
-                 data.requestStatus == RequestStatus.REQUEST_CANCELLED || 
-                 data.requestStatus == RequestStatus.REQUEST_NULLED? "temasek.polytechnic.ptwemsys@gmail.com" : ""
+          cc_to: "temasek.polytechnic.ptwemsys@gmail.com"
         };
       
         break;
@@ -413,7 +403,7 @@ export class MailService {
           canc_req_ts: data.wantToCancel? "(on " + new Date(data.reqCancTimestamp).toLocaleString() + ")" : "",
           canc_ts: data.cancelledTimestamp == DefaultValues.VALUE_NONE? DefaultValues.VALUE_NONE : new Date(data.cancelledTimestamp).toLocaleString(),
 
-          perm_status: data.ptwStatus.permitStatus.toUpperCase(),
+          perm_status: data.ptwStatus.permitStatus == PermitStatus.STATUS_INVALID? "INVALID" : data.ptwStatus.permitStatus.toUpperCase(),
           cloterm_req: data.ptwStatus.wantToTerminate? "Yes" : "No",
           cloterm_req_ts: data.ptwStatus.wantToTerminate? "(on " + new Date(data.ptwStatus.reqTermTimestamp).toLocaleString() + ")" : "",
           cloterm_rs: data.ptwStatus.remarks,
@@ -553,12 +543,7 @@ export class MailService {
           
           to_email: data.applicantDets.email,
           bcc_to: "",
-          cc_to: data.wantToCancel || 
-                 data.ptwStatus.wantToTerminate || 
-                 data.requestStatus == RequestStatus.REQUEST_APPROVED ||
-                 data.requestStatus == RequestStatus.REQUEST_REJECTED || 
-                 data.requestStatus == RequestStatus.REQUEST_CANCELLED || 
-                 data.requestStatus == RequestStatus.REQUEST_NULLED? "temasek.polytechnic.ptwemsys@gmail.com" : ""
+          cc_to: "temasek.polytechnic.ptwemsys@gmail.com"
         };
 
         break;
@@ -573,7 +558,7 @@ export class MailService {
           canc_req_ts: data.wantToCancel? "(on " + new Date(data.reqCancTimestamp).toLocaleString() + ")" : "",
           canc_ts: data.cancelledTimestamp == DefaultValues.VALUE_NONE? DefaultValues.VALUE_NONE : new Date(data.cancelledTimestamp).toLocaleString(),
 
-          perm_status: data.ptwStatus.permitStatus.toUpperCase(),
+          perm_status: data.ptwStatus.permitStatus == PermitStatus.STATUS_INVALID? "INVALID" : data.ptwStatus.permitStatus.toUpperCase(),
           cloterm_req: data.ptwStatus.wantToTerminate? "Yes" : "No",
           cloterm_req_ts: data.ptwStatus.wantToTerminate? "(on " + new Date(data.ptwStatus.reqTermTimestamp).toLocaleString() + ")" : "",
           cloterm_rs: data.ptwStatus.remarks,
@@ -707,12 +692,7 @@ export class MailService {
           
           to_email: data.applicantDets.email,
           bcc_to: "",
-          cc_to: data.wantToCancel || 
-                 data.ptwStatus.wantToTerminate || 
-                 data.requestStatus == RequestStatus.REQUEST_APPROVED ||
-                 data.requestStatus == RequestStatus.REQUEST_REJECTED || 
-                 data.requestStatus == RequestStatus.REQUEST_CANCELLED || 
-                 data.requestStatus == RequestStatus.REQUEST_NULLED? "temasek.polytechnic.ptwemsys@gmail.com" : ""
+          cc_to: "temasek.polytechnic.ptwemsys@gmail.com"
         };
 
         break;
@@ -727,7 +707,7 @@ export class MailService {
           canc_req_ts: data.wantToCancel? "(on " + new Date(data.reqCancTimestamp).toLocaleString() + ")" : "",
           canc_ts: data.cancelledTimestamp == DefaultValues.VALUE_NONE? DefaultValues.VALUE_NONE : new Date(data.cancelledTimestamp).toLocaleString(),
 
-          perm_status: data.ptwStatus.permitStatus.toUpperCase(),
+          perm_status: data.ptwStatus.permitStatus == PermitStatus.STATUS_INVALID? "INVALID" : data.ptwStatus.permitStatus.toUpperCase(),
           cloterm_req: data.ptwStatus.wantToTerminate? "Yes" : "No",
           cloterm_req_ts: data.ptwStatus.wantToTerminate? "(on " + new Date(data.ptwStatus.reqTermTimestamp).toLocaleString() + ")" : "",
           cloterm_rs: data.ptwStatus.remarks,
@@ -861,12 +841,7 @@ export class MailService {
           
           to_email: data.applicantDets.email,
           bcc_to: "",
-          cc_to: data.wantToCancel || 
-                 data.ptwStatus.wantToTerminate || 
-                 data.requestStatus == RequestStatus.REQUEST_APPROVED ||
-                 data.requestStatus == RequestStatus.REQUEST_REJECTED || 
-                 data.requestStatus == RequestStatus.REQUEST_CANCELLED || 
-                 data.requestStatus == RequestStatus.REQUEST_NULLED? "temasek.polytechnic.ptwemsys@gmail.com" : ""
+          cc_to: "temasek.polytechnic.ptwemsys@gmail.com"
         };
 
         break;

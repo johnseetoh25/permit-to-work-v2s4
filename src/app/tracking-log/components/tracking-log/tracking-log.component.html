@@ -23,7 +23,7 @@
 </header>
 <div class = "content-body">
     <div class = "refresh-container">
-        <button mat-raised-button color = "basic" [disabled] = "this.isRefreshing" (click) = "this.refresh()"><mat-icon>refresh</mat-icon>&emsp;REFRESH</button>
+        <button mat-raised-button color = "accent" [disabled] = "this.isRefreshing" (click) = "this.refresh()"><mat-icon>refresh</mat-icon>&emsp;REFRESH</button>
     </div>
     <br>
     <table mat-table *ngIf = "this.activePageSortedData.length > 0" [dataSource] = "this.activePageSortedData" class = "tracking-log-table" matSort (matSortChange) = "this.sort($event)"> 
