@@ -47,7 +47,7 @@ export class ValidatorReqdetsComponent implements OnInit {
   public ngOnInit(): void { }
 
   public refresh(): void {
-    this.db.fetchWith(this.fetched.id).subscribe((data: IPermitToWork[]) => {
+    this.db.fetchWith("id", this.fetched.id.toString()).subscribe((data: IPermitToWork[]) => {
       this.targetPtw = data;
       this.submissionTimestampDisplay = new Date(this.targetPtw[0].timestamp);
       if (this.targetPtw[0].reqCancTimestamp != DefaultValues.VALUE_NONE) {

@@ -16,15 +16,32 @@
     flex: 1 1 auto;
 }
 
+.vertical-divider {
+    border-left: 2px solid gainsboro;
+    height: 50px;
+    margin-right: 16px;
+}
+
 .tracking-log-table {
     width: 100%;
     border-radius: 10px;
     overflow: hidden !important;
-    background-color: rgb(255, 255, 255, 0.5);
+    background-color: rgb(255, 255, 255, 0.8);
+    margin-bottom: 8px;
+}
+
+.tracking-log-table ng-container mat-header-cell {
+    margin: 24px;
+}
+
+mat-paginator {
+    width: 100%;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255, 0.9);
 }
 
 #no-data-container {
-    height: 600px;
+    height: 300px;
     background-color: #ffffffd7;
     border-radius: 10px;
     padding: 50px;
@@ -51,7 +68,15 @@
     justify-content: flex-start;
 }
 
-#sort-by-option {
+.sort-by-container #search-all {
+    margin-right: 16px;
+}
+
+.sort-by-container #sort-by-option {
+    margin-right: 16px;
+}
+
+.sort-by-container #sort-by-year-option {
     margin-right: 16px;
 }
 
@@ -63,6 +88,11 @@
 .sort-by-container #sort-by-year-option mat-form-field {
     height: 50px;
     width: 125px;
+}
+
+.sort-by-container #search-all mat-form-field {
+    height: 50px;
+    width: 300px;
 }
 
 .refresh-container button {

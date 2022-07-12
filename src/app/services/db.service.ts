@@ -17,7 +17,7 @@ export class DbService {
 
   constructor(private http : HttpClient, private snackBar: MatSnackBar) { }
 
-  public fetch(): Observable<IPermitToWork[]> {
+  public fetchAll(): Observable<IPermitToWork[]> {
     console.log(this.ptwUrl);
     return this.http.get<IPermitToWork[]>(this.ptwUrl);
   }
@@ -29,8 +29,8 @@ export class DbService {
     return this.http.post(this.ptwUrl, body, { 'headers': headers });
   }
 
-  public fetchWith(id: number): Observable<IPermitToWork[]> {
-    return this.http.get<IPermitToWork[]>(this.ptwUrl + "?id=" + id.toString());
+  public fetchWith(param: string, value: string): Observable<IPermitToWork[]> {
+    return this.http.get<IPermitToWork[]>(this.ptwUrl + "?"+ param + "=" + value);
   }
 
   public returnProcessingPermits(): Observable<IPermitToWork[]> {

@@ -82,8 +82,7 @@ export class ValidatorTlComponent implements OnInit {
 
   public refresh(): void {
     this.isRefreshing = true;
-    this.db.fetch()
-      .subscribe((data: IPermitToWork[]) => {
+    this.db.fetchAll().subscribe((data: IPermitToWork[]) => {
         console.log(data);
         this.isRefreshing = false;
         this.activeData = data;
@@ -365,7 +364,7 @@ export class ValidatorTlComponent implements OnInit {
       toExpire?.timestamp
     );
 
-    this.db.fetchWith(toExpire.id).subscribe((resp: IPermitToWork[]) => {
+    this.db.fetchWith("id", toExpire.id.toString()).subscribe((resp: IPermitToWork[]) => {
       //this.mail.send(resp[0], resp[0].permitType);
     });
   }

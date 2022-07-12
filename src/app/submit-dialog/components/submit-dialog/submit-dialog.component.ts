@@ -36,7 +36,7 @@ export class SubmitDialogComponent implements OnInit {
   public postPtwReq(toSubmit: IPermitToWork): void {
     this.db.post(toSubmit)
       .subscribe((data : IPermitToWork) => {
-        this.db.fetchWith(data.id - 1 || 1).subscribe((resp: IPermitToWork[]) => {
+        this.db.fetchWith("id", (data.id - 1).toString() || (1).toString()).subscribe((resp: IPermitToWork[]) => {
           var tempPreviousPtwYear: number = Number(resp[0].ptwYear);
           var tempCurrentPtwYear: number = Number(data.ptwYear);
           var tempPtwNo: number = data.id;
@@ -303,7 +303,7 @@ export class SubmitDialogComponent implements OnInit {
           this.dialogRefSelf.close();
           this.dialogRefSelf.afterClosed().subscribe(() => {
             this.navigateTo("");
-            this.db.fetchWith(data.id).subscribe((resp: IPermitToWork[]) => {
+            this.db.fetchWith("id", data.id.toString()).subscribe((resp: IPermitToWork[]) => {
               //this.mail.send(resp[0], resp[0].permitType);
             });
             this.openSnackBar("A new PTW request has been made! An email notification will be sent to you shortly.", "");

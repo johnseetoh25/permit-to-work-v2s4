@@ -24,12 +24,22 @@
 <div class = "content-body">
     <div class = "control-container">
         <div class = "sort-by-container">
+            <div id = "search-all">
+                <mat-form-field appearance = "fill">
+                    <mat-label>Search any keyword</mat-label>
+                    <input matInput (keyup) = "applySortFilter($event)" placeholder = "By permit ID, permit type etc." [(ngModel)] = "this.searchAllInput">
+                    <button *ngIf = "this.searchAllInput" matSuffix mat-icon-button aria-label="Clear" (click) = "this.searchAllInput = ''; this.applySortFilter($event);">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <div class = "vertical-divider"></div>
             <div id = "sort-by-option">
                 <mat-form-field appearance = "fill">
                     <mat-label>Sort by</mat-label>
                     <mat-select [(value)] = "this.selectedSortByOption">
                         <mat-option>No filter</mat-option>
-                        <mat-option value = "ptwYear">Year</mat-option>
+                        <mat-option value = "ptwYear">Year of application</mat-option>
                         <mat-option value = "permitType">Permit type</mat-option>
                         <mat-option value = "reqStatus">Request status</mat-option>
                         <mat-option value = "permitStatus">Permit status</mat-option>
@@ -39,7 +49,7 @@
             <div id = "sort-by-year-option" *ngIf = "this.selectedSortByOption == 'ptwYear'">
                 <mat-form-field appearance = "fill">
                     <mat-label>Year</mat-label>
-                    <mat-select>
+                    <mat-select [(value)] = "this.selectedSortByYear">
                         <mat-option>None</mat-option>
                         <mat-option *ngFor = "let year of this.ptwYearList" [value] = "year">{{ year }}</mat-option>
                     </mat-select>
@@ -47,27 +57,27 @@
             </div>
         </div>
         <div class = "refresh-container">
-            <button mat-button color = "primary" [disabled] = "this.isRefreshing" (click) = "this.refresh()"><mat-icon>refresh</mat-icon>&emsp;REFRESH</button>
+            <button mat-button color = "primary" [disabled] = "this.isLoading" (click) = "this.refresh(); this.searchAllInput = ''"><mat-icon>refresh</mat-icon>&emsp;REFRESH</button>
         </div>
     </div>
-    <table mat-table *ngIf = "this.activeData.length > 0" [dataSource] = "this.activeData" class = "tracking-log-table"> 
+    <mat-table [dataSource] = "this.dataSource" class = "tracking-log-table" matSort> 
         <ng-container matColumnDef = "ptwId">
-            <th mat-header = "ptwId" mat-header-cell *matHeaderCellDef>Permit ID</th>
-            <td mat-cell *matCellDef = "let colElems">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Permit ID</mat-header-cell>
+            <mat-cell *matCellDef = "let colElems">
                 <mat-label id = "ptw-id-text" >
                     {{ colElems.ptwId }}
                 </mat-label>
-            </td>
+            </mat-cell>
         </ng-container>
-    
+
         <ng-container matColumnDef = "locationOfWork">
-            <th mat-header = "locationOfWork" mat-header-cell *matHeaderCellDef>Location of work</th>
-            <td mat-cell *matCellDef = "let colElems">{{ colElems.locationOfWork?.main }} ⬦ {{ colElems.locationOfWork?.sub }}</td>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Location of work</mat-header-cell>
+            <mat-cell *matCellDef = "let colElems">{{ colElems.locationOfWork.main }} ⬦ {{ colElems.locationOfWork.sub }}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef = "permitType">
-            <th mat-header = "permitType" mat-header-cell *matHeaderCellDef>Permit type</th>
-            <td mat-cell *matCellDef = "let colElems">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Permit type</mat-header-cell>
+            <mat-cell *matCellDef = "let colElems">
                 <mat-icon *ngIf = "colElems.permitType == 'Hot work permit (HWP)'" style = "color: brown; vertical-align: middle;">whatshot</mat-icon>
                 <mat-icon *ngIf = "colElems.permitType == 'Cold work permit (CWP)'" style = "color: darkslateblue; vertical-align: middle;">ac_unit</mat-icon>
                 <mat-icon *ngIf = "colElems.permitType == 'Electrical permit (EP)'" style = "color: khaki; vertical-align: middle;">flash_on</mat-icon>
@@ -78,43 +88,43 @@
                 <mat-label id = "ptw-type-text" *ngIf = "colElems.permitType == 'Electrical permit (EP)'">&emsp;EP</mat-label>
                 <mat-label id = "ptw-type-text" *ngIf = "colElems.permitType == 'Work at height permit (WAHP)'">&emsp;WAHP</mat-label>
                 <mat-label id = "ptw-type-text" *ngIf = "colElems.permitType == 'Confined space permit (CSP)'">&emsp;CSP</mat-label>
-            </td>
+            </mat-cell>
         </ng-container>
-    
+
         <ng-container matColumnDef = "permitValidity">
-            <th mat-header = "permitValidity" mat-header-cell *matHeaderCellDef>Permit validity</th>
-            <td mat-cell *matCellDef = "let colElems">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Permit validity</mat-header-cell>
+            <mat-cell *matCellDef = "let colElems">
                 <mat-label>
                     {{ colElems.startWorkingDateTime | date: 'short' }} ➡ {{ colElems.endWorkingDateTime | date: 'short' }}
                 </mat-label>
-            </td>
+            </mat-cell>
         </ng-container>
-    
+
         <ng-container matColumnDef = "applicantName">
-            <th mat-header = "applicantName" mat-header-cell *matHeaderCellDef>Applicant name</th>
-            <td mat-cell *matCellDef = "let colElems">{{ colElems.applicantDets?.name }}</td>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Applicant name</mat-header-cell>
+            <mat-cell *matCellDef = "let colElems">{{ colElems.applicantDets?.name }}</mat-cell>
         </ng-container>
-    
+
         <ng-container matColumnDef = "submissionTimestamp">
-            <th mat-header = "submissionTimestamp" mat-header-cell *matHeaderCellDef>Application date</th>
-            <td mat-cell *matCellDef = "let colElems">{{ colElems.timestamp | date: 'short' }}</td>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Application date</mat-header-cell>
+            <mat-cell *matCellDef = "let colElems">{{ colElems.timestamp | date: 'short' }}</mat-cell>
         </ng-container>
-    
+
         <ng-container matColumnDef = "requestStatus">
-            <th mat-header = "requestStatus" mat-header-cell *matHeaderCellDef>Request status</th>
-            <td mat-cell *matCellDef = "let colElems" 
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Request status</mat-header-cell>
+            <mat-cell *matCellDef = "let colElems" 
                 [ngStyle] = " 
                     colElems.requestStatus == 'Approved' ? { color: 'forestgreen' } : 
                     colElems.requestStatus == 'Rejected' ? { color: 'maroon' } : 
                     colElems.requestStatus == 'Pending' ? { color: 'gray' } : 
                     { color: '' }">
-                <mat-label id = "status-text">{{ colElems.requestStatus | uppercase }}</mat-label>
-            </td>
+                <mat-label id = "status-text">{{ colElems.requestStatus | uppercase }} <mat-label style = "color: red" *ngIf = "colElems.wantToCancel && colElems.cancelledTimestamp == 'None'">(C*)</mat-label></mat-label>
+            </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef = "permitStatus">
-            <th mat-header = "permitStatus" mat-header-cell *matHeaderCellDef>Permit status</th>
-            <td mat-cell *matCellDef = "let colElems" 
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Permit status</mat-header-cell>
+            <mat-cell *matCellDef = "let colElems" 
                 [ngStyle] = "
                     colElems.ptwStatus?.permitStatus == 'Processing' ? { color: 'royalblue' } : 
                     colElems.ptwStatus?.permitStatus == 'Valid' ? { color: 'forestgreen' } : 
@@ -122,28 +132,31 @@
                     colElems.ptwStatus?.permitStatus == 'Terminated' ? { color: 'maroon' } : 
                     colElems.ptwStatus?.permitStatus == 'Closed' ? { color: 'rgb(103, 58, 183)' } :
                     { color: '' }">
-                <mat-label id = "status-text">{{ colElems.ptwStatus?.permitStatus | uppercase }}</mat-label>
-            </td>
+                <mat-label id = "status-text">{{ colElems.ptwStatus?.permitStatus | uppercase }} <mat-label style = "color: red" *ngIf = "colElems.ptwStatus.wantToTerminate && colElems.ptwStatus.terminatedTimestamp == 'None'">(T*)</mat-label></mat-label>
+            </mat-cell>
         </ng-container>
-
+    
         <ng-container matColumnDef = "processingStatus">
-            <th mat-header = "processingStatus" mat-header-cell *matHeaderCellDef>Eval. | Appr.</th>
-            <td mat-cell *matCellDef = "let colElems">
+            <mat-header-cell *matHeaderCellDef>Eval. | Appr.</mat-header-cell>
+            <mat-cell *matCellDef = "let colElems">
                 <mat-checkbox disabled [checked] = "colElems.safetyAssessorEvaluation?.passed"></mat-checkbox>
                 <mat-checkbox style = "padding-left: 8px;" disabled [checked] = "colElems.authorisedManagerApproval?.passed"></mat-checkbox>
-            </td>
+            </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef = "action">
-            <th mat-header = "action" mat-header-cell *matHeaderCellDef>Action</th>
-            <td mat-cell *matCellDef = "let colElems">
+            <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+            <mat-cell *matCellDef = "let colElems">
                 <button style = "width: 100%" class = "check-details-button" mat-stroked-button color = "primary" (click) = "this.expandSelectedPtw(colElems.id)"><mat-icon>open_in_new</mat-icon>&emsp;Open</button>
-            </td>
+            </mat-cell>
         </ng-container>
         
-        <tr mat-header-row *matHeaderRowDef = "this.displayedHeaderColumns"></tr>
-        <tr mat-row *matRowDef = "let row; columns: this.displayedHeaderColumns;"></tr>
-    </table>
+        <mat-header-row *matHeaderRowDef = "this.displayedHeaderColumns"></mat-header-row>
+        <mat-row *matRowDef = "let row; columns: this.displayedHeaderColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions] = "[5, 10, 25, 100]"></mat-paginator>
+
     <div *ngIf = "this.activeData.length === 0" id = "no-data-container">
         <mat-label>No PTW data currently available</mat-label>
         <br><br>

@@ -292,7 +292,7 @@ export class CancelDialogComponent implements OnInit {
 
     this.dialogRefSelf.close();
     this.dialogRefSelf.afterClosed().subscribe(() => {
-      this.db.fetchWith(toCancel.id).subscribe((resp: IPermitToWork[]) => {
+      this.db.fetchWith("id", toCancel.id.toString()).subscribe((resp: IPermitToWork[]) => {
         //this.mail.send(resp[0], resp[0].permitType);
       });
       this.openSnackBar("The request has been " + toCancel.requestStatus.toLowerCase() + ". An email notification will be sent to you shortly.", "");

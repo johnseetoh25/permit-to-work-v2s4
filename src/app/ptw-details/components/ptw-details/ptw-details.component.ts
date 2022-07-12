@@ -41,7 +41,7 @@ export class PtwDetailsComponent implements OnInit {
   }
 
   public refresh(): void {
-    this.db.fetchWith(this.fetchedId).subscribe((data: IPermitToWork[]) => {
+    this.db.fetchWith("id", this.fetchedId.toString()).subscribe((data: IPermitToWork[]) => {
       this.targetPtw = data;
       this.submissionTimestampDisplay = new Date(this.targetPtw[0].timestamp);
       if (this.targetPtw[0].ptwStatus.terminatedTimestamp != DefaultValues.VALUE_NONE) {

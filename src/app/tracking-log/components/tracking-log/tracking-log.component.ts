@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { DbService } from 'src/app/services/db.service';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 import { IPermitToWork } from 'src/app/interfaces/IPermitToWork';
 import { Router } from '@angular/router';
 import { MessageService } from 'src/app/services/message.service';
@@ -24,22 +27,34 @@ import { MailService } from 'src/app/services/mail.service';
 })
 export class TrackingLogComponent implements OnInit {
   public displayedHeaderColumns: string[] = [
-    'ptwId',
-    'locationOfWork',
-    'permitType',
-    'permitValidity',
-    'applicantName',
-    'submissionTimestamp',
-    'requestStatus',
-    'permitStatus',
-    'processingStatus',
-    'action'
+    "ptwId",
+    "locationOfWork",
+    "permitType",
+    "permitValidity",
+    "applicantName",
+    "submissionTimestamp",
+    "requestStatus",
+    "permitStatus",
+    "processingStatus",
+    "action"
   ];
 
-  public activeData: IPermitToWork[] = [];
+  public getProperty = (obj: any, path: any) => (
+    path.split('.').reduce((o: any, p: any) => o && o[p], obj)
+  );
+
+  @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
+  @ViewChild(MatSort) sort: MatSort | null = null;
+  
+  public searchAllInput: string = "";
   public selectedSortByOption: string = "";
   public ptwYearList: string[] = [];
-  public isRefreshing: boolean = false;
+  public selectedSortByYear: string = "";
+
+  public dataSource: MatTableDataSource<IPermitToWork> = new MatTableDataSource<IPermitToWork>();
+  public activeData: IPermitToWork[] = [];
+  public isLoading: boolean = false;
+
   private clickEventSub: Subscription;
 
   constructor(
@@ -56,41 +71,76 @@ export class TrackingLogComponent implements OnInit {
     });
   }
 
-  public ngOnInit(): void { 
+  public ngOnInit(): void {
     this.getUniquePtwYear();
     this.refresh();
   }
 
   public getUniquePtwYear(): void {
-    this.db.fetch().subscribe((resp: IPermitToWork[]) => {
+    this.db.fetchAll().subscribe((resp: IPermitToWork[]) => {
       let key = [...new Set(resp.map(res => res.ptwYear))];
       this.ptwYearList = key;
     });
   }
 
   public refresh(): void {
-    this.isRefreshing = true;
-    this.db.fetch()
-      .subscribe((data: IPermitToWork[]) => {
-        console.log(data);
-        this.isRefreshing = false;
-        this.activeData = data;
-
-        for (let dt of this.activeData) {
-          var ewdt: Date = new Date(dt.endWorkingDateTime);
-          if (dt.ptwStatus.permitStatus == PermitStatus.STATUS_VALID) {
-            if (ewdt.valueOf() < Date.now()) {
-              this.makeExpire(dt);
-            }
-          }
+    this.isLoading = true;
+    this.db.fetchAll().subscribe((data: IPermitToWork[]) => {
+      console.log(data);
+      this.isLoading = false;
+      this.activeData = data;
+      this.checkExpire(this.activeData);
+      this.dataSource = new MatTableDataSource(this.activeData);
+      this.dataSource.sortingDataAccessor = (obj: any, property: any) => {
+        switch (property) {
+          case "ptwId": return obj.ptwId;
+          case "locationOfWork": return obj.locationOfWork.main;
+          case "permitType": return obj.permitType;
+          case "permitValidity": return obj.startWorkingDateTime;
+          case "applicantName": return obj.applicantDets.name;
+          case "submissionTimestamp": return obj.timestamp;
+          case "requestStatus": return obj.requestStatus;
+          case "permitStatus": return obj.ptwStatus.permitStatus;
+          default: return obj[property];
         }
+      };
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
+  }
+
+  public applySortFilter(event: Event): void {
+    this.dataSource.filterPredicate = (data: IPermitToWork, filter: string) => (
+      data.ptwId.trim().toLowerCase().indexOf(filter) !== -1 ||
+      data.locationOfWork.main.trim().toLowerCase().indexOf(filter) !== -1 ||
+      data.locationOfWork.sub.trim().toLowerCase().indexOf(filter) !== -1 ||
+      data.permitType.trim().toLowerCase().indexOf(filter) !== -1 ||
+      new Date(data.startWorkingDateTime).toLocaleString().trim().toLowerCase().indexOf(filter) !== -1 ||
+      new Date(data.endWorkingDateTime).toLocaleString().trim().toLowerCase().indexOf(filter) !== -1 ||
+      data.applicantDets.name.trim().toLowerCase().indexOf(filter) !== -1 ||
+      new Date(data.timestamp).toLocaleString().trim().toLowerCase().indexOf(filter) !== -1 ||
+      data.requestStatus.trim().toLowerCase().indexOf(filter) !== -1 ||
+      data.ptwStatus.permitStatus.trim().toLowerCase().indexOf(filter) !== -1
+    );
+    var filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue;
   }
 
   public async expandSelectedPtw(id: string): Promise<void> {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = id;
     this.dialogRefPtwDets = this.dialog.open(PtwDetailsComponent, dialogConfig);
+  }
+
+  public checkExpire(dataList: IPermitToWork[]): void {
+    for (let dt of dataList) {
+      var ewdt: Date = new Date(dt.endWorkingDateTime);
+      if (dt.ptwStatus.permitStatus == PermitStatus.STATUS_VALID) {
+        if (ewdt.valueOf() < Date.now()) {
+          this.makeExpire(dt);
+        }
+      }
+    }
   }
 
   public makeExpire(res: IPermitToWork): void {
@@ -350,7 +400,7 @@ export class TrackingLogComponent implements OnInit {
       toExpire?.timestamp
     );
 
-    this.db.fetchWith(toExpire.id).subscribe((resp: IPermitToWork[]) => {
+    this.db.fetchWith("id", toExpire.id.toString()).subscribe((resp: IPermitToWork[]) => {
       //this.mail.send(resp[0], resp[0].permitType);
     });
   }
