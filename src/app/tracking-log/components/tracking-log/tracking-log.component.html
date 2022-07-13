@@ -24,48 +24,16 @@
 <div class = "content-body">
     <div class = "control-container">
         <div class = "sort-by-container">
-            <!-- <div id = "filter-search">
+            <div id = "filter-search-year">
                 <mat-form-field appearance = "fill">
-                    <mat-label>Search by any column</mat-label>
-                    <input matInput (keyup) = "this.applySortFilter($event)" placeholder = "By permit ID, permit type etc." [(ngModel)] = "this.searchAllInput">
-                    <button *ngIf = "this.searchAllInput" matSuffix mat-icon-button aria-label="Clear" (click) = "this.searchAllInput = ''; this.applySortFilter($event);">
-                        <mat-icon>close</mat-icon>
-                    </button>
-                </mat-form-field>
-            </div>
-            <div class = "vertical-divider"></div>
-            <div id = "sort-by-option">
-                <mat-form-field appearance = "fill">
-                    <mat-label>Sort by</mat-label>
-                    <mat-select [(value)] = "this.selectedSortByOption">
-                        <mat-option>No filter</mat-option>
-                        <mat-option value = "ptwYear">Year of application</mat-option>
-                        <mat-option value = "permitType">Permit type</mat-option>
-                        <mat-option value = "reqStatus">Request status</mat-option>
-                        <mat-option value = "permitStatus">Permit status</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div id = "sort-by-year-option" *ngIf = "this.selectedSortByOption == 'ptwYear'">
-                <mat-form-field appearance = "fill">
-                    <mat-label>Year</mat-label>
-                    <mat-select (selectionChange) = "this.applySortByYearFilter($event.value)">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor = "let year of this.ptwYearList" [value] = "year">{{ year }}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div> -->
-            <div id = "sort-by-year-option">
-                <mat-form-field appearance = "fill">
-                    <mat-label>Filter year</mat-label>
+                    <mat-label>Sort year</mat-label>
                     <mat-select [formControl] = "this.ptwYearFilter">
-                        <mat-option value = "">None</mat-option>
-                        <mat-option *ngFor = "let year of this.ptwYearList" [value] = "year">{{ year }}</mat-option>
+                        <mat-option *ngFor = "let year of this.ptwYearList" [value] = "year">{{ year? year : "None" }}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
             <div class = "vertical-divider"></div>
-            <div id = "filter-search">
+            <div id = "filter-search-ptw-id">
                 <mat-form-field appearance = "fill">
                     <mat-label>Filter permit ID</mat-label>
                     <input matInput [formControl] = "this.ptwIdFilter" placeholder = "Enter keyword">
@@ -74,7 +42,7 @@
                     </button>
                 </mat-form-field>
             </div>
-            <div id = "filter-search">
+            <div id = "filter-search-loc-of-work">
                 <mat-form-field appearance = "fill">
                     <mat-label>Filter location of work</mat-label>
                     <input matInput [formControl] = "this.locOfWorkFilter" placeholder = "Enter keyword">
@@ -83,9 +51,60 @@
                     </button>
                 </mat-form-field>
             </div>
+            <div id = "filter-search-permit-type">
+                <mat-form-field appearance = "fill">
+                    <mat-label>Filter permit type</mat-label>
+                    <mat-select [formControl] = "this.permitTypeFilter">
+                        <mat-option value = "">None</mat-option>
+                        <mat-option value = "WAHP">WAHP</mat-option>
+                        <mat-option value = "CSP">CSP</mat-option>
+                        <mat-option value = "HWP">HWP</mat-option>
+                        <mat-option value = "CWP">CWP</mat-option>
+                        <mat-option value = "EP">EP</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div id = "filter-search-request-status">
+                <mat-form-field appearance = "fill">
+                    <mat-label>Filter request status</mat-label>
+                    <mat-select [formControl] = "this.requestStatusFilter">
+                        <mat-option value = "">None</mat-option>
+                        <mat-option value = "Pending">Pending</mat-option>
+                        <mat-option value = "Approved">Approved</mat-option>
+                        <mat-option value = "Rejected">Rejected</mat-option>
+                        <mat-option value = "Cancelled">Cancelled</mat-option>
+                        <mat-option value = "---">Nulled/Invalid</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div id = "filter-search-permit-status">
+                <mat-form-field appearance = "fill">
+                    <mat-label>Filter permit status</mat-label>
+                    <mat-select [formControl] = "this.permitStatusFilter">
+                        <mat-option value = "">None</mat-option>
+                        <mat-option value = "Processing">Processing</mat-option>
+                        <mat-option value = "Valid">Valid</mat-option>
+                        <mat-option value = "---">Invalid</mat-option>
+                        <mat-option value = "Expired">Expired</mat-option>
+                        <mat-option value = "Terminated">Terminated</mat-option>
+                        <mat-option value = "Closed">Closed</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
         </div>
         <div class = "refresh-container">
-            <button mat-button color = "primary" [disabled] = "this.isLoading" (click) = "this.refresh(); this.searchAllInput = ''"><mat-icon>refresh</mat-icon>&emsp;REFRESH</button>
+            <button 
+                mat-button color = "primary" 
+                [disabled] = "this.isLoading" 
+                (click) = "
+                    this.refresh(); 
+                    this.ptwYearFilter.setValue(''); 
+                    this.ptwIdFilter.patchValue(''); 
+                    this.locOfWorkFilter.patchValue('');
+                    this.permitTypeFilter.setValue('');
+                    this.requestStatusFilter.setValue('');
+                    this.permitStatusFilter.setValue('');
+                "><mat-icon>refresh</mat-icon>&emsp;RESET</button>
         </div>
     </div>
     <mat-table [dataSource] = "this.dataSource" class = "tracking-log-table" matSort> 
@@ -183,11 +202,11 @@
         <mat-row *matRowDef = "let row; columns: this.displayedHeaderColumns;"></mat-row>
     </mat-table>
 
-    <mat-paginator [pageSizeOptions] = "[5, 10, 25, 100]"></mat-paginator>
-
     <div *ngIf = "this.activeData.length === 0" id = "no-data-container">
         <mat-label>No PTW data currently available</mat-label>
         <br><br>
         <mat-icon>report_problem</mat-icon>
     </div>
+
+    <mat-paginator [pageSizeOptions] = "[5, 10, 25, 100]"></mat-paginator> 
 </div>

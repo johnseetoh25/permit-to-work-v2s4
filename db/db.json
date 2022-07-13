@@ -2692,7 +2692,7 @@
         "sectionTwo": {
           "assessment": {
             "q01": {
-              "choice": "None",
+              "choice": "Yes",
               "remarks": "None"
             }
           }
@@ -2700,19 +2700,19 @@
         "sectionThree": {
           "permitReview": {
             "q01": {
-              "choice": "None",
+              "choice": "Yes",
               "remarks": "None"
             },
             "q02": {
-              "choice": "None",
+              "choice": "Yes",
               "remarks": "None"
             },
             "q03": {
-              "choice": "None",
+              "choice": "Yes",
               "remarks": "None"
             },
             "q04": {
-              "choice": "None",
+              "choice": "Yes",
               "remarks": "None"
             }
           }
@@ -2842,27 +2842,27 @@
         "email": "asd@das.sadsa"
       },
       "ptwStatus": {
-        "permitStatus": "Processing",
-        "taskStatus": "Not Started",
-        "remarks": "None",
+        "permitStatus": "Valid",
+        "taskStatus": "Cond. Changed",
+        "remarks": "djasdjsaonfiqwjnbc",
         "checked": false,
         "supervisorName": "None",
-        "wantToTerminate": false,
-        "reqTermTimestamp": "None",
+        "wantToTerminate": true,
+        "reqTermTimestamp": "2022-07-13T04:27:01.130Z",
         "terminatedTimestamp": "None",
-        "timestamp": "None"
+        "timestamp": "2022-07-13T04:25:35.792Z"
       },
       "safetyAssessorEvaluation": {
-        "passed": false,
-        "name": "None",
-        "timestamp": "None"
+        "passed": true,
+        "name": "Tyrone Ingram (SPV003)",
+        "timestamp": "2022-07-13T04:25:30.993Z"
       },
       "authorisedManagerApproval": {
-        "passed": false,
-        "name": "None",
-        "timestamp": "None"
+        "passed": true,
+        "name": "Tyrone Ingram (SPV003)",
+        "timestamp": "2022-07-13T04:25:35.792Z"
       },
-      "requestStatus": "Pending",
+      "requestStatus": "Approved",
       "wantToCancel": false,
       "reqCancTimestamp": "None",
       "cancelledTimestamp": "None",
@@ -3335,8 +3335,8 @@
         "timestamp": "None"
       },
       "requestStatus": "Pending",
-      "wantToCancel": false,
-      "reqCancTimestamp": "None",
+      "wantToCancel": true,
+      "reqCancTimestamp": "2022-07-13T04:28:10.413Z",
       "cancelledTimestamp": "None",
       "timestamp": "2022-07-12T09:23:06.735Z",
       "id": 7

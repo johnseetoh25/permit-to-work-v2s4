@@ -27,6 +27,9 @@ import { FormControl } from '@angular/forms';
   ]
 })
 export class TrackingLogComponent implements OnInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
+  @ViewChild(MatSort) sort: MatSort | null = null;
+
   public displayedHeaderColumns: string[] = [
     "ptwId",
     "locationOfWork",
@@ -40,31 +43,23 @@ export class TrackingLogComponent implements OnInit {
     "action"
   ];
 
-
-
   public ptwYearFilter = new FormControl();
   public ptwIdFilter = new FormControl();
   public locOfWorkFilter = new FormControl();
+  public permitTypeFilter = new FormControl();
+  public requestStatusFilter = new FormControl();
+  public permitStatusFilter = new FormControl();
   public globalFilter = "";
   public filteredValues = {
     ptwId: "",
     locWork: "",
-    ptwYear: ""
+    ptwYear: "",
+    permitType: "",
+    requestStatus: "",
+    permitStatus: ""
   };
 
-
-
-
-  public getProperty = (obj: any, path: any) => (
-    path.split('.').reduce((o: any, p: any) => o && o[p], obj)
-  );
-
-  @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
-  @ViewChild(MatSort) sort: MatSort | null = null;
-  
-  public searchAllInput: string = "";
-  public selectedSortByOption: string = "";
-  public ptwYearList: string[] = [];
+  public ptwYearList: string[] = [""];
 
   public dataSource: MatTableDataSource<IPermitToWork> = new MatTableDataSource<IPermitToWork>();
   public activeData: IPermitToWork[] = [];
@@ -83,6 +78,12 @@ export class TrackingLogComponent implements OnInit {
   ) {
     this.clickEventSub = this.compShare.getClickEvent().subscribe(() => {
       this.refresh();
+      this.ptwYearFilter.setValue(''); 
+      this.ptwIdFilter.patchValue(''); 
+      this.locOfWorkFilter.patchValue('');
+      this.permitTypeFilter.setValue('');
+      this.requestStatusFilter.setValue('');
+      this.permitStatusFilter.setValue('');
     });
   }
 
@@ -99,15 +100,35 @@ export class TrackingLogComponent implements OnInit {
       this.filteredValues["locWork"] = locOfWorkFilterValue;
       this.dataSource.filter = JSON.stringify(this.filteredValues);
     });
+    this.permitTypeFilter.valueChanges.subscribe((permitTypeFilterValue) => {
+      this.filteredValues["permitType"] = permitTypeFilterValue;
+      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    });
+    this.requestStatusFilter.valueChanges.subscribe((requestStatusFilterValue) => {
+      this.filteredValues["requestStatus"] = requestStatusFilterValue;
+      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    });
+    this.permitStatusFilter.valueChanges.subscribe((permitStatusFilterValue) => {
+      this.filteredValues["permitStatus"] = permitStatusFilterValue;
+      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    });
 
     this.getUniquePtwYear();
     this.refresh();
+    this.ptwYearFilter.setValue(''); 
+    this.ptwIdFilter.patchValue(''); 
+    this.locOfWorkFilter.patchValue('');
+    this.permitTypeFilter.setValue('');
+    this.requestStatusFilter.setValue('');
+    this.permitStatusFilter.setValue('');
   }
 
   public getUniquePtwYear(): void {
     this.db.fetchAll().subscribe((resp: IPermitToWork[]) => {
       let key = [...new Set(resp.map(res => res.ptwYear))];
-      this.ptwYearList = key;
+      for (let k of key) {
+        this.ptwYearList.push(k);
+      }
     });
   }
 
@@ -155,42 +176,17 @@ export class TrackingLogComponent implements OnInit {
              (data.ptwId.trim().toLowerCase().indexOf(searchString.ptwId) !== -1 ||
              data.ptwId.trim().indexOf(searchString.ptwId) !== -1) &&
              (data.locationOfWork.main.trim().toLowerCase().indexOf(searchString.locWork) !== -1 ||
-             data.locationOfWork.sub.trim().toLowerCase().indexOf(searchString.locWork) !== -1);
+             data.locationOfWork.sub.trim().toLowerCase().indexOf(searchString.locWork) !== -1) &&
+             (data.permitType.trim().toLowerCase().indexOf(searchString.permitType) !== -1 ||
+             data.permitType.trim().indexOf(searchString.permitType) !== -1) &&
+             (data.requestStatus.trim().toLowerCase().indexOf(searchString.requestStatus) !== -1 ||
+             data.requestStatus.trim().indexOf(searchString.requestStatus) !== -1) && 
+             (data.ptwStatus.permitStatus.trim().toLowerCase().indexOf(searchString.permitStatus) !== -1 ||
+             data.ptwStatus.permitStatus.trim().indexOf(searchString.permitStatus) !== -1);
     }
 
     return custFp;
   }
-
-  public applyFilter(filter: string) {
-    this.globalFilter = filter;
-    this.dataSource.filter = JSON.stringify(this.filteredValues);
-  }
-
-  //----------------------------------------------------
-  public applySortFilter(event: Event): void {
-    this.dataSource.filterPredicate = (data: IPermitToWork, filter: string) => (
-      data.ptwId.trim().toLowerCase().indexOf(filter) !== -1 ||
-      data.locationOfWork.main.trim().toLowerCase().indexOf(filter) !== -1 ||
-      data.locationOfWork.sub.trim().toLowerCase().indexOf(filter) !== -1 ||
-      data.permitType.trim().toLowerCase().indexOf(filter) !== -1 ||
-      new Date(data.startWorkingDateTime).toLocaleString("en-US", { hour12:true }).trim().toLowerCase().indexOf(filter) !== -1 ||
-      new Date(data.endWorkingDateTime).toLocaleString("en-US", { hour12:true }).trim().toLowerCase().indexOf(filter) !== -1 ||
-      data.applicantDets.name.trim().toLowerCase().indexOf(filter) !== -1 ||
-      new Date(data.timestamp).toLocaleString("en-US", { hour12:true }).trim().toLowerCase().indexOf(filter) !== -1 ||
-      data.requestStatus.trim().toLowerCase().indexOf(filter) !== -1 ||
-      data.ptwStatus.permitStatus.trim().toLowerCase().indexOf(filter) !== -1
-    );
-    var filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue;
-  }
-
-  public applySortByYearFilter(value: string): void {
-    this.dataSource.filterPredicate = (data: IPermitToWork, filter: string) => (
-      data.ptwYear.trim().toLowerCase().indexOf(filter) !== -1
-    );
-    this.dataSource.filter = value;
-  }
-  //----------------------------------------------------
 
   public async expandSelectedPtw(id: string): Promise<void> {
     const dialogConfig = new MatDialogConfig();

@@ -49,6 +49,7 @@ mat-paginator {
     font-size: medium;
     color: grey;
     font-weight: 425;
+    margin-bottom: 8px;
 }
 
 .control-container {
@@ -68,29 +69,42 @@ mat-paginator {
     justify-content: flex-start;
 }
 
-.sort-by-container #filter-search {
+.sort-by-container 
+#filter-search-year, 
+#filter-search-ptw-id, 
+#filter-search-loc-of-work, 
+#filter-search-permit-type, 
+#filter-search-request-status,
+#filter-search-permit-status {
     margin-right: 16px;
 }
 
-.sort-by-container #sort-by-option {
-    margin-right: 16px;
-}
-
-.sort-by-container #sort-by-year-option {
-    margin-right: 16px;
-}
-
-.sort-by-container #sort-by-option mat-form-field {
-    height: 50px;
-    width: 300px;
-}
-
-.sort-by-container #sort-by-year-option mat-form-field {
+.sort-by-container #filter-search-year mat-form-field {
     height: 50px;
     width: 125px;
 }
 
-.sort-by-container #filter-search mat-form-field {
+.sort-by-container #filter-search-ptw-id mat-form-field {
+    height: 50px;
+    width: 150px;
+}
+
+.sort-by-container #filter-search-permit-type mat-form-field {
+    height: 50px;
+    width: 175px;
+}
+
+.sort-by-container #filter-search-request-status mat-form-field {
+    height: 50px;
+    width: 175px;
+}
+
+.sort-by-container #filter-search-permit-status mat-form-field {
+    height: 50px;
+    width: 175px;
+}
+
+.sort-by-container #filter-search-loc-of-work mat-form-field {
     height: 50px;
     width: 200px;
 }
