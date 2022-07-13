@@ -104,7 +104,7 @@
                     this.permitTypeFilter.setValue('');
                     this.requestStatusFilter.setValue('');
                     this.permitStatusFilter.setValue('');
-                "><mat-icon>refresh</mat-icon>&emsp;RESET</button>
+                "><mat-icon>refresh</mat-icon>&emsp;REFRESH</button>
         </div>
     </div>
     <mat-table [dataSource] = "this.dataSource" class = "tracking-log-table" matSort> 
@@ -179,7 +179,7 @@
                     colElems.ptwStatus?.permitStatus == 'Terminated' ? { color: 'maroon' } : 
                     colElems.ptwStatus?.permitStatus == 'Closed' ? { color: 'rgb(103, 58, 183)' } :
                     { color: '' }">
-                <mat-label id = "status-text">{{ colElems.ptwStatus?.permitStatus | uppercase }} <mat-label style = "color: red" *ngIf = "colElems.ptwStatus.wantToTerminate && colElems.ptwStatus.terminatedTimestamp == 'None'">(T*)</mat-label></mat-label>
+                <mat-label id = "status-text">{{ colElems.ptwStatus?.permitStatus | uppercase }} <mat-label style = "color: red" *ngIf = "colElems.ptwStatus.wantToTerminate && colElems.ptwStatus.terminatedTimestamp == 'None' && colElems.ptwStatus.permitStatus != 'Expired'">(T*)</mat-label></mat-label>
             </mat-cell>
         </ng-container>
     
@@ -208,5 +208,5 @@
         <mat-icon>report_problem</mat-icon>
     </div>
 
-    <mat-paginator [pageSizeOptions] = "[5, 10, 25, 100]"></mat-paginator> 
+    <mat-paginator [pageSizeOptions] = "[8, 16, 24, 32]"></mat-paginator> 
 </div>

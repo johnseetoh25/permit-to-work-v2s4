@@ -10,6 +10,7 @@ import { IPermitToWork } from 'src/app/interfaces/IPermitToWork';
 import { ValidatorReqdetsComponent } from 'src/app/validator-reqdets/components/validator-reqdets/validator-reqdets.component';
 import { CompShareService } from 'src/app/services/comp-share.service';
 import { Subscription } from 'rxjs';
+import { PermitStatus } from 'src/app/constants/PermitStatus';
 
 @Component({
   selector: 'app-dashboard',

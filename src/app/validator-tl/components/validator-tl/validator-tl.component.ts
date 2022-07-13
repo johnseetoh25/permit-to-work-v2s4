@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DbService } from 'src/app/services/db.service';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 import { IPermitToWork } from 'src/app/interfaces/IPermitToWork';
-import { Sort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { MessageService } from 'src/app/services/message.service';
@@ -14,6 +16,7 @@ import { Subscription } from 'rxjs';
 import { PermitStatus } from 'src/app/constants/PermitStatus';
 import { RequestStatus } from 'src/app/constants/RequestStatus';
 import { MailService } from 'src/app/services/mail.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-validator-tl',
@@ -27,23 +30,47 @@ import { MailService } from 'src/app/services/mail.service';
   ]
 })
 export class ValidatorTlComponent implements OnInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
+  @ViewChild(MatSort) sort: MatSort | null = null;
+
   public displayedHeaderColumns: string[] = [
-    'ptwId',
-    'locationOfWork',
-    'permitType',
-    'permitValidity',
-    'applicantName',
-    'submissionTimestamp',
-    'requestStatus',
-    'permitStatus',
-    'processingStatus',
-    'action'
+    "ptwId",
+    "locationOfWork",
+    "permitType",
+    "permitValidity",
+    "applicantName",
+    "submissionTimestamp",
+    "requestStatus",
+    "permitStatus",
+    "processingStatus",
+    "action"
   ];
 
   public userNameDisplay: string = "";
+  
+  public ptwYearFilter = new FormControl();
+  public ptwIdFilter = new FormControl();
+  public locOfWorkFilter = new FormControl();
+  public permitTypeFilter = new FormControl();
+  public requestStatusFilter = new FormControl();
+  public permitStatusFilter = new FormControl();
+  public globalFilter = "";
+  public filteredValues = {
+    ptwId: "",
+    locWork: "",
+    ptwYear: "",
+    permitType: "",
+    requestStatus: "",
+    permitStatus: ""
+  };
+
+  public ptwYearList: string[] = [""];
+
+  public dataSource: MatTableDataSource<IPermitToWork> = new MatTableDataSource<IPermitToWork>();
   public activeData: IPermitToWork[] = [];
-  public isRefreshing: boolean = false;
-  private clickEventSub: Subscription;
+  public isLoading: boolean = false;
+
+  private clickEventSub: Subscription = new Subscription;
 
   constructor(
     private db: DbService,
@@ -58,12 +85,51 @@ export class ValidatorTlComponent implements OnInit {
   ) {
     this.clickEventSub = this.compShare.getClickEvent().subscribe(() => {
       this.refresh();
+      this.ptwYearFilter.setValue(''); 
+      this.ptwIdFilter.patchValue(''); 
+      this.locOfWorkFilter.patchValue('');
+      this.permitTypeFilter.setValue('');
+      this.requestStatusFilter.setValue('');
+      this.permitStatusFilter.setValue('');
     });
   }
 
   public ngOnInit(): void { 
-    this.refresh();
     this.checkSession();
+
+    this.ptwYearFilter.valueChanges.subscribe((ptwYearFilterValue) => {
+      this.filteredValues["ptwYear"] = ptwYearFilterValue;
+      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    });
+    this.ptwIdFilter.valueChanges.subscribe((ptwIdFilterValue) => {
+      this.filteredValues["ptwId"] = ptwIdFilterValue;
+      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    });
+    this.locOfWorkFilter.valueChanges.subscribe((locOfWorkFilterValue) => {
+      this.filteredValues["locWork"] = locOfWorkFilterValue;
+      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    });
+    this.permitTypeFilter.valueChanges.subscribe((permitTypeFilterValue) => {
+      this.filteredValues["permitType"] = permitTypeFilterValue;
+      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    });
+    this.requestStatusFilter.valueChanges.subscribe((requestStatusFilterValue) => {
+      this.filteredValues["requestStatus"] = requestStatusFilterValue;
+      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    });
+    this.permitStatusFilter.valueChanges.subscribe((permitStatusFilterValue) => {
+      this.filteredValues["permitStatus"] = permitStatusFilterValue;
+      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    });
+
+    this.getUniquePtwYear();
+    this.refresh();
+    this.ptwYearFilter.setValue('');
+    this.ptwIdFilter.patchValue(''); 
+    this.locOfWorkFilter.patchValue('');
+    this.permitTypeFilter.setValue('');
+    this.requestStatusFilter.setValue('');
+    this.permitStatusFilter.setValue('');
   }
 
   public checkSession(): void {
@@ -80,22 +146,69 @@ export class ValidatorTlComponent implements OnInit {
     });
   }
 
-  public refresh(): void {
-    this.isRefreshing = true;
-    this.db.fetchAll().subscribe((data: IPermitToWork[]) => {
-        console.log(data);
-        this.isRefreshing = false;
-        this.activeData = data;
-
-        for (let dt of this.activeData) {
-          var ewdt: Date = new Date(dt.endWorkingDateTime);
-          if (dt.ptwStatus.permitStatus == PermitStatus.STATUS_VALID) {
-            if (ewdt.valueOf() < Date.now()) {
-              this.makeExpire(dt);
-            }
-          }
-        }
+  public getUniquePtwYear(): void {
+    this.db.fetchAll().subscribe((resp: IPermitToWork[]) => {
+      let key = [...new Set(resp.map(res => res.ptwYear))];
+      for (let k of key) {
+        this.ptwYearList.push(k);
+      }
     });
+  }
+
+  public refresh(): void {
+    this.isLoading = true;
+    this.db.fetchAll().subscribe((data: IPermitToWork[]) => {
+      console.log(data);
+      this.isLoading = false;
+      this.activeData = data;
+      this.checkExpire(this.activeData);
+      this.dataSource = new MatTableDataSource(this.activeData);
+      this.dataSource.sortingDataAccessor = (obj: any, property: any) => {
+        switch (property) {
+          case "ptwId": return obj.ptwId;
+          case "locationOfWork": return obj.locationOfWork.main;
+          case "permitType": return obj.permitType;
+          case "permitValidity": return obj.startWorkingDateTime;
+          case "applicantName": return obj.applicantDets.name;
+          case "submissionTimestamp": return obj.timestamp;
+          case "requestStatus": return obj.requestStatus;
+          case "permitStatus": return obj.ptwStatus.permitStatus;
+          default: return obj[property];
+        }
+      };
+      this.dataSource.filterPredicate = this.customFilterPredicate();
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+  }
+
+  public customFilterPredicate(): any {
+    const custFp = (data: IPermitToWork, filter: string): boolean => {
+      var globalMatch = !this.globalFilter;
+
+      if (this.globalFilter) {
+        globalMatch = data.ptwId.trim().toLowerCase().indexOf(this.globalFilter.toLowerCase()) !== -1;
+      }
+
+      if (!globalMatch) {
+        return false;
+      }
+
+      let searchString = JSON.parse(filter);
+      return data.ptwYear.trim().toLowerCase().indexOf(searchString.ptwYear) !== -1 &&
+             (data.ptwId.trim().toLowerCase().indexOf(searchString.ptwId) !== -1 ||
+             data.ptwId.trim().indexOf(searchString.ptwId) !== -1) &&
+             (data.locationOfWork.main.trim().toLowerCase().indexOf(searchString.locWork) !== -1 ||
+             data.locationOfWork.sub.trim().toLowerCase().indexOf(searchString.locWork) !== -1) &&
+             (data.permitType.trim().toLowerCase().indexOf(searchString.permitType) !== -1 ||
+             data.permitType.trim().indexOf(searchString.permitType) !== -1) &&
+             (data.requestStatus.trim().toLowerCase().indexOf(searchString.requestStatus) !== -1 ||
+             data.requestStatus.trim().indexOf(searchString.requestStatus) !== -1) && 
+             (data.ptwStatus.permitStatus.trim().toLowerCase().indexOf(searchString.permitStatus) !== -1 ||
+             data.ptwStatus.permitStatus.trim().indexOf(searchString.permitStatus) !== -1);
+    }
+
+    return custFp;
   }
 
   public async expandSelectedPtw(id: string): Promise<void> {
@@ -105,6 +218,17 @@ export class ValidatorTlComponent implements OnInit {
       userName: this.userNameDisplay
     };
     this.dialogRefPtwDets = this.dialog.open(ValidatorReqdetsComponent, dialogConfig);
+  }
+
+  public checkExpire(dataList: IPermitToWork[]): void {
+    for (let dt of dataList) {
+      var ewdt: Date = new Date(dt.endWorkingDateTime);
+      if (dt.ptwStatus.permitStatus == PermitStatus.STATUS_VALID) {
+        if (ewdt.valueOf() < Date.now()) {
+          this.makeExpire(dt);
+        }
+      }
+    }
   }
 
   public makeExpire(res: IPermitToWork): void {
