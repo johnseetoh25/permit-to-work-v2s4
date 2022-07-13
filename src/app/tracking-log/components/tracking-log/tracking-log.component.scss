@@ -68,7 +68,7 @@ mat-paginator {
     justify-content: flex-start;
 }
 
-.sort-by-container #search-all {
+.sort-by-container #filter-search {
     margin-right: 16px;
 }
 
@@ -90,9 +90,9 @@ mat-paginator {
     width: 125px;
 }
 
-.sort-by-container #search-all mat-form-field {
+.sort-by-container #filter-search mat-form-field {
     height: 50px;
-    width: 300px;
+    width: 200px;
 }
 
 .refresh-container button {

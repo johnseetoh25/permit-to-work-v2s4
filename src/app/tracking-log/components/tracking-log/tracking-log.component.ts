@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DbService } from 'src/app/services/db.service';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 import { PermitStatus } from 'src/app/constants/PermitStatus';
 import { RequestStatus } from 'src/app/constants/RequestStatus';
 import { MailService } from 'src/app/services/mail.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-tracking-log',
@@ -39,6 +40,21 @@ export class TrackingLogComponent implements OnInit {
     "action"
   ];
 
+
+
+  public ptwYearFilter = new FormControl();
+  public ptwIdFilter = new FormControl();
+  public locOfWorkFilter = new FormControl();
+  public globalFilter = "";
+  public filteredValues = {
+    ptwId: "",
+    locWork: "",
+    ptwYear: ""
+  };
+
+
+
+
   public getProperty = (obj: any, path: any) => (
     path.split('.').reduce((o: any, p: any) => o && o[p], obj)
   );
@@ -49,7 +65,6 @@ export class TrackingLogComponent implements OnInit {
   public searchAllInput: string = "";
   public selectedSortByOption: string = "";
   public ptwYearList: string[] = [];
-  public selectedSortByYear: string = "";
 
   public dataSource: MatTableDataSource<IPermitToWork> = new MatTableDataSource<IPermitToWork>();
   public activeData: IPermitToWork[] = [];
@@ -72,6 +87,19 @@ export class TrackingLogComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.ptwYearFilter.valueChanges.subscribe((ptwYearFilterValue) => {
+      this.filteredValues["ptwYear"] = ptwYearFilterValue;
+      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    });
+    this.ptwIdFilter.valueChanges.subscribe((ptwIdFilterValue) => {
+      this.filteredValues["ptwId"] = ptwIdFilterValue;
+      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    });
+    this.locOfWorkFilter.valueChanges.subscribe((locOfWorkFilterValue) => {
+      this.filteredValues["locWork"] = locOfWorkFilterValue;
+      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    });
+
     this.getUniquePtwYear();
     this.refresh();
   }
@@ -104,27 +132,65 @@ export class TrackingLogComponent implements OnInit {
           default: return obj[property];
         }
       };
+      this.dataSource.filterPredicate = this.customFilterPredicate();
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
   }
 
+  public customFilterPredicate(): any {
+    const custFp = (data: IPermitToWork, filter: string): boolean => {
+      var globalMatch = !this.globalFilter;
+
+      if (this.globalFilter) {
+        globalMatch = data.ptwId.trim().toLowerCase().indexOf(this.globalFilter.toLowerCase()) !== -1;
+      }
+
+      if (!globalMatch) {
+        return false;
+      }
+
+      let searchString = JSON.parse(filter);
+      return data.ptwYear.trim().toLowerCase().indexOf(searchString.ptwYear) !== -1 &&
+             (data.ptwId.trim().toLowerCase().indexOf(searchString.ptwId) !== -1 ||
+             data.ptwId.trim().indexOf(searchString.ptwId) !== -1) &&
+             (data.locationOfWork.main.trim().toLowerCase().indexOf(searchString.locWork) !== -1 ||
+             data.locationOfWork.sub.trim().toLowerCase().indexOf(searchString.locWork) !== -1);
+    }
+
+    return custFp;
+  }
+
+  public applyFilter(filter: string) {
+    this.globalFilter = filter;
+    this.dataSource.filter = JSON.stringify(this.filteredValues);
+  }
+
+  //----------------------------------------------------
   public applySortFilter(event: Event): void {
     this.dataSource.filterPredicate = (data: IPermitToWork, filter: string) => (
       data.ptwId.trim().toLowerCase().indexOf(filter) !== -1 ||
       data.locationOfWork.main.trim().toLowerCase().indexOf(filter) !== -1 ||
       data.locationOfWork.sub.trim().toLowerCase().indexOf(filter) !== -1 ||
       data.permitType.trim().toLowerCase().indexOf(filter) !== -1 ||
-      new Date(data.startWorkingDateTime).toLocaleString().trim().toLowerCase().indexOf(filter) !== -1 ||
-      new Date(data.endWorkingDateTime).toLocaleString().trim().toLowerCase().indexOf(filter) !== -1 ||
+      new Date(data.startWorkingDateTime).toLocaleString("en-US", { hour12:true }).trim().toLowerCase().indexOf(filter) !== -1 ||
+      new Date(data.endWorkingDateTime).toLocaleString("en-US", { hour12:true }).trim().toLowerCase().indexOf(filter) !== -1 ||
       data.applicantDets.name.trim().toLowerCase().indexOf(filter) !== -1 ||
-      new Date(data.timestamp).toLocaleString().trim().toLowerCase().indexOf(filter) !== -1 ||
+      new Date(data.timestamp).toLocaleString("en-US", { hour12:true }).trim().toLowerCase().indexOf(filter) !== -1 ||
       data.requestStatus.trim().toLowerCase().indexOf(filter) !== -1 ||
       data.ptwStatus.permitStatus.trim().toLowerCase().indexOf(filter) !== -1
     );
     var filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue;
   }
+
+  public applySortByYearFilter(value: string): void {
+    this.dataSource.filterPredicate = (data: IPermitToWork, filter: string) => (
+      data.ptwYear.trim().toLowerCase().indexOf(filter) !== -1
+    );
+    this.dataSource.filter = value;
+  }
+  //----------------------------------------------------
 
   public async expandSelectedPtw(id: string): Promise<void> {
     const dialogConfig = new MatDialogConfig();

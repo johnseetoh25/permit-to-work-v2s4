@@ -24,10 +24,10 @@
 <div class = "content-body">
     <div class = "control-container">
         <div class = "sort-by-container">
-            <div id = "search-all">
+            <!-- <div id = "filter-search">
                 <mat-form-field appearance = "fill">
-                    <mat-label>Search any keyword</mat-label>
-                    <input matInput (keyup) = "applySortFilter($event)" placeholder = "By permit ID, permit type etc." [(ngModel)] = "this.searchAllInput">
+                    <mat-label>Search by any column</mat-label>
+                    <input matInput (keyup) = "this.applySortFilter($event)" placeholder = "By permit ID, permit type etc." [(ngModel)] = "this.searchAllInput">
                     <button *ngIf = "this.searchAllInput" matSuffix mat-icon-button aria-label="Clear" (click) = "this.searchAllInput = ''; this.applySortFilter($event);">
                         <mat-icon>close</mat-icon>
                     </button>
@@ -49,10 +49,38 @@
             <div id = "sort-by-year-option" *ngIf = "this.selectedSortByOption == 'ptwYear'">
                 <mat-form-field appearance = "fill">
                     <mat-label>Year</mat-label>
-                    <mat-select [(value)] = "this.selectedSortByYear">
+                    <mat-select (selectionChange) = "this.applySortByYearFilter($event.value)">
                         <mat-option>None</mat-option>
                         <mat-option *ngFor = "let year of this.ptwYearList" [value] = "year">{{ year }}</mat-option>
                     </mat-select>
+                </mat-form-field>
+            </div> -->
+            <div id = "sort-by-year-option">
+                <mat-form-field appearance = "fill">
+                    <mat-label>Filter year</mat-label>
+                    <mat-select [formControl] = "this.ptwYearFilter">
+                        <mat-option value = "">None</mat-option>
+                        <mat-option *ngFor = "let year of this.ptwYearList" [value] = "year">{{ year }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class = "vertical-divider"></div>
+            <div id = "filter-search">
+                <mat-form-field appearance = "fill">
+                    <mat-label>Filter permit ID</mat-label>
+                    <input matInput [formControl] = "this.ptwIdFilter" placeholder = "Enter keyword">
+                    <button *ngIf = "this.ptwIdFilter.value" matSuffix mat-icon-button aria-label = "Clear" (click) = "this.ptwIdFilter.patchValue('');">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <div id = "filter-search">
+                <mat-form-field appearance = "fill">
+                    <mat-label>Filter location of work</mat-label>
+                    <input matInput [formControl] = "this.locOfWorkFilter" placeholder = "Enter keyword">
+                    <button *ngIf = "this.locOfWorkFilter.value" matSuffix mat-icon-button aria-label = "Clear" (click) = "this.locOfWorkFilter.patchValue('');">
+                        <mat-icon>close</mat-icon>
+                    </button>
                 </mat-form-field>
             </div>
         </div>
