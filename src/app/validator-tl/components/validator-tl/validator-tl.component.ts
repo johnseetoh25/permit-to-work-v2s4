@@ -161,6 +161,9 @@ export class ValidatorTlComponent implements OnInit {
       console.log(data);
       this.isLoading = false;
       this.activeData = data;
+      this.activeData.sort((a, b) => 
+        (a.ptwId.substring(4, 10).valueOf() > b.ptwId.substring(4, 10).valueOf())? -1 : 1
+      );
       this.checkExpire(this.activeData);
       this.dataSource = new MatTableDataSource(this.activeData);
       this.dataSource.sortingDataAccessor = (obj: any, property: any) => {

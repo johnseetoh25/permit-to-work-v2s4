@@ -35,7 +35,7 @@
             <div class = "vertical-divider"></div>
             <div id = "filter-search-ptw-id">
                 <mat-form-field appearance = "fill">
-                    <mat-label>Filter permit ID</mat-label>
+                    <mat-label>Search permit ID</mat-label>
                     <input matInput [formControl] = "this.ptwIdFilter" placeholder = "Enter keyword">
                     <button *ngIf = "this.ptwIdFilter.value" matSuffix mat-icon-button aria-label = "Clear" (click) = "this.ptwIdFilter.patchValue('');">
                         <mat-icon>close</mat-icon>
@@ -44,7 +44,7 @@
             </div>
             <div id = "filter-search-loc-of-work">
                 <mat-form-field appearance = "fill">
-                    <mat-label>Filter location of work</mat-label>
+                    <mat-label>Search location of work</mat-label>
                     <input matInput [formControl] = "this.locOfWorkFilter" placeholder = "Enter keyword">
                     <button *ngIf = "this.locOfWorkFilter.value" matSuffix mat-icon-button aria-label = "Clear" (click) = "this.locOfWorkFilter.patchValue('');">
                         <mat-icon>close</mat-icon>
@@ -90,6 +90,15 @@
                         <mat-option value = "Closed">Closed</mat-option>
                     </mat-select>
                 </mat-form-field>
+            </div>
+            <div class = "vertical-divider"></div>
+            <div id = "tl-legends">
+                <mat-card>
+                    <mat-label id = "status-text" style = "color: red">(C*)</mat-label>
+                    <mat-label style = "margin-right: 16px"> Cancellation req.</mat-label>
+                    <mat-label id = "status-text" style = "color: red">(T*)</mat-label>
+                    <mat-label> Closure/termination req.</mat-label>
+                </mat-card>
             </div>
         </div>
         <div class = "refresh-container">
@@ -208,5 +217,5 @@
         <mat-icon>report_problem</mat-icon>
     </div>
 
-    <mat-paginator [pageSizeOptions] = "[8, 16, 24, 32]"></mat-paginator> 
+    <mat-paginator [pageSizeOptions] = "[10, 20, 50, 100]"></mat-paginator> 
 </div>

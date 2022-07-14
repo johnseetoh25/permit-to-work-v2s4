@@ -72,37 +72,37 @@ mat-paginator {
 #filter-search-permit-type, 
 #filter-search-request-status,
 #filter-search-permit-status {
+    height: 50px;
     margin-right: 16px;
 }
 
 .sort-by-container #filter-search-year mat-form-field {
-    height: 50px;
     width: 125px;
 }
 
 .sort-by-container #filter-search-ptw-id mat-form-field {
-    height: 50px;
     width: 150px;
 }
 
 .sort-by-container #filter-search-permit-type mat-form-field {
-    height: 50px;
     width: 175px;
 }
 
 .sort-by-container #filter-search-request-status mat-form-field {
-    height: 50px;
     width: 175px;
 }
 
 .sort-by-container #filter-search-permit-status mat-form-field {
-    height: 50px;
     width: 175px;
 }
 
 .sort-by-container #filter-search-loc-of-work mat-form-field {
-    height: 50px;
     width: 200px;
+}
+
+.sort-by-container #tl-legends mat-card {
+    width: fit-content;
+    background-color: rgba(228, 208, 208, 0.5);
 }
 
 .refresh-container button {
