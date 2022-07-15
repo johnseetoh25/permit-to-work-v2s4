@@ -1,3 +1,5 @@
+// ==============================================================================================================================================================================
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
@@ -13,6 +15,7 @@ import { PermitStatus } from 'src/app/constants/PermitStatus';
 import { TaskStatus } from 'src/app/constants/TaskStatus';
 import { PermitTypes } from 'src/app/constants/PermitTypes';
 
+// ==============================================================================================================================================================================
 
 @Component({
   selector: 'app-ptw-request',
@@ -29,298 +32,231 @@ import { PermitTypes } from 'src/app/constants/PermitTypes';
     }
   ]
 })
+
+// ==============================================================================================================================================================================
+
 export class PtwRequestComponent implements OnInit {
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Request form data.)
+  public reqFormData: IPermitToWork = <IPermitToWork>{};
 
-  public partiallyCompletedPTWData!: IPermitToWork;
-
+  // * (Error message for stepper tabs.)
   public errorMessage: string = "Please complete all the required fields.";
 
-  public sectionOneAFormGroup!: FormGroup;
-    public selectedLocationOfWork: string = "";
-    public selectedLocationSector: string = "";
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // NOTE: Vars with comment tag [REQ_FORM_DATA] indicate data to be inserted into 
+  //       reqFormData.
 
-    public selectedPermitType: string = "";
+  // * (Stepper form group for Section One A.)
+  public sectionOneAFormGroup: FormGroup = <FormGroup>{};
 
-    public taskCoversMultiLocs: boolean = false;
-    public otherLocationsInput: string = "";
-    
-    public startDateInput: Date = new Date();
-    public endDateInput: Date = new Date();
-      public startDateTimeConcat: string = "";
-
-    public startTimeInput: Date = new Date();
-    public endTimeInput: Date = new Date();
-      public endDateTimeConcat: string = "";
-
-    public taskDescriptionInput: string = "";
-
-    public totalNoOfAttendants: number = 0;
-      public noOfWorkersEventValue: number = 1;
-        public noOfWorkersInput: number = 0;
-      public noOfSupervisorsEventValue: number = 1;
-        public noOfSupervisorsInput: number = 0;
-  
+  // * (Additional form validators and limiters.)
+  dateToday: Date = new Date();
+  dateTmr: Date = new Date();
+  maxDate: Date | null = new Date(new Date().setDate(2));
   public radioButtonGroup: string[] = ['Yes', 'No', 'N/A'];
   public radioButtonGroupAlt: string[] = ['Yes', 'No'];
-
   public nricOrFinNoInputMask = createMask("A9999999A");
   public contactNoInputMask = createMask("+65 9999-9999");
 
+  /* [REQ_FORM_DATA] */ public selectedLocationOfWork: string = "";
+  /* [REQ_FORM_DATA] */ public selectedLocationSector: string = "";
+  /* [REQ_FORM_DATA] */ public selectedPermitType: string = "";
+  /* [REQ_FORM_DATA] */ public otherLocationsInput: string = "";
+                        public startDateInput: Date = new Date();
+                        public endDateInput: Date = new Date();
+  /* [REQ_FORM_DATA] */ public startDateTimeConcat: string = "";
+                        public startTimeInput: Date = new Date();
+                        public endTimeInput: Date = new Date();
+  /* [REQ_FORM_DATA] */ public endDateTimeConcat: string = "";
+  /* [REQ_FORM_DATA] */ public taskDescriptionInput: string = "";
+                        public totalNoOfAttendants: number = 0;
+                        public noOfWorkersEventValue: number = 1;
+  /* [REQ_FORM_DATA] */ public noOfWorkersInput: number = 0;
+                        public noOfSupervisorsEventValue: number = 1;
+  /* [REQ_FORM_DATA] */ public noOfSupervisorsInput: number = 0;
+
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // * (Stepper form group for Section One B.)
   public sectionOneBFormGroup!: FormGroup;
-    // ============================ Section I(B) for WAH ============================
-    public wah_s1_cmi_q01_choiceInput: string = "";
-    public wah_s1_cmi_q01_remarksInput: string = "";
 
-    public wah_s1_cmi_q02_choiceInput: string = "";
-    public wah_s1_cmi_q02_remarksInput: string = "";
+  // ------------------------------ * (WAHP) * ------------------------------
+  /* [REQ_FORM_DATA] */ public wah_s1_cmi_q01_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public wah_s1_cmi_q01_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public wah_s1_cmi_q02_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public wah_s1_cmi_q02_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public wah_s1_cmi_q03_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public wah_s1_cmi_q03_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public wah_s1_cmi_q04_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public wah_s1_cmi_q04_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public wah_s1_cmi_q05_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public wah_s1_cmi_q05_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public wah_s1_cmi_q06_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public wah_s1_cmi_q06_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public wah_s1_cmi_q07_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public wah_s1_cmi_q07_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public wah_s1_cmi_q08_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public wah_s1_cmi_q08_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public wah_s1_cmi_q09_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public wah_s1_cmi_q09_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public wah_s1_cmi_q10_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public wah_s1_cmi_q10_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public wah_s1_cmi_q11_specifyInput: string = "";
 
-    public wah_s1_cmi_q03_choiceInput: string = "";
-    public wah_s1_cmi_q03_remarksInput: string = "";
+  // ------------------------------ * (CSP) * ------------------------------
+  /* [REQ_FORM_DATA] */ public cs_s1_ph_atmoInput: string = "";
+  /* [REQ_FORM_DATA] */ public cs_s1_ph_nonAtmoInput: string = "";
+  /* [REQ_FORM_DATA] */ public cs_s1_cmi_per_q01_checkedInput: string = "";
+  /* [REQ_FORM_DATA] */ public cs_s1_cmi_per_q02_checkedInput: string = "";
+  /* [REQ_FORM_DATA] */ public cs_s1_cmi_per_q03_checkedInput: string = "";
+  /* [REQ_FORM_DATA] */ public cs_s1_cmi_per_q04_checkedInput: string = "";
+  /* [REQ_FORM_DATA] */ public cs_s1_cmi_per_q05_checkedInput: string = "";
+  /* [REQ_FORM_DATA] */ public cs_s1_cmi_per_q06_checkedInput: string = "";
+  /* [REQ_FORM_DATA] */ public cs_s1_cmi_per_q07_checkedInput: string = "";
+  /* [REQ_FORM_DATA] */ public cs_s1_cmi_per_q08_checkedInput: string = "";
+  /* [REQ_FORM_DATA] */ public cs_s1_cmi_ppe_q01_checkedInput: string = "";
+  /* [REQ_FORM_DATA] */ public cs_s1_cmi_ppe_q02_checkedInput: string = "";
+  /* [REQ_FORM_DATA] */ public cs_s1_cmi_ppe_q03_checkedInput: string = "";
+  /* [REQ_FORM_DATA] */ public cs_s1_cmi_ppe_q04_checkedInput: string = "";
+  /* [REQ_FORM_DATA] */ public cs_s1_cmi_ppe_q05_checkedInput: string = "";
+  /* [REQ_FORM_DATA] */ public cs_s1_cmi_ppe_q06_checkedInput: string = "";
+  /* [REQ_FORM_DATA] */ public cs_s1_cmi_ppe_q07_specifyInput: string = "";
 
-    public wah_s1_cmi_q04_choiceInput: string = "";
-    public wah_s1_cmi_q04_remarksInput: string = "";
+  // ------------------------------ * (HWP) * ------------------------------
+  /* [REQ_FORM_DATA] */ public hw_s1_cmi_q01_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public hw_s1_cmi_q01_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public hw_s1_cmi_q02_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public hw_s1_cmi_q02_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public hw_s1_cmi_q03_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public hw_s1_cmi_q03_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public hw_s1_cmi_q04_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public hw_s1_cmi_q04_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public hw_s1_cmi_q05_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public hw_s1_cmi_q05_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public hw_s1_cmi_q06_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public hw_s1_cmi_q06_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public hw_s1_cmi_q07_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public hw_s1_cmi_q07_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public hw_s1_cmi_q08_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public hw_s1_cmi_q08_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public hw_s1_cmi_q09_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public hw_s1_cmi_q09_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public hw_s1_cmi_q10_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public hw_s1_cmi_q10_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public hw_s1_cmi_q11_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public hw_s1_cmi_q11_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public hw_s1_cmi_q12_specifyInput: string = "";
+  /* [REQ_FORM_DATA] */ public hw_s1_cmi_q13_specifyInput: string = "";
 
-    public wah_s1_cmi_q05_choiceInput: string = "";
-    public wah_s1_cmi_q05_remarksInput: string = "";
+  // ------------------------------ * (CWP) * ------------------------------
+  /* [REQ_FORM_DATA] */ public cw_s1_cmi_q01_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public cw_s1_cmi_q01_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public cw_s1_cmi_q02_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public cw_s1_cmi_q02_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public cw_s1_cmi_q03_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public cw_s1_cmi_q03_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public cw_s1_cmi_q04_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public cw_s1_cmi_q04_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public cw_s1_cmi_q05_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public cw_s1_cmi_q05_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public cw_s1_cmi_q06_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public cw_s1_cmi_q06_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public cw_s1_cmi_q07_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public cw_s1_cmi_q07_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public cw_s1_cmi_q08_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public cw_s1_cmi_q08_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public cw_s1_cmi_q09_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public cw_s1_cmi_q09_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public cw_s1_cmi_q10_specifyInput: string = "";
+  /* [REQ_FORM_DATA] */ public cw_s1_cmi_q11_specifyInput: string = "";
 
-    public wah_s1_cmi_q06_choiceInput: string = "";
-    public wah_s1_cmi_q06_remarksInput: string = "";
+  // ------------------------------ * (EP) * ------------------------------
+  /* [REQ_FORM_DATA] */ public e_s1_cmi_q01_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public e_s1_cmi_q01_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public e_s1_cmi_q02_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public e_s1_cmi_q02_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public e_s1_cmi_q03_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public e_s1_cmi_q03_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public e_s1_cmi_q04_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public e_s1_cmi_q04_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public e_s1_cmi_q05_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public e_s1_cmi_q05_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public e_s1_cmi_q06_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public e_s1_cmi_q06_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public e_s1_cmi_q07_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public e_s1_cmi_q07_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public e_s1_cmi_q08_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public e_s1_cmi_q08_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public e_s1_cmi_q09_choiceInput: string = "";
+  /* [REQ_FORM_DATA] */ public e_s1_cmi_q09_remarksInput: string = "";
+  /* [REQ_FORM_DATA] */ public e_s1_cmi_q10_specifyInput: string = "";
+  /* [REQ_FORM_DATA] */ public e_s1_cmi_q11_specifyInput: string = "";
 
-    public wah_s1_cmi_q07_choiceInput: string = "";
-    public wah_s1_cmi_q07_remarksInput: string = "";
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    public wah_s1_cmi_q08_choiceInput: string = "";
-    public wah_s1_cmi_q08_remarksInput: string = "";
-
-    public wah_s1_cmi_q09_choiceInput: string = "";
-    public wah_s1_cmi_q09_remarksInput: string = "";
-
-    public wah_s1_cmi_q10_choiceInput: string = "";
-    public wah_s1_cmi_q10_remarksInput: string = "";
-
-    public wah_s1_cmi_q11_specifyInput: string = "";
-    // ==============================================================================
-
-    // ============================ Section I(B) for CS =============================
-    public cs_s1_ph_atmoInput: string = "";
-    public cs_s1_ph_nonAtmoInput: string = "";
-
-    public cs_s1_cmi_per_q01_checkedInput: string = "";
-    public cs_s1_cmi_per_q02_checkedInput: string = "";
-    public cs_s1_cmi_per_q03_checkedInput: string = "";
-    public cs_s1_cmi_per_q04_checkedInput: string = "";
-    public cs_s1_cmi_per_q05_checkedInput: string = "";
-    public cs_s1_cmi_per_q06_checkedInput: string = "";
-    public cs_s1_cmi_per_q07_checkedInput: string = "";
-    public cs_s1_cmi_per_q08_checkedInput: string = "";
-
-    public cs_s1_cmi_ppe_q01_checkedInput: string = "";
-    public cs_s1_cmi_ppe_q02_checkedInput: string = "";
-    public cs_s1_cmi_ppe_q03_checkedInput: string = "";
-    public cs_s1_cmi_ppe_q04_checkedInput: string = "";
-    public cs_s1_cmi_ppe_q05_checkedInput: string = "";
-    public cs_s1_cmi_ppe_q06_checkedInput: string = "";
-    public cs_s1_cmi_ppe_q07_specifyInput: string = "";
-    // ==============================================================================
-
-    // ============================ Section I(B) for HW =============================
-    public hw_s1_cmi_q01_choiceInput: string = "";
-    public hw_s1_cmi_q01_remarksInput: string = "";
-
-    public hw_s1_cmi_q02_choiceInput: string = "";
-    public hw_s1_cmi_q02_remarksInput: string = "";
-
-    public hw_s1_cmi_q03_choiceInput: string = "";
-    public hw_s1_cmi_q03_remarksInput: string = "";
-
-    public hw_s1_cmi_q04_choiceInput: string = "";
-    public hw_s1_cmi_q04_remarksInput: string = "";
-
-    public hw_s1_cmi_q05_choiceInput: string = "";
-    public hw_s1_cmi_q05_remarksInput: string = "";
-
-    public hw_s1_cmi_q06_choiceInput: string = "";
-    public hw_s1_cmi_q06_remarksInput: string = "";
-
-    public hw_s1_cmi_q07_choiceInput: string = "";
-    public hw_s1_cmi_q07_remarksInput: string = "";
-
-    public hw_s1_cmi_q08_choiceInput: string = "";
-    public hw_s1_cmi_q08_remarksInput: string = "";
-
-    public hw_s1_cmi_q09_choiceInput: string = "";
-    public hw_s1_cmi_q09_remarksInput: string = "";
-
-    public hw_s1_cmi_q10_choiceInput: string = "";
-    public hw_s1_cmi_q10_remarksInput: string = "";
-
-    public hw_s1_cmi_q11_choiceInput: string = "";
-    public hw_s1_cmi_q11_remarksInput: string = "";
-
-    public hw_s1_cmi_q12_specifyInput: string = "";
-
-    public hw_s1_cmi_q13_specifyInput: string = "";
-    // ==============================================================================
-
-    // ============================ Section I(B) for CW =============================
-    public cw_s1_cmi_q01_choiceInput: string = "";
-    public cw_s1_cmi_q01_remarksInput: string = "";
-
-    public cw_s1_cmi_q02_choiceInput: string = "";
-    public cw_s1_cmi_q02_remarksInput: string = "";
-
-    public cw_s1_cmi_q03_choiceInput: string = "";
-    public cw_s1_cmi_q03_remarksInput: string = "";
-
-    public cw_s1_cmi_q04_choiceInput: string = "";
-    public cw_s1_cmi_q04_remarksInput: string = "";
-
-    public cw_s1_cmi_q05_choiceInput: string = "";
-    public cw_s1_cmi_q05_remarksInput: string = "";
-
-    public cw_s1_cmi_q06_choiceInput: string = "";
-    public cw_s1_cmi_q06_remarksInput: string = "";
-
-    public cw_s1_cmi_q07_choiceInput: string = "";
-    public cw_s1_cmi_q07_remarksInput: string = "";
-
-    public cw_s1_cmi_q08_choiceInput: string = "";
-    public cw_s1_cmi_q08_remarksInput: string = "";
-
-    public cw_s1_cmi_q09_choiceInput: string = "";
-    public cw_s1_cmi_q09_remarksInput: string = "";
-
-    public cw_s1_cmi_q10_specifyInput: string = "";
-
-    public cw_s1_cmi_q11_specifyInput: string = "";
-    // ==============================================================================
-
-    // ============================ Section I(B) for E ==============================
-    public e_s1_cmi_q01_choiceInput: string = "";
-    public e_s1_cmi_q01_remarksInput: string = "";
-
-    public e_s1_cmi_q02_choiceInput: string = "";
-    public e_s1_cmi_q02_remarksInput: string = "";
-
-    public e_s1_cmi_q03_choiceInput: string = "";
-    public e_s1_cmi_q03_remarksInput: string = "";
-
-    public e_s1_cmi_q04_choiceInput: string = "";
-    public e_s1_cmi_q04_remarksInput: string = "";
-
-    public e_s1_cmi_q05_choiceInput: string = "";
-    public e_s1_cmi_q05_remarksInput: string = "";
-
-    public e_s1_cmi_q06_choiceInput: string = "";
-    public e_s1_cmi_q06_remarksInput: string = "";
-
-    public e_s1_cmi_q07_choiceInput: string = "";
-    public e_s1_cmi_q07_remarksInput: string = "";
-
-    public e_s1_cmi_q08_choiceInput: string = "";
-    public e_s1_cmi_q08_remarksInput: string = "";
-
-    public e_s1_cmi_q09_choiceInput: string = "";
-    public e_s1_cmi_q09_remarksInput: string = "";
-
-    public e_s1_cmi_q10_specifyInput: string = "";
-
-    public e_s1_cmi_q11_specifyInput: string = "";
-    // ==============================================================================
-
+// * (Stepper form group for Section One C.)
   public sectionOneCFormGroup!: FormGroup;
-    public displayedHeaderColumns: string[] = [
-      "id",
-      "name",
-      "nricOrFinNo",
-      "contactNo"
-    ];
-    public attendantDetsData: Array<AttendantDets> = [
-      {
-        id: 1,
-        name: "",
-        nricOrFinNo: "",
-        contactNo: ""
-      },
-      {
-        id: 2,
-        name: "",
-        nricOrFinNo: "",
-        contactNo: ""
-      },
-      {
-        id: 3,
-        name: "",
-        nricOrFinNo: "",
-        contactNo: ""
-      },
-      {
-        id: 4,
-        name: "",
-        nricOrFinNo: "",
-        contactNo: ""
-      },
-      {
-        id: 5,
-        name: "",
-        nricOrFinNo: "",
-        contactNo: ""
-      },
-      {
-        id: 6,
-        name: "",
-        nricOrFinNo: "",
-        contactNo: ""
-      }
-    ];
 
-    public applicantNameInput: string = "";
-    public applicantNricOrFinNoInput: string = "";
-      
-    public selectedApplicantOrganisationType: string = "";
-    public applicantOrganisationNameInput: string = "";
-    public applicantDepartmentNameInput: string = "";
-    public applicantContactNoInput: string = "";
-      
-    public applicantEmailInput: string = "";
-    public applicantEmailInputMask = createMask({ alias: "email" });
-    public applicantDeclarationChecked: boolean = false;
+  public displayedHeaderColumns: string[] = [ "id", "name", "nricOrFinNo", "contactNo" ];
+  public attendantDetsData: Array<AttendantDets> = [
+    /* [REQ_FORM_DATA] */ { id: 1, name: "", nricOrFinNo: "", contactNo: "" },
+    /* [REQ_FORM_DATA] */ { id: 2, name: "", nricOrFinNo: "", contactNo: "" },
+    /* [REQ_FORM_DATA] */ { id: 3, name: "", nricOrFinNo: "", contactNo: "" },
+    /* [REQ_FORM_DATA] */ { id: 4, name: "", nricOrFinNo: "", contactNo: "" },
+    /* [REQ_FORM_DATA] */ { id: 5, name: "", nricOrFinNo: "", contactNo: "" },
+    /* [REQ_FORM_DATA] */ { id: 6, name: "", nricOrFinNo: "", contactNo: "" },
+  ];
+  /* [REQ_FORM_DATA] */ public applicantNameInput: string = "";
+  /* [REQ_FORM_DATA] */ public applicantNricOrFinNoInput: string = "";
+  /* [REQ_FORM_DATA] */ public selectedApplicantOrganisationType: string = "";
+  /* [REQ_FORM_DATA] */ public applicantOrganisationNameInput: string = "";
+  /* [REQ_FORM_DATA] */ public applicantDepartmentNameInput: string = "";
+  /* [REQ_FORM_DATA] */ public applicantContactNoInput: string = "";  
+  /* [REQ_FORM_DATA] */ public applicantEmailInput: string = "";
+  public applicantEmailInputMask = createMask({ alias: "email" });
+  public applicantDeclarationChecked: boolean = false;
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
   constructor(
     private formBuilder: FormBuilder,
     public dialog: MatDialog, 
     public submitDialogRef: MatDialogRef<SubmitDialogComponent>,
     private router: Router
-  ) { }
+  ) {
+    // * (Get date after today by 1.)
+    this.dateTmr.setDate(this.dateToday.getDate() + 1);
+  }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   public ngOnInit(): void {
-    this.setNoOfWorkers(this.noOfSupervisorsEventValue);
+    // * (Set starting no. of workers.)
+    this.setNoOfWorkers(this.noOfWorkersEventValue);
+    // * (Set starting no. of supervisors.)
     this.setNoOfSupervisors(this.noOfSupervisorsEventValue);
+    // * (Total no. of displayable rows from total personnel.)
     this.totalNoOfAttendants = this.calcNoOfTableRowDisplayed();
 
+    // * (Setting up form validators for Section One A.)
     this.sectionOneAFormGroup = this.formBuilder.group({
       locationOfWork: ["", Validators.required],
       locationSector: ["", Validators.required],
-
       permitType: ["", Validators.required],
-
       startDate: ["", Validators.required],
       startTime: ["", Validators.required],
-
       endDate: ["", Validators.required],
       endTime: ["", Validators.required],
-
       taskDesc: ["", Validators.required],
-
       noOfWorkers: ["", Validators.required],
-      noOfSpvs: ["", Validators.required]
+      noOfSpvs: ["", Validators.required],
     });
 
+    // * (Setting up form validators for Section One B.)
     this.sectionOneBFormGroup = this.formBuilder.group({
-      // ============================ Section I(B) for WAH ============================
+      // ------------------------------ * (WAHP) * ------------------------------
       wah_s1_cmi_q01_choice: ["", Validators.required],
       wah_s1_cmi_q02_choice: ["", Validators.required],
       wah_s1_cmi_q03_choice: ["", Validators.required],
@@ -331,12 +267,10 @@ export class PtwRequestComponent implements OnInit {
       wah_s1_cmi_q08_choice: ["", Validators.required],
       wah_s1_cmi_q09_choice: ["", Validators.required],
       wah_s1_cmi_q10_choice: ["", Validators.required],
-      // ==============================================================================
 
-      // ============================ Section I(B) for CS =============================
+      // ------------------------------ * (CSP) * ------------------------------
       cs_s1_ph_atmo: ["", Validators.required],
       cs_s1_ph_nonAtmo: ["", Validators.required],
-
       cs_s1_cmi_per_q01_checked: ["", Validators.required],
       cs_s1_cmi_per_q02_checked: ["", Validators.required],
       cs_s1_cmi_per_q03_checked: ["", Validators.required],
@@ -345,16 +279,14 @@ export class PtwRequestComponent implements OnInit {
       cs_s1_cmi_per_q06_checked: ["", Validators.required],
       cs_s1_cmi_per_q07_checked: ["", Validators.required],
       cs_s1_cmi_per_q08_checked: ["", Validators.required],
-
       cs_s1_cmi_ppe_q01_checked: ["", Validators.required],
       cs_s1_cmi_ppe_q02_checked: ["", Validators.required],
       cs_s1_cmi_ppe_q03_checked: ["", Validators.required],
       cs_s1_cmi_ppe_q04_checked: ["", Validators.required],
       cs_s1_cmi_ppe_q05_checked: ["", Validators.required],
       cs_s1_cmi_ppe_q06_checked: ["", Validators.required],
-      // ==============================================================================
 
-      // ============================ Section I(B) for HW =============================
+      // ------------------------------ * (HWP) * ------------------------------
       hw_s1_cmi_q01_choice: ["", Validators.required],
       hw_s1_cmi_q02_choice: ["", Validators.required],
       hw_s1_cmi_q03_choice: ["", Validators.required],
@@ -366,9 +298,8 @@ export class PtwRequestComponent implements OnInit {
       hw_s1_cmi_q09_choice: ["", Validators.required],
       hw_s1_cmi_q10_choice: ["", Validators.required],
       hw_s1_cmi_q11_choice: ["", Validators.required],
-      // ==============================================================================
-
-      // ============================ Section I(B) for CW =============================
+      
+      // ------------------------------ * (CWP) * ------------------------------
       cw_s1_cmi_q01_choice: ["", Validators.required],
       cw_s1_cmi_q02_choice: ["", Validators.required],
       cw_s1_cmi_q03_choice: ["", Validators.required],
@@ -378,9 +309,8 @@ export class PtwRequestComponent implements OnInit {
       cw_s1_cmi_q07_choice: ["", Validators.required],
       cw_s1_cmi_q08_choice: ["", Validators.required],
       cw_s1_cmi_q09_choice: ["", Validators.required],
-      // ==============================================================================
 
-      // ============================ Section I(B) for E ==============================
+      // ------------------------------ * (EP) * ------------------------------
       e_s1_cmi_q01_choice: ["", Validators.required],
       e_s1_cmi_q02_choice: ["", Validators.required],
       e_s1_cmi_q03_choice: ["", Validators.required],
@@ -389,38 +319,30 @@ export class PtwRequestComponent implements OnInit {
       e_s1_cmi_q06_choice: ["", Validators.required],
       e_s1_cmi_q07_choice: ["", Validators.required],
       e_s1_cmi_q08_choice: ["", Validators.required],
-      e_s1_cmi_q09_choice: ["", Validators.required]
-      // ==============================================================================
+      e_s1_cmi_q09_choice: ["", Validators.required],
     });
 
+    // * (Setting up form validators for Section One C.)
     this.sectionOneCFormGroup = this.formBuilder.group({
       // Attendant details
       ad1_name: ["", Validators.required],
       ad1_nricOrFinNo: ["", [ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]],
       ad1_contactNo: ["", Validators.required],
-
       ad2_name: ["", Validators.required],
       ad2_nricOrFinNo: ["", [ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]],
       ad2_contactNo: ["", Validators.required],
-
       ad3_name: ["", Validators.required],
       ad3_nricOrFinNo: ["", [ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]],
       ad3_contactNo: ["", Validators.required],
-
       ad4_name: ["", Validators.required],
       ad4_nricOrFinNo: ["", [ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]],
       ad4_contactNo: ["", Validators.required],
-
       ad5_name: ["", Validators.required],
       ad5_nricOrFinNo: ["", [ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]],
       ad5_contactNo: ["", Validators.required],
-
       ad6_name: ["", Validators.required],
       ad6_nricOrFinNo: ["", [ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]],
       ad6_contactNo: ["", Validators.required],
-
-
-      // Applicant / supervisor details
       aplName: ["", Validators.required],
       aplNricOrFinNo: ["", [ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]],
       aplOrgType: ["", Validators.required],
@@ -430,56 +352,82 @@ export class PtwRequestComponent implements OnInit {
       aplEmail: ["", [ Validators.pattern(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/), Validators.required ]],
       aplDclChecked: ["", Validators.requiredTrue],
     });
-
+    // * (Show displayable personnel details rows from total personnel no.)
     this.toggleAttendantDetsTableRowValidator(this.totalNoOfAttendants);
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // * (Date picker filter where choosing weekends as dates are excluded.)
+  public weekendFilter = (d: Date | null): boolean => {
+    const day = (d || new Date()).getDay();
+    return day !== 0 && day !== 6;
+  }
+
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   
+  // * (Prompt error message when Section One A contains erronous inputs.)
   public sectionOneAFormGroupError = (controlName: string, errorName: string) => {
     return this.sectionOneAFormGroup.controls[controlName].hasError(errorName);
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Prompt error message when Section One B contains erronous inputs.)
   public sectionOneBFormGroupError = (controlName: string, errorName: string) => {
     return this.sectionOneBFormGroup.controls[controlName].hasError(errorName);
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Prompt error message when Section One C contains erronous inputs.)
   public sectionOneCFormGroupError = (controlName: string, errorName: string) => {
     return this.sectionOneCFormGroup.controls[controlName].hasError(errorName);
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Set starting no. of workers.)
   public setNoOfWorkers(value: any) {
     this.noOfWorkersInput = value;
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Set starting no. of supervisors.)
   public setNoOfSupervisors(value: any) {
     this.noOfSupervisorsInput = value;
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Calculate total no. of displayable rows for personnel details.)
   public calcNoOfTableRowDisplayed(): number {
     var total: number = Math.abs(this.noOfWorkersInput + this.noOfSupervisorsInput);
     return total;
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Join both start working date and time together as string.)
   public concatStartDateTime(date: Date, time: Date): string {
     let tempDate = new Date(date.toDateString().concat(", ", time.toString()));
     let tempDateString = tempDate.toISOString();
     return tempDateString;
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Join both end working date and time together as string.)
   public concatEndDateTime(date: Date, time: Date): string {
     let tempDate = new Date(date.toDateString().concat(", ", time.toString()));
     let tempDateString = tempDate.toISOString();
     return tempDateString;
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Toggle form validators for Section One B everytime a diff. permit type is selected.)
   public togglePTWFormValidators(value: string): void {
     switch (value) {
       case PermitTypes.WORK_AT_HEIGHT:
@@ -579,11 +527,11 @@ export class PtwRequestComponent implements OnInit {
 
         break;
     }
-
-    console.log(value, " has been chosen.");
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Clear all fields in Section One B.)
   private clearFieldsOf(value: string): void {
     switch (value) {
       case PermitTypes.WORK_AT_HEIGHT:
@@ -809,13 +757,12 @@ export class PtwRequestComponent implements OnInit {
 
         break;
     }
-    
-    console.log(value, " fields have been cleared.");
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Update all form validators in Section One B.)
   private updateAllValidators(): void {
-    // ==============================================================================
     this.sectionOneBFormGroup.get('wah_s1_cmi_q01_choice')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('wah_s1_cmi_q02_choice')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('wah_s1_cmi_q03_choice')?.updateValueAndValidity();
@@ -826,12 +773,8 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('wah_s1_cmi_q08_choice')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('wah_s1_cmi_q09_choice')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('wah_s1_cmi_q10_choice')?.updateValueAndValidity();
-    // ==============================================================================
-
-    // ==============================================================================
     this.sectionOneBFormGroup.get('cs_s1_ph_atmo')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('cs_s1_ph_nonAtmo')?.updateValueAndValidity();
-
     this.sectionOneBFormGroup.get('cs_s1_cmi_per_q01_checked')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('cs_s1_cmi_per_q02_checked')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('cs_s1_cmi_per_q03_checked')?.updateValueAndValidity();
@@ -846,9 +789,6 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q04_checked')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q05_checked')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q06_checked')?.updateValueAndValidity();
-    // ==============================================================================
-
-    // ==============================================================================
     this.sectionOneBFormGroup.get('hw_s1_cmi_q01_choice')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('hw_s1_cmi_q02_choice')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('hw_s1_cmi_q03_choice')?.updateValueAndValidity();
@@ -860,9 +800,6 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('hw_s1_cmi_q09_choice')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('hw_s1_cmi_q10_choice')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('hw_s1_cmi_q11_choice')?.updateValueAndValidity();
-    // ==============================================================================
-
-    // ==============================================================================
     this.sectionOneBFormGroup.get('cw_s1_cmi_q01_choice')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('cw_s1_cmi_q02_choice')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('cw_s1_cmi_q03_choice')?.updateValueAndValidity();
@@ -871,11 +808,7 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('cw_s1_cmi_q06_choice')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('cw_s1_cmi_q07_choice')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('cw_s1_cmi_q08_choice')?.updateValueAndValidity();
-  
     this.sectionOneBFormGroup.get('cw_s1_cmi_q09_choice')?.updateValueAndValidity();
-    // ==============================================================================
-
-    // ==============================================================================
     this.sectionOneBFormGroup.get('e_s1_cmi_q01_choice')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('e_s1_cmi_q02_choice')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('e_s1_cmi_q03_choice')?.updateValueAndValidity();
@@ -885,10 +818,11 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('e_s1_cmi_q07_choice')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('e_s1_cmi_q08_choice')?.updateValueAndValidity();
     this.sectionOneBFormGroup.get('e_s1_cmi_q09_choice')?.updateValueAndValidity();
-    // ==============================================================================
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Set all form field validators in WAH as required.)
   private setRequiredAllWahValidators(): void {
     this.sectionOneBFormGroup.get('wah_s1_cmi_q01_choice')?.setValidators(Validators.required);
     this.sectionOneBFormGroup.get('wah_s1_cmi_q02_choice')?.setValidators(Validators.required);
@@ -902,7 +836,9 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('wah_s1_cmi_q10_choice')?.setValidators(Validators.required);
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Clear all form field validators in WAH.)
   private clearAllWahValidators(): void {
     this.sectionOneBFormGroup.get('wah_s1_cmi_q01_choice')?.clearValidators();
     this.sectionOneBFormGroup.get('wah_s1_cmi_q02_choice')?.clearValidators();
@@ -916,11 +852,12 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('wah_s1_cmi_q10_choice')?.clearValidators();
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Set all form field validators in CS as required.)
   private setRequiredAllCsValidators(): void {
     this.sectionOneBFormGroup.get('cs_s1_ph_atmo')?.setValidators(Validators.required);
     this.sectionOneBFormGroup.get('cs_s1_ph_nonAtmo')?.setValidators(Validators.required);
-
     this.sectionOneBFormGroup.get('cs_s1_cmi_per_q01_checked')?.setValidators(Validators.required);
     this.sectionOneBFormGroup.get('cs_s1_cmi_per_q02_checked')?.setValidators(Validators.required);
     this.sectionOneBFormGroup.get('cs_s1_cmi_per_q03_checked')?.setValidators(Validators.required);
@@ -929,7 +866,6 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('cs_s1_cmi_per_q06_checked')?.setValidators(Validators.required);
     this.sectionOneBFormGroup.get('cs_s1_cmi_per_q07_checked')?.setValidators(Validators.required);
     this.sectionOneBFormGroup.get('cs_s1_cmi_per_q08_checked')?.setValidators(Validators.required);
-
     this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q01_checked')?.setValidators(Validators.required);
     this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q02_checked')?.setValidators(Validators.required);
     this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q03_checked')?.setValidators(Validators.required);
@@ -938,11 +874,12 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q06_checked')?.setValidators(Validators.required);
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Clear all form field validators in CS.)
   private clearAllCsValidators(): void {
     this.sectionOneBFormGroup.get('cs_s1_ph_atmo')?.clearValidators();
     this.sectionOneBFormGroup.get('cs_s1_ph_nonAtmo')?.clearValidators();
-
     this.sectionOneBFormGroup.get('cs_s1_cmi_per_q01_checked')?.clearValidators();
     this.sectionOneBFormGroup.get('cs_s1_cmi_per_q02_checked')?.clearValidators();
     this.sectionOneBFormGroup.get('cs_s1_cmi_per_q03_checked')?.clearValidators();
@@ -951,7 +888,6 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('cs_s1_cmi_per_q06_checked')?.clearValidators();
     this.sectionOneBFormGroup.get('cs_s1_cmi_per_q07_checked')?.clearValidators();
     this.sectionOneBFormGroup.get('cs_s1_cmi_per_q08_checked')?.clearValidators();
-
     this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q01_checked')?.clearValidators();
     this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q02_checked')?.clearValidators();
     this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q03_checked')?.clearValidators();
@@ -960,7 +896,9 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('cs_s1_cmi_ppe_q06_checked')?.clearValidators();
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Set all form field validators in HW as required.)
   private setRequiredAllHwValidators(): void {
     this.sectionOneBFormGroup.get('hw_s1_cmi_q01_choice')?.setValidators(Validators.required);
     this.sectionOneBFormGroup.get('hw_s1_cmi_q02_choice')?.setValidators(Validators.required);
@@ -975,7 +913,9 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('hw_s1_cmi_q11_choice')?.setValidators(Validators.required);
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Clear all form field validators in HW.)
   private clearAllHwValidators(): void {
     this.sectionOneBFormGroup.get('hw_s1_cmi_q01_choice')?.clearValidators();
     this.sectionOneBFormGroup.get('hw_s1_cmi_q02_choice')?.clearValidators();
@@ -990,7 +930,9 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('hw_s1_cmi_q11_choice')?.clearValidators();
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Set all form field validators in CW as required.)
   private setRequiredAllCwValidators(): void {
     this.sectionOneBFormGroup.get('cw_s1_cmi_q01_choice')?.setValidators(Validators.required);
     this.sectionOneBFormGroup.get('cw_s1_cmi_q02_choice')?.setValidators(Validators.required);
@@ -1003,7 +945,9 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('cw_s1_cmi_q09_choice')?.setValidators(Validators.required);
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Clear all form field validators in CW.)
   private clearAllCwValidators(): void {
     this.sectionOneBFormGroup.get('cw_s1_cmi_q01_choice')?.clearValidators();
     this.sectionOneBFormGroup.get('cw_s1_cmi_q02_choice')?.clearValidators();
@@ -1016,7 +960,9 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('cw_s1_cmi_q09_choice')?.clearValidators();
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Set all form field validators in E as required.)
   private setRequiredAllElecValidators(): void {
     this.sectionOneBFormGroup.get('e_s1_cmi_q01_choice')?.setValidators(Validators.required);
     this.sectionOneBFormGroup.get('e_s1_cmi_q02_choice')?.setValidators(Validators.required);
@@ -1029,7 +975,9 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('e_s1_cmi_q09_choice')?.setValidators(Validators.required);
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Clear all form field validators in E.)
   private clearAllElecValidators(): void {
     this.sectionOneBFormGroup.get('e_s1_cmi_q01_choice')?.clearValidators();
     this.sectionOneBFormGroup.get('e_s1_cmi_q02_choice')?.clearValidators();
@@ -1042,7 +990,9 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneBFormGroup.get('e_s1_cmi_q09_choice')?.clearValidators();
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Toggle on or off the applicant org name input validator.)
   public toggleApplicantOrgNameValidator(value : string) : void {
     switch (value) {
       case 'Internal':
@@ -1056,7 +1006,9 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneCFormGroup.get('aplOrgName')?.updateValueAndValidity();
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Toggle on or off the personnel org name input validator.)
   public toggleArdOrgNameValidator(permitType: string, orgType : string) : void {
     switch (permitType) {
       case 'Work at height permit (WAHP)':
@@ -1084,198 +1036,162 @@ export class PtwRequestComponent implements OnInit {
     }
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Toggle on or off the personnel details rows validator.)
   public toggleAttendantDetsTableRowValidator(total: number): void {
     switch (total) {
       case 1:
         this.sectionOneCFormGroup.get('ad1_name')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
         this.sectionOneCFormGroup.get('ad1_contactNo')?.setValidators([Validators.required]);
-
         this.sectionOneCFormGroup.get('ad2_name')?.clearValidators();
         this.sectionOneCFormGroup.get('ad2_nricOrFinNo')?.clearValidators();
         this.sectionOneCFormGroup.get('ad2_contactNo')?.clearValidators();
-
         this.sectionOneCFormGroup.get('ad3_name')?.clearValidators();
         this.sectionOneCFormGroup.get('ad3_nricOrFinNo')?.clearValidators();
         this.sectionOneCFormGroup.get('ad3_contactNo')?.clearValidators();
-
         this.sectionOneCFormGroup.get('ad4_name')?.clearValidators();
         this.sectionOneCFormGroup.get('ad4_nricOrFinNo')?.clearValidators();
         this.sectionOneCFormGroup.get('ad4_contactNo')?.clearValidators();
-
         this.sectionOneCFormGroup.get('ad5_name')?.clearValidators();
         this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.clearValidators();
         this.sectionOneCFormGroup.get('ad5_contactNo')?.clearValidators();
-
         this.sectionOneCFormGroup.get('ad6_name')?.clearValidators();
         this.sectionOneCFormGroup.get('ad6_nricOrFinNo')?.clearValidators();
         this.sectionOneCFormGroup.get('ad6_contactNo')?.clearValidators();
-
         break;
 
       case 2:
         this.sectionOneCFormGroup.get('ad1_name')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
         this.sectionOneCFormGroup.get('ad1_contactNo')?.setValidators([Validators.required]);
-
         this.sectionOneCFormGroup.get('ad2_name')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad2_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
         this.sectionOneCFormGroup.get('ad2_contactNo')?.setValidators([Validators.required]);
-
         this.sectionOneCFormGroup.get('ad3_name')?.clearValidators();
         this.sectionOneCFormGroup.get('ad3_nricOrFinNo')?.clearValidators();
         this.sectionOneCFormGroup.get('ad3_contactNo')?.clearValidators();
-
         this.sectionOneCFormGroup.get('ad4_name')?.clearValidators();
         this.sectionOneCFormGroup.get('ad4_nricOrFinNo')?.clearValidators();
         this.sectionOneCFormGroup.get('ad4_contactNo')?.clearValidators();
-
         this.sectionOneCFormGroup.get('ad5_name')?.clearValidators();
         this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.clearValidators();
         this.sectionOneCFormGroup.get('ad5_contactNo')?.clearValidators();
-
         this.sectionOneCFormGroup.get('ad6_name')?.clearValidators();
         this.sectionOneCFormGroup.get('ad6_nricOrFinNo')?.clearValidators();
         this.sectionOneCFormGroup.get('ad6_contactNo')?.clearValidators();
-
         break;
       
       case 3:
         this.sectionOneCFormGroup.get('ad1_name')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
         this.sectionOneCFormGroup.get('ad1_contactNo')?.setValidators([Validators.required]);
-
         this.sectionOneCFormGroup.get('ad2_name')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad2_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
         this.sectionOneCFormGroup.get('ad2_contactNo')?.setValidators([Validators.required]);
-
         this.sectionOneCFormGroup.get('ad3_name')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad3_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
         this.sectionOneCFormGroup.get('ad3_contactNo')?.setValidators([Validators.required]);
-
         this.sectionOneCFormGroup.get('ad4_name')?.clearValidators();
         this.sectionOneCFormGroup.get('ad4_nricOrFinNo')?.clearValidators();
         this.sectionOneCFormGroup.get('ad4_contactNo')?.clearValidators();
-
         this.sectionOneCFormGroup.get('ad5_name')?.clearValidators();
         this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.clearValidators();
         this.sectionOneCFormGroup.get('ad5_contactNo')?.clearValidators();
-
         this.sectionOneCFormGroup.get('ad6_name')?.clearValidators();
         this.sectionOneCFormGroup.get('ad6_nricOrFinNo')?.clearValidators();
         this.sectionOneCFormGroup.get('ad6_contactNo')?.clearValidators();
-
         break;
 
       case 4:
         this.sectionOneCFormGroup.get('ad1_name')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
         this.sectionOneCFormGroup.get('ad1_contactNo')?.setValidators([Validators.required]);
-
         this.sectionOneCFormGroup.get('ad2_name')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad2_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
         this.sectionOneCFormGroup.get('ad2_contactNo')?.setValidators([Validators.required]);
-
         this.sectionOneCFormGroup.get('ad3_name')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad3_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
         this.sectionOneCFormGroup.get('ad3_contactNo')?.setValidators([Validators.required]);
-
         this.sectionOneCFormGroup.get('ad4_name')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad4_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
         this.sectionOneCFormGroup.get('ad4_contactNo')?.setValidators([Validators.required]);
-
         this.sectionOneCFormGroup.get('ad5_name')?.clearValidators();
         this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.clearValidators();
         this.sectionOneCFormGroup.get('ad5_contactNo')?.clearValidators();
-
         this.sectionOneCFormGroup.get('ad6_name')?.clearValidators();
         this.sectionOneCFormGroup.get('ad6_nricOrFinNo')?.clearValidators();
         this.sectionOneCFormGroup.get('ad6_contactNo')?.clearValidators();
-
         break;
 
       case 5:
         this.sectionOneCFormGroup.get('ad1_name')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
         this.sectionOneCFormGroup.get('ad1_contactNo')?.setValidators([Validators.required]);
-
         this.sectionOneCFormGroup.get('ad2_name')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad2_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
         this.sectionOneCFormGroup.get('ad2_contactNo')?.setValidators([Validators.required]);
-
         this.sectionOneCFormGroup.get('ad3_name')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad3_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
         this.sectionOneCFormGroup.get('ad3_contactNo')?.setValidators([Validators.required]);
-
         this.sectionOneCFormGroup.get('ad4_name')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad4_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
         this.sectionOneCFormGroup.get('ad4_contactNo')?.setValidators([Validators.required]);
-
         this.sectionOneCFormGroup.get('ad5_name')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
         this.sectionOneCFormGroup.get('ad5_contactNo')?.setValidators([Validators.required]);
-
         this.sectionOneCFormGroup.get('ad6_name')?.clearValidators();
         this.sectionOneCFormGroup.get('ad6_nricOrFinNo')?.clearValidators();
         this.sectionOneCFormGroup.get('ad6_contactNo')?.clearValidators();
-    
         break;
 
         case 5:
           this.sectionOneCFormGroup.get('ad1_name')?.setValidators(Validators.required);
           this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
           this.sectionOneCFormGroup.get('ad1_contactNo')?.setValidators([Validators.required]);
-  
           this.sectionOneCFormGroup.get('ad2_name')?.setValidators(Validators.required);
           this.sectionOneCFormGroup.get('ad2_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
           this.sectionOneCFormGroup.get('ad2_contactNo')?.setValidators([Validators.required]);
-  
           this.sectionOneCFormGroup.get('ad3_name')?.setValidators(Validators.required);
           this.sectionOneCFormGroup.get('ad3_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
           this.sectionOneCFormGroup.get('ad3_contactNo')?.setValidators([Validators.required]);
-  
           this.sectionOneCFormGroup.get('ad4_name')?.setValidators(Validators.required);
           this.sectionOneCFormGroup.get('ad4_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
           this.sectionOneCFormGroup.get('ad4_contactNo')?.setValidators([Validators.required]);
-  
           this.sectionOneCFormGroup.get('ad5_name')?.setValidators(Validators.required);
           this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
           this.sectionOneCFormGroup.get('ad5_contactNo')?.setValidators([Validators.required]);
-  
           this.sectionOneCFormGroup.get('ad6_name')?.setValidators(Validators.required);
           this.sectionOneCFormGroup.get('ad6_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
           this.sectionOneCFormGroup.get('ad6_contactNo')?.setValidators([Validators.required]);
-      
           break;
       }
 
     this.sectionOneCFormGroup.get('ad1_name')?.updateValueAndValidity();
     this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.updateValueAndValidity();
     this.sectionOneCFormGroup.get('ad1_contactNo')?.updateValueAndValidity();
-
     this.sectionOneCFormGroup.get('ad2_name')?.updateValueAndValidity();
     this.sectionOneCFormGroup.get('ad2_nricOrFinNo')?.updateValueAndValidity();
     this.sectionOneCFormGroup.get('ad2_contactNo')?.updateValueAndValidity();
-
     this.sectionOneCFormGroup.get('ad3_name')?.updateValueAndValidity();
     this.sectionOneCFormGroup.get('ad3_nricOrFinNo')?.updateValueAndValidity();
     this.sectionOneCFormGroup.get('ad3_contactNo')?.updateValueAndValidity();
-
     this.sectionOneCFormGroup.get('ad4_name')?.updateValueAndValidity();
     this.sectionOneCFormGroup.get('ad4_nricOrFinNo')?.updateValueAndValidity();
     this.sectionOneCFormGroup.get('ad4_contactNo')?.updateValueAndValidity();
-
     this.sectionOneCFormGroup.get('ad5_name')?.updateValueAndValidity();
     this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.updateValueAndValidity();
     this.sectionOneCFormGroup.get('ad5_contactNo')?.updateValueAndValidity();
-
     this.sectionOneCFormGroup.get('ad6_name')?.updateValueAndValidity();
     this.sectionOneCFormGroup.get('ad6_nricOrFinNo')?.updateValueAndValidity();
     this.sectionOneCFormGroup.get('ad6_contactNo')?.updateValueAndValidity();
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Gather all input from the req form and formulate the structure required to send the 
+  // data object to the server.)
   public allocateFormData(dataSource: IPermitToWork): IPermitToWork {
     this.startDateTimeConcat = this.concatStartDateTime(this.startDateInput, this.startTimeInput);
     this.endDateTimeConcat = this.concatEndDateTime(this.endDateInput, this.endTimeInput);
@@ -1889,17 +1805,26 @@ export class PtwRequestComponent implements OnInit {
     return dataSource;
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Open the submission dialog.)
   public openSubmitDialogue(): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = this.allocateFormData(this.partiallyCompletedPTWData);
+    // * (Send the reqFormData while opening the dialog.)
+    dialogConfig.data = this.allocateFormData(this.reqFormData);
+    // * (Open the dialog with injected data - reqFormData.)
     this.submitDialogRef = this.dialog.open(SubmitDialogComponent, dialogConfig);
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  // * (Router navigation without history tracebacks.)
   public navigateTo(url: string): void {
     this.router.navigate(["/" + url], { replaceUrl: true });
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
+
+// ==============================================================================================================================================================================

@@ -1,3 +1,5 @@
+// ==============================================================================================================================================================================
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DbService } from 'src/app/services/db.service';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
@@ -18,6 +20,8 @@ import { RequestStatus } from 'src/app/constants/RequestStatus';
 import { MailService } from 'src/app/services/mail.service';
 import { FormControl } from '@angular/forms';
 
+// ==============================================================================================================================================================================
+
 @Component({
   selector: 'app-validator-tl',
   templateUrl: './validator-tl.component.html',
@@ -29,10 +33,17 @@ import { FormControl } from '@angular/forms';
     }
   ]
 })
+
+// ==============================================================================================================================================================================
+
 export class ValidatorTlComponent implements OnInit {
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // * (Angular Materials' paginator and sort variables.)
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
   @ViewChild(MatSort) sort: MatSort | null = null;
 
+  // * (Header columsn refvars to be used in Mat Table.)
   public displayedHeaderColumns: string[] = [
     "ptwId",
     "locationOfWork",
@@ -46,15 +57,28 @@ export class ValidatorTlComponent implements OnInit {
     "action"
   ];
 
+  // * (Validator user name variable to be displayed in the page.)
   public userNameDisplay: string = "";
   
+  // * (Sort by year filter.)
   public ptwYearFilter = new FormControl();
+
+  // * (Sort by permit ID filter.)
   public ptwIdFilter = new FormControl();
+
+  // * (Sort by location of work filter.)
   public locOfWorkFilter = new FormControl();
+
+  // * (Sort by permit type filter.)
   public permitTypeFilter = new FormControl();
+
+  // * (Sort by request status filter.)
   public requestStatusFilter = new FormControl();
+
+  // * (Sort by permit status filter.)
   public permitStatusFilter = new FormControl();
-  public globalFilter = "";
+
+  // * (Filtered values object.)
   public filteredValues = {
     ptwId: "",
     locWork: "",
@@ -64,13 +88,22 @@ export class ValidatorTlComponent implements OnInit {
     permitStatus: ""
   };
 
+  // * (To store unique year values derived from all submitted permits.)
   public ptwYearList: string[] = [""];
 
+  // * (Empty data source for Mat Table, using IPermitToWork interface template.)
   public dataSource: MatTableDataSource<IPermitToWork> = new MatTableDataSource<IPermitToWork>();
+  
+  // * (Interfaced empty data array.)
   public activeData: IPermitToWork[] = [];
+
+  // * (Check if it's currently loading.)
   public isLoading: boolean = false;
 
-  private clickEventSub: Subscription = new Subscription;
+  // * (Click event subscription for any callback from the emitter.)
+  private clickEventSub: Subscription = new Subscription();
+
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   constructor(
     private db: DbService,
@@ -83,89 +116,130 @@ export class ValidatorTlComponent implements OnInit {
     private compShare: CompShareService,
     private mail: MailService
   ) {
+    // * (Subscribe to detect any click event that triggers changes in UI, then do 
+    // something afterwards.)
     this.clickEventSub = this.compShare.getClickEvent().subscribe(() => {
+      // * (Refresh and refetch permit data from the server, and load them back to 
+      // Mat Table.)
       this.refresh();
-      this.ptwYearFilter.setValue(''); 
-      this.ptwIdFilter.patchValue(''); 
-      this.locOfWorkFilter.patchValue('');
-      this.permitTypeFilter.setValue('');
-      this.requestStatusFilter.setValue('');
-      this.permitStatusFilter.setValue('');
+
+      // * (Reset all filter field value to empty.)
+      this.ptwYearFilter.setValue(""); 
+      this.ptwIdFilter.patchValue(""); 
+      this.locOfWorkFilter.patchValue("");
+      this.permitTypeFilter.setValue("");
+      this.requestStatusFilter.setValue("");
+      this.permitStatusFilter.setValue("");
+
+      console.log(this.clickEventSub);
     });
   }
+
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   public ngOnInit(): void { 
+    // * (Check current login session.)
     this.checkSession();
 
-    this.ptwYearFilter.valueChanges.subscribe((ptwYearFilterValue) => {
-      this.filteredValues["ptwYear"] = ptwYearFilterValue;
+    // * (Subscribe each filter when value changes in inputs, which the inputs will be 
+    // parsed into their respective filter to be used for filtering Mat Table data.)
+    this.ptwYearFilter.valueChanges.subscribe((filterValue: string) => {
+      this.filteredValues["ptwYear"] = filterValue;
       this.dataSource.filter = JSON.stringify(this.filteredValues);
     });
-    this.ptwIdFilter.valueChanges.subscribe((ptwIdFilterValue) => {
-      this.filteredValues["ptwId"] = ptwIdFilterValue;
+    this.ptwIdFilter.valueChanges.subscribe((filterValue: string) => {
+      this.filteredValues["ptwId"] = filterValue;
       this.dataSource.filter = JSON.stringify(this.filteredValues);
     });
-    this.locOfWorkFilter.valueChanges.subscribe((locOfWorkFilterValue) => {
-      this.filteredValues["locWork"] = locOfWorkFilterValue;
+    this.locOfWorkFilter.valueChanges.subscribe((filterValue: string) => {
+      this.filteredValues["locWork"] = filterValue;
       this.dataSource.filter = JSON.stringify(this.filteredValues);
     });
-    this.permitTypeFilter.valueChanges.subscribe((permitTypeFilterValue) => {
-      this.filteredValues["permitType"] = permitTypeFilterValue;
+    this.permitTypeFilter.valueChanges.subscribe((filterValue: string) => {
+      this.filteredValues["permitType"] = filterValue;
       this.dataSource.filter = JSON.stringify(this.filteredValues);
     });
-    this.requestStatusFilter.valueChanges.subscribe((requestStatusFilterValue) => {
-      this.filteredValues["requestStatus"] = requestStatusFilterValue;
+    this.requestStatusFilter.valueChanges.subscribe((filterValue: string) => {
+      this.filteredValues["requestStatus"] = filterValue;
       this.dataSource.filter = JSON.stringify(this.filteredValues);
     });
-    this.permitStatusFilter.valueChanges.subscribe((permitStatusFilterValue) => {
-      this.filteredValues["permitStatus"] = permitStatusFilterValue;
+    this.permitStatusFilter.valueChanges.subscribe((filterValue: string) => {
+      this.filteredValues["permitStatus"] = filterValue;
       this.dataSource.filter = JSON.stringify(this.filteredValues);
     });
-
+    
     this.getUniquePtwYear();
+
     this.refresh();
-    this.ptwYearFilter.setValue('');
-    this.ptwIdFilter.patchValue(''); 
-    this.locOfWorkFilter.patchValue('');
-    this.permitTypeFilter.setValue('');
-    this.requestStatusFilter.setValue('');
-    this.permitStatusFilter.setValue('');
+
+    this.ptwYearFilter.setValue(""); 
+    this.ptwIdFilter.patchValue(""); 
+    this.locOfWorkFilter.patchValue("");
+    this.permitTypeFilter.setValue("");
+    this.requestStatusFilter.setValue("");
+    this.permitStatusFilter.setValue("");
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // * (Check if there is any existing login session in this page. If yes,
+  // remain on the same page i.e.: inSession = true. Else, redirect user 
+  // to sign-in page.)
   public checkSession(): void {
-    this.auth.checkSession(true).subscribe((resp: User[]) => { 
-      if (resp[0]?.userId != null) {
-        console.log("Currently signed in validator:", resp[0].userId);
-        this.auth.signIn(resp[0].userId, resp[0].userPw);
-        this.userNameDisplay = resp[0].userName + " (" + resp[0].userId + ")";
+    this.auth.checkSession(true).subscribe((signedInCallback: User[]) => { 
+      if (signedInCallback[0]?.userId != null) {
+        this.auth.signIn(signedInCallback[0].userId, signedInCallback[0].userPw);
+        this.userNameDisplay = signedInCallback[0].userName + " (" + signedInCallback[0].userId + ")";
+        
+        // * (Send an event signal to convert home title's onclick function as sign out func
+        // instead of normal router func.)
         this.compShare.sendHomeTitleAsSignOutEvent();
+
+        console.log("Currently signed in validator:", signedInCallback[0].userId);
       } else {
         console.log("Currently signed in validator: None");
-        this.router.navigate(['validator-sign-in'], { replaceUrl: true });
+        this.navigateTo("validator-sign-in");
       }
     });
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // * (Get unique year values derived from all submitted permits.)
   public getUniquePtwYear(): void {
-    this.db.fetchAll().subscribe((resp: IPermitToWork[]) => {
-      let key = [...new Set(resp.map(res => res.ptwYear))];
-      for (let k of key) {
-        this.ptwYearList.push(k);
+    this.db.fetchAll().subscribe((result: IPermitToWork[]) => {
+      let uniqueYears = [...new Set(result.map((res: IPermitToWork) => res.ptwYear))];
+      for (let year of uniqueYears) {
+        this.ptwYearList.push(year);
       }
     });
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // * (Refresh and refetch permit data from the server, and load them back to 
+  // Mat Table.)
   public refresh(): void {
+    // * (Make the sign-in button temporarily disabled until operation is completed.)
     this.isLoading = true;
-    this.db.fetchAll().subscribe((data: IPermitToWork[]) => {
-      console.log(data);
+
+    this.db.fetchAll().subscribe((result: IPermitToWork[]) => {
+      // * (Re-enable the sign-in button.)
       this.isLoading = false;
-      this.activeData = data;
-      this.activeData.sort((a, b) => 
+
+      // * (Make the subscription result to be data of Mat Table.)
+      this.activeData = result;
+      this.activeData.sort((a: IPermitToWork, b: IPermitToWork) => 
         (a.ptwId.substring(4, 10).valueOf() > b.ptwId.substring(4, 10).valueOf())? -1 : 1
       );
+
+      // * (Check if any permit in the list goes pass permit validity. If yes, update 
+      // the permit status to be expired. Else, remain the same.)
       this.checkExpire(this.activeData);
+
+      // * (Parse Mat Table data to be used in Mat Table.)
       this.dataSource = new MatTableDataSource(this.activeData);
+      // * (Make it so that the Mat Table data be sortable via column headers.)
       this.dataSource.sortingDataAccessor = (obj: any, property: any) => {
         switch (property) {
           case "ptwId": return obj.ptwId;
@@ -179,68 +253,97 @@ export class ValidatorTlComponent implements OnInit {
           default: return obj[property];
         }
       };
+      // * (Apply custom filter parameters to Mat Table data.)
       this.dataSource.filterPredicate = this.customFilterPredicate();
+      // * (Assign Mat Table paginator to data source.)
       this.dataSource.paginator = this.paginator;
+      // * (Assign Mat Table sort to data source.)
       this.dataSource.sort = this.sort;
     });
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // * (Return a custom filter for sorting data source assigned to the Mat Table.)
   public customFilterPredicate(): any {
     const custFp = (data: IPermitToWork, filter: string): boolean => {
-      var globalMatch = !this.globalFilter;
-
-      if (this.globalFilter) {
-        globalMatch = data.ptwId.trim().toLowerCase().indexOf(this.globalFilter.toLowerCase()) !== -1;
-      }
-
-      if (!globalMatch) {
-        return false;
-      }
-
-      let searchString = JSON.parse(filter);
+      let searchString: any = JSON.parse(filter);
+             
+             // * (Filter by ptwYear.)
       return data.ptwYear.trim().toLowerCase().indexOf(searchString.ptwYear) !== -1 &&
+             // * (Filter by ptwId - lowercase.)
              (data.ptwId.trim().toLowerCase().indexOf(searchString.ptwId) !== -1 ||
+             // * (Filter by ptwId.)
              data.ptwId.trim().indexOf(searchString.ptwId) !== -1) &&
+             // * (Filter by locOfWork.main - lowercase.)
              (data.locationOfWork.main.trim().toLowerCase().indexOf(searchString.locWork) !== -1 ||
+             // * (Filter by locOfWork.sub - lowercase.)
              data.locationOfWork.sub.trim().toLowerCase().indexOf(searchString.locWork) !== -1) &&
+             // * (Filter by permitType - lowercase.)
              (data.permitType.trim().toLowerCase().indexOf(searchString.permitType) !== -1 ||
+             // * (Filter by permitType.)
              data.permitType.trim().indexOf(searchString.permitType) !== -1) &&
+             // * (Filter by requestStatus - lowercase.)
              (data.requestStatus.trim().toLowerCase().indexOf(searchString.requestStatus) !== -1 ||
-             data.requestStatus.trim().indexOf(searchString.requestStatus) !== -1) && 
+             // * (Filter by requestStatus.)
+             data.requestStatus.trim().indexOf(searchString.requestStatus) !== -1) &&
+             // * (Filter by permitStatus - lowercase.)
              (data.ptwStatus.permitStatus.trim().toLowerCase().indexOf(searchString.permitStatus) !== -1 ||
+             // * (Filter by permitStatus.)
              data.ptwStatus.permitStatus.trim().indexOf(searchString.permitStatus) !== -1);
     }
 
     return custFp;
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // * (Open a selected permit to expand its details and further actions.)
   public async expandSelectedPtw(id: string): Promise<void> {
     const dialogConfig = new MatDialogConfig();
+    // * (Send id and username value to the dialog to open specific permit 
+    // details by id.)
     dialogConfig.data = {
       id: id,
       userName: this.userNameDisplay
     };
+    // * (Open the dialog with injected data - id, username.)
     this.dialogRefPtwDets = this.dialog.open(ValidatorReqdetsComponent, dialogConfig);
   }
 
-  public checkExpire(dataList: IPermitToWork[]): void {
-    for (let dt of dataList) {
-      var ewdt: Date = new Date(dt.endWorkingDateTime);
-      if (dt.ptwStatus.permitStatus == PermitStatus.STATUS_VALID) {
-        if (ewdt.valueOf() < Date.now()) {
-          this.makeExpire(dt);
-        }
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // * (Check if any permit in the list goes pass permit validity. If yes, update 
+  // the permit status to be expired. Else, remain the same.)
+  public checkExpire(activeDataList: IPermitToWork[]): void {
+    for (let data of activeDataList) {
+      var endWorkingDateTime: Date = new Date(data.endWorkingDateTime);
+
+      // * (If a particular permit status is not valid, do nothing.)
+      if (data.ptwStatus.permitStatus != PermitStatus.STATUS_VALID) {
+        return;
+      }
+
+      // * (If the particular end working date time is less than current time, invoke
+      // function to make the said permit expires.)
+      if (endWorkingDateTime.valueOf() < Date.now()) {
+        this.makeExpire(data);
       }
     }
   }
 
-  public makeExpire(res: IPermitToWork): void {
-    console.log(res.ptwId);
-    res.ptwStatus.permitStatus = PermitStatus.STATUS_EXPIRED;
-    res.requestStatus = RequestStatus.REQUEST_NULLED;
-    this.postPtwReq(res);
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // * (Make a permit to expire.)
+  public makeExpire(target: IPermitToWork): void {
+    target.ptwStatus.permitStatus = PermitStatus.STATUS_EXPIRED;
+    target.requestStatus = RequestStatus.REQUEST_NULLED;
+    this.postPtwReq(target);
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // * (Update the permit-to-expire to the server.)
   public postPtwReq(toExpire: IPermitToWork): void {
     this.db.update(
       toExpire?.id,
@@ -491,21 +594,35 @@ export class ValidatorTlComponent implements OnInit {
       toExpire?.timestamp
     );
 
-    this.db.fetchWith("id", toExpire.id.toString()).subscribe((resp: IPermitToWork[]) => {
-      //this.mail.send(resp[0], resp[0].permitType);
+    // * (Afterwards, send an email notifying the action.)
+    this.db.fetchWith("id", toExpire.id.toString()).subscribe((response: IPermitToWork[]) => {
+      //this.mail.send(response[0], response[0].permitType);
     });
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // * (Router navigation without history tracebacks.)
   public navigateTo(url: string): void {
     this.router.navigate(["/" + url], { replaceUrl: true });
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // * (Open sign-out dialog to sign-out user.)
   public openSignOutDialog() : void {
     const dialogConfig = new MatDialogConfig();
     this.dialogRefSignOut = this.dialog.open(SignoutDialogComponent, dialogConfig);
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // * (Self-expiring toast message box after an action is performed.)
   public openSnackBar(msg: string, action: string): void {
     this.msg.openSnackBar(msg, action, 3000);
   }
+
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 }
+
+// ==============================================================================================================================================================================

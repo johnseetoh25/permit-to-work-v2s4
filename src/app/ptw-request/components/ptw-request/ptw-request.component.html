@@ -192,6 +192,8 @@
                             required
                             formControlName = "startDate" 
                             placeholder = "Start date"
+                            [min] = "this.dateToday"
+                            [matDatepickerFilter] = "this.weekendFilter"
                             [matDatepicker] = "startDatePicker"
                             (dateChange) = "this.startDateInput = this.sectionOneAFormGroup.get('startDate')?.value;">
                         <mat-hint>MM/DD/YYYY</mat-hint>
@@ -219,7 +221,9 @@
                             matInput 
                             required
                             formControlName = "endDate" 
-                            placeholder = "End date" 
+                            placeholder = "End date"
+                            [min] = "this.dateToday"
+                            [matDatepickerFilter] = "weekendFilter"
                             [matDatepicker] = "endDatePicker"
                             (dateChange) = "this.endDateInput = this.sectionOneAFormGroup.get('endDate')?.value;">
                         <mat-hint>MM/DD/YYYY</mat-hint>

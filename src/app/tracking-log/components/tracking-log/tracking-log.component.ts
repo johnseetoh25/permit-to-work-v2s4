@@ -40,7 +40,7 @@ export class TrackingLogComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
   @ViewChild(MatSort) sort: MatSort | null = null;
 
-  // * (Header columsn refvars to be used in Mat Table.)
+  // * (Header column refvars to be used in Mat Table.)
   public displayedHeaderColumns: string[] = [
     "ptwId",
     "locationOfWork",
@@ -116,12 +116,12 @@ export class TrackingLogComponent implements OnInit {
       this.refresh();
 
       // * (Reset all filter field value to empty.)
-      this.ptwYearFilter.setValue(''); 
-      this.ptwIdFilter.patchValue(''); 
-      this.locOfWorkFilter.patchValue('');
-      this.permitTypeFilter.setValue('');
-      this.requestStatusFilter.setValue('');
-      this.permitStatusFilter.setValue('');
+      this.ptwYearFilter.setValue(""); 
+      this.ptwIdFilter.patchValue(""); 
+      this.locOfWorkFilter.patchValue("");
+      this.permitTypeFilter.setValue("");
+      this.requestStatusFilter.setValue("");
+      this.permitStatusFilter.setValue("");
 
       console.log(this.clickEventSub);
     });
@@ -161,12 +161,12 @@ export class TrackingLogComponent implements OnInit {
 
     this.refresh();
 
-    this.ptwYearFilter.setValue(''); 
-    this.ptwIdFilter.patchValue(''); 
-    this.locOfWorkFilter.patchValue('');
-    this.permitTypeFilter.setValue('');
-    this.requestStatusFilter.setValue('');
-    this.permitStatusFilter.setValue('');
+    this.ptwYearFilter.setValue(""); 
+      this.ptwIdFilter.patchValue(""); 
+      this.locOfWorkFilter.patchValue("");
+      this.permitTypeFilter.setValue("");
+      this.requestStatusFilter.setValue("");
+      this.permitStatusFilter.setValue("");
   }
 
   // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -297,10 +297,10 @@ export class TrackingLogComponent implements OnInit {
   // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   // * (Make a permit to expire.)
-  public makeExpire(res: IPermitToWork): void {
-    res.ptwStatus.permitStatus = PermitStatus.STATUS_EXPIRED;
-    res.requestStatus = RequestStatus.REQUEST_NULLED;
-    this.postPtwReq(res);
+  public makeExpire(target: IPermitToWork): void {
+    target.ptwStatus.permitStatus = PermitStatus.STATUS_EXPIRED;
+    target.requestStatus = RequestStatus.REQUEST_NULLED;
+    this.postPtwReq(target);
   }
 
   // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -557,8 +557,8 @@ export class TrackingLogComponent implements OnInit {
     );
 
     // * (Afterwards, send an email notifying the action.)
-    this.db.fetchWith("id", toExpire.id.toString()).subscribe((resp: IPermitToWork[]) => {
-      //this.mail.send(resp[0], resp[0].permitType);
+    this.db.fetchWith("id", toExpire.id.toString()).subscribe((response: IPermitToWork[]) => {
+      //this.mail.send(response[0], response[0].permitType);
     });
   }
 
