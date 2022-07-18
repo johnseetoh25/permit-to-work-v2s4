@@ -4,7 +4,7 @@
       "userId": "SPV001",
       "userPw": "test1",
       "userName": "Oliver Roberts",
-      "inSession": false,
+      "inSession": true,
       "id": 1
     },
     {
@@ -11112,7 +11112,7 @@
         "sectionTwo": {
           "assessment": {
             "q01": {
-              "choice": "None",
+              "choice": "Yes",
               "remarks": "None"
             }
           }
@@ -11120,19 +11120,19 @@
         "sectionThree": {
           "permitReview": {
             "q01": {
-              "choice": "None",
+              "choice": "Yes",
               "remarks": "None"
             },
             "q02": {
-              "choice": "None",
+              "choice": "Yes",
               "remarks": "None"
             },
             "q03": {
-              "choice": "None",
+              "choice": "No",
               "remarks": "None"
             },
             "q04": {
-              "choice": "None",
+              "choice": "Yes",
               "remarks": "None"
             }
           }
@@ -11338,7 +11338,7 @@
         "email": "asd@ads.asda"
       },
       "ptwStatus": {
-        "permitStatus": "Processing",
+        "permitStatus": "Valid",
         "taskStatus": "Not Started",
         "remarks": "None",
         "checked": false,
@@ -11346,19 +11346,19 @@
         "wantToTerminate": false,
         "reqTermTimestamp": "None",
         "terminatedTimestamp": "None",
-        "timestamp": "None"
+        "timestamp": "2022-07-18T01:47:50.974Z"
       },
       "safetyAssessorEvaluation": {
-        "passed": false,
-        "name": "None",
-        "timestamp": "None"
+        "passed": true,
+        "name": "Oliver Roberts (SPV001)",
+        "timestamp": "2022-07-18T01:47:45.741Z"
       },
       "authorisedManagerApproval": {
-        "passed": false,
-        "name": "None",
-        "timestamp": "None"
+        "passed": true,
+        "name": "Oliver Roberts (SPV001)",
+        "timestamp": "2022-07-18T01:47:50.974Z"
       },
-      "requestStatus": "Pending",
+      "requestStatus": "Approved",
       "wantToCancel": false,
       "reqCancTimestamp": "None",
       "cancelledTimestamp": "None",
