@@ -1,3 +1,5 @@
+// ==============================================================================================================================================================================
+
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Router } from '@angular/router';
@@ -6,57 +8,79 @@ import { DbService } from 'src/app/services/db.service';
 import { MessageService } from 'src/app/services/message.service';
 import { MailService } from 'src/app/services/mail.service';
 
+// ==============================================================================================================================================================================
+
 @Component({
   selector: 'app-submit-dialog',
   templateUrl: './submit-dialog.component.html',
   styleUrls: ['./submit-dialog.component.scss']
 })
+
+// ==============================================================================================================================================================================
+
 export class SubmitDialogComponent implements OnInit {
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // * (Empty permit request object to submit to the server.)
   private ptwReqToSubmit: IPermitToWork = <IPermitToWork>{};
+
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   constructor(
     private dialogRefSelf: MatDialogRef<SubmitDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public injectedPartiallyCompletedPTWForm: IPermitToWork,
+    // * (Passing the dialog data from the ptw-request page, i.e.: reqForm.)
+    @Inject(MAT_DIALOG_DATA) public reqFormData: IPermitToWork,
     private db: DbService,
     private msg: MessageService,
     private router: Router,
     private mail: MailService
   ) { }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
   public ngOnInit(): void { }
 
-  public submitApplication(): void {
-    this.injectedPartiallyCompletedPTWForm.timestamp = new Date().toISOString();
-    this.injectedPartiallyCompletedPTWForm.ptwYear = this.injectedPartiallyCompletedPTWForm.timestamp.substring(0, 4);
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    this.ptwReqToSubmit = this.injectedPartiallyCompletedPTWForm;
+  // * (Submit the application combining the reqForm from ptw-request + data updates here, then submit
+  // to the server.)
+  public submitApplication(): void {
+    // * (Insert and replace a timestamp string into the injected reqFormData.)
+    this.reqFormData.timestamp = new Date().toISOString();
+    // * (Insert and replace the year in which the request was made.)
+    this.reqFormData.ptwYear = this.reqFormData.timestamp.substring(0, 4);
+
+    this.ptwReqToSubmit = this.reqFormData;
     this.postPtwReq(this.ptwReqToSubmit);
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // * (Update the request-to-post to the server.)
   public postPtwReq(toSubmit: IPermitToWork): void {
     this.db.post(toSubmit)
       .subscribe((data : IPermitToWork) => {
-        this.db.fetchWith("id", (data.id - 1).toString()).subscribe((resp: IPermitToWork[]) => {
-          // var tempPreviousPtwYear: number = Number(resp[0].ptwYear);
+        // * (.)
+        this.db.fetchWith("id", (data.id - 1).toString()).subscribe((result: IPermitToWork[]) => {
           var tempPreviousPtwYear: number = 0;
           var tempCurrentPtwYear: number = 0;
           var tempPtwNo: number = 0;
           var generatedPtwId: string = "";
-          if (resp[0] == null || resp[0] == undefined) {
+          if (result[0] == null || result[0] == undefined) {
             tempCurrentPtwYear = Number(data.ptwYear);
             tempPtwNo = data.id;
             generatedPtwId = "PTW-" + tempCurrentPtwYear.toString().substring(2, 4) + tempPtwNo.toString().padStart(4, "0");
           } else {
-            tempPreviousPtwYear = Number(resp[0].ptwYear);
+            tempPreviousPtwYear = Number(result[0].ptwYear);
             tempCurrentPtwYear = Number(data.ptwYear);
             tempPtwNo = data.id;
 
             if (tempPreviousPtwYear < tempCurrentPtwYear) {
-              console.log("The year has progressed by 1!", resp[0].ptwId, "Prev ptw year: " + tempPreviousPtwYear, "Current ptw year: " + tempCurrentPtwYear);
+              console.log("The year has progressed by 1!", result[0].ptwId, "Prev ptw year: " + tempPreviousPtwYear, "Current ptw year: " + tempCurrentPtwYear);
               console.log("First case:" + tempPtwNo);
               generatedPtwId = "PTW-" + tempCurrentPtwYear.toString().substring(2, 4) + (tempPtwNo - (tempPtwNo - 1)).toString().padStart(4, "0");
             } else {
-              console.log("The year remains the same.", resp[0].ptwId, "Prev ptw year: " + tempPreviousPtwYear, "Current ptw year: " + tempCurrentPtwYear);
+              console.log("The year remains the same.", result[0].ptwId, "Prev ptw year: " + tempPreviousPtwYear, "Current ptw year: " + tempCurrentPtwYear);
               console.log("Second case:" + tempPtwNo);
               generatedPtwId = "PTW-" + tempCurrentPtwYear.toString().substring(2, 4) + tempPtwNo.toString().padStart(4, "0");
             }
@@ -314,8 +338,8 @@ export class SubmitDialogComponent implements OnInit {
           this.dialogRefSelf.close();
           this.dialogRefSelf.afterClosed().subscribe(() => {
             this.navigateTo("");
-            this.db.fetchWith("id", data.id.toString()).subscribe((resp: IPermitToWork[]) => {
-              //this.mail.send(resp[0], resp[0].permitType);
+            this.db.fetchWith("id", data.id.toString()).subscribe((result: IPermitToWork[]) => {
+              //this.mail.send(result[0], result[0].permitType);
             });
             this.openSnackBar("A new PTW request has been made! An email notification will be sent to you shortly.", "");
           });
@@ -326,11 +350,21 @@ export class SubmitDialogComponent implements OnInit {
     });
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // * (Self-expiring toast message box after an action is performed.)
   public openSnackBar(msg: string, action: string): void {
     this.msg.openSnackBar(msg, action, 3000);
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // * (Router navigation without history tracebacks.)
   public navigateTo(url: string): void {
     this.router.navigate(["/" + url], { replaceUrl: true });
   }
+
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 }
+
+// ==============================================================================================================================================================================

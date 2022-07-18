@@ -132,6 +132,7 @@ export class DashboardComponent implements OnInit {
     // * (Return no. of pending permit requests.)
     this.db.returnPendingReqs().subscribe((result: IPermitToWork[]) => {
       this.pendingReqList = result;
+      // * (Sort the pending request array list items in alphabetically descending order.)
       this.pendingReqList.sort((a, b) => 
         (a.ptwId.substring(4, 10).valueOf() > b.ptwId.substring(4, 10).valueOf())? -1 : 1
       );
