@@ -1,3 +1,5 @@
+// ==============================================================================================================================================================================
+
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { IPermitToWork } from 'src/app/interfaces/IPermitToWork';
@@ -10,22 +12,38 @@ import { CompShareService } from 'src/app/services/comp-share.service';
 import { RequestStatus } from 'src/app/constants/RequestStatus';
 import { MailService } from 'src/app/services/mail.service';
 
+// ==============================================================================================================================================================================
+
 @Component({
   selector: 'app-terminate-dialog',
   templateUrl: './terminate-dialog.component.html',
   styleUrls: ['./terminate-dialog.component.scss']
 })
+
+// ==============================================================================================================================================================================
+
 export class TerminateDialogComponent implements OnInit {
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // * (Empty permit object to terminate.)
   public ptwToCloseOrTerminate: IPermitToWork = <IPermitToWork>{};
 
+  // * (Enum list of reasons for insertion purpose.)
   public reasonsForTermination: string[] = [
     TaskStatus.STATUS_COMPLETED,
     TaskStatus.STATUS_CONDITION_CHANGED
   ];
   
+  // * (Permit status to be updated into the fetched entry.)
   public newPermitStatus: string = "";
+
+  // * (Closure/termination remarks fetched from server.)
   public taskStatusRemarksInput: string = "";
+
+  // * (Safeguard input used to confirm closure/termination.)
   public typeToConfirmInput: string = "";
+
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public targetPtw: any,
@@ -36,11 +54,17 @@ export class TerminateDialogComponent implements OnInit {
     private compShare: CompShareService,
     private mail: MailService
   ) {
+    // * (Assign the cloterm remarks, if any, to be displayed on the dialog.)
     this.taskStatusRemarksInput = this.targetPtw[0].ptwStatus.remarks;
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
   public ngOnInit(): void { }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // * (Determine the new permit status based on fetched reason of cloterm.)
   public determineNewPermitStatus(reason: string): void {
     switch (reason) {
       case TaskStatus.STATUS_COMPLETED:
@@ -52,7 +76,11 @@ export class TerminateDialogComponent implements OnInit {
     }
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // * (Terminate the target permit.)
   public terminatePtw(reason: string, newPermitStatus: string): void {
+    // * (Fields to be updated.)
     this.targetPtw[0].requestStatus = RequestStatus.REQUEST_NULLED;
     this.targetPtw[0].ptwStatus.checked = true;
     this.targetPtw[0].ptwStatus.taskStatus = reason;
@@ -62,11 +90,13 @@ export class TerminateDialogComponent implements OnInit {
     this.targetPtw[0].ptwStatus.terminatedTimestamp = new Date().toISOString();
 
     this.ptwToCloseOrTerminate = this.targetPtw[0];
-    
     this.putPtwData(this.ptwToCloseOrTerminate);
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
   public putPtwData(toTerminate: IPermitToWork): void {
+    // * (Update the entry.)
     this.db.update(
       toTerminate?.id,
       toTerminate?.ptwId,
@@ -318,19 +348,31 @@ export class TerminateDialogComponent implements OnInit {
 
     this.dialogRefSelf.close();
     this.dialogRefSelf.afterClosed().subscribe(() => {
+      // * (Send email notif regarding the action.)
       this.db.fetchWith("id", toTerminate.id.toString()).subscribe((resp: IPermitToWork[]) => {
         //this.mail.send(resp[0], resp[0].permitType);
       });
       this.openSnackBar("The permit has been " + toTerminate.ptwStatus.permitStatus.toLowerCase() + ". An email notification will be sent to you shortly.", "");
+      // * (Emit a click event signalling to do something to any comp subbed to this emitter.)
       this.compShare.sendClickEvent();
     });
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // * (Self-expiring toast message box after an action is performed.)
   public openSnackBar(msg: string, action: string): void {
     this.msg.openSnackBar(msg, action, 3000);
   }
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // * (Router navigation without history tracebacks.)
   public navigateTo(url: string): void {
     this.router.navigate(["/" + url], { replaceUrl: true });
   }
+
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 }
+
+// ==============================================================================================================================================================================

@@ -287,6 +287,7 @@ export class ReqcancDialogComponent implements OnInit {
     );
     this.dialogRefSelf.close();
     this.dialogRefSelf.afterClosed().subscribe(() => {
+      // * (Send email notif regarding the action.)
       this.db.fetchWith("id", toReqCanc.id.toString()).subscribe((resp: IPermitToWork[]) => {
         //this.mail.send(resp[0], resp[0].permitType);
       });

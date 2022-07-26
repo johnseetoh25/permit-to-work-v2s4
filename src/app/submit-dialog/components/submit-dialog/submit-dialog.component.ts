@@ -59,26 +59,40 @@ export class SubmitDialogComponent implements OnInit {
   // * (Update the request-to-post to the server.)
   public postPtwReq(toSubmit: IPermitToWork): void {
     this.db.post(toSubmit)
-      .subscribe((data : IPermitToWork) => {
-        // * (.)
+      .subscribe((data: IPermitToWork) => {
+        // * (After adding new entry, refetch previous entry from newly added entry. If prev entry does
+        // not exist, refetch newly added entry.)
         this.db.fetchWith("id", (data.id - 1).toString()).subscribe((result: IPermitToWork[]) => {
+          // * (Previous entry's year of req.)
           var tempPreviousPtwYear: number = 0;
+          // * (Current entry's year of req.)
           var tempCurrentPtwYear: number = 0;
+          // * (Current entry's req id.)
           var tempPtwNo: number = 0;
+          // * (Final permit ID to be updated back the said entry, i.e.: PTW-YY1234)
           var generatedPtwId: string = "";
+
+          // * (If fetch result returns null or undefined, use only the current entry's year of req. to
+          // format the permit ID.)
           if (result[0] == null || result[0] == undefined) {
             tempCurrentPtwYear = Number(data.ptwYear);
             tempPtwNo = data.id;
             generatedPtwId = "PTW-" + tempCurrentPtwYear.toString().substring(2, 4) + tempPtwNo.toString().padStart(4, "0");
+          // * (Else, extract the previous and current year of req. to format the permit ID.)
           } else {
             tempPreviousPtwYear = Number(result[0].ptwYear);
             tempCurrentPtwYear = Number(data.ptwYear);
             tempPtwNo = data.id;
 
+            // * (If previous year of req. is smaller than current one, reset the req. no back to 1 and
+            // and start incrementing from there on.)
             if (tempPreviousPtwYear < tempCurrentPtwYear) {
               console.log("The year has progressed by 1!", result[0].ptwId, "Prev ptw year: " + tempPreviousPtwYear, "Current ptw year: " + tempCurrentPtwYear);
               console.log("First case:" + tempPtwNo);
+
+              // * (Resetting formula: b = a - (a - 1), where b is the final req. id.)
               generatedPtwId = "PTW-" + tempCurrentPtwYear.toString().substring(2, 4) + (tempPtwNo - (tempPtwNo - 1)).toString().padStart(4, "0");
+            // * (Else, let req. id as it is.)
             } else {
               console.log("The year remains the same.", result[0].ptwId, "Prev ptw year: " + tempPreviousPtwYear, "Current ptw year: " + tempCurrentPtwYear);
               console.log("Second case:" + tempPtwNo);
@@ -86,6 +100,7 @@ export class SubmitDialogComponent implements OnInit {
             }
           }
 
+          // * (Update the entry.)
           this.db.update(
             tempPtwNo,
             generatedPtwId,
@@ -338,6 +353,7 @@ export class SubmitDialogComponent implements OnInit {
           this.dialogRefSelf.close();
           this.dialogRefSelf.afterClosed().subscribe(() => {
             this.navigateTo("");
+            // * (Send email notif regarding the action.)
             this.db.fetchWith("id", data.id.toString()).subscribe((result: IPermitToWork[]) => {
               //this.mail.send(result[0], result[0].permitType);
             });
