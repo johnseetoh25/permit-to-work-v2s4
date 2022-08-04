@@ -596,7 +596,7 @@ export class ValidatorTlComponent implements OnInit {
 
     // * (Afterwards, send an email notifying the action.)
     this.db.fetchWith("id", toExpire.id.toString()).subscribe((response: IPermitToWork[]) => {
-      this.mail.send(response[0], response[0].permitType);
+      //this.mail.send(response[0], response[0].permitType);
     });
   }
 

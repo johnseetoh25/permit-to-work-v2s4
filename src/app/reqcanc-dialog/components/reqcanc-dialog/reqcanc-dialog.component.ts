@@ -289,7 +289,7 @@ export class ReqcancDialogComponent implements OnInit {
     this.dialogRefSelf.afterClosed().subscribe(() => {
       // * (Send email notif regarding the action.)
       this.db.fetchWith("id", toReqCanc.id.toString()).subscribe((resp: IPermitToWork[]) => {
-        this.mail.send(resp[0], resp[0].permitType);
+        //this.mail.send(resp[0], resp[0].permitType);
       });
       this.openSnackBar("A cancellation request has been sent. An email notification will be sent to you shortly.", "");
       this.compShare.sendClickEvent();

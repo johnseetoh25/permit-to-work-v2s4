@@ -350,7 +350,7 @@ export class TerminateDialogComponent implements OnInit {
     this.dialogRefSelf.afterClosed().subscribe(() => {
       // * (Send email notif regarding the action.)
       this.db.fetchWith("id", toTerminate.id.toString()).subscribe((resp: IPermitToWork[]) => {
-        this.mail.send(resp[0], resp[0].permitType);
+        //this.mail.send(resp[0], resp[0].permitType);
       });
       this.openSnackBar("The permit has been " + toTerminate.ptwStatus.permitStatus.toLowerCase() + ". An email notification will be sent to you shortly.", "");
       // * (Emit a click event signalling to do something to any comp subbed to this emitter.)

@@ -447,7 +447,7 @@ export class AmDialogComponent implements OnInit {
     this.dialogRefSelf.afterClosed().subscribe(() => {
       // * (Send email notif regarding the action.)
       this.db.fetchWith("id", toEvaluate.id.toString()).subscribe((resp: IPermitToWork[]) => {
-        this.mail.send(resp[0], resp[0].permitType);
+        //this.mail.send(resp[0], resp[0].permitType);
       });
       this.openSnackBar("The permit has been " + toEvaluate.requestStatus.toLowerCase() + ". An email notification will be sent to you shortly.", "");
     });
