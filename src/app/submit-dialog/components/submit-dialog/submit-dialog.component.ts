@@ -355,7 +355,7 @@ export class SubmitDialogComponent implements OnInit {
             this.navigateTo("");
             // * (Send email notif regarding the action.)
             this.db.fetchWith("id", data.id.toString()).subscribe((result: IPermitToWork[]) => {
-              //this.mail.send(result[0], result[0].permitType);
+              this.mail.send(result[0], result[0].permitType);
             });
             this.openSnackBar("A new PTW request has been made! An email notification will be sent to you shortly.", "");
           });

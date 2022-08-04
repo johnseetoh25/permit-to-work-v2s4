@@ -10,7 +10,7 @@ import { RequestStatus } from '../constants/RequestStatus';
   providedIn: 'root'
 })
 export class DbService {
-  private ptwUrl: string = '/db/ptw';
+  private ptwUrl: string = 'https://db-temasek-poly-ptw-emng-sys.herokuapp.com/ptw';
 
   public horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   public verticalPosition: MatSnackBarVerticalPosition = 'bottom';

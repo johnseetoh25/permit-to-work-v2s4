@@ -14,7 +14,7 @@ export class AuthService {
   public horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   public verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
-  private validatorsUrl: string = "/db/validators";
+  private validatorsUrl: string = "https://db-temasek-poly-ptw-emng-sys.herokuapp.com/validators";
   public currentUser: User = {
     id: 0,
     userId: "",
