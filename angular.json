@@ -21,7 +21,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "docs",
           "options": {
             "outputPath": "dist/permit-to-work-v2s1",
             "index": "src/index.html",
