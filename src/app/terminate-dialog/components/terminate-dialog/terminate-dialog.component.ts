@@ -106,7 +106,9 @@ export class TerminateDialogComponent implements OnInit {
       toTerminate?.locationOfWork?.sub,
       toTerminate?.startWorkingDateTime,
       toTerminate?.endWorkingDateTime,
-      toTerminate?.taskDescription,
+      //toTerminate?.taskDescription,
+      toTerminate?.predefinedTask,
+      toTerminate?.predefinedTaskOthers,
       toTerminate?.noOfWorkers,
       toTerminate?.noOfSupervisors,
 
@@ -291,26 +293,32 @@ export class TerminateDialogComponent implements OnInit {
 
       toTerminate?.attendantDets?.[0].name,
       toTerminate?.attendantDets?.[0].nricOrFinNo,
+      toTerminate?.attendantDets?.[0].role,
       toTerminate?.attendantDets?.[0].contactNo,
 
       toTerminate?.attendantDets?.[1].name,
       toTerminate?.attendantDets?.[1].nricOrFinNo,
+      toTerminate?.attendantDets?.[1].role,
       toTerminate?.attendantDets?.[1].contactNo,
 
       toTerminate?.attendantDets?.[2].name,
       toTerminate?.attendantDets?.[2].nricOrFinNo,
+      toTerminate?.attendantDets?.[2].role,
       toTerminate?.attendantDets?.[2].contactNo,
 
       toTerminate?.attendantDets?.[3].name,
       toTerminate?.attendantDets?.[3].nricOrFinNo,
+      toTerminate?.attendantDets?.[3].role,
       toTerminate?.attendantDets?.[3].contactNo,
 
       toTerminate?.attendantDets?.[4].name,
       toTerminate?.attendantDets?.[4].nricOrFinNo,
+      toTerminate?.attendantDets?.[4].role,
       toTerminate?.attendantDets?.[4].contactNo,
 
       toTerminate?.attendantDets?.[5].name,
       toTerminate?.attendantDets?.[5].nricOrFinNo,
+      toTerminate?.attendantDets?.[5].role,
       toTerminate?.attendantDets?.[5].contactNo,
 
       toTerminate?.applicantDets?.name,
@@ -346,16 +354,25 @@ export class TerminateDialogComponent implements OnInit {
       toTerminate?.timestamp
     );
 
+    // * (Emit a click event signalling to do something to any comp subbed to this emitter.)
+    this.compShare.sendClickEvent();
     this.dialogRefSelf.close();
-    this.dialogRefSelf.afterClosed().subscribe(() => {
-      // * (Send email notif regarding the action.)
-      this.db.fetchWith("id", toTerminate.id.toString()).subscribe((resp: IPermitToWork[]) => {
-        this.mail.send(resp[0], resp[0].permitType);
-      });
-      this.openSnackBar("The permit has been " + toTerminate.ptwStatus.permitStatus.toLowerCase() + ". An email notification will be sent to you shortly.", "");
-      // * (Emit a click event signalling to do something to any comp subbed to this emitter.)
-      this.compShare.sendClickEvent();
+    // * (Send email notif regarding the action.)
+    this.db.fetchWith("id", toTerminate.id.toString()).subscribe((resp: IPermitToWork[]) => {
+      this.mail.send(resp[0], resp[0].permitType);
     });
+    this.openSnackBar("The permit has been " + toTerminate.ptwStatus.permitStatus.toLowerCase() + ". An email notification will be sent to you shortly.", "");
+
+    // this.dialogRefSelf.close();
+    // this.dialogRefSelf.afterClosed().subscribe(() => {
+    //   // * (Send email notif regarding the action.)
+    //   this.db.fetchWith("id", toTerminate.id.toString()).subscribe((resp: IPermitToWork[]) => {
+    //     //this.mail.send(resp[0], resp[0].permitType);
+    //   });
+    //   this.openSnackBar("The permit has been " + toTerminate.ptwStatus.permitStatus.toLowerCase() + ". An email notification will be sent to you shortly.", "");
+    //   // * (Emit a click event signalling to do something to any comp subbed to this emitter.)
+    //   this.compShare.sendClickEvent();
+    // });
   }
 
   // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------

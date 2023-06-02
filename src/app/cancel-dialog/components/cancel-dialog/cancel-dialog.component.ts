@@ -50,7 +50,9 @@ export class CancelDialogComponent implements OnInit {
       toCancel?.locationOfWork?.sub,
       toCancel?.startWorkingDateTime,
       toCancel?.endWorkingDateTime,
-      toCancel?.taskDescription,
+      //toCancel?.taskDescription,
+      toCancel?.predefinedTask,
+      toCancel?.predefinedTaskOthers,
       toCancel?.noOfWorkers,
       toCancel?.noOfSupervisors,
 
@@ -235,26 +237,32 @@ export class CancelDialogComponent implements OnInit {
 
       toCancel?.attendantDets?.[0].name,
       toCancel?.attendantDets?.[0].nricOrFinNo,
+      toCancel?.attendantDets?.[0].role,
       toCancel?.attendantDets?.[0].contactNo,
 
       toCancel?.attendantDets?.[1].name,
       toCancel?.attendantDets?.[1].nricOrFinNo,
+      toCancel?.attendantDets?.[1].role,
       toCancel?.attendantDets?.[1].contactNo,
 
       toCancel?.attendantDets?.[2].name,
       toCancel?.attendantDets?.[2].nricOrFinNo,
+      toCancel?.attendantDets?.[2].role,
       toCancel?.attendantDets?.[2].contactNo,
 
       toCancel?.attendantDets?.[3].name,
       toCancel?.attendantDets?.[3].nricOrFinNo,
+      toCancel?.attendantDets?.[3].role,
       toCancel?.attendantDets?.[3].contactNo,
 
       toCancel?.attendantDets?.[4].name,
       toCancel?.attendantDets?.[4].nricOrFinNo,
+      toCancel?.attendantDets?.[4].role,
       toCancel?.attendantDets?.[4].contactNo,
 
       toCancel?.attendantDets?.[5].name,
       toCancel?.attendantDets?.[5].nricOrFinNo,
+      toCancel?.attendantDets?.[5].role,
       toCancel?.attendantDets?.[5].contactNo,
 
       toCancel?.applicantDets?.name,
@@ -290,15 +298,25 @@ export class CancelDialogComponent implements OnInit {
       toCancel?.timestamp
     );
 
+    // * (Emit a click event signalling to do something to any comp subbed to this emitter.)
+    this.compShare.sendClickEvent();
     this.dialogRefSelf.close();
-    this.dialogRefSelf.afterClosed().subscribe(() => {
-      // * (Send email notif regarding the action.)
-      this.db.fetchWith("id", toCancel.id.toString()).subscribe((resp: IPermitToWork[]) => {
-        this.mail.send(resp[0], resp[0].permitType);
-      });
-      this.openSnackBar("The request has been " + toCancel.requestStatus.toLowerCase() + ". An email notification will be sent to you shortly.", "");
-      this.compShare.sendClickEvent();
+    // * (Send email notif regarding the action.)
+    this.db.fetchWith("id", toCancel.id.toString()).subscribe((resp: IPermitToWork[]) => {
+      this.mail.send(resp[0], resp[0].permitType);
     });
+    this.openSnackBar("The request has been " + toCancel.requestStatus.toLowerCase() + ". An email notification will be sent to you shortly.", "");
+    
+
+    // this.dialogRefSelf.close();
+    // this.dialogRefSelf.afterClosed().subscribe(() => {
+    //   // * (Send email notif regarding the action.)
+    //   this.db.fetchWith("id", toCancel.id.toString()).subscribe((resp: IPermitToWork[]) => {
+    //     //this.mail.send(resp[0], resp[0].permitType);
+    //   });
+    //   this.openSnackBar("The request has been " + toCancel.requestStatus.toLowerCase() + ". An email notification will be sent to you shortly.", "");
+    //   this.compShare.sendClickEvent();
+    // });
   }
 
   public openSnackBar(msg: string, action: string): void {

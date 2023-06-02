@@ -1,11 +1,11 @@
 {
-  "name": "permit-to-work-v2s1",
+  "name": "permit-to-work-v2s2",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port=4200",
+    "start": "set NODE_OPTIONS=--openssl-legacy-provider && ng serve --port=4200",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "watch": "set NODE_OPTIONS=--openssl-legacy-provider && ng build --watch --configuration development",
     "test": "ng test",
     "db": "json-server -p 3000 db/db.json --routes db/routes.json --no-cors=true"
   },

@@ -316,7 +316,9 @@ export class TrackingLogComponent implements OnInit {
       toExpire?.locationOfWork?.sub,
       toExpire?.startWorkingDateTime,
       toExpire?.endWorkingDateTime,
-      toExpire?.taskDescription,
+      //toExpire?.taskDescription,
+      toExpire?.predefinedTask,
+      toExpire?.predefinedTaskOthers,
       toExpire?.noOfWorkers,
       toExpire?.noOfSupervisors,
 
@@ -501,26 +503,32 @@ export class TrackingLogComponent implements OnInit {
 
       toExpire?.attendantDets?.[0].name,
       toExpire?.attendantDets?.[0].nricOrFinNo,
+      toExpire?.attendantDets?.[0].role,
       toExpire?.attendantDets?.[0].contactNo,
 
       toExpire?.attendantDets?.[1].name,
       toExpire?.attendantDets?.[1].nricOrFinNo,
+      toExpire?.attendantDets?.[1].role,
       toExpire?.attendantDets?.[1].contactNo,
 
       toExpire?.attendantDets?.[2].name,
       toExpire?.attendantDets?.[2].nricOrFinNo,
+      toExpire?.attendantDets?.[2].role,
       toExpire?.attendantDets?.[2].contactNo,
 
       toExpire?.attendantDets?.[3].name,
       toExpire?.attendantDets?.[3].nricOrFinNo,
+      toExpire?.attendantDets?.[3].role,
       toExpire?.attendantDets?.[3].contactNo,
 
       toExpire?.attendantDets?.[4].name,
       toExpire?.attendantDets?.[4].nricOrFinNo,
+      toExpire?.attendantDets?.[4].role,
       toExpire?.attendantDets?.[4].contactNo,
 
       toExpire?.attendantDets?.[5].name,
       toExpire?.attendantDets?.[5].nricOrFinNo,
+      toExpire?.attendantDets?.[5].role,
       toExpire?.attendantDets?.[5].contactNo,
 
       toExpire?.applicantDets?.name,

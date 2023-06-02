@@ -204,7 +204,9 @@ export class AmDialogComponent implements OnInit {
       toEvaluate?.locationOfWork?.sub,
       toEvaluate?.startWorkingDateTime,
       toEvaluate?.endWorkingDateTime,
-      toEvaluate?.taskDescription,
+      //toEvaluate?.taskDescription,
+      toEvaluate?.predefinedTask,
+      toEvaluate?.predefinedTaskOthers,
       toEvaluate?.noOfWorkers,
       toEvaluate?.noOfSupervisors,
 
@@ -389,26 +391,32 @@ export class AmDialogComponent implements OnInit {
 
       toEvaluate?.attendantDets?.[0].name,
       toEvaluate?.attendantDets?.[0].nricOrFinNo,
+      toEvaluate?.attendantDets?.[0].role,
       toEvaluate?.attendantDets?.[0].contactNo,
 
       toEvaluate?.attendantDets?.[1].name,
       toEvaluate?.attendantDets?.[1].nricOrFinNo,
+      toEvaluate?.attendantDets?.[1].role,
       toEvaluate?.attendantDets?.[1].contactNo,
 
       toEvaluate?.attendantDets?.[2].name,
       toEvaluate?.attendantDets?.[2].nricOrFinNo,
+      toEvaluate?.attendantDets?.[2].role,
       toEvaluate?.attendantDets?.[2].contactNo,
 
       toEvaluate?.attendantDets?.[3].name,
       toEvaluate?.attendantDets?.[3].nricOrFinNo,
+      toEvaluate?.attendantDets?.[3].role,
       toEvaluate?.attendantDets?.[3].contactNo,
 
       toEvaluate?.attendantDets?.[4].name,
       toEvaluate?.attendantDets?.[4].nricOrFinNo,
+      toEvaluate?.attendantDets?.[4].role,
       toEvaluate?.attendantDets?.[4].contactNo,
 
       toEvaluate?.attendantDets?.[5].name,
       toEvaluate?.attendantDets?.[5].nricOrFinNo,
+      toEvaluate?.attendantDets?.[5].role,
       toEvaluate?.attendantDets?.[5].contactNo,
 
       toEvaluate?.applicantDets?.name,
@@ -443,17 +451,27 @@ export class AmDialogComponent implements OnInit {
       toEvaluate?.cancelledTimestamp,
       toEvaluate?.timestamp
     );
+
+    // * (Emit a click event signalling to do something to any comp subbed to this emitter.)
+    this.compShare.sendClickEvent();
     this.dialogRefSelf.close();
-    this.dialogRefSelf.afterClosed().subscribe(() => {
-      // * (Send email notif regarding the action.)
-      this.db.fetchWith("id", toEvaluate.id.toString()).subscribe((resp: IPermitToWork[]) => {
-        this.mail.send(resp[0], resp[0].permitType);
-      });
-      this.openSnackBar("The permit has been " + toEvaluate.requestStatus.toLowerCase() + ". An email notification will be sent to you shortly.", "");
+    // * (Send email notif regarding the action.)
+    this.db.fetchWith("id", toEvaluate.id.toString()).subscribe((resp: IPermitToWork[]) => {
+      this.mail.send(resp[0], resp[0].permitType);
     });
-    this.dialogRefVldReqDets.afterClosed().subscribe(() => {
-      this.compShare.sendClickEvent();
-    });
+    this.openSnackBar("The permit has been " + toEvaluate.requestStatus.toLowerCase() + ". An email notification will be sent to you shortly.", "");
+
+    // this.dialogRefSelf.close();
+    // this.dialogRefSelf.afterClosed().subscribe(() => {
+    //   // * (Send email notif regarding the action.)
+    //   this.db.fetchWith("id", toEvaluate.id.toString()).subscribe((resp: IPermitToWork[]) => {
+    //     //this.mail.send(resp[0], resp[0].permitType);
+    //   });
+    //   this.openSnackBar("The permit has been " + toEvaluate.requestStatus.toLowerCase() + ". An email notification will be sent to you shortly.", "");
+    // });
+    // this.dialogRefVldReqDets.afterClosed().subscribe(() => {
+    //   this.compShare.sendClickEvent();
+    // });
   }
 
   public openSnackBar(msg: string, action: string): void {

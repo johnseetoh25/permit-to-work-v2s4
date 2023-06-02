@@ -110,7 +110,9 @@ export class SubmitDialogComponent implements OnInit {
             data?.locationOfWork?.sub,
             data?.startWorkingDateTime,
             data?.endWorkingDateTime,
-            data?.taskDescription,
+            //data?.taskDescription,
+            data?.predefinedTask,
+            data?.predefinedTaskOthers,
             data?.noOfWorkers,
             data?.noOfSupervisors,
 
@@ -295,26 +297,32 @@ export class SubmitDialogComponent implements OnInit {
 
             data?.attendantDets?.[0].name,
             data?.attendantDets?.[0].nricOrFinNo,
+            data?.attendantDets?.[0].role,
             data?.attendantDets?.[0].contactNo,
 
             data?.attendantDets?.[1].name,
             data?.attendantDets?.[1].nricOrFinNo,
+            data?.attendantDets?.[1].role,
             data?.attendantDets?.[1].contactNo,
 
             data?.attendantDets?.[2].name,
             data?.attendantDets?.[2].nricOrFinNo,
+            data?.attendantDets?.[2].role,
             data?.attendantDets?.[2].contactNo,
 
             data?.attendantDets?.[3].name,
             data?.attendantDets?.[3].nricOrFinNo,
+            data?.attendantDets?.[3].role,
             data?.attendantDets?.[3].contactNo,
 
             data?.attendantDets?.[4].name,
             data?.attendantDets?.[4].nricOrFinNo,
+            data?.attendantDets?.[4].role,
             data?.attendantDets?.[4].contactNo,
 
             data?.attendantDets?.[5].name,
             data?.attendantDets?.[5].nricOrFinNo,
+            data?.attendantDets?.[5].role,
             data?.attendantDets?.[5].contactNo,
 
             data?.applicantDets?.name,
@@ -355,7 +363,7 @@ export class SubmitDialogComponent implements OnInit {
             this.navigateTo("");
             // * (Send email notif regarding the action.)
             this.db.fetchWith("id", data.id.toString()).subscribe((result: IPermitToWork[]) => {
-              this.mail.send(result[0], result[0].permitType);
+              //this.mail.send(result[0], result[0].permitType);
             });
             this.openSnackBar("A new PTW request has been made! An email notification will be sent to you shortly.", "");
           });

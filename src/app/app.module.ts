@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { InputMaskModule } from '@ngneat/input-mask';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +25,12 @@ import { NgxEchartsModule } from 'ngx-echarts';
       echarts: () => import('echarts')
     })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: LocationStrategy, 
+      useClass: HashLocationStrategy
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
