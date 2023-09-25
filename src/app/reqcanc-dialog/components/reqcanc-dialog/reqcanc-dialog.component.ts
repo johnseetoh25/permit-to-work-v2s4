@@ -46,7 +46,9 @@ export class ReqcancDialogComponent implements OnInit {
       toReqCanc?.locationOfWork?.sub,
       toReqCanc?.startWorkingDateTime,
       toReqCanc?.endWorkingDateTime,
-      toReqCanc?.taskDescription,
+      //toReqCanc?.taskDescription,
+      toReqCanc?.predefinedTask,
+      toReqCanc?.predefinedTaskOthers,
       toReqCanc?.noOfWorkers,
       toReqCanc?.noOfSupervisors,
 
@@ -231,26 +233,32 @@ export class ReqcancDialogComponent implements OnInit {
 
       toReqCanc?.attendantDets?.[0].name,
       toReqCanc?.attendantDets?.[0].nricOrFinNo,
+      toReqCanc?.attendantDets?.[0].role,
       toReqCanc?.attendantDets?.[0].contactNo,
 
       toReqCanc?.attendantDets?.[1].name,
       toReqCanc?.attendantDets?.[1].nricOrFinNo,
+      toReqCanc?.attendantDets?.[1].role,
       toReqCanc?.attendantDets?.[1].contactNo,
 
       toReqCanc?.attendantDets?.[2].name,
       toReqCanc?.attendantDets?.[2].nricOrFinNo,
+      toReqCanc?.attendantDets?.[2].role,
       toReqCanc?.attendantDets?.[2].contactNo,
 
       toReqCanc?.attendantDets?.[3].name,
       toReqCanc?.attendantDets?.[3].nricOrFinNo,
+      toReqCanc?.attendantDets?.[3].role,
       toReqCanc?.attendantDets?.[3].contactNo,
 
       toReqCanc?.attendantDets?.[4].name,
       toReqCanc?.attendantDets?.[4].nricOrFinNo,
+      toReqCanc?.attendantDets?.[4].role,
       toReqCanc?.attendantDets?.[4].contactNo,
 
       toReqCanc?.attendantDets?.[5].name,
       toReqCanc?.attendantDets?.[5].nricOrFinNo,
+      toReqCanc?.attendantDets?.[5].role,
       toReqCanc?.attendantDets?.[5].contactNo,
 
       toReqCanc?.applicantDets?.name,
@@ -285,15 +293,25 @@ export class ReqcancDialogComponent implements OnInit {
       toReqCanc?.cancelledTimestamp,
       toReqCanc?.timestamp
     );
+
+    // * (Emit a click event signalling to do something to any comp subbed to this emitter.)
+    this.compShare.sendClickEvent();
     this.dialogRefSelf.close();
-    this.dialogRefSelf.afterClosed().subscribe(() => {
-      // * (Send email notif regarding the action.)
-      this.db.fetchWith("id", toReqCanc.id.toString()).subscribe((resp: IPermitToWork[]) => {
-        this.mail.send(resp[0], resp[0].permitType);
-      });
-      this.openSnackBar("A cancellation request has been sent. An email notification will be sent to you shortly.", "");
-      this.compShare.sendClickEvent();
+    // * (Send email notif regarding the action.)
+    this.db.fetchWith("id", toReqCanc.id.toString()).subscribe((resp: IPermitToWork[]) => {
+      this.mail.send(resp[0], resp[0].permitType);
     });
+    this.openSnackBar("A cancellation request has been sent. An email notification will be sent to you shortly.", "");
+
+    // this.dialogRefSelf.close();
+    // this.dialogRefSelf.afterClosed().subscribe(() => {
+    //   // * (Send email notif regarding the action.)
+    //   this.db.fetchWith("id", toReqCanc.id.toString()).subscribe((resp: IPermitToWork[]) => {
+    //     //this.mail.send(resp[0], resp[0].permitType);
+    //   });
+    //   this.openSnackBar("A cancellation request has been sent. An email notification will be sent to you shortly.", "");
+    //   this.compShare.sendClickEvent();
+    // });
   }
 
   public openSnackBar(msg: string, action: string): void {

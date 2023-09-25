@@ -10,7 +10,8 @@ import { RequestStatus } from '../constants/RequestStatus';
   providedIn: 'root'
 })
 export class DbService {
-  private ptwUrl: string = 'https://db-temasek-poly-ptw-emng-sys.herokuapp.com/ptw';
+  private ptwUrl: string = 'https://db-ptw-sys-2.herokuapp.com/ptw';
+  //private ptwUrl: string = 'db/ptw';
 
   public horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   public verticalPosition: MatSnackBarVerticalPosition = 'bottom';
@@ -78,7 +79,9 @@ export class DbService {
     selectedLocationSector: string,
     startWorkingDateTime: string,
     endWorkingDateTime: string,
-    taskDescription: string,
+    //taskDescription: string,
+    predefinedTask: string,
+    predefinedTaskOthers: string,
     noOfWorkers: number,
     noOfSupervisors: number,
 
@@ -263,26 +266,32 @@ export class DbService {
 
     ad1_name: string,
     ad1_nricOrFinNo: string,
+    ad1_role: string,
     ad1_contactNo: string,
 
     ad2_name: string,
     ad2_nricOrFinNo: string,
+    ad2_role: string,
     ad2_contactNo: string,
 
     ad3_name: string,
     ad3_nricOrFinNo: string,
+    ad3_role: string,
     ad3_contactNo: string,
 
     ad4_name: string,
     ad4_nricOrFinNo: string,
+    ad4_role: string,
     ad4_contactNo: string,
 
     ad5_name: string,
     ad5_nricOrFinNo: string,
+    ad5_role: string,
     ad5_contactNo: string,
 
     ad6_name: string,
     ad6_nricOrFinNo: string,
+    ad6_role: string,
     ad6_contactNo: string,
 
     ad_name: string,
@@ -332,7 +341,9 @@ export class DbService {
         permitType: permitType,
         startWorkingDateTime: startWorkingDateTime,
         endWorkingDateTime: endWorkingDateTime,
-        taskDescription: taskDescription,
+        //taskDescription: taskDescription,
+        predefinedTask: predefinedTask,
+        predefinedTaskOthers: predefinedTaskOthers,
         noOfWorkers: noOfWorkers,
         noOfSupervisors: noOfSupervisors,
         workAtHeight: {
@@ -724,36 +735,42 @@ export class DbService {
             id: 1,
             name: ad1_name,
             nricOrFinNo: ad1_nricOrFinNo,
+            role: ad1_role,
             contactNo: ad1_contactNo
           },
           {
             id: 2,
             name: ad2_name,
             nricOrFinNo: ad2_nricOrFinNo,
+            role: ad2_role,
             contactNo: ad2_contactNo
           },
           {
             id: 3,
             name: ad3_name,
             nricOrFinNo: ad3_nricOrFinNo,
+            role: ad3_role,
             contactNo: ad3_contactNo
           },
           {
             id: 4,
             name: ad4_name,
             nricOrFinNo: ad4_nricOrFinNo,
+            role: ad4_role,
             contactNo: ad4_contactNo
           },
           {
             id: 5,
             name: ad5_name,
             nricOrFinNo: ad5_nricOrFinNo,
+            role: ad5_role,
             contactNo: ad5_contactNo
           },
           {
             id: 6,
             name: ad6_name,
             nricOrFinNo: ad6_nricOrFinNo,
+            role: ad6_role,
             contactNo: ad6_contactNo
           },
         ],

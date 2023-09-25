@@ -71,7 +71,9 @@ export class ReqtermDialogComponent implements OnInit {
       toReqTerm?.locationOfWork?.sub,
       toReqTerm?.startWorkingDateTime,
       toReqTerm?.endWorkingDateTime,
-      toReqTerm?.taskDescription,
+      //toReqTerm?.taskDescription,
+      toReqTerm?.predefinedTask,
+      toReqTerm?.predefinedTaskOthers,
       toReqTerm?.noOfWorkers,
       toReqTerm?.noOfSupervisors,
 
@@ -256,26 +258,32 @@ export class ReqtermDialogComponent implements OnInit {
 
       toReqTerm?.attendantDets?.[0].name,
       toReqTerm?.attendantDets?.[0].nricOrFinNo,
+      toReqTerm?.attendantDets?.[0].role,
       toReqTerm?.attendantDets?.[0].contactNo,
 
       toReqTerm?.attendantDets?.[1].name,
       toReqTerm?.attendantDets?.[1].nricOrFinNo,
+      toReqTerm?.attendantDets?.[1].role,
       toReqTerm?.attendantDets?.[1].contactNo,
 
       toReqTerm?.attendantDets?.[2].name,
       toReqTerm?.attendantDets?.[2].nricOrFinNo,
+      toReqTerm?.attendantDets?.[2].role,
       toReqTerm?.attendantDets?.[2].contactNo,
 
       toReqTerm?.attendantDets?.[3].name,
       toReqTerm?.attendantDets?.[3].nricOrFinNo,
+      toReqTerm?.attendantDets?.[3].role,
       toReqTerm?.attendantDets?.[3].contactNo,
 
       toReqTerm?.attendantDets?.[4].name,
       toReqTerm?.attendantDets?.[4].nricOrFinNo,
+      toReqTerm?.attendantDets?.[4].role,
       toReqTerm?.attendantDets?.[4].contactNo,
 
       toReqTerm?.attendantDets?.[5].name,
       toReqTerm?.attendantDets?.[5].nricOrFinNo,
+      toReqTerm?.attendantDets?.[5].role,
       toReqTerm?.attendantDets?.[5].contactNo,
 
       toReqTerm?.applicantDets?.name,
@@ -310,15 +318,25 @@ export class ReqtermDialogComponent implements OnInit {
       toReqTerm?.cancelledTimestamp,
       toReqTerm?.timestamp
     );
+    
+    // * (Emit a click event signalling to do something to any comp subbed to this emitter.)
+    this.compShare.sendClickEvent();
     this.dialogRefSelf.close();
-    this.dialogRefSelf.afterClosed().subscribe(() => {
-      // * (Send email notif regarding the action.)
-      this.db.fetchWith("id", toReqTerm.id.toString()).subscribe((resp: IPermitToWork[]) => {
-        this.mail.send(resp[0], resp[0].permitType);
-      });
-      this.openSnackBar("A closure/termination request has been sent. An email notification will be sent to you shortly.", "");
-      this.compShare.sendClickEvent();
+    // * (Send email notif regarding the action.)
+    this.db.fetchWith("id", toReqTerm.id.toString()).subscribe((resp: IPermitToWork[]) => {
+      this.mail.send(resp[0], resp[0].permitType);
     });
+    this.openSnackBar("A closure/termination request has been sent. An email notification will be sent to you shortly.", "");
+
+    // this.dialogRefSelf.close();
+    // this.dialogRefSelf.afterClosed().subscribe(() => {
+    //   // * (Send email notif regarding the action.)
+    //   this.db.fetchWith("id", toReqTerm.id.toString()).subscribe((resp: IPermitToWork[]) => {
+    //     //this.mail.send(resp[0], resp[0].permitType);
+    //   });
+    //   this.openSnackBar("A closure/termination request has been sent. An email notification will be sent to you shortly.", "");
+    //   this.compShare.sendClickEvent();
+    // });
   }
 
   public openSnackBar(msg: string, action: string): void {

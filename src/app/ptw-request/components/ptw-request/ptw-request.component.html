@@ -26,11 +26,11 @@
         <mat-step [stepControl] = "this.sectionOneAFormGroup" [errorMessage] = "this.errorMessage">
             <form class = "basic-info-form" [formGroup] = "this.sectionOneAFormGroup">
                 <ng-template matStepLabel>Section I (A): Basic Information</ng-template>
-                <div class = "section-title">
+                <mat-toolbar class = "section-title">
                     <mat-label class = "section-title-desc">
                         <mat-icon style = "vertical-align: middle; font-size: 22px;">create</mat-icon> This section is to be completed by a <mat-label style = "font-weight: 425">representative supervisor</mat-label>
                     </mat-label>
-                </div>
+                </mat-toolbar>
                 <br>
                 <h2>Application Form</h2>
                 <mat-form-field class = "location-of-work-options" appearance = "fill">
@@ -95,10 +95,11 @@
                         </mat-option>
                         <mat-option 
                             *ngIf = "
-                                this.selectedLocationOfWork == 'Biodiesel production sector' ||
+                            
                                 this.selectedLocationOfWork == 'Work at height training platform'
                             "
                             value = "Work at height permit (WAHP)">
+                            
                             Work at height permit (WAHP)
                         </mat-option>
                         <mat-option 
@@ -193,7 +194,6 @@
                             formControlName = "startDate" 
                             placeholder = "Start date"
                             [min] = "this.dateToday"
-                            [matDatepickerFilter] = "this.weekendFilter"
                             [matDatepicker] = "startDatePicker"
                             (dateChange) = "this.startDateInput = this.sectionOneAFormGroup.get('startDate')?.value;">
                         <mat-hint>MM/DD/YYYY</mat-hint>
@@ -223,7 +223,6 @@
                             formControlName = "endDate" 
                             placeholder = "End date"
                             [min] = "this.dateToday"
-                            [matDatepickerFilter] = "weekendFilter"
                             [matDatepicker] = "endDatePicker"
                             (dateChange) = "this.endDateInput = this.sectionOneAFormGroup.get('endDate')?.value;">
                         <mat-hint>MM/DD/YYYY</mat-hint>
@@ -245,12 +244,27 @@
                         <mat-error *ngIf = "this.sectionOneAFormGroupError('endTime', 'required');">End time is required.</mat-error>
                     </mat-form-field>
                 </div>
-                <br><br> 
-                <mat-form-field class = "task-desc-input" appearance = "fill">
-                    <mat-label>Task description</mat-label>
-                    <textarea matInput required [(ngModel)] = "this.taskDescriptionInput" formControlName = "taskDesc"></textarea>
-                    <mat-error *ngIf = "this.sectionOneAFormGroupError('taskDesc', 'required');">Task description is required.</mat-error>
+                <br><br>                
+                
+                <mat-form-field class = "permit-type-options" appearance = "fill">
+                    <mat-label>Select Predefined Task</mat-label>
+                    <mat-select required formControlName = "predefinedTask" [(value)] = "this.selectedPredefinedTask">
+                        <mat-option value = "Corrective Maintenance">Corrective Maintenance</mat-option>
+                        <mat-option value = "Preventive Maintenance">Preventive Maintenance</mat-option>
+                        <mat-option value = "Training">Training</mat-option>
+                        <mat-option value = "Others">Others</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf = "this.sectionOneAFormGroupError('predefinedTask', 'required');">Permit type is required.</mat-error>
                 </mat-form-field>
+                <br>
+                <div *ngIf = "this.selectedPredefinedTask == 'Others'" >
+                    <mat-form-field class = "predefind-task-others-input" appearance = "fill">
+                        <mat-label>Insert Others</mat-label>
+                        <input matInput [(ngModel)] = "this.predefinedTaskOthersInput" formControlName = "predefinedTaskOthers">
+                        <mat-error>Predefined Task Others is required.</mat-error>
+                    </mat-form-field> 
+                </div>
+
                 <br>
                 <mat-form-field class = "no-of-workers-input" appearance = "fill">
                     <mat-label>No. of workers</mat-label>
@@ -298,11 +312,11 @@
             <form class = "safety-measures-form" [formGroup] = "this.sectionOneBFormGroup">
                 <ng-template matStepLabel>Section I (B): Safety Measures</ng-template>
                 <div *ngIf = "this.selectedPermitType == 'Work at height permit (WAHP)'">
-                    <div class = "section-title">
+                    <mat-toolbar class = "section-title">
                         <mat-label class = "section-title-desc">
                             <mat-icon style = "vertical-align: middle; font-size: 22px;">create</mat-icon> This section is to be completed by a <mat-label style = "font-weight: 425">representative supervisor</mat-label>
                         </mat-label>
-                    </div>
+                    </mat-toolbar>
                     <br>
                     <h2>Work at Height (WAH) Control Measures Implemented</h2>
                     <mat-label class = "required-label">* Please ensure all the checkboxes are checked, i.e.: from <mat-label style = "font-weight: 450;">(*)</mat-label> to <mat-label style = "color: forestgreen; font-weight: 450;">(✔)</mat-label></mat-label>
@@ -1926,11 +1940,11 @@
         <mat-step [stepControl] = "this.sectionOneCFormGroup" [errorMessage] = "this.errorMessage">
             <form class = "personnel-dets-form" [formGroup] = "this.sectionOneCFormGroup">
                 <ng-template matStepLabel>Section I (C): Personnel Details</ng-template>
-                <div class = "section-title">
+                <mat-toolbar class = "section-title">
                     <mat-label class = "section-title-desc">
                         <mat-icon style = "vertical-align: middle; font-size: 22px;">create</mat-icon> This section is to be completed by a <mat-label style = "font-weight: 425">representative supervisor</mat-label>
                     </mat-label>
-                </div>
+                </mat-toolbar>
                 <br>
                 <h2>Personnel Details</h2>
                 <mat-label>The number of fillable rows depends on the <mat-label style = "font-weight: 425">total number of workers and supervisors</mat-label> specified in Section I (A),
@@ -1940,10 +1954,11 @@
                 <mat-label class = "required-label">* Required field</mat-label>
                 <br><br>
                 <div>
-                    <mat-grid-list cols = "3" rowHeight = "65px">
+                    <mat-grid-list cols = "4" rowHeight = "65px">
                         <mat-grid-tile-header>
                             <mat-grid-tile>Name*</mat-grid-tile>
-                            <mat-grid-tile>NRIC / FIN No.*</mat-grid-tile>
+                            <mat-grid-tile>Student ID / Admin ID*</mat-grid-tile>
+                            <mat-grid-tile>Role</mat-grid-tile>
                             <mat-grid-tile>Contact No.*</mat-grid-tile>
                         </mat-grid-tile-header>
 
@@ -1961,17 +1976,27 @@
                                 <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
                                     <input
                                         matInput
-                                        [inputMask] = "this.nricOrFinNoInputMask"
+                                        
                                         [(ngModel)] = "this.attendantDetsData[0].nricOrFinNo"
                                         formControlName = "ad1_nricOrFinNo">
                                 </mat-form-field>
                             </mat-grid-tile>
                             <mat-grid-tile>
+                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <mat-select [(value)] = "this.selectedAttendantDetails01Role" 
+                                                [(ngModel)]="this.attendantDetsData[0].role" 
+                                                formControlName = "ad1_role">
+                                        <mat-option value = "Supervisor">Supervisor</mat-option>
+                                        <mat-option value = "Worker">Worker</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
                                 <div id = "contact-no-input-arrow-removed">
-                                    <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never" >
                                         <input
                                             matInput
-                                            type = "number"
+                                            
                                             [(ngModel)] = "this.attendantDetsData[0].contactNo"
                                             formControlName = "ad1_contactNo">
                                     </mat-form-field>
@@ -1993,9 +2018,19 @@
                                 <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
                                     <input
                                         matInput
-                                        [inputMask] = "this.nricOrFinNoInputMask"
+                                        
                                         [(ngModel)] = "this.attendantDetsData[1].nricOrFinNo"
                                         formControlName = "ad2_nricOrFinNo">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <mat-select [(value)] = "this.selectedAttendantDetails02Role" 
+                                                [(ngModel)]="this.attendantDetsData[1].role" 
+                                                formControlName = "ad2_role">
+                                        <mat-option value = "Supervisor">Supervisor</mat-option>
+                                        <mat-option value = "Worker">Worker</mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </mat-grid-tile>
                             <mat-grid-tile>
@@ -2025,9 +2060,19 @@
                                 <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
                                     <input
                                         matInput
-                                        [inputMask] = "this.nricOrFinNoInputMask"
+                                        
                                         [(ngModel)] = "this.attendantDetsData[2].nricOrFinNo"
                                         formControlName = "ad3_nricOrFinNo">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <mat-select [(value)] = "this.selectedAttendantDetails03Role" 
+                                                [(ngModel)]="this.attendantDetsData[2].role" 
+                                                formControlName = "ad3_role">
+                                        <mat-option value = "Supervisor">Supervisor</mat-option>
+                                        <mat-option value = "Worker">Worker</mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </mat-grid-tile>
                             <mat-grid-tile>
@@ -2057,9 +2102,19 @@
                                 <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
                                     <input
                                         matInput
-                                        [inputMask] = "this.nricOrFinNoInputMask"
+                                        
                                         [(ngModel)] = "this.attendantDetsData[3].nricOrFinNo"
                                         formControlName = "ad4_nricOrFinNo">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <mat-select [(value)] = "this.selectedAttendantDetails04Role" 
+                                                [(ngModel)]="this.attendantDetsData[3].role" 
+                                                formControlName = "ad4_role">
+                                        <mat-option value = "Supervisor">Supervisor</mat-option>
+                                        <mat-option value = "Worker">Worker</mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </mat-grid-tile>
                             <mat-grid-tile>
@@ -2089,9 +2144,19 @@
                                 <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
                                     <input
                                         matInput
-                                        [inputMask] = "this.nricOrFinNoInputMask"
+                                        
                                         [(ngModel)] = "this.attendantDetsData[4].nricOrFinNo"
                                         formControlName = "ad5_nricOrFinNo">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <mat-select [(value)] = "this.selectedAttendantDetails05Role" 
+                                                [(ngModel)]="this.attendantDetsData[4].role" 
+                                                formControlName = "ad5_role">
+                                        <mat-option value = "Supervisor">Supervisor</mat-option>
+                                        <mat-option value = "Worker">Worker</mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </mat-grid-tile>
                             <mat-grid-tile>
@@ -2121,9 +2186,19 @@
                                 <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
                                     <input
                                         matInput
-                                        [inputMask] = "this.nricOrFinNoInputMask"
+                                        
                                         [(ngModel)] = "this.attendantDetsData[5].nricOrFinNo"
                                         formControlName = "ad6_nricOrFinNo">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
+                                    <mat-select [(value)] = "this.selectedAttendantDetails06Role" 
+                                                [(ngModel)]="this.attendantDetsData[5].role" 
+                                                formControlName = "ad6_role">
+                                        <mat-option value = "Supervisor">Supervisor</mat-option>
+                                        <mat-option value = "Worker">Worker</mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </mat-grid-tile>
                             <mat-grid-tile>
@@ -2149,18 +2224,21 @@
                 <br><br>
                 <mat-form-field class = "apl-name-input" appearance = "fill">
                     <mat-label>Name</mat-label>
-                    <input matInput required [(ngModel)] = "this.applicantNameInput" formControlName = "aplName">
+                    <input matInput 
+                           required 
+                           [(ngModel)] = "this.attendantDetsData[0].name" 
+                           formControlName = "aplName">
                     <mat-error *ngIf = "this.sectionOneCFormGroupError('aplName', 'required');">Name is required.</mat-error>
                 </mat-form-field>
                 <br>
                 <mat-form-field class = "apl-nric-or-fin-no-input" appearance = "fill">
-                    <mat-label>NRIC / FIN no.</mat-label>
+                    <mat-label>Student ID / Admin ID</mat-label>
                     <input 
                         matInput
                         required 
                         placeholder = "@_______#"
-                        [inputMask] = "this.nricOrFinNoInputMask"
-                        [(ngModel)] = "this.applicantNricOrFinNoInput" 
+                        
+                        [(ngModel)] = "this.attendantDetsData[0].nricOrFinNo" 
                         formControlName = "aplNricOrFinNo">
                     <mat-error *ngIf = "this.sectionOneCFormGroupError('aplNricOrFinNo', 'required');">NRIC/FIN no. is required.</mat-error>
                 </mat-form-field>
@@ -2194,21 +2272,35 @@
                         <input 
                             matInput 
                             required
-                            type = "number"
-                            [(ngModel)] = "this.applicantContactNoInput" 
+                            
+                            [(ngModel)] = "this.attendantDetsData[0].contactNo" 
                             formControlName = "aplContactNo">
                         <mat-error *ngIf = "this.sectionOneCFormGroupError('aplContactNo', 'required');">Contact no. is required.</mat-error>
                     </mat-form-field>
                 </div>
                 <mat-form-field class = "apl-email-input" appearance = "fill">
                     <mat-label>Email address</mat-label>
-                    <input 
-                        matInput 
-                        required
-                        placeholder = "_@_._"
-                        [inputMask] = "this.applicantEmailInputMask"
-                        [(ngModel)] = "this.applicantEmailInput" 
-                        formControlName = "aplEmail">
+                    <input matInput required
+                            
+                            formControlName = "aplEmail">       
+                    <!--<div class="apl-email-input-row">
+                        <div class="apl-email-input-col">
+                            <input 
+                                matInput 
+                                required 
+                                [(ngModel)] = "this.applicantEmailInput" 
+                                formControlName = "aplEmail">
+                        </div>
+                        <div class="apl-email-input-col">
+                            <input 
+                                matInput 
+                                required
+                                placeholder = "@student.tp.edu.sg"
+                                [inputMask] = "this.applicantEmailInputMask"
+                                [(ngModel)] = "this.applicantEmailInput" 
+                                formControlName = "aplEmail"> 
+                        </div> 
+                    </div>-->
                     <mat-error *ngIf = "this.sectionOneCFormGroupError('aplEmail', 'required');">Email address is required.</mat-error>
                 </mat-form-field>
                 <br><br>
@@ -2230,15 +2322,15 @@
                         <br>
                         <mat-checkbox
                             [disabled] = "
-                                this.applicantNameInput == '' ||
-                                this.applicantNricOrFinNoInput == '' ||
+                                this.attendantDetsData[0].name == '' ||
+                                this.attendantDetsData[0].nricOrFinNo == '' ||
                                 this.selectedApplicantOrganisationType == '' ||
                                 (
                                     this.selectedApplicantOrganisationType == 'External' && 
                                     this.applicantOrganisationNameInput == ''
                                 ) ||
                                 this.applicantDepartmentNameInput == '' ||
-                                this.applicantContactNoInput == '' ||
+                                this.attendantDetsData[0].contactNo == '' ||
                                 this.applicantEmailInput == ''
                             " 
                             [(ngModel)] = "this.applicantDeclarationChecked" 
@@ -2256,14 +2348,14 @@
                         mat-stroked-button
                         (click) = "this.openSubmitDialogue()"
                         [disabled] = "
-                            this.applicantNameInput == '' ||
-                            this.applicantNricOrFinNoInput == '' ||
+                            this.attendantDetsData[0].name == '' ||
+                            this.attendantDetsData[0].nricOrFinNo == '' ||
                             this.selectedApplicantOrganisationType == '' ||
                             this.selectedApplicantOrganisationType == null || (
                                 this.selectedApplicantOrganisationType == 'External' 
                                 && this.applicantOrganisationNameInput == ''
                             ) ||
-                            this.applicantContactNoInput == '' ||
+                            this.attendantDetsData[0].contactNo == '' ||
                             this.applicantEmailInput == '' ||
                             this.applicantDeclarationChecked == false
                         "

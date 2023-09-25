@@ -9,7 +9,9 @@ export interface IPermitToWork {
 	permitType: string,
     startWorkingDateTime: string,
     endWorkingDateTime: string,
-    taskDescription: string,
+    //taskDescription: string,
+	predefinedTask: string,
+	predefinedTaskOthers: string,
 	noOfWorkers: number,
 	noOfSupervisors: number,
 	workAtHeight: {
@@ -401,36 +403,42 @@ export interface IPermitToWork {
 			id: number,
 			name: string,
 			nricOrFinNo: string,
+			role: string,
 			contactNo: string
 		},
 		{
 			id: number,
 			name: string,
 			nricOrFinNo: string,
+			role: string,
 			contactNo: string
 		},
 		{
 			id: number,
 			name: string,
 			nricOrFinNo: string,
+			role: string,
 			contactNo: string
 		},
 		{
 			id: number,
 			name: string,
 			nricOrFinNo: string,
+			role: string,
 			contactNo: string
 		},
 		{
 			id: number,
 			name: string,
 			nricOrFinNo: string,
+			role: string,
 			contactNo: string
 		},
 		{
 			id: number,
 			name: string,
 			nricOrFinNo: string,
+			role: string,
 			contactNo: string
 		},
 	],

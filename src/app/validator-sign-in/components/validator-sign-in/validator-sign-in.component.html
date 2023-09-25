@@ -41,9 +41,9 @@
                 <input matInput required type = "password" formControlName = "userPw" placeholder = "Enter password" (change) = "this.userPwInput = this.validatorSignInFormGroup.get('userPw')?.value;">
             </mat-form-field>
             <br>
-            <button [disabled] = "this.auth.signingIn" class = "sign-in-button" mat-raised-button color = "primary">Sign-in</button>
+            <button [disabled] = "this.auth.signingIn" class = "sign-in-button" style="background-color: #66CCCC;" mat-raised-button>Sign-in</button>
             <br>
-            <button class = "back-button" (click) = "this.navigateTo('landing')" routerLinkActive = "active" mat-raised-button color = "primary">Back</button>
+            <button class = "back-button" (click) = "this.navigateTo('landing')" routerLinkActive = "active" style="background-color: #CCFFFF;" mat-raised-button>Back</button>
         </form>
     </div>
 </div>

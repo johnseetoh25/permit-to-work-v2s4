@@ -233,7 +233,11 @@
                         <br><br>
                         <mat-label id = "label-text">&emsp;Subsector:&emsp;</mat-label><mat-label>{{ dt.locationOfWork?.sub }}</mat-label>
                         <br><br>
-                        <mat-label id = "label-text">&emsp;Task description:&emsp;</mat-label><mat-label>{{ dt.taskDescription }}</mat-label>
+                        <mat-label id = "label-text">&emsp;Task:&emsp;</mat-label>
+                        <mat-label *ngIf="dt.predefinedTask == 'Corrective Maintenance' " >{{ dt.predefinedTask }}</mat-label>
+                        <mat-label *ngIf="dt.predefinedTask == 'Preventive Maintenance' " >{{ dt.predefinedTask }}</mat-label>
+                        <mat-label *ngIf="dt.predefinedTask == 'Training' " >{{ dt.predefinedTask }}</mat-label>
+                        <mat-label *ngIf="dt.predefinedTask == 'Others' " >{{ dt.predefinedTask }} ({{ dt.predefinedTaskOthers }})</mat-label>
                         <br><br>
                         <mat-divider></mat-divider>
                         <br>

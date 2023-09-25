@@ -126,7 +126,11 @@
                                         <mat-label style = "font-weight: 425;">&emsp;Effective period:</mat-label>
                                         <mat-label>&emsp;{{ pending.startWorkingDateTime | date: "short" }} ➡ {{ pending.endWorkingDateTime | date: "short" }}</mat-label>
                                         <br>
-                                        <mat-label style = "font-weight: 425;">&emsp;Task:</mat-label><mat-label>&emsp;{{ pending.taskDescription }}</mat-label>
+                                        <mat-label style = "font-weight: 425;">&emsp;Task:</mat-label>
+                                        <mat-label *ngIf="pending.predefinedTask == 'Corrective Maintenance' ">&emsp;{{ pending.predefinedTask }}</mat-label>
+                                        <mat-label *ngIf="pending.predefinedTask == 'Preventive Maintenance' ">&emsp;{{ pending.predefinedTask }}</mat-label>
+                                        <mat-label *ngIf="pending.predefinedTask == 'Training' ">&emsp;{{ pending.predefinedTask }}</mat-label>
+                                        <mat-label *ngIf="pending.predefinedTask == 'Others' ">&emsp;{{ pending.predefinedTask }} &emsp;({{ pending.predefinedTaskOthers }})</mat-label>
                                         <br>
                                         <mat-label style = "font-weight: 425;">&emsp;Applicant:</mat-label><mat-label>&emsp;{{ pending.applicantDets.name }}</mat-label>
                                         <br><br>

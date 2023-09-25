@@ -144,7 +144,9 @@ export class SaDialogComponent implements OnInit {
       toEvaluate?.locationOfWork?.sub,
       toEvaluate?.startWorkingDateTime,
       toEvaluate?.endWorkingDateTime,
-      toEvaluate?.taskDescription,
+      //toEvaluate?.taskDescription,
+      toEvaluate?.predefinedTask,
+      toEvaluate?.predefinedTaskOthers,
       toEvaluate?.noOfWorkers,
       toEvaluate?.noOfSupervisors,
 
@@ -329,26 +331,32 @@ export class SaDialogComponent implements OnInit {
 
       toEvaluate?.attendantDets?.[0].name,
       toEvaluate?.attendantDets?.[0].nricOrFinNo,
+      toEvaluate?.attendantDets?.[0].role,
       toEvaluate?.attendantDets?.[0].contactNo,
 
       toEvaluate?.attendantDets?.[1].name,
       toEvaluate?.attendantDets?.[1].nricOrFinNo,
+      toEvaluate?.attendantDets?.[1].role,
       toEvaluate?.attendantDets?.[1].contactNo,
 
       toEvaluate?.attendantDets?.[2].name,
       toEvaluate?.attendantDets?.[2].nricOrFinNo,
+      toEvaluate?.attendantDets?.[2].role,
       toEvaluate?.attendantDets?.[2].contactNo,
 
       toEvaluate?.attendantDets?.[3].name,
       toEvaluate?.attendantDets?.[3].nricOrFinNo,
+      toEvaluate?.attendantDets?.[3].role,
       toEvaluate?.attendantDets?.[3].contactNo,
 
       toEvaluate?.attendantDets?.[4].name,
       toEvaluate?.attendantDets?.[4].nricOrFinNo,
+      toEvaluate?.attendantDets?.[4].role,
       toEvaluate?.attendantDets?.[4].contactNo,
 
       toEvaluate?.attendantDets?.[5].name,
       toEvaluate?.attendantDets?.[5].nricOrFinNo,
+      toEvaluate?.attendantDets?.[5].role,
       toEvaluate?.attendantDets?.[5].contactNo,
 
       toEvaluate?.applicantDets?.name,
@@ -381,14 +389,19 @@ export class SaDialogComponent implements OnInit {
       toEvaluate?.wantToCancel,
       toEvaluate?.reqCancTimestamp,
       toEvaluate?.cancelledTimestamp,
-      toEvaluate?.timestamp
+      toEvaluate?.timestamp,
     );
 
+    
     this.dialogRefSelf.close();
-    this.dialogRefSelf.afterClosed().subscribe(() => {
-      this.openSnackBar("The permit has been evaluated. Please proceed to approval/rejection.", "");
-      this.compShare.sendClickEvent();
-    });
+    this.openSnackBar("The permit has been evaluated. Please proceed to approval/rejection.", "");
+    this.compShare.sendClickEvent();
+
+    // this.dialogRefSelf.close();
+    // this.dialogRefSelf.afterClosed().subscribe(() => {
+    //   this.openSnackBar("The permit has been evaluated. Please proceed to approval/rejection.", "");
+    //   this.compShare.sendClickEvent();
+    // });
   }
 
   public openSnackBar(msg: string, action: string): void {
