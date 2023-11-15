@@ -215,7 +215,7 @@ export class PtwRequestComponent implements OnInit {
   /* [REQ_FORM_DATA] */ public applicantOrganisationNameInput: string = "";
   /* [REQ_FORM_DATA] */ public applicantDepartmentNameInput: string = "";
   /* [REQ_FORM_DATA] */ public applicantContactNoInput: string = "";  
-  /* [REQ_FORM_DATA] */ public applicantEmailInput: string = ""+"@student.tp.edu.sg";
+  /* [REQ_FORM_DATA] */ public applicantEmailInput: string = "";
   //public applicantEmailInputMask = createMask("@student.tp.edu.sg");
   public applicantDeclarationChecked: boolean = false;
   public selectedAttendantDetails01Role: string = "";
@@ -334,31 +334,31 @@ export class PtwRequestComponent implements OnInit {
     this.sectionOneCFormGroup = this.formBuilder.group({
       // Attendant details
       ad1_name: ["", Validators.required],
-      ad1_nricOrFinNo: ["", [ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]],
+      ad1_nricOrFinNo: ["", Validators.required],
       ad1_role: ["", Validators.required],
       ad1_contactNo: ["", Validators.required],
       ad2_name: ["", Validators.required],
-      ad2_nricOrFinNo: ["", [ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]],
+      ad2_nricOrFinNo: ["", Validators.required],
       ad2_role: ["", Validators.required],
       ad2_contactNo: ["", Validators.required],
       ad3_name: ["", Validators.required],
-      ad3_nricOrFinNo: ["", [ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]],
+      ad3_nricOrFinNo: ["", Validators.required],
       ad3_role: ["", Validators.required],
       ad3_contactNo: ["", Validators.required],
       ad4_name: ["", Validators.required],
-      ad4_nricOrFinNo: ["", [ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]],
+      ad4_nricOrFinNo: ["", Validators.required],
       ad4_role: ["", Validators.required],
       ad4_contactNo: ["", Validators.required],
       ad5_name: ["", Validators.required],
-      ad5_nricOrFinNo: ["", [ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]],
+      ad5_nricOrFinNo: ["", Validators.required],
       ad5_role: ["", Validators.required],
       ad5_contactNo: ["", Validators.required],
       ad6_name: ["", Validators.required],
-      ad6_nricOrFinNo: ["", [ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]],
+      ad6_nricOrFinNo: ["", Validators.required],
       ad6_role: ["", Validators.required],
       ad6_contactNo: ["", Validators.required],
       aplName: ["", Validators.required],
-      aplNricOrFinNo: ["", [ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]],
+      aplNricOrFinNo: ["", Validators.required],
       aplOrgType: ["", Validators.required],
       aplOrgName: ["", Validators.required],
       aplDepName: ["", Validators.required],
@@ -1049,7 +1049,7 @@ export class PtwRequestComponent implements OnInit {
     switch (total) {
       case 1:
         this.sectionOneCFormGroup.get('ad1_name')?.setValidators(Validators.required);
-        this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([Validators.required ]);
         this.sectionOneCFormGroup.get('ad1_role')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad1_contactNo')?.setValidators([Validators.required]);
         this.sectionOneCFormGroup.get('ad2_name')?.clearValidators();
@@ -1076,11 +1076,11 @@ export class PtwRequestComponent implements OnInit {
 
       case 2:
         this.sectionOneCFormGroup.get('ad1_name')?.setValidators(Validators.required);
-        this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([Validators.required ]);
         this.sectionOneCFormGroup.get('ad1_role')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad1_contactNo')?.setValidators([Validators.required]);
         this.sectionOneCFormGroup.get('ad2_name')?.setValidators(Validators.required);
-        this.sectionOneCFormGroup.get('ad2_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad2_nricOrFinNo')?.setValidators([Validators.required ]);
         this.sectionOneCFormGroup.get('ad2_role')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad2_contactNo')?.setValidators([Validators.required]);
         this.sectionOneCFormGroup.get('ad3_name')?.clearValidators();
@@ -1103,15 +1103,15 @@ export class PtwRequestComponent implements OnInit {
       
       case 3:
         this.sectionOneCFormGroup.get('ad1_name')?.setValidators(Validators.required);
-        this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([Validators.required ]);
         this.sectionOneCFormGroup.get('ad1_role')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad1_contactNo')?.setValidators([Validators.required]);
         this.sectionOneCFormGroup.get('ad2_name')?.setValidators(Validators.required);
-        this.sectionOneCFormGroup.get('ad2_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad2_nricOrFinNo')?.setValidators([Validators.required ]);
         this.sectionOneCFormGroup.get('ad2_role')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad2_contactNo')?.setValidators([Validators.required]);
         this.sectionOneCFormGroup.get('ad3_name')?.setValidators(Validators.required);
-        this.sectionOneCFormGroup.get('ad3_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad3_nricOrFinNo')?.setValidators([Validators.required ]);
         this.sectionOneCFormGroup.get('ad3_role')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad3_contactNo')?.setValidators([Validators.required]);
         this.sectionOneCFormGroup.get('ad4_name')?.clearValidators();
@@ -1131,19 +1131,19 @@ export class PtwRequestComponent implements OnInit {
 
       case 4:
         this.sectionOneCFormGroup.get('ad1_name')?.setValidators(Validators.required);
-        this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([Validators.required ]);
         this.sectionOneCFormGroup.get('ad1_role')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad1_contactNo')?.setValidators([Validators.required]);
         this.sectionOneCFormGroup.get('ad2_name')?.setValidators(Validators.required);
-        this.sectionOneCFormGroup.get('ad2_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad2_nricOrFinNo')?.setValidators([Validators.required ]);
         this.sectionOneCFormGroup.get('ad2_role')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad2_contactNo')?.setValidators([Validators.required]);
         this.sectionOneCFormGroup.get('ad3_name')?.setValidators(Validators.required);
-        this.sectionOneCFormGroup.get('ad3_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad3_nricOrFinNo')?.setValidators([Validators.required ]);
         this.sectionOneCFormGroup.get('ad3_role')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad3_contactNo')?.setValidators([Validators.required]);
         this.sectionOneCFormGroup.get('ad4_name')?.setValidators(Validators.required);
-        this.sectionOneCFormGroup.get('ad4_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad4_nricOrFinNo')?.setValidators([Validators.required ]);
         this.sectionOneCFormGroup.get('ad4_role')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad4_contactNo')?.setValidators([Validators.required]);
         this.sectionOneCFormGroup.get('ad5_name')?.clearValidators();
@@ -1158,23 +1158,23 @@ export class PtwRequestComponent implements OnInit {
 
       case 5:
         this.sectionOneCFormGroup.get('ad1_name')?.setValidators(Validators.required);
-        this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([Validators.required ]);
         this.sectionOneCFormGroup.get('ad1_role')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad1_contactNo')?.setValidators([Validators.required]);
         this.sectionOneCFormGroup.get('ad2_name')?.setValidators(Validators.required);
-        this.sectionOneCFormGroup.get('ad2_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad2_nricOrFinNo')?.setValidators([Validators.required ]);
         this.sectionOneCFormGroup.get('ad2_role')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad2_contactNo')?.setValidators([Validators.required]);
         this.sectionOneCFormGroup.get('ad3_name')?.setValidators(Validators.required);
-        this.sectionOneCFormGroup.get('ad3_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad3_nricOrFinNo')?.setValidators([Validators.required ]);
         this.sectionOneCFormGroup.get('ad3_role')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad3_contactNo')?.setValidators([Validators.required]);
         this.sectionOneCFormGroup.get('ad4_name')?.setValidators(Validators.required);
-        this.sectionOneCFormGroup.get('ad4_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad4_nricOrFinNo')?.setValidators([Validators.required ]);
         this.sectionOneCFormGroup.get('ad4_role')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad4_contactNo')?.setValidators([Validators.required]);
         this.sectionOneCFormGroup.get('ad5_name')?.setValidators(Validators.required);
-        this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+        this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.setValidators([Validators.required ]);
         this.sectionOneCFormGroup.get('ad5_role')?.setValidators(Validators.required);
         this.sectionOneCFormGroup.get('ad5_contactNo')?.setValidators([Validators.required]);
         this.sectionOneCFormGroup.get('ad6_name')?.clearValidators();
@@ -1185,27 +1185,27 @@ export class PtwRequestComponent implements OnInit {
 
         case 6:
           this.sectionOneCFormGroup.get('ad1_name')?.setValidators(Validators.required);
-          this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+          this.sectionOneCFormGroup.get('ad1_nricOrFinNo')?.setValidators([Validators.required ]);
           this.sectionOneCFormGroup.get('ad1_role')?.setValidators(Validators.required);
           this.sectionOneCFormGroup.get('ad1_contactNo')?.setValidators([Validators.required]);
           this.sectionOneCFormGroup.get('ad2_name')?.setValidators(Validators.required);
-          this.sectionOneCFormGroup.get('ad2_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+          this.sectionOneCFormGroup.get('ad2_nricOrFinNo')?.setValidators([Validators.required ]);
           this.sectionOneCFormGroup.get('ad2_role')?.setValidators(Validators.required);
           this.sectionOneCFormGroup.get('ad2_contactNo')?.setValidators([Validators.required]);
           this.sectionOneCFormGroup.get('ad3_name')?.setValidators(Validators.required);
-          this.sectionOneCFormGroup.get('ad3_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+          this.sectionOneCFormGroup.get('ad3_nricOrFinNo')?.setValidators([Validators.required ]);
           this.sectionOneCFormGroup.get('ad3_role')?.setValidators(Validators.required);
           this.sectionOneCFormGroup.get('ad3_contactNo')?.setValidators([Validators.required]);
           this.sectionOneCFormGroup.get('ad4_name')?.setValidators(Validators.required);
-          this.sectionOneCFormGroup.get('ad4_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+          this.sectionOneCFormGroup.get('ad4_nricOrFinNo')?.setValidators([Validators.required ]);
           this.sectionOneCFormGroup.get('ad4_role')?.setValidators(Validators.required);
           this.sectionOneCFormGroup.get('ad4_contactNo')?.setValidators([Validators.required]);
           this.sectionOneCFormGroup.get('ad5_name')?.setValidators(Validators.required);
-          this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+          this.sectionOneCFormGroup.get('ad5_nricOrFinNo')?.setValidators([Validators.required ]);
           this.sectionOneCFormGroup.get('ad5_role')?.setValidators(Validators.required);
           this.sectionOneCFormGroup.get('ad5_contactNo')?.setValidators([Validators.required]);
           this.sectionOneCFormGroup.get('ad6_name')?.setValidators(Validators.required);
-          this.sectionOneCFormGroup.get('ad6_nricOrFinNo')?.setValidators([ Validators.pattern(/[A-Z]{1}[0-9]{7}[A-Z]{1}/), Validators.required ]);
+          this.sectionOneCFormGroup.get('ad6_nricOrFinNo')?.setValidators([Validators.required ]);
           this.sectionOneCFormGroup.get('ad6_role')?.setValidators(Validators.required);
           this.sectionOneCFormGroup.get('ad6_contactNo')?.setValidators([Validators.required]);
           break;

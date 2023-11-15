@@ -1974,7 +1974,7 @@
                             </mat-grid-tile>
                             <mat-grid-tile>
                                 <mat-form-field style = "width: 175px" apperance = "fill" floatLabel = "never">
-                                    <input
+                                    <input                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
                                         matInput
                                         
                                         [(ngModel)] = "this.attendantDetsData[0].nricOrFinNo"
@@ -2236,7 +2236,7 @@
                     <input 
                         matInput
                         required 
-                        placeholder = "@_______#"
+                        
                         
                         [(ngModel)] = "this.attendantDetsData[0].nricOrFinNo" 
                         formControlName = "aplNricOrFinNo">
@@ -2280,10 +2280,7 @@
                 </div>
                 <mat-form-field class = "apl-email-input" appearance = "fill">
                     <mat-label>Email address</mat-label>
-                    <input matInput required
-                            
-                            formControlName = "aplEmail">       
-                    <!--<div class="apl-email-input-row">
+                    <div class="apl-email-input-row">
                         <div class="apl-email-input-col">
                             <input 
                                 matInput 
@@ -2291,7 +2288,7 @@
                                 [(ngModel)] = "this.applicantEmailInput" 
                                 formControlName = "aplEmail">
                         </div>
-                        <div class="apl-email-input-col">
+                    <!-- <div class="apl-email-input-col">
                             <input 
                                 matInput 
                                 required
@@ -2299,8 +2296,8 @@
                                 [inputMask] = "this.applicantEmailInputMask"
                                 [(ngModel)] = "this.applicantEmailInput" 
                                 formControlName = "aplEmail"> 
-                        </div> 
-                    </div>-->
+                        </div>  -->
+                    </div>
                     <mat-error *ngIf = "this.sectionOneCFormGroupError('aplEmail', 'required');">Email address is required.</mat-error>
                 </mat-form-field>
                 <br><br>

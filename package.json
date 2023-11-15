@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "set NODE_OPTIONS=--openssl-legacy-provider && ng serve --port=4200",
-    "build": "ng build",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider; ng build",
     "watch": "set NODE_OPTIONS=--openssl-legacy-provider && ng build --watch --configuration development",
     "test": "ng test",
     "db": "json-server -p 3000 db/db.json --routes db/routes.json --no-cors=true"
